@@ -1,4 +1,4 @@
-package classes;
+package classes.pages;
 
 import javax.swing.*;
 
