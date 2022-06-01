@@ -9,7 +9,7 @@ public class Application {
 
     public HashMap<String, String> registeredUsers = new HashMap<String, String>();
     private String currentUser;
-    String dataTable = "/Users/jackstoneman/JavaProjects/group-i/out/production/src/dataTables/registeredUsers.csv";
+    String dataTable = "out/production/group-i/dataTables/registeredUsers.csv";
 
     public Application() {
         this.readRegisteredUsers();
