@@ -6,7 +6,6 @@ public class User{
     private String name;
     private String phoneNo;
     private String email;
-    private Date dateOfBirth;
     private int type;
 
     public User(){
@@ -14,7 +13,6 @@ public class User{
         name = "";
         phoneNo = "";
         email = "";
-        dateOfBirth = new Date();
         type = 0;
     }
 
@@ -56,21 +54,6 @@ public class User{
 
     public String getEmailAddress(){
         return email;
-    }
-
-    public void setDateOfBirth(String dob){
-        DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        try {
-            dateOfBirth = format.parse(dob);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public String getDateOfBirth(){
-        DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        String dob = format.format(dateOfBirth);
-        return dob;
     }
 
     public void setType(int type){
