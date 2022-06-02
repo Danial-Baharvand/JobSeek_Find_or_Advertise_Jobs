@@ -1,16 +1,17 @@
 package classes;
 
 import java.util.*;
-import java.text.*;
 
 public class User{
+    private final Date dateOfBirth;
     private String userName;
     private String name;
     private String phoneNo;
     private String email;
     private int type;
 
-    public User(){
+    public User(Date dateOfBirth){
+        this.dateOfBirth = dateOfBirth;
         userName = "";
         name = "";
         phoneNo = "";
