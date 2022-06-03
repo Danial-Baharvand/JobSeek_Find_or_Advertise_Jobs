@@ -9,8 +9,8 @@ public class Application {
 
     public HashMap<String, String> registeredUsers = new HashMap<String, String>();
     private String currentUser;
-    String dt_registeredUsers = "/Users/jackstoneman/JavaProjects/group-i/out/production/src/dataTables/registeredUsers.csv";
-    String dt_jobSeekers = "/Users/jackstoneman/JavaProjects/group-i/out/production/src/dataTables/jobSeekers.csv";
+    String dt_registeredUsers = "out/production/group-i/dataTables/registeredUsers.csv";
+    String dt_jobSeekers = "out/production/group-i/dataTables/jobSeekers.csv";
 
     public Application() {
         this.readRegisteredUsers();
