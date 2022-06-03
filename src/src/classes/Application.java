@@ -20,7 +20,6 @@ public class Application {
      * @param email is String that is a User's email
      * @param password is a String that is a User's password
      * adds the email of the logged in User to the currentUser ArrayList
-     * @return true if the email and password parameters match a key:value pair in the registeredUsers HashMap
      * else false
      */
     public void createNewJobSeeker(String email, String password, String firstName, String lastName) {
@@ -63,4 +62,7 @@ public class Application {
         this.currentUser = email;
     }
 
+    public String getCurrentUser() {
+        return currentUser;
+    }
 }
