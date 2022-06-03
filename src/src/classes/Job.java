@@ -9,6 +9,7 @@ public class Job {
     int salary;
     String jobType;
     String keywords;
+    String description;
 
     public int getJobID() {
         return JobID;
@@ -72,5 +73,13 @@ public class Job {
 
     public void setKeywords(String keywords) {
         this.keywords = keywords;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

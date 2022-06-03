@@ -9,18 +9,22 @@ public class Search {
     int salary;
     String jobType;
     String keywords;
-    ArrayList<Job> jobs = new ArrayList<Job>();
-    Map<Integer, HashSet<Job>> scores = new TreeMap<Integer, HashSet<Job>>(Collections.reverseOrder());
-    public Search(){}
-    public Search(String searchText, String state, String cat, int salary, String jobType, String keywords){
-        this.searchText = searchText;
-        this.state = state;
-        this.cat = cat;
-        this. salary = salary;
-        this.jobType = jobType;
-        this.keywords = keywords;
+    HashSet<Job> jobs;
+    ArrayList<ScoredJob> scoredJobs = new ArrayList<>();
+    public Search(HashSet<Job> jobs){
+        this.jobs = jobs;
+        //setScores(jobs);
     }
 
+    public void setScores(){
+        Scorer scorer = new Scorer();
+        for (Job job: jobs){
+            System.out.println(this.getSearchText());
+            int score = scorer.scoreAgaintSearch(this, job);
+            scoredJobs.add(new ScoredJob(job, score));
+        }
+        scoredJobs.sort(Comparator.comparing(ScoredJob::getScore).reversed());
+    }
     public String getSearchText() {
         return searchText;
     }
@@ -45,7 +49,7 @@ public class Search {
         return keywords;
     }
 
-    public ArrayList<Job> getJobs() {
+    public HashSet<Job> getJobs() {
         return jobs;
     }
 
@@ -73,13 +77,14 @@ public class Search {
         this.keywords = keywords;
     }
 
-    public void setJobs(ArrayList<Job> jobs) {
+    public void setJobs(HashSet<Job> jobs) {
         this.jobs = jobs;
     }
     public void addJob(Job job) {
         this.jobs.add(job);
     }
-    public void setScores(HashSet<Job> jobs){
 
+    public ArrayList<ScoredJob> getScoredJobs() {
+        return scoredJobs;
     }
 }

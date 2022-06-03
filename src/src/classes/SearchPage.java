@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
 
 public class SearchPage {
     private JTextField searchTBox;
@@ -25,7 +26,7 @@ public class SearchPage {
         return searchPanel;
     }
 
-    public SearchPage() {
+    public SearchPage(HashSet<Job> jobs) {
         /**test code to check categories' functionality
         should be removed when adding categories by recruiters is implemented
         */
@@ -42,14 +43,15 @@ public class SearchPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Creates a new search object and adds the user's selected criteria to it
-                Search mySearch = new Search();
-                mySearch.setSearchText(searchTBox.getText());
-                mySearch.setState((String) stateCBox.getSelectedItem());
-                mySearch.setCat((String) catCBox.getSelectedItem());
-                mySearch.setJobType((String) jobTypeCBox.getSelectedItem());
-                mySearch.setSalary(salarySlider.getValue());
-                mySearch.setKeywords(keywordsTBox.getText());
-                Runtime.showSearchResultsPage(Runtime.frame);
+                Search search = new Search(jobs);
+                search.setSearchText(searchTBox.getText());
+                search.setState((String) stateCBox.getSelectedItem());
+                search.setCat((String) catCBox.getSelectedItem());
+                search.setJobType((String) jobTypeCBox.getSelectedItem());
+                search.setSalary(salarySlider.getValue());
+                search.setKeywords(keywordsTBox.getText());
+                search.setScores();
+                Runtime.showSearchResultsPage(Runtime.frame, search);
             }
         });
     }

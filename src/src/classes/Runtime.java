@@ -21,16 +21,16 @@ public class Runtime {
         frame.setTitle("Search Page");
         frame.getContentPane().removeAll();
         frame.repaint();
-        frame.setContentPane(new SearchPage().getSearchPanel());
+        frame.setContentPane(new SearchPage(createExampleJobs()).getSearchPanel());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
-    public static void showSearchResultsPage(JFrame frame){
+    public static void showSearchResultsPage(JFrame frame, Search search){
         frame.setTitle("Search Results Page");
         frame.getContentPane().removeAll();
         frame.repaint();
-        frame.setContentPane(new SearchResultsPage().getSearchResultsPanel());
+        frame.setContentPane(new SearchResultsPage(search).getSearchResultsPanel());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
@@ -41,12 +41,25 @@ public class Runtime {
         Job job1 = new Job();
         job1.setJobTitle("Software Engineer");
         job1.setRecruiter(recruiter1);
+        job1.setCat("compSie");
+        job1.setDescription("This is a job. Please apply");
+        job1.setState("QLD");
+        job1.setSalary(125000);
         Job job2 = new Job();
         job2.setJobTitle("It Specialist");
         job2.setRecruiter(recruiter1);
         Job job3 = new Job();
         job3.setJobTitle("Data Analyst");
         job3.setRecruiter(recruiter1);
-        return new HashSet<Job>(Arrays.asList(job1, job2, job3));
+        Job job4 = new Job();
+        job4.setJobTitle("DevOps");
+        job4.setRecruiter(recruiter1);
+        Job job5 = new Job();
+        job5.setJobTitle("Web Dev");
+        job5.setRecruiter(recruiter1);
+        Job job6 = new Job();
+        job6.setJobTitle("Bakcend");
+        job6.setRecruiter(recruiter1);
+        return new HashSet<Job>(Arrays.asList(job1, job2, job3, job4, job5, job6));
     }
 }
