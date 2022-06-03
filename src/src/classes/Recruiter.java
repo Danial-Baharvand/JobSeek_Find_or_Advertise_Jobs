@@ -1,11 +1,22 @@
 package classes;
 
-public class Recruiter extends User {
+public class Recruiter {
+    String recruiterID;
+    String org;
 
-    private String organisation;
+    public String getRecruiterID() {
+        return recruiterID;
+    }
 
-    public Recruiter(String email, String password, String firstName, String lastName, String organisation) {
-        super(email, password, firstName, lastName);
-        this.organisation = organisation;
+    public String getOrg() {
+        return org;
+    }
+
+    public void setRecruiterID(String recruiterID) {
+        this.recruiterID = recruiterID;
+    }
+
+    public void setOrg(String org) {
+        this.org = org;
     }
 }

@@ -1,13 +1,14 @@
 package classes;
 
 import java.io.*;
-import java.util.ArrayList;
+
 import java.util.HashMap;
+
 
 public class Application {
 
     public HashMap<String, String> registeredUsers = new HashMap<String, String>();
-    private ArrayList<String> currentUser = new ArrayList<String>();
+    private String currentUser;
     String dt_registeredUsers = "/Users/jackstoneman/JavaProjects/group-i/out/production/src/dataTables/registeredUsers.csv";
     String dt_jobSeekers = "/Users/jackstoneman/JavaProjects/group-i/out/production/src/dataTables/jobSeekers.csv";
 
@@ -34,13 +35,12 @@ public class Application {
     /**
      * @param email is String that is a User's email
      * @param password is a String that is a User's password
-     * adds the email of the logged in User to the currentUser ArrayList
      * @return true if the email and password parameters match a key:value pair in the registeredUsers HashMap
      * else false
      */
     public boolean userLogin(String email, String password) {
         if (this.registeredUsers.containsValue(this.registeredUsers.get(email))) {
-            this.currentUser.add(email);
+            this.setCurrentUser(email);
             return true;
         } else {
             return false;
@@ -57,6 +57,10 @@ public class Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setCurrentUser(String email) {
+        this.currentUser = email;
     }
 
 }
