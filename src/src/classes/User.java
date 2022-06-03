@@ -3,28 +3,20 @@ package classes;
 import java.util.*;
 
 public class User{
-    private final Date dateOfBirth;
     private String userName;
     private String name;
     private String phoneNo;
     private String email;
     private int type;
 
-    public User(Date dateOfBirth){
-        this.dateOfBirth = dateOfBirth;
-        userName = "";
-        name = "";
-        phoneNo = "";
-        email = "";
-        type = 0;
-    }
-
-    public User(String userName, String name, String phoneNo, String email, Date dateOfBirth){
+    public User(String userName, String name, String phoneNo, String email){
         this.userName = userName;
         this.name = name;
         this.phoneNo = phoneNo;
         this.email = email;
-        this.dateOfBirth = dateOfBirth;
+    }
+
+    public User() {
     }
 
     public void setUserName(String userName){
