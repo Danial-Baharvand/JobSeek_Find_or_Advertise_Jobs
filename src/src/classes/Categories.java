@@ -49,4 +49,8 @@ public class Categories {
             e.printStackTrace();
         }
     }
+
+    public HashMap<String, Set<String>> getMap() {
+        return map;
+    }
 }

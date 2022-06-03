@@ -1,6 +1,6 @@
 package classes;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class Search {
     String searchText;
@@ -10,6 +10,7 @@ public class Search {
     String jobType;
     String keywords;
     ArrayList<Job> jobs = new ArrayList<Job>();
+    Map<Integer, HashSet<Job>> scores = new TreeMap<Integer, HashSet<Job>>(Collections.reverseOrder());
     public Search(){}
     public Search(String searchText, String state, String cat, int salary, String jobType, String keywords){
         this.searchText = searchText;
@@ -77,5 +78,8 @@ public class Search {
     }
     public void addJob(Job job) {
         this.jobs.add(job);
+    }
+    public void setScores(HashSet<Job> jobs){
+
     }
 }
