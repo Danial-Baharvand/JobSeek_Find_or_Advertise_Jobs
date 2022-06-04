@@ -7,6 +7,12 @@ public class User {
     private String firstName;
     private String lastName;
 
+    public User(String email, String firstName, String lastName) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -36,13 +42,6 @@ public class User {
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public User(String email, String password, String firstName, String lastName) {
-        this.email = email;
-        this.password = password;
-        this.firstName = firstName;
         this.lastName = lastName;
     }
 

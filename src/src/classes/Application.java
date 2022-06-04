@@ -9,26 +9,12 @@ public class Application {
 
     public HashMap<String, String> registeredUsers = new HashMap<String, String>();
     private String currentUser;
-    String dt_registeredUsers = "out/production/group-i/dataTables/registeredUsers.csv";
-    String dt_jobSeekers = "out/production/group-i/dataTables/jobSeekers.csv";
+    final static String dt_registeredUsers = "out/production/src/dataTables/registeredUsers.csv";
+    final static String dt_jobSeekers = "out/production/src/dataTables/jobSeekers.csv";
+    final static String dt_resumes = "out/production/src/dataTables/resumes.csv";
 
     public Application() {
         this.readRegisteredUsers();
-    }
-
-    /**
-     * @param email is String that is a User's email
-     * @param password is a String that is a User's password
-     * adds the email of the logged in User to the currentUser ArrayList
-     * else false
-     */
-    public void createNewJobSeeker(String email, String password, String firstName, String lastName) {
-        JobSeeker newJobSeeker = new JobSeeker(email, password, firstName, lastName);
-        CSVWriter writer = new CSVWriter();
-        String newRegisteredUserDetails = newJobSeeker.getEmail().concat(",").concat(newJobSeeker.getPassword());
-        writer.newLine(dt_registeredUsers, newRegisteredUserDetails);
-        String newJobSeekerDetails = newJobSeeker.getFirstName().concat(",").concat(newJobSeeker.getLastName()).concat(",").concat(newJobSeeker.getEmail());
-        writer.newLine(dt_jobSeekers, newJobSeekerDetails);
     }
 
     /**
@@ -64,5 +50,9 @@ public class Application {
 
     public String getCurrentUser() {
         return currentUser;
+    }
+
+    public HashMap<String, String> getRegisteredUsers() {
+        return registeredUsers;
     }
 }

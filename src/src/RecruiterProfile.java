@@ -78,8 +78,8 @@ public class RecruiterProfile {
         jobDescriptionPanel = new JPanel();
         jobDescriptionPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(4, 2, new Insets(0, 0, 0, 0), -1, -1));
         jobDescription.setViewportView(jobDescriptionPanel);
-        selectedJobDescription = new JLabel();
-        selectedJobDescription.setText("Label");
+        //selectedJobDescription = new JLabel();
+        //selectedJobDescription.setText("Label");
         jobDescriptionPanel.add(selectedJobDescription, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         selectedJobLocation = new JLabel();
         selectedJobLocation.setText("Label");
