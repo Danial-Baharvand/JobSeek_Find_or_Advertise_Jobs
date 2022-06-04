@@ -46,6 +46,24 @@ public class Application {
         }
     }
 
+    /**
+     * @param email is String that is a User's email
+     * @param password is a String that is a User's password
+     * @param recruiterID is a String that is Recruiter's ID
+     * @param org is a String that is a Recruiter's organisation
+     * adds the email of the logged in User to the currentUser ArrayList
+     * else false
+     */
+    public void createNewRecruiter(String email, String password, String firstName, String lastName, String recruiterID, Organisation org) {
+        Recruiter newRecruiter = new Recruiter(email, password, firstName, lastName, recruiterID, org);
+        CSVWriter writer = new CSVWriter();
+        String newRegisteredUserDetails = newRecruiter.getEmail().concat(",").concat(newRecruiter.getPassword());
+        writer.newLine(dt_registeredUsers, newRegisteredUserDetails);
+        String newRecruiterDetails = newRecruiter.getFirstName().concat(",").concat(newRecruiter.getLastName()).concat(",").
+                concat(newRecruiter.getEmail().concat(",")).concat(newRecruiter.getRecruiterID()).concat(",").concat(newRecruiter.getOrg().getName());
+        writer.newLine(dt_recruiters, newRecruiterDetails);
+    }
+
     private void readRegisteredUsers() {
         String line;
         try (BufferedReader reader = new BufferedReader(new FileReader(dt_registeredUsers))) {

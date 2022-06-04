@@ -14,7 +14,8 @@ public class Runtime {
         LoginPage testLoginPage = new LoginPage();
         testSystem.userLogin(testLoginPage.getEmail(), testLoginPage.getPassword());
         System.out.println(testSystem.getCurrentUser());
-        showSearchPage(frame);
+        //showSearchPage(frame);
+        showRecruiterProfilePage(frame);
 
     }
     public static void showSearchPage(JFrame frame){
@@ -35,7 +36,18 @@ public class Runtime {
         frame.pack();
         frame.setVisible(true);
     }
-    public static HashSet<Job> createExampleJobs(){
+
+    public static void showRecruiterProfilePage(JFrame frame){
+        frame.setTitle("Recruiter Profile Page");
+        frame.getContentPane().removeAll();
+        frame.repaint();
+        frame.setContentPane(new RecruiterProfile().getRecruiterProfilePage());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    /*public static HashSet<Job> createExampleJobs(){
         Recruiter recruiter1 = new Recruiter();
         recruiter1.setOrg("Google");
         Job job1 = new Job();
@@ -48,5 +60,5 @@ public class Runtime {
         job3.setJobTitle("Data Analyst");
         job3.setRecruiter(recruiter1);
         return new HashSet<Job>(Arrays.asList(job1, job2, job3));
-    }
+    }*/
 }

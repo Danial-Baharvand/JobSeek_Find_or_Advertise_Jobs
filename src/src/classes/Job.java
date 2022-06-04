@@ -2,6 +2,7 @@ package classes;
 
 public class Job {
     int JobID;
+    String company;
     Recruiter recruiter;
     String jobTitle;
     String state;
@@ -9,6 +10,26 @@ public class Job {
     int salary;
     String jobType;
     String keywords;
+
+    public Job(int jobID, String company, Recruiter recruiter, String jobTitle, String state, String cat, int salary, String jobType, String keywords) {
+        this.JobID = jobID;
+        this.company = company;
+        this.recruiter = recruiter;
+        this.jobTitle = jobTitle;
+        this.state = state;
+        this.cat = cat;
+        this.salary = salary;
+        this.jobType = jobType;
+        this.keywords = keywords;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
 
     public int getJobID() {
         return JobID;
