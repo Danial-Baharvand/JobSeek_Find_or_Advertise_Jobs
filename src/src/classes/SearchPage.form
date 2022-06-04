@@ -35,6 +35,7 @@
         </constraints>
         <properties>
           <model>
+            <item value="Any"/>
             <item value="QLD"/>
             <item value="NSW"/>
             <item value="VIC"/>
@@ -56,7 +57,14 @@
         <constraints>
           <grid row="5" column="4" row-span="3" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <model>
+            <item value="Any"/>
+            <item value="Full-Time"/>
+            <item value="Part-Time"/>
+            <item value="Casual"/>
+          </model>
+        </properties>
       </component>
       <component id="12df6" class="javax.swing.JTextField" binding="keywordsTBox">
         <constraints>

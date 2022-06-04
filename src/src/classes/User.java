@@ -1,69 +1,49 @@
 package classes;
 
-import java.util.*;
+public class User {
 
-public class User{
-    private final Date dateOfBirth;
-    private String userName;
-    private String name;
-    private String phoneNo;
     private String email;
-    private int type;
+    private String password;
+    private String firstName;
+    private String lastName;
 
-    public User(Date dateOfBirth){
-        this.dateOfBirth = dateOfBirth;
-        userName = "";
-        name = "";
-        phoneNo = "";
-        email = "";
-        type = 0;
-    }
-
-    public User(String userName, String name, String phoneNo, String email, Date dateOfBirth){
-        this.userName = userName;
-        this.name = name;
-        this.phoneNo = phoneNo;
-        this.email = email;
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public void setUserName(String userName){
-        this.userName = userName;
-    }
-
-    public String getUserName(){
-        return userName;
-    }
-
-    public void setName(String name){
-        this.name = name;
-    }
-
-    public String getName(){
-        return name;
-    }
-
-    public void setPhoneNumber(String phoneNo){
-        this.phoneNo = phoneNo;
-    }
-
-    public String getPhoneNumber(){
-        return phoneNo;
-    }
-
-    public void setEmailAddress(String email){
-        this.email = email;
-    }
-
-    public String getEmailAddress(){
+    public String getEmail() {
         return email;
     }
 
-    public void setType(int type){
-        this.type = type;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public int getType(){
-        return type;
+    public String getPassword() {
+        return password;
     }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public User(String email, String password, String firstName, String lastName) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
 }

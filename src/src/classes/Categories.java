@@ -2,6 +2,7 @@ package classes;
 
 import java.io.*;
 import java.util.*;
+// comment for test branch
 // Holds data for all categories provided by recruiters
 public class Categories {
     HashMap<String, Set<String>> map = new HashMap<>();
@@ -47,5 +48,9 @@ public class Categories {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public HashMap<String, Set<String>> getMap() {
+        return map;
     }
 }
