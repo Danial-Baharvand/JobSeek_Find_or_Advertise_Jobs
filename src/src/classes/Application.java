@@ -11,6 +11,7 @@ public class Application {
     private String currentUser;
     String dt_registeredUsers = "/Users/jackstoneman/JavaProjects/group-i/out/production/src/dataTables/registeredUsers.csv";
     String dt_jobSeekers = "/Users/jackstoneman/JavaProjects/group-i/out/production/src/dataTables/jobSeekers.csv";
+    //String dt_recruiters = "C:\\Users\\TechFast Australia\\IdeaProjects\\group-i\\out\\production\\src\\dataTables\\recruiters.csv";
 
     public Application() {
         this.readRegisteredUsers();
