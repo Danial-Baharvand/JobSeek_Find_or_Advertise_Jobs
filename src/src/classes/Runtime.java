@@ -47,9 +47,11 @@ public class Runtime {
         frame.setVisible(true);
     }
 
-    /*public static HashSet<Job> createExampleJobs(){
+    public static HashSet<Job> createExampleJobs(){
         Recruiter recruiter1 = new Recruiter();
-        recruiter1.setOrg("Google");
+        Organisation org = new Organisation();
+        recruiter1.setOrg(org);
+        org.setName("Google");
         Job job1 = new Job();
         job1.setJobTitle("Software Engineer");
         job1.setRecruiter(recruiter1);
