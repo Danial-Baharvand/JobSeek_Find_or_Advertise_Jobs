@@ -1,10 +1,13 @@
 package classes;
 
 import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
+import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
+import java.util.Locale;
 
 public class SearchPage {
     private JTextField searchTBox;
@@ -21,6 +24,9 @@ public class SearchPage {
     private JLabel lowSalLabel;
     private JLabel midSalLabel;
     private JLabel highSalLabel;
+    private JButton backButton;
+    private JButton homeButton;
+    private JTextArea textArea1;
 
     public JPanel getSearchPanel() {
         return searchPanel;
@@ -28,8 +34,8 @@ public class SearchPage {
 
     public SearchPage(HashSet<Job> jobs) {
         /**test code to check categories' functionality
-        should be removed when adding categories by recruiters is implemented
-        */
+         should be removed when adding categories by recruiters is implemented
+         */
         Categories categories = new Categories();
         categories.addCat("CompSci", "0001");
         categories.addCat("Networking", "0002");
@@ -73,59 +79,154 @@ public class SearchPage {
      */
     private void $$$setupUI$$$() {
         searchPanel = new JPanel();
-        searchPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(9, 5, new Insets(0, 0, 0, 0), -1, -1));
+        searchPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(12, 7, new Insets(0, 0, 0, 0), -1, -1));
+        searchPanel.setBackground(new Color(-13551257));
+        searchPanel.setEnabled(false);
+        searchPanel.setForeground(new Color(-1));
         searchTBox = new JTextField();
-        searchPanel.add(searchTBox, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 4, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        searchTBox.setBackground(new Color(-11576184));
+        searchTBox.setEditable(true);
+        Font searchTBoxFont = this.$$$getFont$$$("Calibri Light", Font.PLAIN, 16, searchTBox.getFont());
+        if (searchTBoxFont != null) searchTBox.setFont(searchTBoxFont);
+        searchTBox.setForeground(new Color(-1));
+        searchTBox.setText("I am looking for...");
+        searchPanel.add(searchTBox, new com.intellij.uiDesigner.core.GridConstraints(2, 1, 1, 4, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(150, -1), null, 0, false));
         final com.intellij.uiDesigner.core.Spacer spacer1 = new com.intellij.uiDesigner.core.Spacer();
-        searchPanel.add(spacer1, new com.intellij.uiDesigner.core.GridConstraints(1, 3, 8, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_VERTICAL, 1, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        searchPanel.add(spacer1, new com.intellij.uiDesigner.core.GridConstraints(3, 4, 7, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_VERTICAL, 1, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         searchButton = new JButton();
+        searchButton.setBackground(new Color(-1405849));
+        searchButton.setEnabled(true);
+        Font searchButtonFont = this.$$$getFont$$$("Calibri Light", Font.BOLD, 16, searchButton.getFont());
+        if (searchButtonFont != null) searchButton.setFont(searchButtonFont);
+        searchButton.setForeground(new Color(-1));
+        searchButton.setHideActionText(true);
         searchButton.setText("Search");
-        searchPanel.add(searchButton, new com.intellij.uiDesigner.core.GridConstraints(0, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        stateCBox = new JComboBox();
+        searchButton.setToolTipText("");
+        searchPanel.add(searchButton, new com.intellij.uiDesigner.core.GridConstraints(2, 5, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        catCBox = new JComboBox();
+        catCBox.setBackground(new Color(-11576184));
+        Font catCBoxFont = this.$$$getFont$$$("Calibri Light", Font.PLAIN, 16, catCBox.getFont());
+        if (catCBoxFont != null) catCBox.setFont(catCBoxFont);
+        catCBox.setForeground(new Color(-1));
         final DefaultComboBoxModel defaultComboBoxModel1 = new DefaultComboBoxModel();
         defaultComboBoxModel1.addElement("Any");
-        defaultComboBoxModel1.addElement("QLD");
-        defaultComboBoxModel1.addElement("NSW");
-        defaultComboBoxModel1.addElement("VIC");
-        defaultComboBoxModel1.addElement("ACT");
-        defaultComboBoxModel1.addElement("WA");
-        defaultComboBoxModel1.addElement("NT");
-        defaultComboBoxModel1.addElement("SA");
-        defaultComboBoxModel1.addElement("TAS");
-        stateCBox.setModel(defaultComboBoxModel1);
-        searchPanel.add(stateCBox, new com.intellij.uiDesigner.core.GridConstraints(3, 0, 3, 3, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        catCBox = new JComboBox();
-        searchPanel.add(catCBox, new com.intellij.uiDesigner.core.GridConstraints(2, 4, 2, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        catCBox.setModel(defaultComboBoxModel1);
+        searchPanel.add(catCBox, new com.intellij.uiDesigner.core.GridConstraints(4, 5, 2, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         jobTypeCBox = new JComboBox();
+        jobTypeCBox.setBackground(new Color(-11576184));
+        Font jobTypeCBoxFont = this.$$$getFont$$$("Calibri Light", Font.PLAIN, 16, jobTypeCBox.getFont());
+        if (jobTypeCBoxFont != null) jobTypeCBox.setFont(jobTypeCBoxFont);
+        jobTypeCBox.setForeground(new Color(-1));
         final DefaultComboBoxModel defaultComboBoxModel2 = new DefaultComboBoxModel();
         defaultComboBoxModel2.addElement("Any");
         defaultComboBoxModel2.addElement("Full-Time");
         defaultComboBoxModel2.addElement("Part-Time");
         defaultComboBoxModel2.addElement("Casual");
         jobTypeCBox.setModel(defaultComboBoxModel2);
-        searchPanel.add(jobTypeCBox, new com.intellij.uiDesigner.core.GridConstraints(5, 4, 3, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        keywordsTBox = new JTextField();
-        searchPanel.add(keywordsTBox, new com.intellij.uiDesigner.core.GridConstraints(8, 0, 1, 3, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        searchPanel.add(jobTypeCBox, new com.intellij.uiDesigner.core.GridConstraints(7, 5, 3, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         salarySlider = new JSlider();
-        searchPanel.add(salarySlider, new com.intellij.uiDesigner.core.GridConstraints(7, 0, 1, 3, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        StateLabel = new JLabel();
-        StateLabel.setText("State");
-        searchPanel.add(StateLabel, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 2, 3, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        salarySlider.setBackground(new Color(-11576184));
+        salarySlider.putClientProperty("JSlider.isFilled", Boolean.TRUE);
+        salarySlider.putClientProperty("Slider.paintThumbArrowShape", Boolean.TRUE);
+        searchPanel.add(salarySlider, new com.intellij.uiDesigner.core.GridConstraints(9, 1, 1, 3, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         catLabel = new JLabel();
+        Font catLabelFont = this.$$$getFont$$$("Calibri Light", Font.PLAIN, 16, catLabel.getFont());
+        if (catLabelFont != null) catLabel.setFont(catLabelFont);
+        catLabel.setForeground(new Color(-1));
         catLabel.setText("Categories");
-        searchPanel.add(catLabel, new com.intellij.uiDesigner.core.GridConstraints(1, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        searchPanel.add(catLabel, new com.intellij.uiDesigner.core.GridConstraints(3, 5, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         jobTypeLabel = new JLabel();
+        Font jobTypeLabelFont = this.$$$getFont$$$("Calibri Light", Font.PLAIN, 16, jobTypeLabel.getFont());
+        if (jobTypeLabelFont != null) jobTypeLabel.setFont(jobTypeLabelFont);
+        jobTypeLabel.setForeground(new Color(-1));
         jobTypeLabel.setText("Job Type");
-        searchPanel.add(jobTypeLabel, new com.intellij.uiDesigner.core.GridConstraints(4, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        searchPanel.add(jobTypeLabel, new com.intellij.uiDesigner.core.GridConstraints(6, 5, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         lowSalLabel = new JLabel();
+        Font lowSalLabelFont = this.$$$getFont$$$("Calibri Light", Font.PLAIN, 16, lowSalLabel.getFont());
+        if (lowSalLabelFont != null) lowSalLabel.setFont(lowSalLabelFont);
+        lowSalLabel.setForeground(new Color(-1));
         lowSalLabel.setText("$30K");
-        searchPanel.add(lowSalLabel, new com.intellij.uiDesigner.core.GridConstraints(6, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        searchPanel.add(lowSalLabel, new com.intellij.uiDesigner.core.GridConstraints(8, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         midSalLabel = new JLabel();
+        Font midSalLabelFont = this.$$$getFont$$$("Calibri Light", Font.PLAIN, 16, midSalLabel.getFont());
+        if (midSalLabelFont != null) midSalLabel.setFont(midSalLabelFont);
+        midSalLabel.setForeground(new Color(-1));
         midSalLabel.setText("$130K");
-        searchPanel.add(midSalLabel, new com.intellij.uiDesigner.core.GridConstraints(6, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        searchPanel.add(midSalLabel, new com.intellij.uiDesigner.core.GridConstraints(8, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         highSalLabel = new JLabel();
+        Font highSalLabelFont = this.$$$getFont$$$("Calibri Light", Font.PLAIN, 16, highSalLabel.getFont());
+        if (highSalLabelFont != null) highSalLabel.setFont(highSalLabelFont);
+        highSalLabel.setForeground(new Color(-1));
         highSalLabel.setText("$230K");
-        searchPanel.add(highSalLabel, new com.intellij.uiDesigner.core.GridConstraints(6, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        searchPanel.add(highSalLabel, new com.intellij.uiDesigner.core.GridConstraints(8, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        StateLabel = new JLabel();
+        Font StateLabelFont = this.$$$getFont$$$("Calibri Light", Font.PLAIN, 16, StateLabel.getFont());
+        if (StateLabelFont != null) StateLabel.setFont(StateLabelFont);
+        StateLabel.setForeground(new Color(-1));
+        StateLabel.setText("State");
+        searchPanel.add(StateLabel, new com.intellij.uiDesigner.core.GridConstraints(3, 1, 2, 3, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        stateCBox = new JComboBox();
+        stateCBox.setBackground(new Color(-11576184));
+        stateCBox.setEditable(false);
+        stateCBox.setEnabled(true);
+        Font stateCBoxFont = this.$$$getFont$$$("Calibri Light", Font.PLAIN, 16, stateCBox.getFont());
+        if (stateCBoxFont != null) stateCBox.setFont(stateCBoxFont);
+        stateCBox.setForeground(new Color(-1));
+        final DefaultComboBoxModel defaultComboBoxModel3 = new DefaultComboBoxModel();
+        defaultComboBoxModel3.addElement("Any");
+        defaultComboBoxModel3.addElement("QLD");
+        defaultComboBoxModel3.addElement("NSW");
+        defaultComboBoxModel3.addElement("VIC");
+        defaultComboBoxModel3.addElement("ACT");
+        defaultComboBoxModel3.addElement("WA");
+        defaultComboBoxModel3.addElement("NT");
+        defaultComboBoxModel3.addElement("SA");
+        defaultComboBoxModel3.addElement("TAS");
+        stateCBox.setModel(defaultComboBoxModel3);
+        searchPanel.add(stateCBox, new com.intellij.uiDesigner.core.GridConstraints(5, 1, 2, 3, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final com.intellij.uiDesigner.core.Spacer spacer2 = new com.intellij.uiDesigner.core.Spacer();
+        searchPanel.add(spacer2, new com.intellij.uiDesigner.core.GridConstraints(6, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        final com.intellij.uiDesigner.core.Spacer spacer3 = new com.intellij.uiDesigner.core.Spacer();
+        searchPanel.add(spacer3, new com.intellij.uiDesigner.core.GridConstraints(6, 6, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        final com.intellij.uiDesigner.core.Spacer spacer4 = new com.intellij.uiDesigner.core.Spacer();
+        searchPanel.add(spacer4, new com.intellij.uiDesigner.core.GridConstraints(11, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_VERTICAL, 1, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        keywordsTBox = new JTextField();
+        keywordsTBox.setBackground(new Color(-11576184));
+        Font keywordsTBoxFont = this.$$$getFont$$$("Calibri Light", Font.PLAIN, 16, keywordsTBox.getFont());
+        if (keywordsTBoxFont != null) keywordsTBox.setFont(keywordsTBoxFont);
+        keywordsTBox.setForeground(new Color(-1));
+        keywordsTBox.setText("Type in keywords seperated by comma");
+        searchPanel.add(keywordsTBox, new com.intellij.uiDesigner.core.GridConstraints(10, 1, 1, 5, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 2), new Dimension(150, -1), null, 0, false));
+        backButton = new JButton();
+        backButton.setText("Back");
+        searchPanel.add(backButton, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final com.intellij.uiDesigner.core.Spacer spacer5 = new com.intellij.uiDesigner.core.Spacer();
+        searchPanel.add(spacer5, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_VERTICAL, 1, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        homeButton = new JButton();
+        homeButton.setText("Home");
+        searchPanel.add(homeButton, new com.intellij.uiDesigner.core.GridConstraints(1, 5, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+    }
+
+    /**
+     * @noinspection ALL
+     */
+    private Font $$$getFont$$$(String fontName, int style, int size, Font currentFont) {
+        if (currentFont == null) return null;
+        String resultName;
+        if (fontName == null) {
+            resultName = currentFont.getName();
+        } else {
+            Font testFont = new Font(fontName, Font.PLAIN, 10);
+            if (testFont.canDisplay('a') && testFont.canDisplay('1')) {
+                resultName = fontName;
+            } else {
+                resultName = currentFont.getName();
+            }
+        }
+        Font font = new Font(resultName, style >= 0 ? style : currentFont.getStyle(), size >= 0 ? size : currentFont.getSize());
+        boolean isMac = System.getProperty("os.name", "").toLowerCase(Locale.ENGLISH).startsWith("mac");
+        Font fontWithFallback = isMac ? new Font(font.getFamily(), font.getStyle(), font.getSize()) : new StyleContext().getFont(font.getFamily(), font.getStyle(), font.getSize());
+        return fontWithFallback instanceof FontUIResource ? fontWithFallback : new FontUIResource(fontWithFallback);
     }
 
     /**
@@ -135,4 +236,7 @@ public class SearchPage {
         return searchPanel;
     }
 
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+    }
 }

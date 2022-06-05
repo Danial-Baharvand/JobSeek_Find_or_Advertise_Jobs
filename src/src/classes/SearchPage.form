@@ -1,29 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="classes.SearchPage">
-  <grid id="27dc6" binding="searchPanel" layout-manager="GridLayoutManager" row-count="9" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-    <margin top="0" left="0" bottom="0" right="0"/>
+  <grid id="27dc6" binding="searchPanel" layout-manager="GridLayoutManager" row-count="12" column-count="8" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="20" left="20" bottom="20" right="20"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="400"/>
+      <xy x="20" y="20" width="684" height="517"/>
     </constraints>
-    <properties/>
+    <properties>
+      <background color="-13224648"/>
+      <enabled value="false"/>
+      <foreground color="-1"/>
+    </properties>
     <border type="none"/>
     <children>
       <component id="4ec63" class="javax.swing.JTextField" binding="searchTBox">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="2" column="0" row-span="1" col-span="7" vsize-policy="2" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <background color="-1973791"/>
+          <editable value="true"/>
+          <font name="Calibri Light" size="16" style="0"/>
+          <foreground color="-13224648"/>
+          <text value="I am looking for..."/>
+        </properties>
       </component>
       <vspacer id="269bc">
         <constraints>
-          <grid row="1" column="3" row-span="8" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="6" row-span="7" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
-      <component id="3367e" class="javax.swing.JButton" binding="searchButton">
+      <component id="b6293" class="javax.swing.JComboBox" binding="jobTypeCBox">
         <constraints>
-          <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="8" column="7" row-span="3" col-span="1" vsize-policy="0" hsize-policy="2" anchor="9" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-1973791"/>
+          <font name="Calibri Light" size="16" style="0"/>
+          <foreground color="-13224648"/>
+          <model>
+            <item value="Any"/>
+            <item value="Full-Time"/>
+            <item value="Part-Time"/>
+            <item value="Casual"/>
+          </model>
+        </properties>
+      </component>
+      <component id="57939" class="javax.swing.JLabel" binding="jobTypeLabel">
+        <constraints>
+          <grid row="7" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Calibri Light" size="16" style="0"/>
+          <foreground color="-1"/>
+          <text value="Job Type"/>
+        </properties>
+      </component>
+      <component id="12df6" class="javax.swing.JTextField" binding="keywordsTBox">
+        <constraints>
+          <grid row="11" column="0" row-span="1" col-span="8" vsize-policy="6" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="-1" height="2"/>
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-1973791"/>
+          <font name="Calibri Light" size="16" style="0"/>
+          <foreground color="-13224648"/>
+          <text value="Type in keywords seperated by comma"/>
+        </properties>
+      </component>
+      <component id="bb050" class="javax.swing.JButton" binding="backButton" default-binding="true">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Back"/>
+        </properties>
+      </component>
+      <component id="39f44" class="javax.swing.JButton" binding="homeButton" default-binding="true">
+        <constraints>
+          <grid row="0" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Home"/>
+        </properties>
+      </component>
+      <component id="28c33" class="javax.swing.JTextArea" binding="textArea1" default-binding="true">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="8" vsize-policy="1" hsize-policy="1" anchor="1" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="15"/>
+            <maximum-size width="-1" height="1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-11348236"/>
+        </properties>
+      </component>
+      <component id="671ab" class="javax.swing.JButton" binding="searchButton" default-binding="true">
+        <constraints>
+          <grid row="2" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Search"/>
@@ -31,9 +108,14 @@
       </component>
       <component id="506e3" class="javax.swing.JComboBox" binding="stateCBox">
         <constraints>
-          <grid row="3" column="0" row-span="3" col-span="3" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="0" row-span="2" col-span="6" vsize-policy="0" hsize-policy="2" anchor="9" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <background color="-1973791"/>
+          <editable value="false"/>
+          <enabled value="true"/>
+          <font name="Calibri Light" size="16" style="0"/>
+          <foreground color="-13224648"/>
           <model>
             <item value="Any"/>
             <item value="QLD"/>
@@ -49,83 +131,78 @@
       </component>
       <component id="91347" class="javax.swing.JComboBox" binding="catCBox">
         <constraints>
-          <grid row="2" column="4" row-span="2" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="b6293" class="javax.swing.JComboBox" binding="jobTypeCBox">
-        <constraints>
-          <grid row="5" column="4" row-span="3" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="7" row-span="2" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <background color="-1973791"/>
+          <font name="Calibri Light" size="16" style="0"/>
+          <foreground color="-13224648"/>
           <model>
             <item value="Any"/>
-            <item value="Full-Time"/>
-            <item value="Part-Time"/>
-            <item value="Casual"/>
           </model>
-        </properties>
-      </component>
-      <component id="12df6" class="javax.swing.JTextField" binding="keywordsTBox">
-        <constraints>
-          <grid row="8" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="a11ce" class="javax.swing.JSlider" binding="salarySlider">
-        <constraints>
-          <grid row="7" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="4404e" class="javax.swing.JLabel" binding="StateLabel">
-        <constraints>
-          <grid row="1" column="0" row-span="2" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="State"/>
         </properties>
       </component>
       <component id="a9312" class="javax.swing.JLabel" binding="catLabel">
         <constraints>
-          <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font name="Calibri Light" size="16" style="0"/>
+          <foreground color="-1"/>
           <text value="Categories"/>
         </properties>
       </component>
-      <component id="57939" class="javax.swing.JLabel" binding="jobTypeLabel">
+      <component id="4404e" class="javax.swing.JLabel" binding="StateLabel">
         <constraints>
-          <grid row="4" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Job Type"/>
+          <font name="Calibri Light" size="16" style="0"/>
+          <foreground color="-1"/>
+          <text value="State"/>
         </properties>
       </component>
       <component id="69caa" class="javax.swing.JLabel" binding="lowSalLabel">
         <constraints>
-          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font name="Calibri Light" size="16" style="0"/>
+          <foreground color="-1"/>
           <text value="$30K"/>
-        </properties>
-      </component>
-      <component id="88c10" class="javax.swing.JLabel" binding="midSalLabel">
-        <constraints>
-          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="$130K"/>
         </properties>
       </component>
       <component id="75567" class="javax.swing.JLabel" binding="highSalLabel">
         <constraints>
-          <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font name="Calibri Light" size="16" style="0"/>
+          <foreground color="-1"/>
           <text value="$230K"/>
+        </properties>
+      </component>
+      <component id="a11ce" class="javax.swing.JSlider" binding="salarySlider">
+        <constraints>
+          <grid row="8" column="0" row-span="1" col-span="6" vsize-policy="0" hsize-policy="6" anchor="9" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-13224648"/>
+          <foreground color="-1973791"/>
+        </properties>
+        <clientProperties>
+          <JSlider.isFilled class="java.lang.Boolean" value="true"/>
+          <Slider.paintThumbArrowShape class="java.lang.Boolean" value="true"/>
+        </clientProperties>
+      </component>
+      <component id="88c10" class="javax.swing.JLabel" binding="midSalLabel">
+        <constraints>
+          <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Calibri Light" size="16" style="0"/>
+          <foreground color="-1"/>
+          <text value="$130K"/>
         </properties>
       </component>
     </children>
