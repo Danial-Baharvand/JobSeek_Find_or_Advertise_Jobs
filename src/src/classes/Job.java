@@ -11,6 +11,17 @@ public class Job {
     String jobType;
     String keywords;
 
+    public Job() {
+        this.JobID = 0;
+        this.company = "";
+        Recruiter recruiter = new Recruiter();
+        this.jobTitle = "";
+        this.state = "";
+        this.cat = "";
+        this.salary = 0;
+        this.jobType = "";
+        this.keywords = "";
+    }
     public Job(int jobID, String company, Recruiter recruiter, String jobTitle, String state, String cat, int salary, String jobType, String keywords) {
         this.JobID = jobID;
         this.company = company;

@@ -4,6 +4,11 @@ public class Organisation {
     String name;
     String website;
 
+    public Organisation() {
+        name = "";
+        website = "";
+    }
+
     public Organisation(String name, String website) {
         this.name = name;
         this.website = website;

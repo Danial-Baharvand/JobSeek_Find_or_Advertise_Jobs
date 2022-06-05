@@ -221,7 +221,7 @@ public class RecruiterProfile {
         recruiterPhoneNo.setText("Phone");
         recruiterProfile.add(recruiterPhoneNo, new com.intellij.uiDesigner.core.GridConstraints(5, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         whoWeAreLabel = new JLabel();
-        whoWeAreLabel.setText("Who We Are:");
+        whoWeAreLabel.setText("About Us:");
         recruiterProfile.add(whoWeAreLabel, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(249, 16), null, 0, false));
         jobListingsLabel = new JLabel();
         jobListingsLabel.setText("Job Listings");
