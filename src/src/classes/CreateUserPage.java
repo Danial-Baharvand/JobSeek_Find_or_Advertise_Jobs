@@ -1,4 +1,4 @@
-package classes.pages;
+package classes;
 
 public class CreateUserPage {
 
