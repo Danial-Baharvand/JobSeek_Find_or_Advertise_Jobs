@@ -9,26 +9,12 @@ public class Application {
 
     public HashMap<String, String> registeredUsers = new HashMap<String, String>();
     private String currentUser;
-    String dt_registeredUsers = "out/production/group-i/dataTables/registeredUsers.csv";
-    String dt_jobSeekers = "out/production/group-i/dataTables/jobSeekers.csv";
+    final static String dt_registeredUsers = "out/production/src/dataTables/registeredUsers.csv";
+    final static String dt_jobSeekers = "out/production/src/dataTables/jobSeekers.csv";
+    final static String dt_resumes = "out/production/src/dataTables/resumes.csv";
 
     public Application() {
         this.readRegisteredUsers();
-    }
-
-    /**
-     * @param email is String that is a User's email
-     * @param password is a String that is a User's password
-     * adds the email of the logged in User to the currentUser ArrayList
-     * else false
-     */
-    public void createNewJobSeeker(String email, String password, String firstName, String lastName) {
-        JobSeeker newJobSeeker = new JobSeeker(email, password, firstName, lastName);
-        CSVWriter writer = new CSVWriter();
-        String newRegisteredUserDetails = newJobSeeker.getEmail().concat(",").concat(newJobSeeker.getPassword());
-        writer.newLine(dt_registeredUsers, newRegisteredUserDetails);
-        String newJobSeekerDetails = newJobSeeker.getFirstName().concat(",").concat(newJobSeeker.getLastName()).concat(",").concat(newJobSeeker.getEmail());
-        writer.newLine(dt_jobSeekers, newJobSeekerDetails);
     }
 
     /**
@@ -49,9 +35,9 @@ public class Application {
     private void readRegisteredUsers() {
         String line;
         try (BufferedReader reader = new BufferedReader(new FileReader(dt_registeredUsers))) {
-            while ((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null && !line.equals("")) {
                 String[] registeredUser = line.split(",");
-                registeredUsers.put(registeredUser[0], registeredUser[1]);
+                registeredUsers.putIfAbsent(registeredUser[0], registeredUser[1]);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -64,5 +50,19 @@ public class Application {
 
     public String getCurrentUser() {
         return currentUser;
+    }
+
+    public HashMap<String, String> getRegisteredUsers() {
+        return registeredUsers;
+    }
+
+    /**
+     * updates the registeredUsers Hashmap by calling the readRegisteredUsers method to read the registeredUsers file
+     * @param email is the email to search for in the registeredUsers Hashmap
+     * @return true if the email already exists as a Key in the registeredUsers Hashmap, else false
+     */
+    public boolean isRegisteredUser(String email) {
+        this.readRegisteredUsers();
+        return this.registeredUsers.containsKey(email);
     }
 }
