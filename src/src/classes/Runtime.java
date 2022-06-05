@@ -19,8 +19,8 @@ public class Runtime {
         testObject.testCreateAccount(testCreateAccount, testApplication);
 
         // TEST LOGIN
-        LoginPage testLoginPage = new LoginPage();
-        testObject.testLogin(testLoginPage, testApplication);
+        //LoginPage testLoginPage = new LoginPage();
+        //testObject.testLogin(testLoginPage, testApplication);
 
 
         // SHOW SEARCH PAGE

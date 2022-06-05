@@ -17,34 +17,57 @@ public class CreateAccount {
     public CreateAccount() {
 
     }
+
     /**
-     * @param email is String that is a User's email
-     * @param password is a String that is a User's password
-     * adds the email of the logged-in User to the currentUser ArrayList
-     * else false
+     * creates a new JobSeeker after validating that the email is new and that the passwords match
+     * writes the email, firstName and lastName to the JobSeekers file
+     * writes the email and password to the registeredUsers file
+     * @param firstName of the JobSeeker
+     * @param lastName of the JobSeeker
+     * @param email of the JobSeeker
+     * @param password of the JobSeeker
+     * @param confirmPassword of the JobSeeker
      */
-    public void createJobSeeker(String firstName, String lastName, String email, String password, String confirmPassword) {
-        //check if email is new (i.e., not in registered users) - if not, notify that email is not new
-        //check if password and confirm password match - if not, return that passwords don't match
-        //create new JobSeeker object and add new JobSeeker to database
-
-        User newJobSeeker = new JobSeeker(email, firstName, lastName);
-
-        CSVWriter writer = new CSVWriter();
-        String newJobSeekerDetails = String.format("%s,%s,%s", newJobSeeker.getEmail(), newJobSeeker.getFirstName(),newJobSeeker.getLastName());
-        writer.newLine(Application.dt_jobSeekers, newJobSeekerDetails);
-        //add new email and password to registered users file
-
-        String newRegisteredUserDetails = String.format("%s,%s", newJobSeeker.getEmail(), password);
-        writer.newLine(Application.dt_registeredUsers, newRegisteredUserDetails);
-
+    public String createJobSeeker(String firstName, String lastName, String email, String password, String confirmPassword) {
+        //check if email is registered to an existing account - if so, notify that email is not new
+        if (!new Application().isRegisteredUser(email)) {
+            //check if password and confirm password match - if not, return that passwords don't match
+            if (password.equals(confirmPassword)) {
+                //create new JobSeeker object and add new JobSeeker to database
+                User newJobSeeker = new JobSeeker(email, firstName, lastName);
+                CSVWriter writer = new CSVWriter();
+                String newJobSeekerDetails = String.format("%s,%s,%s", newJobSeeker.getEmail(), newJobSeeker.getFirstName(),newJobSeeker.getLastName());
+                writer.newLine(Application.dt_jobSeekers, newJobSeekerDetails);
+                //add new email and password to registered users file
+                String newRegisteredUserDetails = String.format("%s,%s", newJobSeeker.getEmail(), password);
+                writer.newLine(Application.dt_registeredUsers, newRegisteredUserDetails);
+                System.out.println(String.format("New account successfully created for %s!", email));
+                return String.format("New account successfully created for %s!", email);
+            } else {
+                System.out.println(String.format("Passwords do not match. Account not created. Please try again."));
+                return String.format("Passwords do not match. Account not created. Please try again.");
+            }
+        } else {
+            System.out.println(String.format("That email address has already been registered to an account. Please login with your email address and password."));
+            return String.format("That email address has already been registered to an account. Please login with your email address and password.");
+        }
     }
-
+    /**
+     * creates a new JobSeeker after validating that the email is new and that the passwords match
+     * writes the email, firstName and lastName to the JobSeekers file
+     * writes the email and password to the registeredUsers file
+     * writes the resumeFile to the resumes file
+     * @param firstName of the JobSeeker
+     * @param lastName of the JobSeeker
+     * @param email of the JobSeeker
+     * @param password of the JobSeeker
+     * @param confirmPassword of the JobSeeker
+     * @param resumeFile is the file path of the JobSeeker's resume
+     */
     public void createJobSeeker(String firstName, String lastName, String email, String password, String confirmPassword, String resumeFile) {
         //check if email is new (i.e., not in registered users) - if not, notify that email is not new
         //check if password and confirm password match - if not, return that passwords don't match
         //create new JobSeeker object and add new JobSeeker to database
-        System.out.println(String.format("The email being passed to the newJobSeeker constructor is: %s", email));
         User newJobSeeker = new JobSeeker(email, firstName, lastName);
         CSVWriter writer = new CSVWriter();
         String newJobSeekerDetails = newJobSeeker.toString();
