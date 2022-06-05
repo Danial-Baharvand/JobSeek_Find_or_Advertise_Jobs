@@ -65,20 +65,4 @@ public class Tests {
         //return false;
     }
 
-    /**
-     * tests whether the userLogin method of the Application class is working successfully
-     * success: if a valid email and password are passed from the LoginPage to the userLogin method
-     * then the currentUser will be printed
-     * fail: the currentUser value will be "-1" and the user will be notifed that the email or password was incorrect
-     * @param testLoginPage is an object of the LoginPage class
-     * @param testApplication is an object of the Application class
-     */
-    public void testLogin(LoginPage testLoginPage, Application testApplication) {
-        if (testApplication.userLogin(testLoginPage.getEmail(), testLoginPage.getPassword())) {
-            System.out.println(String.format("User successfully logged in with email %s.", testApplication.getCurrentUser()));
-        } else {
-            System.out.println("Email or password incorrect.");
-        }
-    }
-
 }

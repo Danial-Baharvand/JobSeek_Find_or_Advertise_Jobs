@@ -9,14 +9,15 @@ import java.util.Set;
 public class Runtime {
     public static JFrame frame = new JFrame();
     public static Tests testObject = new Tests();
+    public static Application currentApplication;
 
     public static void main(String[] args) {
-        Application testApplication = new Application();
-        testApplication.getRegisteredUsers();
+        currentApplication = new Application();
+        currentApplication.getRegisteredUsers();
 
         // TEST ACCOUNT CREATION
-        CreateAccount testCreateAccount = new CreateAccount();
-        testObject.testCreateAccount(testCreateAccount, testApplication);
+        //CreateAccount testCreateAccount = new CreateAccount();
+        //testObject.testCreateAccount(testCreateAccount, currentApplication);
 
         // TEST LOGIN
         //LoginPage testLoginPage = new LoginPage();
@@ -26,8 +27,19 @@ public class Runtime {
         // SHOW SEARCH PAGE
         //showSearchPage(frame);
 
+        //SHOW LOGIN PAGE
+        showLoginPage(frame);
+
+        //SHOW CREATE ACCOUNT PAGE
+        //showCreateAccountPage(frame);
+
     }
-    public static void showSearchPage(JFrame frame){
+
+    public static boolean actionUserLogin(String email, String password) {
+        return currentApplication.userLogin(email, password);
+    }
+
+    public static void showSearchPage(JFrame frame) {
         frame.setTitle("Search Page");
         frame.getContentPane().removeAll();
         frame.repaint();
@@ -36,6 +48,32 @@ public class Runtime {
         frame.pack();
         frame.setVisible(true);
     }
+
+    public static void showLoginPage(JFrame frame) {
+        frame.setTitle("Login Page");
+        frame.getContentPane().removeAll();
+        frame.repaint();
+        frame.setContentPane(new LoginPage().getLoginPagePanel());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    public static void showCreateAccountPage(JFrame frame) {
+        frame.setTitle("Create Account Page");
+        frame.getContentPane().removeAll();
+        frame.repaint();
+        frame.setContentPane(new CreateAccount().getCreateAccountPanel());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    public static void actionShowCreateAccountPage() {
+        showCreateAccountPage(frame);
+    }
+
+
     public static void showSearchResultsPage(JFrame frame, Search search){
         frame.setTitle("Search Results Page");
         frame.getContentPane().removeAll();

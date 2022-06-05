@@ -13,8 +13,23 @@ public class CreateAccount {
     final String[] type = new String[] {"Job Seeker", "Recruiter"};
     private String organisation;
     private String resumeFile;
+    private JLabel typeLabel;
+    private JFrame frame;
+    private JComboBox userTypeComboBox;
+    private JLabel fullNameLabel;
+    private JLabel emailLabel;
+    private JLabel passwordLabel;
+    private JTextField fullNameTextField;
+    private JTextField emailTextField;
+    private JLabel confirmPasswordLabel;
+    private JPasswordField passwordPasswordField;
+    private JPasswordField confirmPasswordPasswordField;
+    private JButton createAccountButton;
+    private JPanel mainPanel;
 
     public CreateAccount() {
+        frame = new JFrame();
+        frame.setTitle("Login Page");
 
     }
 
@@ -77,7 +92,10 @@ public class CreateAccount {
         writer.newLine(Application.dt_registeredUsers, newRegisteredUserDetails);
         //add new resume to resumes file
         writer.newLine(Application.dt_resumes, resumeFile);
+    }
 
+    public JPanel getCreateAccountPanel() {
+        return mainPanel;
     }
 
 

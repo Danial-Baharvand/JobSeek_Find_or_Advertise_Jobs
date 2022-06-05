@@ -2,38 +2,53 @@ package classes;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class LoginPage {
+public class LoginPage extends JFrame {
 
-    public String email;
-    public String password;
+    private JPanel mainPanel;
+    private JFrame frame;
+    private JTextField emailTextField;
+    private JLabel emailLabel;
+    private JTextField passwordTextField;
+    private JLabel passwordLabel;
+    private JButton loginButton;
+    private JButton createNewAccountButton;
 
     public LoginPage() {
-        // registeredUsers is instantiated with valid user for testing purposes. Later, it will accept user input.
-        this.email = "danial@example.com";
-        this.password = "abczyx";
-        // registeredUsers is instantiated with invalid email for testing purposes.
-        //this.email = "daniel@example.com";
-        //this.password = "abc123";
-        // registeredUsers is instantiated with valid email but invalid password for testing purposes.
-        //this.email = "danial@example.com";
-        //this.password = "abc123";
+
+        frame = new JFrame();
+        frame.setTitle("Login Page");
+
+        /**
+         * if the user clicks the Login button, the method gets the user input for email and password
+         * the method invokes the actionUserLogin method of Runtime, which invokes the userLogin method of the Application class
+         * email and password are passed as arguments to actionUserLogin and then to userLogin
+         * actionUserLogin and userLogin both return true if the user is logged-in, which is used in the method to notify the user
+         */
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String email = emailTextField.getText();
+                String password = passwordTextField.getText();
+                if (Runtime.actionUserLogin(email, password)) {
+                    JOptionPane.showMessageDialog(null, "You have successfully logged in!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "The username of password is incorrect.");
+                }
+            }
+        });
+        createNewAccountButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Runtime.actionShowCreateAccountPage();
+            }
+        });
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public JPanel getLoginPagePanel() {
+        return mainPanel;
     }
 
     {
