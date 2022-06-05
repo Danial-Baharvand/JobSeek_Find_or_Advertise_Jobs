@@ -15,6 +15,7 @@ public class Application {
 
     public Application() {
         this.readRegisteredUsers();
+        System.out.println(this.registeredUsers.entrySet());
     }
 
     /**
@@ -35,9 +36,9 @@ public class Application {
     private void readRegisteredUsers() {
         String line;
         try (BufferedReader reader = new BufferedReader(new FileReader(dt_registeredUsers))) {
-            while ((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null && !line.equals("")) {
                 String[] registeredUser = line.split(",");
-                registeredUsers.put(registeredUser[0], registeredUser[1]);
+                registeredUsers.putIfAbsent(registeredUser[0], registeredUser[1]);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -54,5 +55,15 @@ public class Application {
 
     public HashMap<String, String> getRegisteredUsers() {
         return registeredUsers;
+    }
+
+    /**
+     * updates the registeredUsers Hashmap by calling the readRegisteredUsers method to read the registeredUsers file
+     * @param email is the email to search for in the registeredUsers Hashmap
+     * @return true if the email already exists as a Key in the registeredUsers Hashmap, else false
+     */
+    public boolean isRegisteredUser(String email) {
+        this.readRegisteredUsers();
+        return this.registeredUsers.containsKey(email);
     }
 }

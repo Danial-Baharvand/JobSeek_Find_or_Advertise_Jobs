@@ -54,7 +54,7 @@ public class Tests {
      */
     public boolean testCreateAccount(CreateAccount testCreateAccount, Application testApplication) {
         //Test 1: expect true
-        testCreateAccount.createJobSeeker("jack", "stoneman", "jack2@example.com", "acb123", "abc123");
+        testCreateAccount.createJobSeeker("jack", "stoneman", "jack2@example.com", "abc123", "abc123");
         testApplication.userLogin("jack2@example.com", "abc123");
         return true;
         //Test 2: expect false - passwords don't match
