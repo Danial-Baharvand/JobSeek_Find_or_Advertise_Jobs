@@ -23,6 +23,13 @@ public class RecruiterHome {
      */
     private void $$$setupUI$$$() {
         final JPanel panel1 = new JPanel();
-        panel1.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panel1.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(6, 2, new Insets(20, 20, 20, 20), -1, -1));
+        panel1.setBackground(new Color(-13224648));
+        backButton = new JButton();
+        backButton.setText("Back");
+        panel1.add(backButton, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        textArea1 = new JTextArea();
+        textArea1.setBackground(new Color(-11348236));
+        panel1.add(textArea1, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 5, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTH, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, 1, 1, null, new Dimension(150, 15), new Dimension(-1, 1), 0, false));
     }
 }
