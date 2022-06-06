@@ -42,7 +42,7 @@ public class Tests {
         job6.setJobTitle("Backend");
         job6.setRecruiter(recruiter1);
 
-        return new HashSet<Job>(Arrays.asList(job1, job2, job3, job4, job5, job6));
+        return new HashSet<Job>(Arrays.asList(job1, job2, job3, job4, job5));
     }
 
     public static Categories createExampleCats(){

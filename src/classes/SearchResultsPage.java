@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SearchResultsPage {
+    private final int NO_OF_RESULTS = 3;
     private JScrollBar scrollBar1;
     private JLabel job1Title;
     private JLabel job1Score;
@@ -39,15 +40,19 @@ public class SearchResultsPage {
     }
 
     public void createPage(int pageNumber) {
-        job1Title.setText(jobList.get(pageNumber * 3).getJob().getJobTitle());
-        job1Company.setText(jobList.get(pageNumber * 3).getJob().getRecruiter().getOrg());
-        job1Score.setText(String.valueOf(jobList.get(pageNumber * 3).getScore()));
-        job2Title.setText(jobList.get(pageNumber * 3 + 1).getJob().getJobTitle());
-        job2Company.setText(jobList.get(pageNumber * 3 + 1).getJob().getRecruiter().getOrg());
-        job2Score.setText(String.valueOf(jobList.get(pageNumber * 3 + 1).getScore()));
-        job3Title.setText(jobList.get(pageNumber * 3 + 2).getJob().getJobTitle());
-        job3Company.setText(jobList.get(pageNumber * 3 + 2).getJob().getRecruiter().getOrg());
-        job3Score.setText(String.valueOf(jobList.get(pageNumber * 3 + 2).getScore()));
+        JLabel[] jobTitles = {job1Title, job2Title, job3Title};
+        JLabel[] jobCompanies = {job1Company, job2Company, job3Company};
+        JLabel[] jobScores = {job1Score, job2Score, job3Score};
+        for (int i = 0; i < NO_OF_RESULTS; i++) {
+            if (pageNumber * NO_OF_RESULTS + i < jobList.size()) {
+                jobTitles[i].setText(jobList.get(pageNumber * NO_OF_RESULTS + i).getJob().getJobTitle());
+                jobCompanies[i].setText(jobList.get(pageNumber * NO_OF_RESULTS + i).getJob().getRecruiter().getOrg());
+                jobScores[i].setText(String.valueOf(jobList.get(pageNumber * NO_OF_RESULTS + i).getScore()));
+                jobScores[i].getParent().setVisible(true);
+            } else {
+                jobScores[i].getParent().setVisible(false);
+            }
+        }
     }
 
     public void addButtonListeners(JButton nextButton, JButton prevButton) {
