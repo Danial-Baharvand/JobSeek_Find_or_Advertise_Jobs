@@ -12,8 +12,8 @@ public class Runtime {
     public static Application currentApplication;
 
     public static void main(String[] args) {
-        currentApplication = new Application();
-        currentApplication.getRegisteredUsers();
+        //currentApplication = new Application();
+        //currentApplication.getRegisteredUsers();
 
         // TEST ACCOUNT CREATION
         //CreateAccount testCreateAccount = new CreateAccount();
@@ -25,10 +25,10 @@ public class Runtime {
 
 
         // SHOW SEARCH PAGE
-        //showSearchPage(frame);
+        showSearchPage(frame);
 
         //SHOW LOGIN PAGE
-        showLoginPage(frame);
+        //showLoginPage(frame);
 
         //SHOW CREATE ACCOUNT PAGE
         //showCreateAccountPage(frame);
