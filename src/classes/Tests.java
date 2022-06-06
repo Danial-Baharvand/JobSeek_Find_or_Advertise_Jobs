@@ -45,6 +45,14 @@ public class Tests {
         return new HashSet<Job>(Arrays.asList(job1, job2, job3, job4, job5, job6));
     }
 
+    public static Categories createExampleCats(){
+        Categories categories = new Categories();
+        categories.addCat("CompSci", "0001");
+        categories.addCat("Networking", "0002");
+        categories.addCat("AI", "0003");
+        return categories;
+    }
+
     /**
      * tests whether the createJobSeeker method of the CreateAccount class is working successfully
      * success: if a valid email and password are written to the registeredUsers.csv file

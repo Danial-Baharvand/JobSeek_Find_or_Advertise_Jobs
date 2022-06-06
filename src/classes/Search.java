@@ -16,10 +16,12 @@ public class Search {
         //setScores(jobs);
     }
 
+    /**
+     * Uses the scorer object to score all jobs in the Jobs set.
+     */
     public void setScores(){
         Scorer scorer = new Scorer();
         for (Job job: jobs){
-            System.out.println(this.getSearchText());
             int score = scorer.scoreAgaintSearch(this, job);
             scoredJobs.add(new ScoredJob(job, score));
         }

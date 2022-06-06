@@ -25,13 +25,13 @@ public class Runtime {
 
 
         // SHOW SEARCH PAGE
-        //showSearchPage(frame);
+        showSearchPage(frame);
 
         //SHOW LOGIN PAGE
         //showLoginPage(frame);
 
         //SHOW CREATE ACCOUNT PAGE
-        showCreateAccountPage(frame);
+        //showCreateAccountPage(frame);
 
     }
 

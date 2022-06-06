@@ -1,7 +1,8 @@
 package classes;
 
-import java.util.Comparator;
-
+/**
+ * A class that stores a job and a scored assigned to it based on how relevant it is to a certain criteria
+ */
 public class ScoredJob {
     Job job;
     int score;

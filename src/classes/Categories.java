@@ -22,7 +22,7 @@ public class Categories {
 
     public void writeToFile() {
         try {
-            FileOutputStream f = new FileOutputStream(("out/production/group-i/dataTables/categories.txt"));
+            FileOutputStream f = new FileOutputStream(("src/dataTables/categories.txt"));
             ObjectOutputStream o = new ObjectOutputStream(f);
 
             // Write objects to file

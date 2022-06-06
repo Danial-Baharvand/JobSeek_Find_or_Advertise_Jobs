@@ -30,12 +30,9 @@ public class SearchPage {
         /**test code to check categories' functionality
         should be removed when adding categories by recruiters is implemented
         */
-        Categories categories = new Categories();
-        categories.addCat("CompSci", "0001");
-        categories.addCat("Networking", "0002");
-        categories.addCat("AI", "0003");
+        Categories categories = Tests.createExampleCats();
         catCBox.setModel(new DefaultComboBoxModel<>(categories.getMap().keySet().toArray()));
-        catCBox.addItem("Any");
+        catCBox.insertItemAt("Any", 0);
         catCBox.setSelectedItem("Any");
 
 

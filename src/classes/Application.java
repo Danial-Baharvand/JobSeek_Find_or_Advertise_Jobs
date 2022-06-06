@@ -9,9 +9,9 @@ public class Application {
 
     public HashMap<String, String> registeredUsers = new HashMap<String, String>();
     private String currentUser;
-    final static String dt_registeredUsers = "out/production/src/dataTables/registeredUsers.csv";
-    final static String dt_jobSeekers = "out/production/src/dataTables/jobSeekers.csv";
-    final static String dt_resumes = "out/production/src/dataTables/resumes.csv";
+    final static String dt_registeredUsers = "src/dataTables/registeredUsers.csv";
+    final static String dt_jobSeekers = "src/dataTables/jobSeekers.csv";
+    final static String dt_resumes = "src/dataTables/resumes.csv";
 
     public Application() {
         this.readRegisteredUsers();

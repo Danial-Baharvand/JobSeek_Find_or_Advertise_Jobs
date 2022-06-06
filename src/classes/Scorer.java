@@ -4,13 +4,6 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 
 public class Scorer {
-    public static void main(String[] args) {
-        // Code to test functionality
-        Scorer scorer = new Scorer();
-        //System.out.println(scorer.scoreJobTitle("world hello", "Hi World"));
-        //System.out.println(scorer.scoreComboBox("Any", "hi"));
-
-    }
 
     /**
      * Takes 2 strings and returns the number of matching words as a percentatge of all words in the first string
@@ -51,6 +44,14 @@ public class Scorer {
         if (salary >= minSalary){return 100;}
         return 0;
     }
+
+    /**
+     * Compares a job object against the criteria set by search.
+     * Returns the average of the score given to the job for each criterion
+     * @param search a search object which has the search criterion
+     * @param job the job to be compared to the search parameters
+     * @return an int between 0 and 100 repersenting the score given to the job
+     */
     public int scoreAgaintSearch(Search search, Job job){
         final int noOfCriteria = 6;
         int total = scoreStrings(search.getSearchText(), job.getJobTitle()) +

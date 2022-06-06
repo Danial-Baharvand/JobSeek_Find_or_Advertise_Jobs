@@ -12,13 +12,18 @@ public class DescriptionPage {
     private JPanel DescriptionPanel;
     private JLabel salary;
 
+    /**
+     * Creates the detailed description page.
+     * @param jobList the arraylist of scoredJob objects for the current search
+     * @param pageNumber the page number the that this job is on
+     * @param indexOfClick indicating which job was clicked on the page
+     */
     public DescriptionPage(ArrayList<ScoredJob> jobList, int pageNumber, int indexOfClick) {
         Job job = jobList.get(pageNumber * 3 + indexOfClick).getJob();
         description.setText(job.getDescription());
         location.setText(job.getState());
         cat.setText(job.getCat());
         salary.setText(String.valueOf(job.getSalary()));
-        System.out.println(job);
     }
 
     {
