@@ -36,21 +36,28 @@ public class SearchResultsPage {
         createPage(pageNumber);
         addButtonListeners(nextButton, prevButton);
 
-        addPanelListeners();
+        //addPanelListeners();
     }
 
     public void createPage(int pageNumber) {
         JLabel[] jobTitles = {job1Title, job2Title, job3Title};
         JLabel[] jobCompanies = {job1Company, job2Company, job3Company};
         JLabel[] jobScores = {job1Score, job2Score, job3Score};
-        for (int i = 0; i < NO_OF_RESULTS; i++) {
-            if (pageNumber * NO_OF_RESULTS + i < jobList.size()) {
-                jobTitles[i].setText(jobList.get(pageNumber * NO_OF_RESULTS + i).getJob().getJobTitle());
-                jobCompanies[i].setText(jobList.get(pageNumber * NO_OF_RESULTS + i).getJob().getRecruiter().getOrg());
-                jobScores[i].setText(String.valueOf(jobList.get(pageNumber * NO_OF_RESULTS + i).getScore()));
-                jobScores[i].getParent().setVisible(true);
-            } else {
-                jobScores[i].getParent().setVisible(false);
+        for (JLabel label : jobTitles) {
+            label.getParent().setVisible(false);
+        }
+        if (jobList.isEmpty()) {
+            jobTitles[0].setText("No jobs could be found!");
+            jobTitles[0].getParent().setVisible(true);
+        } else {
+            addPanelListeners();
+            for (int i = 0; i < NO_OF_RESULTS; i++) {
+                if (pageNumber * NO_OF_RESULTS + i < jobList.size()) {
+                    jobTitles[i].setText(jobList.get(pageNumber * NO_OF_RESULTS + i).getJob().getJobTitle());
+                    jobCompanies[i].setText(jobList.get(pageNumber * NO_OF_RESULTS + i).getJob().getRecruiter().getOrg());
+                    jobScores[i].setText(String.valueOf(jobList.get(pageNumber * NO_OF_RESULTS + i).getScore()));
+                    jobScores[i].getParent().setVisible(true);
+                }
             }
         }
     }
@@ -59,7 +66,8 @@ public class SearchResultsPage {
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pageNumber += 1;
+                if (pageNumber + 1 < Math.ceil(jobList.size() / (double) NO_OF_RESULTS))
+                    pageNumber += 1;
                 createPage(pageNumber);
             }
         });
@@ -135,13 +143,13 @@ public class SearchResultsPage {
         job1Panel.setBackground(new Color(-4144960));
         searchResultsPanel.add(job1Panel, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 3, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         job1Title = new JLabel();
-        job1Title.setText("Label");
+        job1Title.setText("");
         job1Panel.add(job1Title, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         job1Company = new JLabel();
-        job1Company.setText("Label");
+        job1Company.setText("");
         job1Panel.add(job1Company, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         job1Score = new JLabel();
-        job1Score.setText("Label");
+        job1Score.setText("");
         job1Panel.add(job1Score, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final com.intellij.uiDesigner.core.Spacer spacer1 = new com.intellij.uiDesigner.core.Spacer();
         searchResultsPanel.add(spacer1, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
@@ -150,13 +158,13 @@ public class SearchResultsPage {
         job2Panel.setBackground(new Color(-4144960));
         searchResultsPanel.add(job2Panel, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 3, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         job2Title = new JLabel();
-        job2Title.setText("Label");
+        job2Title.setText("");
         job2Panel.add(job2Title, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         job2Company = new JLabel();
-        job2Company.setText("Label");
+        job2Company.setText("");
         job2Panel.add(job2Company, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         job2Score = new JLabel();
-        job2Score.setText("Label");
+        job2Score.setText("");
         job2Panel.add(job2Score, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final com.intellij.uiDesigner.core.Spacer spacer2 = new com.intellij.uiDesigner.core.Spacer();
         searchResultsPanel.add(spacer2, new com.intellij.uiDesigner.core.GridConstraints(3, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
@@ -165,13 +173,13 @@ public class SearchResultsPage {
         job3Panel.setBackground(new Color(-4144960));
         searchResultsPanel.add(job3Panel, new com.intellij.uiDesigner.core.GridConstraints(4, 0, 1, 3, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         job3Title = new JLabel();
-        job3Title.setText("Label");
+        job3Title.setText("");
         job3Panel.add(job3Title, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         job3Company = new JLabel();
-        job3Company.setText("Label");
+        job3Company.setText("");
         job3Panel.add(job3Company, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         job3Score = new JLabel();
-        job3Score.setText("Label");
+        job3Score.setText("");
         job3Panel.add(job3Score, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
