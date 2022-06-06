@@ -78,6 +78,12 @@ public class RecruiterProfile {
         jobDescriptionPanel = new JPanel();
         jobDescriptionPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(5, 2, new Insets(0, 0, 0, 0), -1, -1));
         jobDescription.setViewportView(jobDescriptionPanel);
+        //selectedJobDescription = new JLabel();
+        // selectedJobDescription.setText("Label");
+        jobDescriptionPanel.add(selectedJobDescription, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        selectedJobLocation = new JLabel();
+        selectedJobLocation.setText("Label");
+        jobDescriptionPanel.add(selectedJobLocation, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(106, 16), null, 0, false));
         selectedJobCompensation = new JLabel();
         selectedJobCompensation.setText("Label");
         jobDescriptionPanel.add(selectedJobCompensation, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(106, 16), null, 0, false));
