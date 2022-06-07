@@ -49,7 +49,7 @@ public class IO {
             while ((line = reader.readLine()) != null && !line.equals("")) {
                 String[] userData = line.split(",");
                 Recruiter recruiter = new Recruiter(userData[EMAIL], userData[NAME], userData[PASSWORD],
-                        userData[ORGANISATION], userData[RECRUITER_DESC]);
+                        userData[ORGANISATION]);
                 recruiters.putIfAbsent(userData[EMAIL], recruiter);
             }
         } catch (IOException e) {

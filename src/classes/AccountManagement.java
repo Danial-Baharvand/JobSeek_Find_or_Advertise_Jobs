@@ -2,6 +2,9 @@ package classes;
 
 import java.util.HashMap;
 
+import static classes.Config.DT_JOBSEEKERS;
+import static classes.Config.DT_RECRUITERS;
+
 
 public class AccountManagement {
     public static HashMap<String, JobSeeker> jobseekers = new HashMap<>();
@@ -21,6 +24,15 @@ public class AccountManagement {
         jobseekers = io.readJobSeekers();
         recruiters = io.readRecruiters();
         admins = io.readAdmins();
+    }
+    public static void addUser(User user){
+        if (user instanceof JobSeeker){
+            jobseekers.put(user.getEmail(), (JobSeeker) user);
+        }else if (user instanceof Recruiter) {
+            recruiters.put(user.getEmail(), (Recruiter) user);
+        }else if (user instanceof Admin) {
+            admins.put(user.getEmail(), (Admin) user);
+        }
     }
 
     public void setCurrentUser(User user) {

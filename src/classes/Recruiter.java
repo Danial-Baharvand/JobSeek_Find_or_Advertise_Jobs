@@ -11,10 +11,9 @@ public class Recruiter extends User {
         recruiterDescription = "";
     }
 
-    public Recruiter(String email, String fullName, String password, String org, String recruiterDescription) {
+    public Recruiter(String email, String fullName, String password, String org) {
         super(email, fullName, password);
         this.org = org;
-        this.recruiterDescription = recruiterDescription;
 
     }
 
@@ -32,5 +31,8 @@ public class Recruiter extends User {
 
     public void setRecruiterDescription(String recruiterDescription) {
         this.recruiterDescription = recruiterDescription;
+    }
+    public String toString() {
+        return String.format("%s,%s,%s,%s", getEmail(), getFullName(), getPassword(), org);
     }
 }
