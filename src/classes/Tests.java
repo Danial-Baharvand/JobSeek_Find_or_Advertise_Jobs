@@ -80,10 +80,10 @@ public class Tests {
      * @param testCreateAccount object of the CreateAccount class, from which the createJobSeeker method is invoked
      * @return true if the use case is expected to run, else false
      */
-    public boolean testCreateAccount(CreateAccount testCreateAccount, Application testApplication) {
+    public boolean testCreateAccount(CreateAccountPage testCreateAccount, AccountManagement testAccountManagement) {
         //Test 1: expect true
-        testCreateAccount.createJobSeeker("jack", "stoneman", "jack2@example.com", "abc123", "abc123");
-        testApplication.userLogin("jack2@example.com", "abc123");
+        //testCreateAccount.createJobSeeker("jack", "stoneman", "jack2@example.com", "abc123", "abc123");
+        //testAccountManagement.userLogin("jack2@example.com", "abc123");
         return true;
         //Test 2: expect false - passwords don't match
         //testCreateAccount.createJobSeeker("jack", "stoneman", "jack2@example.com", "acb123", "abc124");

@@ -1,17 +1,14 @@
 package classes;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 public class Runtime {
     public static JFrame frame = new JFrame();
     public static Tests testObject = new Tests();
-    public static Application currentApplication;
+    public static AccountManagement accMan;
 
     public static void main(String[] args) {
+        accMan = new AccountManagement();
         //currentApplication = new Application();
         //currentApplication.getRegisteredUsers();
 
@@ -34,13 +31,9 @@ public class Runtime {
         //showCreateAccountPage(frame);
 
         //SHOW RECRUITER PROFILE PAGE
-        showRecruiterProfilePage(frame);
+        //showRecruiterProfilePage(frame);
 
 
-    }
-
-    public static boolean actionUserLogin(String email, String password) {
-        return currentApplication.userLogin(email, password);
     }
 
     public static void showSearchPage(JFrame frame) {
@@ -57,8 +50,7 @@ public class Runtime {
         frame.setTitle("Login Page");
         frame.getContentPane().removeAll();
         frame.repaint();
-        frame.setContentPane(new LoginPage().getLoginPagePanel());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setContentPane(new LoginPage(frame, accMan).getLoginPagePanel());
         frame.pack();
         frame.setVisible(true);
     }
@@ -67,14 +59,9 @@ public class Runtime {
         frame.setTitle("Create Account Page");
         frame.getContentPane().removeAll();
         frame.repaint();
-        frame.setContentPane(new CreateAccount().getCreateAccountPanel());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setContentPane(new CreateAccountPage(frame).getCreateAccountPanel());
         frame.pack();
         frame.setVisible(true);
-    }
-
-    public static void actionShowCreateAccountPage() {
-        showCreateAccountPage(frame);
     }
 
     public static void showRecruiterProfilePage(JFrame frame){

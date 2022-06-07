@@ -6,14 +6,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.HashMap;
 
 public class LoginPage extends JFrame {
 
     private JPanel mainPanel;
-    private JFrame frame;
+    private final JFrame frame;
     private JTextField emailTextField;
     private JLabel emailLabel;
-    private JTextField passwordTextField;
+    private JPasswordField passwordField;
     private JLabel passwordLabel;
     private JButton loginButton;
     private JButton createNewAccountButton;
@@ -22,10 +23,15 @@ public class LoginPage extends JFrame {
     private JButton searchButton;
     private boolean passClicked = false;
 
-    public LoginPage() {
+    public LoginPage(JFrame frame, AccountManagement accMan) {
+        this.frame = frame;
 
-        frame = new JFrame();
-        frame.setTitle("Login Page");
+        /**
+         * @param email is String that is a User's email
+         * @param password is a String that is a User's password
+         * @return true if the email and password parameters match a key:value pair in the registeredUsers HashMap
+         * else false
+         */
 
         /**
          * if the user clicks the Login button, the method gets the user input for email and password
@@ -36,9 +42,7 @@ public class LoginPage extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String email = emailTextField.getText();
-                String password = passwordTextField.getText();
-                if (Runtime.actionUserLogin(email, password)) {
+                if (userLogin(accMan)) {
                     JOptionPane.showMessageDialog(null, "You have successfully logged in!");
                 } else {
                     JOptionPane.showMessageDialog(null, "The username of password is incorrect.");
@@ -48,20 +52,39 @@ public class LoginPage extends JFrame {
         createNewAccountButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Runtime.actionShowCreateAccountPage();
+                Runtime.showCreateAccountPage(frame);
             }
         });
-        passwordTextField.addMouseListener(new MouseAdapter() {
+        passwordField.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
                 if (!passClicked) {
-                    passwordTextField.setText("");
+                    passwordField.setText("");
                     passClicked = true;
                 }
             }
         });
+    }
+
+    public boolean userLogin(AccountManagement accMan) {
+        if (validateUser(accMan.getJobseekers())) {
+            accMan.setCurrentUser(accMan.getJobseekers().get(emailTextField.getText()));
+            return true;
+        } else if (validateUser(accMan.getRecruiters())) {
+            accMan.setCurrentUser(accMan.getRecruiters().get(emailTextField.getText()));
+            return true;
+        } else if (validateUser(accMan.getAdmins())) {
+            accMan.setCurrentUser(accMan.getAdmins().get(emailTextField.getText()));
+            return true;
+        } else return false;
+    }
+
+    private boolean validateUser(HashMap<String, ? extends User> users) {
+        if (users.containsKey(emailTextField.getText())) {
+            return users.get(emailTextField.getText()).getPassword().equals(String.valueOf(passwordField.getPassword()));
+        } else return false;
     }
 
     public JPanel getLoginPagePanel() {
@@ -96,11 +119,11 @@ public class LoginPage extends JFrame {
         passwordLabel.setForeground(new Color(-592138));
         passwordLabel.setText("Password:");
         mainPanel.add(passwordLabel, new com.intellij.uiDesigner.core.GridConstraints(3, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        passwordTextField = new JTextField();
-        passwordTextField.setBackground(new Color(-1973791));
-        passwordTextField.setForeground(new Color(-13224648));
-        passwordTextField.setText("password");
-        mainPanel.add(passwordTextField, new com.intellij.uiDesigner.core.GridConstraints(3, 1, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        passwordField = new JPasswordField();
+        passwordField.setBackground(new Color(-1973791));
+        passwordField.setForeground(new Color(-13224648));
+        passwordField.setText("password");
+        mainPanel.add(passwordField, new com.intellij.uiDesigner.core.GridConstraints(3, 1, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         emailLabel = new JLabel();
         emailLabel.setForeground(new Color(-592138));
         emailLabel.setText("Username:");

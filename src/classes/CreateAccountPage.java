@@ -2,8 +2,10 @@ package classes;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class CreateAccount {
+public class CreateAccountPage {
 
     private String firstName;
     private String lastName;
@@ -27,10 +29,17 @@ public class CreateAccount {
     private JButton createAccountButton;
     private JPanel mainPanel;
 
-    public CreateAccount() {
-        frame = new JFrame();
-        frame.setTitle("Login Page");
+    public CreateAccountPage(JFrame frame) {
+        this.frame = frame;
 
+        createAccountButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                createJobSeeker(fullNameTextField.getText(), emailTextField.getText(),
+                        String.valueOf(passwordPasswordField.getPassword()),
+                        String.valueOf(confirmPasswordPasswordField.getPassword()));
+            }
+        });
     }
 
     /**
@@ -44,19 +53,15 @@ public class CreateAccount {
      * @param password        of the JobSeeker
      * @param confirmPassword of the JobSeeker
      */
-    public String createJobSeeker(String firstName, String lastName, String email, String password, String confirmPassword) {
+    public String createJobSeeker(String fullName, String email, String password, String confirmPassword) {
         //check if email is registered to an existing account - if so, notify that email is not new
-        if (!new Application().isRegisteredUser(email)) {
+        if (!AccountManagement.isRegisteredUser(email)) {
             //check if password and confirm password match - if not, return that passwords don't match
             if (password.equals(confirmPassword)) {
                 //create new JobSeeker object and add new JobSeeker to database
-                User newJobSeeker = new JobSeeker(email, firstName, lastName);
-                CSVWriter writer = new CSVWriter();
-                String newJobSeekerDetails = String.format("%s,%s,%s", newJobSeeker.getEmail(), newJobSeeker.getFirstName(), newJobSeeker.getLastName());
-                writer.newLine(Application.dt_jobSeekers, newJobSeekerDetails);
-                //add new email and password to registered users file
-                String newRegisteredUserDetails = String.format("%s,%s", newJobSeeker.getEmail(), password);
-                writer.newLine(Application.dt_registeredUsers, newRegisteredUserDetails);
+                User newJobSeeker = new JobSeeker(email, fullName, password);
+                IO writer = new IO();
+                writer.writeUser(newJobSeeker);
                 System.out.println(String.format("New account successfully created for %s!", email));
                 return String.format("New account successfully created for %s!", email);
             } else {
@@ -82,21 +87,20 @@ public class CreateAccount {
      * @param confirmPassword of the JobSeeker
      * @param resumeFile      is the file path of the JobSeeker's resume
      */
-    public void createJobSeeker(String firstName, String lastName, String email, String password, String confirmPassword, String resumeFile) {
+ /*   public void createJobSeeker(String firstName, String lastName, String email, String password, String confirmPassword, String resumeFile) {
         //check if email is new (i.e., not in registered users) - if not, notify that email is not new
         //check if password and confirm password match - if not, return that passwords don't match
         //create new JobSeeker object and add new JobSeeker to database
         User newJobSeeker = new JobSeeker(email, firstName, lastName);
-        CSVWriter writer = new CSVWriter();
+        IO writer = new IO();
         String newJobSeekerDetails = newJobSeeker.toString();
-        writer.newLine(Application.dt_jobSeekers, newJobSeekerDetails);
+        writer.newLine(AccountManagement.dt_jobSeekers, newJobSeekerDetails);
         //add new email and password to registered users file
         String newRegisteredUserDetails = newJobSeeker.getEmail().concat(",").concat(newJobSeeker.getPassword());
-        writer.newLine(Application.dt_registeredUsers, newRegisteredUserDetails);
+        writer.newLine(AccountManagement.dt_registeredUsers, newRegisteredUserDetails);
         //add new resume to resumes file
-        writer.newLine(Application.dt_resumes, resumeFile);
-    }
-
+        writer.newLine(AccountManagement.dt_resumes, resumeFile);
+    }*/
     public JPanel getCreateAccountPanel() {
         return mainPanel;
     }

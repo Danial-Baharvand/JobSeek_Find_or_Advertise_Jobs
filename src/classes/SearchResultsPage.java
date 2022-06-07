@@ -93,12 +93,16 @@ public class SearchResultsPage {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     super.mouseClicked(e);
-                    JPanel clickedPanel = (JPanel) e.getSource();
-                    int indexOfClick = panels.get(clickedPanel);
-                    JFrame desFrame = new JFrame("Description Page");
-                    desFrame.setContentPane(new DescriptionPage(jobList, pageNumber, indexOfClick).getDescriptionPanel());
-                    desFrame.pack();
-                    desFrame.setVisible(true);
+                    if (AccountManagement.currentUser == null) {
+                        Runtime.showLoginPage(new JFrame());
+                    } else {
+                        JPanel clickedPanel = (JPanel) e.getSource();
+                        int indexOfClick = panels.get(clickedPanel);
+                        JFrame desFrame = new JFrame("Description Page");
+                        desFrame.setContentPane(new DescriptionPage(jobList, pageNumber, indexOfClick).getDescriptionPanel());
+                        desFrame.pack();
+                        desFrame.setVisible(true);
+                    }
                 }
 
                 @Override
