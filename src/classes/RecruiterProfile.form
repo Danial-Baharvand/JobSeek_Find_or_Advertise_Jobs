@@ -5,7 +5,9 @@
     <constraints>
       <xy x="20" y="20" width="578" height="400"/>
     </constraints>
-    <properties/>
+    <properties>
+      <background color="-13224648"/>
+    </properties>
     <border type="none"/>
     <children>
       <component id="f8b48" class="javax.swing.JButton" binding="backButton">
@@ -72,7 +74,9 @@
           <grid id="bb0fa" binding="jobDescriptionPanel" layout-manager="GridLayoutManager" row-count="5" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints/>
-            <properties/>
+            <properties>
+              <background color="-13224648"/>
+            </properties>
             <border type="none"/>
             <children>
               <component id="c3b1f" class="javax.swing.JLabel" binding="selectedJobCompensation">

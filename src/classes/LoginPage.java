@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class LoginPage extends JFrame {
 
@@ -15,6 +17,10 @@ public class LoginPage extends JFrame {
     private JLabel passwordLabel;
     private JButton loginButton;
     private JButton createNewAccountButton;
+    private JTextField textField1;
+    private JButton backButton;
+    private JButton searchButton;
+    private boolean passClicked = false;
 
     public LoginPage() {
 
@@ -43,6 +49,17 @@ public class LoginPage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Runtime.actionShowCreateAccountPage();
+            }
+        });
+        passwordTextField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+
+                if (!passClicked) {
+                    passwordTextField.setText("");
+                    passClicked = true;
+                }
             }
         });
     }
@@ -95,4 +112,5 @@ public class LoginPage extends JFrame {
     public JComponent $$$getRootComponent$$$() {
         return mainPanel;
     }
+
 }

@@ -21,6 +21,8 @@ public class SearchPage {
     private JLabel lowSalLabel;
     private JLabel midSalLabel;
     private JLabel highSalLabel;
+    private JTextArea textArea1;
+    private JButton loginButton;
 
     public JPanel getSearchPanel() {
         return searchPanel;
