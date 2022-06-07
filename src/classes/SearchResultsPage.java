@@ -35,8 +35,7 @@ public class SearchResultsPage {
         jobList = search.getScoredJobs();
         createPage(pageNumber);
         addButtonListeners(nextButton, prevButton);
-
-        //addPanelListeners();
+        addPanelListeners();
     }
 
     public void createPage(int pageNumber) {
@@ -50,7 +49,6 @@ public class SearchResultsPage {
             jobTitles[0].setText("No jobs could be found!");
             jobTitles[0].getParent().setVisible(true);
         } else {
-            addPanelListeners();
             for (int i = 0; i < NO_OF_RESULTS; i++) {
                 if (pageNumber * NO_OF_RESULTS + i < jobList.size()) {
                     jobTitles[i].setText(jobList.get(pageNumber * NO_OF_RESULTS + i).getJob().getJobTitle());
@@ -66,9 +64,11 @@ public class SearchResultsPage {
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (pageNumber + 1 < Math.ceil(jobList.size() / (double) NO_OF_RESULTS))
+                if (pageNumber + 1 < Math.ceil(jobList.size() / (double) NO_OF_RESULTS)) {
                     pageNumber += 1;
-                createPage(pageNumber);
+                    //e.getSource().
+                    createPage(pageNumber);
+                }
             }
         });
         this.prevButton.addActionListener(new ActionListener() {
@@ -83,6 +83,9 @@ public class SearchResultsPage {
     }
 
     public void addPanelListeners() {
+        if (jobList.isEmpty()) {
+            return;
+        }
         Map<JPanel, Integer> panels = Map.of(job1Panel, 0, job2Panel, 1, job3Panel, 2);
 
         for (JPanel panel : panels.keySet()) {
