@@ -3,13 +3,14 @@ package classes;
 public class Job {
     int JobID;
     Recruiter recruiter;
+    String company;
     String jobTitle;
     String state;
     String cat;
     int salary;
     String jobType;
     String keywords;
-    String description;
+    String jobDescription;
 
     public int getJobID() {
         return JobID;
@@ -39,6 +40,16 @@ public class Job {
         return jobType;
     }
 
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getJobCompany() {return company;}
+
     public String getKeywords() {
         return keywords;
     }
@@ -59,6 +70,8 @@ public class Job {
         this.state = state;
     }
 
+    public void setJobCompany(String company) {this.company = company;}
+
     public void setCat(String cat) {
         this.cat = cat;
     }
@@ -75,11 +88,11 @@ public class Job {
         this.keywords = keywords;
     }
 
-    public String getDescription() {
-        return description;
+    public String getJobDescription() {
+        return jobDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setJobDescription(String jobDescription) {
+        this.jobDescription = jobDescription;
     }
 }

@@ -18,7 +18,7 @@ public class Tests {
         job1.setJobTitle("Software Engineer");
         job1.setRecruiter(recruiter1);
         job1.setCat("compSie");
-        job1.setDescription("This is a job. Please apply");
+        job1.setJobDescription("This is a job. Please apply");
         job1.setState("QLD");
         job1.setSalary(125000);
 

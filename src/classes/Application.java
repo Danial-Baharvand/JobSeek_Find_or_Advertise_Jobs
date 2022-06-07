@@ -12,6 +12,7 @@ public class Application {
     final static String dt_registeredUsers = "src/dataTables/registeredUsers.csv";
     final static String dt_jobSeekers = "src/dataTables/jobSeekers.csv";
     final static String dt_resumes = "src/dataTables/resumes.csv";
+    final static String dt_recruiters = "out/production/group-i/dataTables/recruiters.csv";
 
     public Application() {
         this.readRegisteredUsers();

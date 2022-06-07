@@ -28,10 +28,14 @@ public class Runtime {
         //showSearchPage(frame);
 
         //SHOW LOGIN PAGE
-        showLoginPage(frame);
+        //showLoginPage(frame);
 
         //SHOW CREATE ACCOUNT PAGE
-        //showCreateAccountPage(frame);
+        showCreateAccountPage(frame);
+
+        //SHOW RECRUITER PROFILE PAGE
+        showRecruiterProfilePage(frame);
+
 
     }
 
@@ -71,6 +75,16 @@ public class Runtime {
 
     public static void actionShowCreateAccountPage() {
         showCreateAccountPage(frame);
+    }
+
+    public static void showRecruiterProfilePage(JFrame frame){
+        frame.setTitle("Recruiter Profile Page");
+        frame.getContentPane().removeAll();
+        frame.repaint();
+        frame.setContentPane(new RecruiterProfile().getRecruiterProfilePage());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
     }
 
 
