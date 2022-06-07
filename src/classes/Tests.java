@@ -62,7 +62,7 @@ public class Tests {
         job6.setState("QLD");
         job6.setSalary(125000);
 
-        return new HashSet<Job>(Arrays.asList());
+        return new HashSet<Job>(Arrays.asList(job1, job2, job3, job4, job5));
     }
 
     public static Categories createExampleCats(){
