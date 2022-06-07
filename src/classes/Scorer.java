@@ -16,9 +16,7 @@ public class Scorer {
         // Find the number of mutual words in 2 strings regardless of case
         double mutual = Stream.of(title1.toLowerCase().split(" ")).
                 filter(x -> Arrays.asList(title2.toLowerCase().split(" ")).contains(x)).count();
-        System.out.println(mutual);
         double wordCount = Arrays.stream(title1.split(" ")).count();
-        System.out.println(wordCount);
         return (int) ((mutual / wordCount) * 100);
     }
 
@@ -53,9 +51,8 @@ public class Scorer {
      * @return an int between 0 and 100 repersenting the score given to the job
      */
     public int scoreAgaintSearch(Search search, Job job){
-        final int noOfCriteria = 6;
+        final int noOfCriteria = 5;
         int total = scoreStrings(search.getSearchText(), job.getJobTitle()) +
-                scoreStrings(search.getKeywords(), job.getKeywords()) +
                 scoreComboBox(search.getState(), job.getState()) +
                 scoreComboBox(search.getCat(), job.getCat()) +
                 scoreComboBox(search.getJobType(), job.getJobType()) +

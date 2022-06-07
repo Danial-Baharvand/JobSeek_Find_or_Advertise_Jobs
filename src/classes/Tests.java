@@ -25,22 +25,42 @@ public class Tests {
         Job job2 = new Job();
         job2.setJobTitle("It Specialist");
         job2.setRecruiter(recruiter1);
+        job2.setCat("compSie");
+        job2.setJobDescription("This is a job. Please apply");
+        job2.setState("QLD");
+        job2.setSalary(125000);
 
         Job job3 = new Job();
         job3.setJobTitle("Data Analyst");
         job3.setRecruiter(recruiter1);
+        job3.setCat("compSie");
+        job3.setJobDescription("This is a job. Please apply");
+        job3.setState("QLD");
+        job3.setSalary(125000);
 
         Job job4 = new Job();
         job4.setJobTitle("DevOps");
         job4.setRecruiter(recruiter1);
+        job4.setCat("compSie");
+        job4.setJobDescription("This is a job. Please apply");
+        job4.setState("QLD");
+        job4.setSalary(125000);
 
         Job job5 = new Job();
         job5.setJobTitle("Web Dev");
         job5.setRecruiter(recruiter1);
+        job5.setCat("compSie");
+        job5.setJobDescription("This is a job. Please apply");
+        job5.setState("QLD");
+        job5.setSalary(125000);
 
         Job job6 = new Job();
         job6.setJobTitle("Backend");
         job6.setRecruiter(recruiter1);
+        job6.setCat("compSie");
+        job6.setJobDescription("This is a job. Please apply");
+        job6.setState("QLD");
+        job6.setSalary(125000);
 
         return new HashSet<Job>(Arrays.asList(job1, job2, job3, job4, job5));
     }
