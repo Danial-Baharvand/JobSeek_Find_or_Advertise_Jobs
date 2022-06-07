@@ -58,6 +58,7 @@ public class RecruiterProfile {
     private void $$$setupUI$$$() {
         recruiterProfile = new JPanel();
         recruiterProfile.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(8, 3, new Insets(0, 0, 0, 0), -1, -1));
+        recruiterProfile.setBackground(new Color(-13224648));
         backButton = new JButton();
         backButton.setText("Back");
         recruiterProfile.add(backButton, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(54, 30), null, 0, false));
@@ -79,6 +80,7 @@ public class RecruiterProfile {
         recruiterProfile.add(jobDescription, new com.intellij.uiDesigner.core.GridConstraints(7, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         jobDescriptionPanel = new JPanel();
         jobDescriptionPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(5, 2, new Insets(0, 0, 0, 0), -1, -1));
+        jobDescriptionPanel.setBackground(new Color(-13224648));
         jobDescription.setViewportView(jobDescriptionPanel);
         selectedJobCompensation = new JLabel();
         selectedJobCompensation.setText("Label");
