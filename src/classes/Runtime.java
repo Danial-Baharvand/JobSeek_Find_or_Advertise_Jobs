@@ -31,7 +31,7 @@ public class Runtime {
         //showLoginPage(frame);
 
         //SHOW CREATE ACCOUNT PAGE
-        showCreateAccountPage(frame);
+        //showCreateAccountPage(frame);
 
         //SHOW RECRUITER PROFILE PAGE
         showRecruiterProfilePage(frame);
