@@ -95,7 +95,7 @@ public class RecruiterProfile {
         viewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                selectedJobDescription.setText("Random Job Description");
+                selectedJobDescription.setText(testJob.getJobDescription());
                 selectedJobCompensation.setText(String.valueOf(testJob.getSalary()));
                 selectedJobLocation.setText(testJob.getState());
                 selectJobCategory.setText(testJob.cat);
@@ -105,7 +105,7 @@ public class RecruiterProfile {
         viewButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                selectedJobDescription.setText("Another Random Job Description");
+                selectedJobDescription.setText(testJob1.getJobDescription());
                 selectedJobCompensation.setText(String.valueOf(testJob1.getSalary()));
                 selectedJobLocation.setText(testJob1.getState());
                 selectJobCategory.setText(testJob1.cat);
@@ -115,7 +115,7 @@ public class RecruiterProfile {
         viewButton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                selectedJobDescription.setText("Even More Random Job Descriptions");
+                selectedJobDescription.setText(testJob2.getJobDescription());
                 selectedJobCompensation.setText(String.valueOf(testJob2.getSalary()));
                 selectedJobLocation.setText(testJob2.getState());
                 selectJobCategory.setText(testJob2.cat);
@@ -151,7 +151,7 @@ public class RecruiterProfile {
     private void $$$setupUI$$$() {
         recruiterProfile = new JPanel();
         recruiterProfile.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(9, 4, new Insets(0, 0, 0, 0), -1, -1));
-        recruiterProfile.setBackground(new Color(-13224648));
+        recruiterProfile.setBackground(new Color(-330497));
         recruiterProfile.setEnabled(false);
         backButton = new JButton();
         backButton.setText("Back");
@@ -164,10 +164,11 @@ public class RecruiterProfile {
         recruiterProfileDescriptionText.setVerticalAlignment(1);
         recruiterProfileDescription.setViewportView(recruiterProfileDescriptionText);
         jobDescription = new JScrollPane();
+        jobDescription.setBackground(new Color(-330497));
         recruiterProfile.add(jobDescription, new com.intellij.uiDesigner.core.GridConstraints(7, 3, 2, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         jobDescriptionPanel = new JPanel();
         jobDescriptionPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(4, 2, new Insets(0, 0, 0, 0), -1, -1));
-        jobDescriptionPanel.setBackground(new Color(-13224648));
+        jobDescriptionPanel.setBackground(new Color(-197889));
         jobDescription.setViewportView(jobDescriptionPanel);
         selectedJobCompensation = new JLabel();
         selectedJobCompensation.setText("Compensation");
