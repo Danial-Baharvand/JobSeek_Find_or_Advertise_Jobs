@@ -152,6 +152,7 @@
         <properties>
           <background color="-13224648"/>
           <foreground color="-1973791"/>
+          <value value="10"/>
         </properties>
       </component>
       <component id="69caa" class="javax.swing.JLabel" binding="lowSalLabel">

@@ -145,6 +145,7 @@ public class SearchPage {
         salarySlider = new JSlider();
         salarySlider.setBackground(new Color(-13224648));
         salarySlider.setForeground(new Color(-1973791));
+        salarySlider.setValue(10);
         searchPanel.add(salarySlider, new com.intellij.uiDesigner.core.GridConstraints(15, 0, 1, 4, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         lowSalLabel = new JLabel();
         lowSalLabel.setForeground(new Color(-592138));
