@@ -6,8 +6,8 @@ public class Search {
     String searchText;
     ArrayList<String> states;
     ArrayList<String> cats;
+    ArrayList<String> jobTypes;
     int salary;
-    String jobType;
     String keywords;
     HashSet<Job> jobs;
     ArrayList<ScoredJob> scoredJobs = new ArrayList<>();
@@ -38,9 +38,6 @@ public class Search {
         return salary;
     }
 
-    public String getJobType() {
-        return jobType;
-    }
 
     public String getKeywords() {
         return keywords;
@@ -59,9 +56,6 @@ public class Search {
         this.salary = salary;
     }
 
-    public void setJobType(String jobType) {
-        this.jobType = jobType;
-    }
 
     public void setKeywords(String keywords) {
         this.keywords = keywords;
@@ -92,5 +86,13 @@ public class Search {
 
     public void setCats(ArrayList<String> cats) {
         this.cats = cats;
+    }
+
+    public ArrayList<String> getJobTypes() {
+        return jobTypes;
+    }
+
+    public void setJobTypes(ArrayList<String> jobTypes) {
+        this.jobTypes = jobTypes;
     }
 }

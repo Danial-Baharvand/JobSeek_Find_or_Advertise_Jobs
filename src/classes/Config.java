@@ -16,5 +16,6 @@ public class Config {
     final static int RECRUITER_DESC = 4;
     final static ArrayList<String> STATES =
             new ArrayList<>(Arrays.asList("QLD", "NSW", "VIC", "ACT", "WA", "NT", "SA", "TAS"));
-
+    final static ArrayList<String> JOB_TYPES =
+            new ArrayList<>(Arrays.asList("Full-Time", "Part-Time", "Casual", "Intern"));
 }

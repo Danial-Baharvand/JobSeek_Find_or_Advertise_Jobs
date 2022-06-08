@@ -2,6 +2,7 @@ package classes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.stream.Stream;
 
 public class Scorer {
@@ -22,23 +23,12 @@ public class Scorer {
     }
 
     /**
-     * Returns 100 if the states match and returns 0 if they don't.
-     * @param option1 first state.
-     * @param option2 second state.
-     * @return an int which can either be 0 or 100.
-     */
-    public int scoreComboBox(String option1, String option2){
-        if(option1.toLowerCase().equals("any")){return 100;}
-        if (option1.toLowerCase().equals(option2.toLowerCase())) {return 100;}
-        return 0;
-    }
-    /**
      * Returns 100 if the target option is in selected options match and returns 0 if they don't.
      * @param selectedOptions first state.
      * @param targetOption second state.
      * @return an int which can either be 0 or 100.
      */
-    public int scoreComboBox2(ArrayList<String> selectedOptions, String targetOption){
+    public int scoreComboBox(ArrayList<String> selectedOptions, String targetOption){
         if (selectedOptions.stream().anyMatch(targetOption::equalsIgnoreCase)) {
             return 100;
 
@@ -65,13 +55,13 @@ public class Scorer {
      * @return an int between 0 and 100 repersenting the score given to the job
      */
     public int scoreAgaintSearch(Search search, Job job){
-        final int noOfCriteria = 5;
-        int total = scoreStrings(search.getSearchText(), job.getJobTitle()) +
-                scoreComboBox2(search.getStates(), job.getState()) +
-                scoreComboBox2(search.getCats(), job.getCat()) +
-                scoreComboBox(search.getJobType(), job.getJobType()) +
-                scoreSalary(search.getSalary(), job.getSalary());
-        return total / noOfCriteria;
+        HashSet<Integer> allScores = new HashSet<>();
+        if (!search.getSearchText().isEmpty()){allScores.add(scoreStrings(search.getSearchText(), job.getJobTitle()));}
+        if (!search.getStates().isEmpty()){allScores.add(scoreComboBox(search.getStates(), job.getState()));}
+        if (!search.getCats().isEmpty()){allScores.add(scoreComboBox(search.getCats(), job.getCat()));}
+        if (!search.getJobTypes().isEmpty()){allScores.add(scoreComboBox(search.getJobTypes(), job.getJobType()));}
+        if (search.getSalary() > 0){allScores.add(scoreSalary(search.getSalary(), job.getSalary()));}
+        return  (int) allScores.stream().mapToDouble(a -> a).average().orElse(0.0);
     }
 
 }
