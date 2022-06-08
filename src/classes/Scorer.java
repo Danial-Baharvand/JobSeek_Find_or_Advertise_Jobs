@@ -40,13 +40,9 @@ public class Scorer {
      */
     public int scoreComboBox2(ArrayList<String> selectedOptions, String targetOption){
         if (selectedOptions.stream().anyMatch(targetOption::equalsIgnoreCase)) {
-
             return 100;
 
         }
-        System.out.println(selectedOptions);
-        System.out.println(targetOption);
-
         return 0;
     }
 
