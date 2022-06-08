@@ -4,8 +4,8 @@ import java.util.*;
 
 public class Search {
     String searchText;
-    String state;
-    String cat;
+    ArrayList<String> states;
+    ArrayList<String> cats;
     int salary;
     String jobType;
     String keywords;
@@ -31,13 +31,8 @@ public class Search {
         return searchText;
     }
 
-    public String getState() {
-        return state;
-    }
 
-    public String getCat() {
-        return cat;
-    }
+
 
     public int getSalary() {
         return salary;
@@ -59,13 +54,6 @@ public class Search {
         this.searchText = searchText;
     }
 
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public void setCat(String cat) {
-        this.cat = cat;
-    }
 
     public void setSalary(int salary) {
         this.salary = salary;
@@ -88,5 +76,21 @@ public class Search {
 
     public ArrayList<ScoredJob> getScoredJobs() {
         return scoredJobs;
+    }
+
+    public ArrayList<String> getStates() {
+        return states;
+    }
+
+    public void setStates(ArrayList<String> states) {
+        this.states = states;
+    }
+
+    public ArrayList<String> getCats() {
+        return cats;
+    }
+
+    public void setCats(ArrayList<String> cats) {
+        this.cats = cats;
     }
 }

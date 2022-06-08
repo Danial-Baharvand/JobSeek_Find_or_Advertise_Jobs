@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 
 public class SearchPage {
@@ -16,7 +18,6 @@ public class SearchPage {
     private JTextField keywordsTBox;
     private JPanel searchPanel;
     private JLabel StateLabel;
-    private JLabel catLabel;
     private JLabel jobTypeLabel;
     private JLabel lowSalLabel;
     private JLabel midSalLabel;
@@ -24,6 +25,11 @@ public class SearchPage {
     private JTextArea textArea1;
     private JButton loginButton;
     private JButton backButton;
+    private JPanel statePanel;
+    private JScrollPane stateScroller;
+    private JLabel catLabel;
+    private JScrollPane catScroller;
+    private JPanel catPanel;
 
     public JPanel getSearchPanel() {
         return searchPanel;
@@ -34,19 +40,23 @@ public class SearchPage {
          should be removed when adding categories by recruiters is implemented
          */
         Categories categories = Tests.createExampleCats();
-        catCBox.setModel(new DefaultComboBoxModel<>(categories.getMap().keySet().toArray()));
+        createOptionBox(statePanel, Config.STATES);
+        createOptionBox(catPanel, new ArrayList<>(categories.getMap().keySet()));
+
+        /*catCBox.setModel(new DefaultComboBoxModel<>(categories.getMap().keySet().toArray()));
         catCBox.insertItemAt("Any", 0);
-        catCBox.setSelectedItem("Any");
+        catCBox.setSelectedItem("Any");*/
 
 
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 // Creates a new search object and adds the user's selected criteria to it
                 Search search = new Search(jobs);
                 search.setSearchText(searchTBox.getText());
-                search.setState((String) stateCBox.getSelectedItem());
-                search.setCat((String) catCBox.getSelectedItem());
+                search.setStates(getSelectedOptions(statePanel));
+                search.setCats(getSelectedOptions(catPanel));
                 search.setJobType((String) jobTypeCBox.getSelectedItem());
                 search.setSalary(salarySlider.getValue());
                 search.setKeywords(keywordsTBox.getText());
@@ -54,6 +64,24 @@ public class SearchPage {
                 Runtime.showSearchResultsPage(Runtime.frame, search);
             }
         });
+    }
+
+    public ArrayList<String> getSelectedOptions(JPanel optionsPanel) {
+        ArrayList<String> selectedOptions = new ArrayList<>();
+        Component[] allOptions = optionsPanel.getComponents();
+        for (Component option : allOptions) {
+            if (((JCheckBox) option).isSelected()) {
+                selectedOptions.add(((JCheckBox) option).getText());
+            }
+        }
+        return selectedOptions;
+    }
+
+    public void createOptionBox(JPanel optionsPanel, ArrayList<String> options) {
+        optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));
+        for (String option : options) {
+            optionsPanel.add(new JCheckBox(option));
+        }
     }
 
 
@@ -73,7 +101,7 @@ public class SearchPage {
      */
     private void $$$setupUI$$$() {
         searchPanel = new JPanel();
-        searchPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(11, 5, new Insets(20, 20, 20, 20), -1, -1));
+        searchPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(15, 5, new Insets(20, 20, 20, 20), -1, -1));
         searchPanel.setBackground(new Color(-13224648));
         searchPanel.setForeground(new Color(-1973791));
         searchTBox = new JTextField();
@@ -82,74 +110,86 @@ public class SearchPage {
         searchTBox.setText("I'm looking for...");
         searchPanel.add(searchTBox, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 4, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         final com.intellij.uiDesigner.core.Spacer spacer1 = new com.intellij.uiDesigner.core.Spacer();
-        searchPanel.add(spacer1, new com.intellij.uiDesigner.core.GridConstraints(3, 3, 7, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_VERTICAL, 1, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        searchPanel.add(spacer1, new com.intellij.uiDesigner.core.GridConstraints(3, 3, 11, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_VERTICAL, 1, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         searchButton = new JButton();
         searchButton.setText("Search");
         searchPanel.add(searchButton, new com.intellij.uiDesigner.core.GridConstraints(2, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        stateCBox = new JComboBox();
+        jobTypeCBox = new JComboBox();
         final DefaultComboBoxModel defaultComboBoxModel1 = new DefaultComboBoxModel();
         defaultComboBoxModel1.addElement("Any");
-        defaultComboBoxModel1.addElement("QLD");
-        defaultComboBoxModel1.addElement("NSW");
-        defaultComboBoxModel1.addElement("VIC");
-        defaultComboBoxModel1.addElement("ACT");
-        defaultComboBoxModel1.addElement("WA");
-        defaultComboBoxModel1.addElement("NT");
-        defaultComboBoxModel1.addElement("SA");
-        defaultComboBoxModel1.addElement("TAS");
-        stateCBox.setModel(defaultComboBoxModel1);
-        searchPanel.add(stateCBox, new com.intellij.uiDesigner.core.GridConstraints(5, 0, 3, 3, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        catCBox = new JComboBox();
-        final DefaultComboBoxModel defaultComboBoxModel2 = new DefaultComboBoxModel();
-        defaultComboBoxModel2.addElement("Any");
-        catCBox.setModel(defaultComboBoxModel2);
-        searchPanel.add(catCBox, new com.intellij.uiDesigner.core.GridConstraints(4, 4, 2, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        jobTypeCBox = new JComboBox();
-        final DefaultComboBoxModel defaultComboBoxModel3 = new DefaultComboBoxModel();
-        defaultComboBoxModel3.addElement("Any");
-        defaultComboBoxModel3.addElement("Full-Time");
-        defaultComboBoxModel3.addElement("Part-Time");
-        defaultComboBoxModel3.addElement("Casual");
-        jobTypeCBox.setModel(defaultComboBoxModel3);
-        searchPanel.add(jobTypeCBox, new com.intellij.uiDesigner.core.GridConstraints(7, 4, 3, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        defaultComboBoxModel1.addElement("Full-Time");
+        defaultComboBoxModel1.addElement("Part-Time");
+        defaultComboBoxModel1.addElement("Casual");
+        jobTypeCBox.setModel(defaultComboBoxModel1);
+        searchPanel.add(jobTypeCBox, new com.intellij.uiDesigner.core.GridConstraints(11, 4, 3, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         keywordsTBox = new JTextField();
         keywordsTBox.setForeground(new Color(-13224648));
         keywordsTBox.setText("Type in keywords seperated by a comma");
-        searchPanel.add(keywordsTBox, new com.intellij.uiDesigner.core.GridConstraints(10, 0, 1, 5, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, -1), null, 0, false));
-        salarySlider = new JSlider();
-        salarySlider.setBackground(new Color(-13224648));
-        salarySlider.setForeground(new Color(-1973791));
-        searchPanel.add(salarySlider, new com.intellij.uiDesigner.core.GridConstraints(9, 0, 1, 3, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        StateLabel = new JLabel();
-        StateLabel.setForeground(new Color(-592138));
-        StateLabel.setText("State");
-        searchPanel.add(StateLabel, new com.intellij.uiDesigner.core.GridConstraints(3, 0, 2, 3, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        catLabel = new JLabel();
-        catLabel.setForeground(new Color(-592138));
-        catLabel.setText("Categories");
-        searchPanel.add(catLabel, new com.intellij.uiDesigner.core.GridConstraints(3, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        searchPanel.add(keywordsTBox, new com.intellij.uiDesigner.core.GridConstraints(14, 0, 1, 5, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, -1), null, 0, false));
         jobTypeLabel = new JLabel();
         jobTypeLabel.setForeground(new Color(-592138));
         jobTypeLabel.setText("Job Type");
-        searchPanel.add(jobTypeLabel, new com.intellij.uiDesigner.core.GridConstraints(6, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        searchPanel.add(jobTypeLabel, new com.intellij.uiDesigner.core.GridConstraints(10, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         lowSalLabel = new JLabel();
         lowSalLabel.setForeground(new Color(-592138));
         lowSalLabel.setText("$30K");
-        searchPanel.add(lowSalLabel, new com.intellij.uiDesigner.core.GridConstraints(8, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        searchPanel.add(lowSalLabel, new com.intellij.uiDesigner.core.GridConstraints(12, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         midSalLabel = new JLabel();
         midSalLabel.setForeground(new Color(-592138));
         midSalLabel.setText("$130K");
-        searchPanel.add(midSalLabel, new com.intellij.uiDesigner.core.GridConstraints(8, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        searchPanel.add(midSalLabel, new com.intellij.uiDesigner.core.GridConstraints(12, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         highSalLabel = new JLabel();
         highSalLabel.setForeground(new Color(-592138));
         highSalLabel.setText("$230K");
-        searchPanel.add(highSalLabel, new com.intellij.uiDesigner.core.GridConstraints(8, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        searchPanel.add(highSalLabel, new com.intellij.uiDesigner.core.GridConstraints(12, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         textArea1 = new JTextArea();
         textArea1.setBackground(new Color(-11348236));
         searchPanel.add(textArea1, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 5, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, 1, 1, null, new Dimension(150, 15), new Dimension(-1, 1), 0, false));
         loginButton = new JButton();
         loginButton.setText("Login");
         searchPanel.add(loginButton, new com.intellij.uiDesigner.core.GridConstraints(0, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        backButton = new JButton();
+        backButton.setText("Back");
+        searchPanel.add(backButton, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        salarySlider = new JSlider();
+        salarySlider.setBackground(new Color(-13224648));
+        salarySlider.setForeground(new Color(-1973791));
+        searchPanel.add(salarySlider, new com.intellij.uiDesigner.core.GridConstraints(13, 0, 1, 3, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        stateCBox = new JComboBox();
+        final DefaultComboBoxModel defaultComboBoxModel2 = new DefaultComboBoxModel();
+        defaultComboBoxModel2.addElement("Any");
+        defaultComboBoxModel2.addElement("QLD");
+        defaultComboBoxModel2.addElement("NSW");
+        defaultComboBoxModel2.addElement("VIC");
+        defaultComboBoxModel2.addElement("ACT");
+        defaultComboBoxModel2.addElement("WA");
+        defaultComboBoxModel2.addElement("NT");
+        defaultComboBoxModel2.addElement("SA");
+        defaultComboBoxModel2.addElement("TAS");
+        stateCBox.setModel(defaultComboBoxModel2);
+        searchPanel.add(stateCBox, new com.intellij.uiDesigner.core.GridConstraints(6, 0, 3, 3, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JLabel label1 = new JLabel();
+        label1.setForeground(new Color(-592138));
+        label1.setText("Minimum Salary");
+        searchPanel.add(label1, new com.intellij.uiDesigner.core.GridConstraints(11, 0, 1, 3, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        StateLabel = new JLabel();
+        StateLabel.setForeground(new Color(-592138));
+        StateLabel.setText("State");
+        searchPanel.add(StateLabel, new com.intellij.uiDesigner.core.GridConstraints(3, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        catLabel = new JLabel();
+        catLabel.setForeground(new Color(-592138));
+        catLabel.setText("Categories");
+        searchPanel.add(catLabel, new com.intellij.uiDesigner.core.GridConstraints(3, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        stateScroller = new JScrollPane();
+        searchPanel.add(stateScroller, new com.intellij.uiDesigner.core.GridConstraints(5, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(100, 100), new Dimension(150, 100), new Dimension(150, 200), 0, false));
+        statePanel = new JPanel();
+        statePanel.setLayout(new GridBagLayout());
+        stateScroller.setViewportView(statePanel);
+        catScroller = new JScrollPane();
+        searchPanel.add(catScroller, new com.intellij.uiDesigner.core.GridConstraints(5, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        catPanel = new JPanel();
+        catPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        catScroller.setViewportView(catPanel);
     }
 
     /**

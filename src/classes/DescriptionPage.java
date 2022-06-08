@@ -20,7 +20,7 @@ public class DescriptionPage {
      */
     public DescriptionPage(ArrayList<ScoredJob> jobList, int pageNumber, int indexOfClick) {
         Job job = jobList.get(pageNumber * 3 + indexOfClick).getJob();
-        description.setText(job.getDescription());
+        description.setText(job.getJobDescription());
         location.setText(job.getState());
         cat.setText(job.getCat());
         salary.setText(String.valueOf(job.getSalary()));
