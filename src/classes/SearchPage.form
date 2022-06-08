@@ -20,7 +20,7 @@
         <properties>
           <editable value="true"/>
           <enabled value="true"/>
-          <text value="I'm looking for..."/>
+          <text value="I'm looking for... (Type in keywords seperated by a comma)"/>
         </properties>
       </component>
       <vspacer id="269bc">
@@ -28,14 +28,6 @@
           <grid row="3" column="3" row-span="10" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
-      <component id="3367e" class="javax.swing.JButton" binding="searchButton">
-        <constraints>
-          <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Search"/>
-        </properties>
-      </component>
       <component id="91347" class="javax.swing.JComboBox" binding="catCBox">
         <constraints>
           <grid row="4" column="4" row-span="2" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
@@ -57,17 +49,6 @@
             <item value="Part-Time"/>
             <item value="Casual"/>
           </model>
-        </properties>
-      </component>
-      <component id="12df6" class="javax.swing.JTextField" binding="keywordsTBox">
-        <constraints>
-          <grid row="13" column="0" row-span="1" col-span="5" vsize-policy="6" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties>
-          <foreground color="-13224648"/>
-          <text value="Type in keywords seperated by a comma"/>
         </properties>
       </component>
       <component id="a9312" class="javax.swing.JLabel" binding="catLabel">
@@ -185,6 +166,14 @@
         <properties>
           <foreground color="-592138"/>
           <text value="Minimum Salary"/>
+        </properties>
+      </component>
+      <component id="3367e" class="javax.swing.JButton" binding="searchButton">
+        <constraints>
+          <grid row="13" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Search"/>
         </properties>
       </component>
     </children>
