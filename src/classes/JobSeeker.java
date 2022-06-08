@@ -1,17 +1,35 @@
 package classes;
 
-import java.util.ArrayList;
+import java.awt.*;
+import java.util.*;
 
 public class JobSeeker extends User {
-
     private String resumeFile;
-    private ArrayList skills;
+    ArrayList<String> skills;
 
-    public JobSeeker(String email, String fullName, String password) {
-        super(email, fullName, password);
+    public JobSeeker(){
+        super("","","");
+        skills = new ArrayList<>();
+    }
+
+    public JobSeeker(String email, String firstName, String lastName) {
+        super(email, firstName, lastName);
     }
 
     public String toString() {
         return String.format("%s,%s,%s", super.getEmail(), super.getFullName(), super.getPassword());
     }
+
+    public void addSkill(String skill){
+        skills.add(skill);
+    }
+
+    public ArrayList<String> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(ArrayList<String> skills) {
+        this.skills = skills;
+    }
+
 }
