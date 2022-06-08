@@ -21,6 +21,7 @@ public class Tests {
         job1.setJobDescription("This is a job. Please apply");
         job1.setState("QLD");
         job1.setSalary(125000);
+        job1.setJobType("Casual");
 
         Job job2 = new Job();
         job2.setJobTitle("It Specialist");
@@ -29,6 +30,7 @@ public class Tests {
         job2.setJobDescription("This is a job. Please apply");
         job2.setState("QLD");
         job2.setSalary(125000);
+        job2.setJobType("full-time");
 
         Job job3 = new Job();
         job3.setJobTitle("Data Analyst");
@@ -37,6 +39,7 @@ public class Tests {
         job3.setJobDescription("This is a job. Please apply");
         job3.setState("QLD");
         job3.setSalary(125000);
+        job3.setJobType("part-time");
 
         Job job4 = new Job();
         job4.setJobTitle("DevOps");
@@ -45,6 +48,7 @@ public class Tests {
         job4.setJobDescription("This is a job. Please apply");
         job4.setState("QLD");
         job4.setSalary(125000);
+        job4.setJobType("Full-time");
 
         Job job5 = new Job();
         job5.setJobTitle("Web Dev");
@@ -53,6 +57,7 @@ public class Tests {
         job5.setJobDescription("This is a job. Please apply");
         job5.setState("QLD");
         job5.setSalary(125000);
+        job5.setJobType("casual");
 
         Job job6 = new Job();
         job6.setJobTitle("Backend");
@@ -61,6 +66,7 @@ public class Tests {
         job6.setJobDescription("This is a job. Please apply");
         job6.setState("QLD");
         job6.setSalary(125000);
+        job6.setJobType("full-time");
 
         return new HashSet<Job>(Arrays.asList(job1, job2, job3, job4, job5));
     }

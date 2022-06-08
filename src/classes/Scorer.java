@@ -69,7 +69,7 @@ public class Scorer {
         int total = scoreStrings(search.getSearchText(), job.getJobTitle()) +
                 scoreComboBox2(search.getStates(), job.getState()) +
                 scoreComboBox2(search.getCats(), job.getCat()) +
-                scoreComboBox(search.getJobType(), job.getJobType()) +
+                scoreComboBox2(search.getJobTypes(), job.getJobType()) +
                 scoreSalary(search.getSalary(), job.getSalary());
         return total / noOfCriteria;
     }
