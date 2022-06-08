@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="classes.SearchPage">
-  <grid id="27dc6" binding="searchPanel" layout-manager="GridLayoutManager" row-count="17" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="searchPanel" layout-manager="GridLayoutManager" row-count="17" column-count="7" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="20" left="20" bottom="20" right="20"/>
     <constraints>
       <xy x="20" y="20" width="500" height="598"/>
@@ -13,7 +13,7 @@
     <children>
       <component id="4ec63" class="javax.swing.JTextField" binding="searchTBox">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="2" column="0" row-span="1" col-span="6" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -25,12 +25,12 @@
       </component>
       <vspacer id="269bc">
         <constraints>
-          <grid row="3" column="4" row-span="14" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="5" row-span="14" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
       <component id="3367e" class="javax.swing.JButton" binding="searchButton">
         <constraints>
-          <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Search"/>
@@ -38,7 +38,7 @@
       </component>
       <component id="25000" class="javax.swing.JTextArea" binding="textArea1" default-binding="true">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="6" vsize-policy="1" hsize-policy="1" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="1" column="0" row-span="1" col-span="7" vsize-policy="1" hsize-policy="1" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="15"/>
             <maximum-size width="-1" height="1"/>
           </grid>
@@ -49,7 +49,7 @@
       </component>
       <component id="7cdd6" class="javax.swing.JButton" binding="loginButton" default-binding="true">
         <constraints>
-          <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Login"/>
@@ -65,7 +65,7 @@
       </component>
       <component id="4404e" class="javax.swing.JLabel" binding="StateLabel">
         <constraints>
-          <grid row="3" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <foreground color="-592138"/>
@@ -83,7 +83,7 @@
       </component>
       <scrollpane id="939ec" binding="stateScroller">
         <constraints>
-          <grid row="5" column="5" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="5" column="6" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <minimum-size width="100" height="100"/>
             <preferred-size width="150" height="100"/>
             <maximum-size width="150" height="200"/>
@@ -118,7 +118,7 @@
       </scrollpane>
       <scrollpane id="8541d" binding="jobTypeScroller">
         <constraints>
-          <grid row="12" column="5" row-span="4" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="12" column="6" row-span="4" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <minimum-size width="100" height="100"/>
             <preferred-size width="150" height="100"/>
             <maximum-size width="150" height="200"/>
@@ -138,7 +138,7 @@
       </scrollpane>
       <component id="57939" class="javax.swing.JLabel" binding="jobTypeLabel">
         <constraints>
-          <grid row="11" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="11" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <foreground color="-592138"/>
@@ -147,7 +147,7 @@
       </component>
       <component id="a11ce" class="javax.swing.JSlider" binding="salarySlider">
         <constraints>
-          <grid row="15" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="15" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <background color="-13224648"/>
@@ -155,40 +155,40 @@
           <value value="10"/>
         </properties>
       </component>
-      <component id="69caa" class="javax.swing.JLabel" binding="lowSalLabel">
+      <component id="dc863" class="javax.swing.JLabel">
         <constraints>
-          <grid row="14" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="12" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <foreground color="-592138"/>
-          <text value="$30K"/>
-        </properties>
-      </component>
-      <component id="88c10" class="javax.swing.JLabel" binding="midSalLabel">
-        <constraints>
-          <grid row="14" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <foreground color="-592138"/>
-          <text value="$130K"/>
+          <text value="Minimum Salary"/>
         </properties>
       </component>
       <component id="75567" class="javax.swing.JLabel" binding="highSalLabel">
+        <constraints>
+          <grid row="14" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <foreground color="-592138"/>
+          <text value="$270K"/>
+        </properties>
+      </component>
+      <component id="88c10" class="javax.swing.JLabel" binding="midSalLabel">
         <constraints>
           <grid row="14" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <foreground color="-592138"/>
-          <text value="$230K"/>
+          <text value="$150K"/>
         </properties>
       </component>
-      <component id="dc863" class="javax.swing.JLabel">
+      <component id="69caa" class="javax.swing.JLabel" binding="lowSalLabel">
         <constraints>
-          <grid row="12" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="14" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <foreground color="-592138"/>
-          <text value="Minimum Salary"/>
+          <text value="$30K"/>
         </properties>
       </component>
     </children>

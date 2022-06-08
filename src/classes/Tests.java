@@ -67,7 +67,6 @@ public class Tests {
         job6.setState("QLD");
         job6.setSalary(125000);
         job6.setJobType("full-time");
-
         return new HashSet<Job>(Arrays.asList(job1, job2, job3, job4, job5));
     }
 

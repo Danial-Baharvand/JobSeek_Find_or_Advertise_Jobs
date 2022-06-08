@@ -1,11 +1,6 @@
 package classes;
 
 import java.util.HashMap;
-
-import static classes.Config.DT_JOBSEEKERS;
-import static classes.Config.DT_RECRUITERS;
-
-
 public class AccountManagement {
     public static HashMap<String, JobSeeker> jobseekers = new HashMap<>();
     public static HashMap<String, Recruiter> recruiters = new HashMap<>();
@@ -16,9 +11,6 @@ public class AccountManagement {
     public AccountManagement() {
         this.readUsers();
     }
-
-
-
     private void readUsers() {
         IO io = new IO();
         jobseekers = io.readJobSeekers();
