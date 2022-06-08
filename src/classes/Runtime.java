@@ -22,7 +22,7 @@ public class Runtime {
 
 
         // SHOW SEARCH PAGE
-        showSearchPage(frame);
+        //showSearchPage(frame);
 
         //SHOW LOGIN PAGE
         //showLoginPage(frame);
@@ -33,6 +33,8 @@ public class Runtime {
         //SHOW RECRUITER PROFILE PAGE
         //showRecruiterProfilePage(frame);
 
+        //SHOW JOB SEEKER PROFILE
+        showJobSeekerHome(frame);
 
     }
 
@@ -68,12 +70,21 @@ public class Runtime {
         frame.setTitle("Recruiter Profile Page");
         frame.getContentPane().removeAll();
         frame.repaint();
-        frame.setContentPane(new RecruiterProfile().getRecruiterProfilePage());
+        frame.setContentPane(new RecruiterProfilePage().getRecruiterProfilePage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
 
+    public static void showJobSeekerHome(JFrame frame){
+        frame.setTitle("Job Seeker Home");
+        frame.getContentPane().removeAll();
+        frame.repaint();
+        frame.setContentPane(new JobSeekerProfilePage().getJobSeekerProfile());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
 
     public static void showSearchResultsPage(JFrame frame, Search search){
         frame.setTitle("Search Results Page");

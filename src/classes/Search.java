@@ -11,6 +11,7 @@ public class Search {
     String keywords;
     HashSet<Job> jobs;
     ArrayList<ScoredJob> scoredJobs = new ArrayList<>();
+
     public Search(HashSet<Job> jobs){
         this.jobs = jobs;
         //setScores(jobs);
