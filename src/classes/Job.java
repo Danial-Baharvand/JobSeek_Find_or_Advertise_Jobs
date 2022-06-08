@@ -11,6 +11,7 @@ public class Job {
     String jobType;
     String keywords;
     String jobDescription;
+    Boolean published = false;
 
     public int getJobID() {
         return JobID;

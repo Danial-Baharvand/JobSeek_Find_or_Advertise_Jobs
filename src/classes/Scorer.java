@@ -1,5 +1,6 @@
 package classes;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
@@ -31,6 +32,23 @@ public class Scorer {
         if (option1.toLowerCase().equals(option2.toLowerCase())) {return 100;}
         return 0;
     }
+    /**
+     * Returns 100 if the target option is in selected options match and returns 0 if they don't.
+     * @param selectedOptions first state.
+     * @param targetOption second state.
+     * @return an int which can either be 0 or 100.
+     */
+    public int scoreComboBox2(ArrayList<String> selectedOptions, String targetOption){
+        if (selectedOptions.stream().anyMatch(targetOption::equalsIgnoreCase)) {
+
+            return 100;
+
+        }
+        System.out.println(selectedOptions);
+        System.out.println(targetOption);
+
+        return 0;
+    }
 
     /**
      * Returns 100 if the salary is higher than the minimum salary. Returns 0 otherwise.
@@ -53,8 +71,8 @@ public class Scorer {
     public int scoreAgaintSearch(Search search, Job job){
         final int noOfCriteria = 5;
         int total = scoreStrings(search.getSearchText(), job.getJobTitle()) +
-                scoreComboBox(search.getState(), job.getState()) +
-                scoreComboBox(search.getCat(), job.getCat()) +
+                scoreComboBox2(search.getStates(), job.getState()) +
+                scoreComboBox2(search.getCats(), job.getCat()) +
                 scoreComboBox(search.getJobType(), job.getJobType()) +
                 scoreSalary(search.getSalary(), job.getSalary());
         return total / noOfCriteria;
