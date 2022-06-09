@@ -24,6 +24,9 @@ public class Runtime {
         // SHOW SEARCH PAGE
         showSearchPage(frame);
 
+        //SHOW Create Job PAGE
+        //showCreateJobPage(frame);
+
         //SHOW LOGIN PAGE
         //showLoginPage(frame);
 
@@ -43,6 +46,16 @@ public class Runtime {
         frame.getContentPane().removeAll();
         frame.repaint();
         frame.setContentPane(new SearchPage(testObject.createExampleJobs()).getSearchPanel());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    public static void showCreateJobPage(JFrame frame) {
+        frame.setTitle("Create Job Page");
+        frame.getContentPane().removeAll();
+        frame.repaint();
+        frame.setContentPane(new CreateJobPage().getCreateJobPanel());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
