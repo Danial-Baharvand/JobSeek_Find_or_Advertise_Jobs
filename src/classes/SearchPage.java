@@ -2,17 +2,14 @@ package classes;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 
 public class SearchPage {
     private boolean searchClicked = false;
-    private JTextField searchTBox;
+    private ClearingTextField searchTBox;
     private JButton searchButton;
     private JSlider salarySlider;
     private JPanel searchPanel;
@@ -59,7 +56,7 @@ public class SearchPage {
                 Runtime.showSearchResultsPage(Runtime.frame, search);
             }
         });
-        searchTBox.addMouseListener(new MouseAdapter() {
+/*        searchTBox.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
@@ -68,7 +65,18 @@ public class SearchPage {
                     searchClicked = true;
                 }
             }
-        });
+        });*/
+  /*      searchTBox.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                if (!searchClicked) {
+                    searchTBox.setText("");
+                    searchClicked = true;
+                }
+            }
+
+        });*/
     }
 
     public ArrayList<String> getSelectedOptions(JPanel optionsPanel) {
@@ -109,7 +117,7 @@ public class SearchPage {
         searchPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(17, 7, new Insets(20, 20, 20, 20), -1, -1));
         searchPanel.setBackground(new Color(-13224648));
         searchPanel.setForeground(new Color(-1973791));
-        searchTBox = new JTextField();
+        searchTBox = new ClearingTextField();
         searchTBox.setEditable(true);
         searchTBox.setEnabled(true);
         searchTBox.setText("I'm looking for...");

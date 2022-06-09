@@ -22,7 +22,7 @@ public class Runtime {
 
 
         // SHOW SEARCH PAGE
-        //showSearchPage(frame);
+        showSearchPage(frame);
 
         //SHOW LOGIN PAGE
         //showLoginPage(frame);
@@ -34,7 +34,7 @@ public class Runtime {
         //showRecruiterProfilePage(frame);
 
         //SHOW JOB SEEKER PROFILE
-        showJobSeekerHome(frame);
+        //showJobSeekerHome(frame);
 
     }
 
