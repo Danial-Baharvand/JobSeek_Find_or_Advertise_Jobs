@@ -9,6 +9,7 @@ public class Config {
     final static String DT_RESUMES = "src/dataTables/resumes.csv";
     final static String DT_RECRUITERS = "src/dataTables/recruiters.csv";
     final static String DT_ADMINS = "src/dataTables/admins.csv";
+    final static String DT_CATEGORIES = "src/dataTables/categories.csv";
     final static int EMAIL = 0;
     final static int NAME = 1;
     final static int PASSWORD = 2;

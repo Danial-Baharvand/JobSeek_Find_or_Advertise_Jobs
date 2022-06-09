@@ -26,7 +26,6 @@ class PromptComboBoxRenderer extends BasicComboBoxRenderer
 
         if (value == null)
             setText( prompt );
-
         return this;
     }
 }

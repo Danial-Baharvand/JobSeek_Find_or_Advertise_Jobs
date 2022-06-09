@@ -18,6 +18,7 @@ public class GuiHelper {
 
     public static void createOptionBox(JPanel optionsPanel, ArrayList<String> options) {
         optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));
+        optionsPanel.removeAll();
         for (String option : options) {
             optionsPanel.add(new JCheckBox(option));
         }

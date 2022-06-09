@@ -2,6 +2,8 @@ package classes;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;import java.awt.event.FocusAdapter;
 
 public class CreateJobPage {
     private ClearingTextField JobTitle;
@@ -16,9 +18,32 @@ public class CreateJobPage {
     private JButton publishBtn;
 
     public CreateJobPage() {
+        Runtime.categories.readFromFile();
         stateCB.setRenderer(new PromptComboBoxRenderer("Location"));
         catCB.setRenderer(new PromptComboBoxRenderer("Category"));
         jobTypeCB.setRenderer(new PromptComboBoxRenderer("Job Type"));
+        updateCategories();
+        catButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Runtime.showEditCategoryPage(new JFrame(), getPage());
+            }
+        });
+        catCB.addFocusListener(new FocusAdapter() {
+        });
+    }
+
+    public CreateJobPage getPage() {
+        return this;
+    }
+
+    public void updateCategories() {
+        catCB.setModel(new DefaultComboBoxModel<>(Runtime.categories.getUserCategories(AccountManagement.
+                getCurrentUser()).toArray(new String[0])));
+        catCB.setSelectedIndex(-1);
+        catCB.setRenderer(new PromptComboBoxRenderer("Category"));
+
+
     }
 
     {

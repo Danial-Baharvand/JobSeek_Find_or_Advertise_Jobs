@@ -5,7 +5,7 @@ public class AccountManagement {
     public static HashMap<String, JobSeeker> jobseekers = new HashMap<>();
     public static HashMap<String, Recruiter> recruiters = new HashMap<>();
     public static HashMap<String, Admin> admins = new HashMap<>();
-    public static User currentUser;
+    private static User currentUser;
 
 
     public AccountManagement() {
@@ -27,11 +27,11 @@ public class AccountManagement {
         }
     }
 
-    public void setCurrentUser(User user) {
+    public static void setCurrentUser(User user) {
         currentUser = user;
     }
 
-    public User getCurrentUser() {
+    public static User getCurrentUser() {
         return currentUser;
     }
 

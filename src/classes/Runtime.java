@@ -6,6 +6,7 @@ public class Runtime {
     public static JFrame frame = new JFrame();
     public static Tests testObject = new Tests();
     public static AccountManagement accMan;
+    public static Categories categories = new Categories();
 
     public static void main(String[] args) {
         accMan = new AccountManagement();
@@ -22,10 +23,17 @@ public class Runtime {
 
 
         // SHOW SEARCH PAGE
-        showSearchPage(frame);
+        //showSearchPage(frame);
 
         //SHOW Create Job PAGE
-        //showCreateJobPage(frame);
+        AccountManagement.setCurrentUser(new User("hulk@gmail.com", "bruce", "1234"));
+        showCreateJobPage(frame);
+
+        // SHOW Edit Category Page
+        //showEditCategoryPage(frame, new CreateJobPage());
+
+        //SHOW Create Job PAGE
+        //showEditCategoryPage(frame);
 
         //SHOW LOGIN PAGE
         //showLoginPage(frame);
@@ -57,6 +65,14 @@ public class Runtime {
         frame.repaint();
         frame.setContentPane(new CreateJobPage().getCreateJobPanel());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+    public static void showEditCategoryPage(JFrame frame, CreateJobPage jobPage) {
+        frame.setTitle("Edit Categories");
+        frame.getContentPane().removeAll();
+        frame.repaint();
+        frame.setContentPane(new EditCategoryPage(frame, jobPage).getCatPagePanel());
         frame.pack();
         frame.setVisible(true);
     }
