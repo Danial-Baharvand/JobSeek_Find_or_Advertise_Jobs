@@ -78,6 +78,16 @@ public class Tests {
         return categories;
     }
 
+    public static JobSeeker createExampleJobSeekers(){
+        JobSeeker js = new JobSeeker();
+        js.setFullName("Jack Lu");
+        js.setEmail("jack@monash.com");
+        js.addSkill("Java");
+        js.addSkill("UI design");
+        js.addSkill("SQL");
+        return js;
+    }
+
     /**
      * tests whether the createJobSeeker method of the CreateAccount class is working successfully
      * success: if a valid email and password are written to the registeredUsers.csv file

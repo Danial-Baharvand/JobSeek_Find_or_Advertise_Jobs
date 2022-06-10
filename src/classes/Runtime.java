@@ -45,7 +45,7 @@ public class Runtime {
         //showRecruiterProfilePage(frame);
 
         //SHOW JOB SEEKER PROFILE
-        //showJobSeekerHome(frame);
+        showJobSeekerHome(frame);
 
     }
 
