@@ -18,6 +18,7 @@ public class CreateAccountPage {
     private JPanel mainPanel;
     private JLabel orgLabel;
     private JTextField orgTextField;
+    private JTextArea textArea1;
 
     public CreateAccountPage(JFrame frame) {
         this.frame = frame;
