@@ -13,6 +13,7 @@ public class Tests {
 
         Recruiter recruiter1 = new Recruiter();
         recruiter1.setOrg("Google");
+        recruiter1.setEmail("companyEmail@gmail.com");
 
         Job job1 = new Job();
         job1.setJobTitle("Software Engineer");
@@ -22,6 +23,8 @@ public class Tests {
         job1.setState("QLD");
         job1.setSalary(125000);
         job1.setJobType("Casual");
+        job1.setKeywords("java, sql");
+        System.out.println(job1);
 
         Job job2 = new Job();
         job2.setJobTitle("It Specialist");
@@ -67,15 +70,14 @@ public class Tests {
         job6.setState("QLD");
         job6.setSalary(125000);
         job6.setJobType("full-time");
-
         return new HashSet<Job>(Arrays.asList(job1, job2, job3, job4, job5));
     }
 
     public static Categories createExampleCats(){
         Categories categories = new Categories();
-        categories.addCat("compSci", "0001");
-        categories.addCat("Networking", "0002");
-        categories.addCat("AI", "0003");
+        categories.add("compSci", "0001");
+        categories.add("Networking", "0002");
+        categories.add("AI", "0003");
         return categories;
     }
 

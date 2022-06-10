@@ -12,10 +12,8 @@ public class LoginPage extends JFrame {
 
     private JPanel mainPanel;
     private final JFrame frame;
-    private JTextField emailTextField;
-    private JLabel emailLabel;
-    private JPasswordField passwordField;
-    private JLabel passwordLabel;
+    private ClearingTextField emailClearingTextField;
+    private ClearingPasswordField passwordClearingPasswordField;
     private JButton loginButton;
     private JButton createNewAccountButton;
     private JTextField textField1;
@@ -55,13 +53,13 @@ public class LoginPage extends JFrame {
                 Runtime.showCreateAccountPage(frame);
             }
         });
-        passwordField.addMouseListener(new MouseAdapter() {
+        passwordClearingPasswordField.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
                 if (!passClicked) {
-                    passwordField.setText("");
+                    passwordClearingPasswordField.setText("");
                     passClicked = true;
                 }
             }
@@ -70,20 +68,20 @@ public class LoginPage extends JFrame {
 
     public boolean userLogin(AccountManagement accMan) {
         if (validateUser(accMan.getJobseekers())) {
-            accMan.setCurrentUser(accMan.getJobseekers().get(emailTextField.getText()));
+            accMan.setCurrentUser(accMan.getJobseekers().get(emailClearingTextField.getText()));
             return true;
         } else if (validateUser(accMan.getRecruiters())) {
-            accMan.setCurrentUser(accMan.getRecruiters().get(emailTextField.getText()));
+            accMan.setCurrentUser(accMan.getRecruiters().get(emailClearingTextField.getText()));
             return true;
         } else if (validateUser(accMan.getAdmins())) {
-            accMan.setCurrentUser(accMan.getAdmins().get(emailTextField.getText()));
+            accMan.setCurrentUser(accMan.getAdmins().get(emailClearingTextField.getText()));
             return true;
         } else return false;
     }
 
     private boolean validateUser(HashMap<String, ? extends User> users) {
-        if (users.containsKey(emailTextField.getText())) {
-            return users.get(emailTextField.getText()).getPassword().equals(String.valueOf(passwordField.getPassword()));
+        if (users.containsKey(emailClearingTextField.getText())) {
+            return users.get(emailClearingTextField.getText()).getPassword().equals(String.valueOf(passwordClearingPasswordField.getPassword()));
         } else return false;
     }
 
@@ -109,40 +107,30 @@ public class LoginPage extends JFrame {
         mainPanel = new JPanel();
         mainPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(5, 3, new Insets(20, 20, 20, 20), -1, -1));
         mainPanel.setBackground(new Color(-13224648));
-        emailTextField = new JTextField();
-        emailTextField.setBackground(new Color(-1973791));
-        emailTextField.setForeground(new Color(-13224648));
-        emailTextField.setText("email");
-        emailTextField.setToolTipText("user@example.com");
-        mainPanel.add(emailTextField, new com.intellij.uiDesigner.core.GridConstraints(2, 1, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-        passwordLabel = new JLabel();
-        passwordLabel.setForeground(new Color(-592138));
-        passwordLabel.setText("Password:");
-        mainPanel.add(passwordLabel, new com.intellij.uiDesigner.core.GridConstraints(3, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        passwordField = new JPasswordField();
-        passwordField.setBackground(new Color(-1973791));
-        passwordField.setForeground(new Color(-13224648));
-        passwordField.setText("password");
-        mainPanel.add(passwordField, new com.intellij.uiDesigner.core.GridConstraints(3, 1, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-        emailLabel = new JLabel();
-        emailLabel.setForeground(new Color(-592138));
-        emailLabel.setText("Username:");
-        mainPanel.add(emailLabel, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        backButton = new JButton();
-        backButton.setText("Back");
-        mainPanel.add(backButton, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        emailClearingTextField = new ClearingTextField();
+        emailClearingTextField.setBackground(new Color(-1973791));
+        emailClearingTextField.setText("Email");
+        emailClearingTextField.setToolTipText("user@example.com");
+        mainPanel.add(emailClearingTextField, new com.intellij.uiDesigner.core.GridConstraints(2, 1, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        passwordClearingPasswordField = new ClearingPasswordField();
+        passwordClearingPasswordField.setBackground(new Color(-1973791));
+        passwordClearingPasswordField.setText("Password");
+        mainPanel.add(passwordClearingPasswordField, new com.intellij.uiDesigner.core.GridConstraints(3, 1, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         textField1 = new JTextField();
         textField1.setBackground(new Color(-11348236));
         mainPanel.add(textField1, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 3, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, 15), new Dimension(-1, 1), 0, false));
-        searchButton = new JButton();
-        searchButton.setText("Search");
-        mainPanel.add(searchButton, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         createNewAccountButton = new JButton();
         createNewAccountButton.setText("Create New Account");
         mainPanel.add(createNewAccountButton, new com.intellij.uiDesigner.core.GridConstraints(4, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         loginButton = new JButton();
         loginButton.setText("Login");
         mainPanel.add(loginButton, new com.intellij.uiDesigner.core.GridConstraints(4, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        searchButton = new JButton();
+        searchButton.setText("Search");
+        mainPanel.add(searchButton, new com.intellij.uiDesigner.core.GridConstraints(0, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        backButton = new JButton();
+        backButton.setText("Back");
+        mainPanel.add(backButton, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**

@@ -1,31 +1,23 @@
 package classes;
 
 import java.util.HashMap;
-
-import static classes.Config.DT_JOBSEEKERS;
-import static classes.Config.DT_RECRUITERS;
-
-
 public class AccountManagement {
-    public static HashMap<String, JobSeeker> jobseekers = new HashMap<>();
-    public static HashMap<String, Recruiter> recruiters = new HashMap<>();
-    public static HashMap<String, Admin> admins = new HashMap<>();
-    public static User currentUser;
+    private HashMap<String, JobSeeker> jobseekers = new HashMap<>();
+    private HashMap<String, Recruiter> recruiters = new HashMap<>();
+    private HashMap<String, Admin> admins = new HashMap<>();
+    private User currentUser;
 
 
     public AccountManagement() {
         this.readUsers();
     }
-
-
-
     private void readUsers() {
         IO io = new IO();
         jobseekers = io.readJobSeekers();
         recruiters = io.readRecruiters();
         admins = io.readAdmins();
     }
-    public static void addUser(User user){
+    public void addUser(User user){
         if (user instanceof JobSeeker){
             jobseekers.put(user.getEmail(), (JobSeeker) user);
         }else if (user instanceof Recruiter) {
@@ -48,7 +40,7 @@ public class AccountManagement {
      * @param email is the email to search for in the registeredUsers Hashmap
      * @return true if the email already exists as a Key in the registeredUsers Hashmap, else false
      */
-    public static boolean isRegisteredUser(String email) {
+    public boolean isRegisteredUser(String email) {
         return jobseekers.containsKey(email) || recruiters.containsKey(email) || admins.containsKey(email);
     }
 

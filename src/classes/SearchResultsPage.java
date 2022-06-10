@@ -70,7 +70,6 @@ public class SearchResultsPage {
             public void actionPerformed(ActionEvent e) {
                 if (pageNumber + 1 < Math.ceil(jobList.size() / (double) NO_OF_RESULTS)) {
                     pageNumber += 1;
-                    //e.getSource().
                     createPage(pageNumber);
                 }
             }
@@ -97,7 +96,7 @@ public class SearchResultsPage {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     super.mouseClicked(e);
-                    if (AccountManagement.currentUser == null) {
+                    if (Runtime.accountManager().getCurrentUser() == null) {
                         Runtime.showLoginPage(new JFrame());
                     } else {
                         JPanel clickedPanel = (JPanel) e.getSource();

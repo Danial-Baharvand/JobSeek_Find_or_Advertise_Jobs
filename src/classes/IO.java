@@ -19,6 +19,13 @@ public class IO {
             e.printStackTrace();
         }
     }
+    public void clearFileContent(String path){
+        try {
+            PrintWriter pw = new PrintWriter(path);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
     public void writeUser(User user){
         if (user instanceof JobSeeker){
             newLine(DT_JOBSEEKERS, user.toString());

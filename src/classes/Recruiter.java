@@ -1,8 +1,11 @@
 package classes;
 
+import java.util.ArrayList;
+
 public class Recruiter extends User {
     String org;
     String recruiterDescription;
+    ArrayList<Job> Jobs = new ArrayList<>();
 
 
     public Recruiter() {
@@ -23,6 +26,14 @@ public class Recruiter extends User {
 
     public void setOrg(String org) {
         this.org = org;
+    }
+
+    public ArrayList<Job> getJobs() {
+        return Jobs;
+    }
+
+    public void setJobs(ArrayList<Job> jobs) {
+        Jobs = jobs;
     }
 
     public String getRecruiterDescription() {
