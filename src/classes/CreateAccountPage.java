@@ -135,6 +135,7 @@ public class CreateAccountPage {
     private void $$$setupUI$$$() {
         mainPanel = new JPanel();
         mainPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(8, 2, new Insets(20, 20, 20, 20), -1, -1));
+        mainPanel.setBackground(new Color(-13224648));
         mainPanel.setMinimumSize(new Dimension(299, 304));
         userTypeComboBox = new JComboBox();
         final DefaultComboBoxModel defaultComboBoxModel1 = new DefaultComboBoxModel();
@@ -143,12 +144,18 @@ public class CreateAccountPage {
         userTypeComboBox.setModel(defaultComboBoxModel1);
         mainPanel.add(userTypeComboBox, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         fullNameTextField = new ClearingTextField();
+        fullNameTextField.setBackground(new Color(-1973791));
+        fullNameTextField.setForeground(new Color(-13224648));
         fullNameTextField.setText("Full Name");
         mainPanel.add(fullNameTextField, new com.intellij.uiDesigner.core.GridConstraints(2, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         emailTextField = new ClearingTextField();
+        emailTextField.setBackground(new Color(-1973791));
+        emailTextField.setForeground(new Color(-13224648));
         emailTextField.setText("E-Mail");
         mainPanel.add(emailTextField, new com.intellij.uiDesigner.core.GridConstraints(3, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         passwordPasswordField = new ClearingPasswordField();
+        passwordPasswordField.setBackground(new Color(-1973791));
+        passwordPasswordField.setForeground(new Color(-13224648));
         passwordPasswordField.setText("Password");
         mainPanel.add(passwordPasswordField, new com.intellij.uiDesigner.core.GridConstraints(4, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         createAccountButton = new JButton();

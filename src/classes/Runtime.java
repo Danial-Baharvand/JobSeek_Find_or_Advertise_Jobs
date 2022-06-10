@@ -27,10 +27,10 @@ public class Runtime {
 
 
         // SHOW SEARCH PAGE
-        showSearchPage(frame);
+        //showSearchPage(frame);
 
         //SHOW Create Job PAGE
-        //showCreateJobPage(frame);
+        showCreateJobPage(frame);
 
         //SHOW Edit Category Page
         //showEditCategoryPage(frame, new CreateJobPage());
