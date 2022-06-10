@@ -10,11 +10,6 @@ public class ClearingPasswordField extends JPasswordField implements FocusListen
     private boolean clicked = false;
     private String defaultText;
 
-
-    public static void main(String[] args) {
-        new ClearingTextField();
-    }
-
     public ClearingPasswordField() {
         setForeground(Color.gray);
         setEchoChar((char) 0);

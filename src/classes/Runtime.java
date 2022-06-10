@@ -16,7 +16,7 @@ public class Runtime {
         accMan = new AccountManagement();
         //accMan.setCurrentUser(new Recruiter("hulk@gmail.com", "bruce", "1234", "Google"));
         accMan.setCurrentUser(new JobSeeker("hulk@gmail.com", "bruce", "1234"));
-        //((JobSeeker)accMan.getCurrentUser()).addSkill("Java");
+
         //currentApplication = new Application();
         //currentApplication.getRegisteredUsers();
 
