@@ -42,7 +42,7 @@ public class CreateJobPage {
         publishBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                createJob(false);
+                createJob(true);
             }
         });
     }
