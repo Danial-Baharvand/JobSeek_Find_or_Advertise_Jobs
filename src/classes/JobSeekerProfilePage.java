@@ -150,6 +150,10 @@ public class JobSeekerProfilePage {
                 if (((JobSeeker) Runtime.accountManager().getCurrentUser()).getResumeFile() != null) {
                     JFileChooser file_open = new JFileChooser();
                     int res = file_open.showOpenDialog(null);
+                    if (res == JFileChooser.APPROVE_OPTION) {
+                        File selectedFile = file_open.getSelectedFile();
+                        System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+                    }
                 }
             }
         });
