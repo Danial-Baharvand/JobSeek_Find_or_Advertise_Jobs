@@ -28,6 +28,7 @@ public class JobSeekerProfilePage {
     private JButton viewResumeButton;
     private JButton deleteButton1;
     private JButton viewButton;
+    private JTextArea textArea1;
 
 
     public JobSeekerProfilePage() {
