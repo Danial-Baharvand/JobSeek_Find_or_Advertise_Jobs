@@ -64,7 +64,7 @@
           <text value="Resume"/>
         </properties>
       </component>
-      <scrollpane id="479ed">
+      <scrollpane id="479ed" binding="skillsListScrollPane">
         <constraints>
           <grid row="4" column="2" row-span="2" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>

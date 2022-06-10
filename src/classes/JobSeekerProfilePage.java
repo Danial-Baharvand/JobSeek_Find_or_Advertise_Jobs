@@ -21,6 +21,7 @@ public class JobSeekerProfilePage {
     private JLabel welcomeLabel;
     private JLabel nameLabel;
     private JPanel skillsList;
+    private JScrollPane skillsListScrollPane;
 
 
     public JobSeekerProfilePage() {
@@ -48,18 +49,24 @@ public class JobSeekerProfilePage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //delete from skills arraylist based on text entered in textpanel
-
                 String sk = skillsInput.getText();
                 js.deleteSkill(sk);
                 refreshOptionBox(skillsList, js.getSkills());
                 skillsInput.setText("");
 
+                //testing if getSelectedOptions is returning the correct arraylist
+                System.out.println(getSelectedOptions(skillsList));
+
+
                 //delete skills which are checked in the skillsList
-                for (int i = 0; i < js.getSkills().size(); i++) {
-                    js.deleteSkill(getSelectedOptions(skillsList).get(i));
-                }
-                refreshOptionBox(skillsList, js.getSkills());
-                skillsInput.setText("");
+                //for (int i = 0; i < js.getSkills().size(); i++)
+
+                //js.deleteSkill(getSelectedOptions(skillsList).get(1));
+
+                //refreshOptionBox(skillsList, js.getSkills());
+                //skillsInput.setText("");
+
+
             }
         });
 
@@ -74,6 +81,16 @@ public class JobSeekerProfilePage {
             }
         }
         return selectedOptions;
+    }
+
+    public void deleteSelectedOptions(JPanel optionsPanel) {
+        ArrayList<String> selectedOptions = new ArrayList<>();
+        Component[] allOptions = optionsPanel.getComponents();
+        for (Component option : allOptions) {
+            if (((JCheckBox) option).isSelected()) {
+                selectedOptions.remove(((JCheckBox) option).getText());
+            }
+        }
     }
 
     public void createOptionBox(JPanel optionsPanel, ArrayList<String> options) {
@@ -136,11 +153,11 @@ public class JobSeekerProfilePage {
         resumeButton = new JButton();
         resumeButton.setText("Resume");
         JobSeekerProfile.add(resumeButton, new com.intellij.uiDesigner.core.GridConstraints(6, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JScrollPane scrollPane1 = new JScrollPane();
-        JobSeekerProfile.add(scrollPane1, new com.intellij.uiDesigner.core.GridConstraints(4, 2, 2, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        skillsListScrollPane = new JScrollPane();
+        JobSeekerProfile.add(skillsListScrollPane, new com.intellij.uiDesigner.core.GridConstraints(4, 2, 2, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         skillsList = new JPanel();
         skillsList.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        scrollPane1.setViewportView(skillsList);
+        skillsListScrollPane.setViewportView(skillsList);
         skillsInput = new ClearingTextField();
         skillsInput.setText("");
         JobSeekerProfile.add(skillsInput, new com.intellij.uiDesigner.core.GridConstraints(3, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
