@@ -42,7 +42,7 @@ public class CreateJobPage {
         publishBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                createJob(false);
+                createJob(true);
             }
         });
     }
@@ -149,7 +149,7 @@ public class CreateJobPage {
         publishBtn.setText("Publish");
         panel1.add(publishBtn, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         keywordsTB = new ClearingTextField();
-        keywordsTB.setText("Type in skills seprated by comma (\",\")");
+        keywordsTB.setText("Type in skills seprated by space (\" \")");
         keywordsTB.setToolTipText("Coding, Java, SQL");
         panel1.add(keywordsTB, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 25), null, 0, false));
     }

@@ -13,8 +13,7 @@ public class Job {
     Boolean published = false;
     public Job(){}
     public Job(String jobDetails){
-        String[] setValues = jobDetails.split("|");
-        ;
+        String[] setValues = jobDetails.split("\\|");
         this.jobTitle = setValues[0];
         this.state =setValues[1];
         this.cat =setValues[2];
@@ -35,8 +34,7 @@ public class Job {
 
     @Override
     public String toString() {
-        return  recruiter.getEmail() +
-                "=" + jobTitle + '|' +
+        return   jobTitle + '|' +
                  state + '|' +
                  cat + '|' +
                  salary + '|' +
