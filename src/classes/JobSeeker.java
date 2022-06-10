@@ -45,4 +45,11 @@ public class JobSeeker extends User {
         this.skills = skills;
     }*/
 
+    public String getResumeFile() {
+        return resumeFile;
+    }
+
+    public void setResumeFile(String resumeFile) {
+        this.resumeFile = resumeFile;
+    }
 }
