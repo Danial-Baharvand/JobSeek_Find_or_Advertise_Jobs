@@ -59,7 +59,7 @@ public class CreateAccountPage {
         final String passConfirm = String.valueOf(confirmPasswordPasswordField.getPassword());
         final String org = orgTextField.getText();
         //check if email is registered to an existing account - if so, notify that email is not new
-        if (!AccountManagement.isRegisteredUser(email)) {
+        if (!Runtime.accountManager().isRegisteredUser(email)) {
             //check if password and confirm password match - if not, return that passwords don't match
             if (pass.equals(passConfirm)) {
                 User newUser;
@@ -73,7 +73,7 @@ public class CreateAccountPage {
 
                 IO writer = new IO();
                 writer.writeUser(newUser);
-                AccountManagement.addUser(newUser);
+                Runtime.accountManager().addUser(newUser);
                 System.out.printf("New account successfully created for %s!%n", email);
                 return String.format("New account successfully created for %s!", email);
             } else {

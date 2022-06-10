@@ -62,7 +62,6 @@ public class RecruiterProfilePage {
         testJob.setJobDescription("This is a job. Please apply");
         testJob.setState("QLD");
         testJob.setSalary(125000);
-        testJob.setCompany("Google");
 
         Job testJob1 = new Job();
         testJob1.setJobTitle("UI Designer");
@@ -71,7 +70,6 @@ public class RecruiterProfilePage {
         testJob1.setJobDescription("This is a job. Please apply");
         testJob1.setState("VIC");
         testJob1.setSalary(99000);
-        testJob1.setCompany("Twitter");
 
         Job testJob2 = new Job();
         testJob2.setJobTitle("Software Technician");
@@ -80,7 +78,6 @@ public class RecruiterProfilePage {
         testJob2.setJobDescription("This is a job. Please apply");
         testJob2.setState("QLD");
         testJob2.setSalary(75000);
-        testJob2.setCompany("IntelliJ");
 
 
         recruiterOrg.setText(testRecruiter.getOrg());
@@ -88,11 +85,11 @@ public class RecruiterProfilePage {
         recruiterEmail.setText(testRecruiter.getEmail());
         recruiterWebsite.setText(testRecruiter.getOrg());
         job1Title.setText(testJob.jobTitle);
-        job1Company.setText(testJob.getCompany());
+        job1Company.setText(testJob.getRecruiter().getOrg());
         job2Title.setText(testJob1.getJobTitle());
-        job2Company.setText(testJob1.getCompany());
+        job2Company.setText(testJob1.getRecruiter().getOrg());
         job3Title.setText(testJob2.jobTitle);
-        job3Company.setText(testJob2.getCompany());
+        job3Company.setText(testJob2.getRecruiter().getOrg());
 
         viewButton.addActionListener(new ActionListener() {
             @Override

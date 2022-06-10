@@ -6,19 +6,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;import java.awt.event.FocusAdapter;
 
 public class CreateJobPage {
-    private ClearingTextField JobTitle;
+    private ClearingTextField jobTitleTB;
     private JPanel CreateJobPanel;
     private JComboBox catCB;
     private JComboBox<String> stateCB;
     private ClearingTextArea jobDescTA;
     private JComboBox jobTypeCB;
     private JButton catButton;
-    private ClearingTextField salaryClearingTextField;
+    private ClearingTextField salaryTB;
     private JButton saveBtn;
     private JButton publishBtn;
+    private ClearingTextField keywordsTB;
 
     public CreateJobPage() {
-        Runtime.categories.readFromFile();
+        Runtime.getJobs().readFromFile(Config.DT_JOBS);
+        Runtime.categories.readFromFile(Config.DT_CATEGORIES);
         stateCB.setRenderer(new PromptComboBoxRenderer("Location"));
         catCB.setRenderer(new PromptComboBoxRenderer("Category"));
         jobTypeCB.setRenderer(new PromptComboBoxRenderer("Job Type"));
@@ -31,6 +33,40 @@ public class CreateJobPage {
         });
         catCB.addFocusListener(new FocusAdapter() {
         });
+        saveBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                createJob(false);
+            }
+        });
+        publishBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                createJob(true);
+            }
+        });
+    }
+
+    private void createJob(boolean publish) {
+
+        try {
+            Job newJob = new Job();
+            newJob.setJobTitle(jobTitleTB.forceGetText());
+            newJob.setRecruiter((Recruiter) Runtime.accountManager().getCurrentUser());
+            newJob.setCat(catCB.getSelectedItem().toString());
+            newJob.setJobDescription(jobDescTA.forceGetText());
+            newJob.setState(stateCB.getSelectedItem().toString());
+            newJob.setSalary(Integer.parseInt(salaryTB.forceGetText()));
+            newJob.setJobType(jobTypeCB.getSelectedItem().toString());
+            newJob.setKeywords(keywordsTB.forceGetText());
+            newJob.setPublished(publish);
+            System.out.println(newJob);
+            Runtime.getJobs().add(newJob.getRecruiter().getEmail(), newJob);
+            Runtime.getJobs().writeToFile(Config.DT_JOBS);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please fill in all fields");
+        }
+
     }
 
     public CreateJobPage getPage() {
@@ -38,7 +74,7 @@ public class CreateJobPage {
     }
 
     public void updateCategories() {
-        catCB.setModel(new DefaultComboBoxModel<>(Runtime.categories.getUserCategories(AccountManagement.
+        catCB.setModel(new DefaultComboBoxModel<>(Runtime.categories.getUserCategories(Runtime.accountManager().
                 getCurrentUser()).toArray(new String[0])));
         catCB.setSelectedIndex(-1);
         catCB.setRenderer(new PromptComboBoxRenderer("Category"));
@@ -97,21 +133,25 @@ public class CreateJobPage {
         catButton.setLabel("Edit");
         catButton.setText("Edit");
         CreateJobPanel.add(catButton, new com.intellij.uiDesigner.core.GridConstraints(1, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        JobTitle = new ClearingTextField();
-        JobTitle.setText("Job Listing Title");
-        CreateJobPanel.add(JobTitle, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 3, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(222, 30), null, 0, false));
-        salaryClearingTextField = new ClearingTextField();
-        salaryClearingTextField.setText("Salary");
-        CreateJobPanel.add(salaryClearingTextField, new com.intellij.uiDesigner.core.GridConstraints(3, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(100, 25), null, null, 0, false));
+        jobTitleTB = new ClearingTextField();
+        jobTitleTB.setText("Job Listing Title");
+        CreateJobPanel.add(jobTitleTB, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 3, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(222, 30), null, 0, false));
+        salaryTB = new ClearingTextField();
+        salaryTB.setText("Salary");
+        CreateJobPanel.add(salaryTB, new com.intellij.uiDesigner.core.GridConstraints(3, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(100, 25), null, null, 0, false));
         final JPanel panel1 = new JPanel();
-        panel1.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
+        panel1.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
         CreateJobPanel.add(panel1, new com.intellij.uiDesigner.core.GridConstraints(4, 0, 1, 4, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         saveBtn = new JButton();
         saveBtn.setText("Save");
-        panel1.add(saveBtn, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel1.add(saveBtn, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         publishBtn = new JButton();
         publishBtn.setText("Publish");
-        panel1.add(publishBtn, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel1.add(publishBtn, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        keywordsTB = new ClearingTextField();
+        keywordsTB.setText("Type in skills seprated by space (\" \")");
+        keywordsTB.setToolTipText("Coding Java SQL");
+        panel1.add(keywordsTB, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 25), null, 0, false));
     }
 
     /**

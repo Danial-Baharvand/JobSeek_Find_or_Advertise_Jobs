@@ -1,15 +1,19 @@
 package classes;
 
 import javax.swing.*;
+import java.util.HashMap;
+import java.util.HashSet;
 
 public class Runtime {
     public static JFrame frame = new JFrame();
     public static Tests testObject = new Tests();
-    public static AccountManagement accMan;
+    private static AccountManagement accMan;
     public static Categories categories = new Categories();
+    private static Jobs jobs = new Jobs();
 
     public static void main(String[] args) {
         accMan = new AccountManagement();
+        accMan.setCurrentUser(new Recruiter("hulk@gmail.com", "bruce", "1234", "Google"));
         //currentApplication = new Application();
         //currentApplication.getRegisteredUsers();
 
@@ -23,17 +27,13 @@ public class Runtime {
 
 
         // SHOW SEARCH PAGE
-        //showSearchPage(frame);
+        showSearchPage(frame);
 
         //SHOW Create Job PAGE
-        AccountManagement.setCurrentUser(new User("hulk@gmail.com", "bruce", "1234"));
-        showCreateJobPage(frame);
+        //showCreateJobPage(frame);
 
-        // SHOW Edit Category Page
+        //SHOW Edit Category Page
         //showEditCategoryPage(frame, new CreateJobPage());
-
-        //SHOW Create Job PAGE
-        //showEditCategoryPage(frame);
 
         //SHOW LOGIN PAGE
         //showLoginPage(frame);
@@ -125,4 +125,11 @@ public class Runtime {
         frame.setVisible(true);
     }
 
+    public static AccountManagement accountManager() {
+        return accMan;
+    }
+
+    public static Jobs getJobs() {
+        return jobs;
+    }
 }
