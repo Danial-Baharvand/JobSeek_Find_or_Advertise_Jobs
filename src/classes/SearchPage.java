@@ -93,19 +93,16 @@ public class SearchPage {
      */
     private void $$$setupUI$$$() {
         searchPanel = new JPanel();
-        searchPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(17, 6, new Insets(20, 20, 20, 20), -1, -1));
+        searchPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(18, 6, new Insets(20, 20, 20, 20), -1, -1));
         searchPanel.setBackground(new Color(-13224648));
         searchPanel.setForeground(new Color(-1973791));
         searchTBox = new JTextField();
         searchTBox.setEditable(true);
         searchTBox.setEnabled(true);
         searchTBox.setText("I'm looking for...");
-        searchPanel.add(searchTBox, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 5, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        searchPanel.add(searchTBox, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 6, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         final com.intellij.uiDesigner.core.Spacer spacer1 = new com.intellij.uiDesigner.core.Spacer();
         searchPanel.add(spacer1, new com.intellij.uiDesigner.core.GridConstraints(3, 4, 14, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_VERTICAL, 1, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        searchButton = new JButton();
-        searchButton.setText("Search");
-        searchPanel.add(searchButton, new com.intellij.uiDesigner.core.GridConstraints(2, 5, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         textArea1 = new JTextArea();
         textArea1.setBackground(new Color(-11348236));
         searchPanel.add(textArea1, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 6, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, 1, 1, null, new Dimension(150, 15), new Dimension(-1, 1), 0, false));
@@ -163,6 +160,9 @@ public class SearchPage {
         label1.setForeground(new Color(-592138));
         label1.setText("Minimum Salary");
         searchPanel.add(label1, new com.intellij.uiDesigner.core.GridConstraints(12, 0, 1, 4, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        searchButton = new JButton();
+        searchButton.setText("Search");
+        searchPanel.add(searchButton, new com.intellij.uiDesigner.core.GridConstraints(17, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
