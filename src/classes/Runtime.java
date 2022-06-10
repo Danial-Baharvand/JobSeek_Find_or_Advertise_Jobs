@@ -13,7 +13,9 @@ public class Runtime {
 
     public static void main(String[] args) {
         accMan = new AccountManagement();
-        accMan.setCurrentUser(new Recruiter("hulk@gmail.com", "bruce", "1234", "Google"));
+        //accMan.setCurrentUser(new Recruiter("hulk@gmail.com", "bruce", "1234", "Google"));
+        accMan.setCurrentUser(new JobSeeker("hulk@gmail.com", "bruce", "1234"));
+
         //currentApplication = new Application();
         //currentApplication.getRegisteredUsers();
 
