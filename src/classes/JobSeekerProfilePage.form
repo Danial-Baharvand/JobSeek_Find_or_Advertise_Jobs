@@ -74,10 +74,12 @@
       </scrollpane>
       <component id="ce349" class="classes.ClearingTextField" binding="skillsInput">
         <constraints>
-          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="-1" height="25"/>
+          </grid>
         </constraints>
         <properties>
-          <text value=""/>
+          <text value="Type in you skills"/>
         </properties>
       </component>
       <component id="890a0" class="javax.swing.JLabel">
@@ -86,14 +88,6 @@
         </constraints>
         <properties>
           <text value="Skills:"/>
-        </properties>
-      </component>
-      <component id="cf196" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Enter skills to add/delete"/>
         </properties>
       </component>
       <vspacer id="e006a">

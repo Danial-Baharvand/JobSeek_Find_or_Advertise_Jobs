@@ -3,6 +3,7 @@ package classes;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class GuiHelper {
     public static ArrayList<String> getSelectedOptions(JPanel optionsPanel) {
@@ -10,7 +11,7 @@ public class GuiHelper {
         Component[] allOptions = optionsPanel.getComponents();
         for (Component option : allOptions) {
             if (((JCheckBox) option).isSelected()) {
-                selectedOptions.add(((JCheckBox) option).getText());
+                selectedOptions.add(((JCheckBox) option).getText().toLowerCase());
             }
         }
         return selectedOptions;
@@ -20,6 +21,7 @@ public class GuiHelper {
         optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));
         optionsPanel.removeAll();
         for (String option : options) {
+            option = option.substring(0,1).toUpperCase() + option.substring(1).toLowerCase();
             optionsPanel.add(new JCheckBox(option));
         }
     }
