@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 public class JobSeekerProfilePage {
     private JPanel JobSeekerProfile;
-    private JButton backButton;
     private JButton appliedJobsButton;
     private JButton jobInterviewsButton;
     private JButton resumeButton;
@@ -20,6 +19,7 @@ public class JobSeekerProfilePage {
     private JTextArea skillsListing;
     private JLabel welcomeLabel;
     private JLabel nameLabel;
+    private JTextArea textArea1;
 
     JobSeeker js = new JobSeeker();
 
