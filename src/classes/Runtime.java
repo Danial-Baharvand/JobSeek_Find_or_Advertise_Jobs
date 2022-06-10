@@ -10,10 +10,13 @@ public class Runtime {
     private static AccountManagement accMan;
     public static Categories categories = new Categories();
     private static Jobs jobs = new Jobs();
+    private static AdvancedSetMap Skills = new AdvancedSetMap();
 
     public static void main(String[] args) {
         accMan = new AccountManagement();
-        accMan.setCurrentUser(new Recruiter("hulk@gmail.com", "bruce", "1234", "Google"));
+        //accMan.setCurrentUser(new Recruiter("hulk@gmail.com", "bruce", "1234", "Google"));
+        accMan.setCurrentUser(new JobSeeker("hulk@gmail.com", "bruce", "1234"));
+        //((JobSeeker)accMan.getCurrentUser()).addSkill("Java");
         //currentApplication = new Application();
         //currentApplication.getRegisteredUsers();
 
@@ -30,7 +33,7 @@ public class Runtime {
         //showSearchPage(frame);
 
         //SHOW Create Job PAGE
-        showCreateJobPage(frame);
+        //showCreateJobPage(frame);
 
         //SHOW Edit Category Page
         //showEditCategoryPage(frame, new CreateJobPage());
@@ -131,5 +134,13 @@ public class Runtime {
 
     public static Jobs getJobs() {
         return jobs;
+    }
+
+    public static AdvancedSetMap getSkills() {
+        return Skills;
+    }
+
+    public static void setSkills(AdvancedSetMap skills) {
+        Skills = skills;
     }
 }

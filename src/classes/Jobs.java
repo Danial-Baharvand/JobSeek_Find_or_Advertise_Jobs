@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class Jobs extends AdvancedSetMap {
+    @Override
     public void readFromFile(String path){
         map.clear();
         String line;
@@ -14,8 +15,6 @@ public class Jobs extends AdvancedSetMap {
                 String[] userData = line.split("=");
                 System.out.println(userData[0]);
                 System.out.println(userData[1]);
-/*                HashSet<Object> cat = new HashSet<>(Arrays.asList(userData[1]
-                        .substring(1, userData[1].length() - 1).split(", ")));*/
                 HashSet<Object> cat = createJobs(userData[1].substring(1, userData[1].length() - 1));
                 map.put(userData[0], cat);
             }

@@ -5,11 +5,11 @@ import java.util.*;
 
 public class JobSeeker extends User {
     private String resumeFile;
-    Set<String> skills;
+    Set<String> skills = new HashSet<>();
 
     public JobSeeker(){
         super("","","");
-        skills = new HashSet<String>();
+        //this.skills = new HashSet<String>();
     }
 
     public JobSeeker(String email, String firstName, String lastName) {
@@ -30,6 +30,10 @@ public class JobSeeker extends User {
 
     public void deleteSkill(String skill) {
         this.skills.remove(skill);
+    }
+
+    public void setSkills(Set<String> skills) {
+        this.skills = skills;
     }
 
 

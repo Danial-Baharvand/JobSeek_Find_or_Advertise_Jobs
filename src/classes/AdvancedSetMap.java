@@ -15,7 +15,7 @@ public class AdvancedSetMap {
      */
     public void add(String key, Object setValue) {
         // convert key to correct text format
-        key = key.substring(0,1).toUpperCase() + key.substring(1).toLowerCase();
+        key = key.toLowerCase();
         // Add key if it doesn't exist
         map.computeIfAbsent(key, k -> new HashSet<>());
         // Add object to the value set for the key
@@ -34,11 +34,24 @@ public class AdvancedSetMap {
     public void writeToFile(String path){
         IO io = new IO();
         io.clearFileContent(path);
-        for (String category:map.keySet()) {
-            io.newLine(path, category + "=" + map.get(category).toString());
+        for (String key:map.keySet()) {
+            io.newLine(path, key + "=" + map.get(key).toString());
         }
     }
-
+    public void readFromFile(String path){
+        map.clear();
+        String line;
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
+            while ((line = reader.readLine()) != null && !line.equals("")) {
+                String[] userData = line.split("=");
+                HashSet<Object> cat = new HashSet<>(Arrays.asList(userData[1]
+                        .substring(1, userData[1].length() - 1).split(", ")));
+                map.put(userData[0], cat);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public HashMap<String, Set<Object>> getMap() {
         return map;
