@@ -44,6 +44,7 @@ public class RecruiterProfilePage {
     private JButton viewButton;
     private JButton viewButton1;
     private JButton viewButton2;
+    private JTextArea textArea1;
 
 
     /**
