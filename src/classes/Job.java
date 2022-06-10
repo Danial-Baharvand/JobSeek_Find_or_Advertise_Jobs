@@ -1,9 +1,8 @@
 package classes;
 
 public class Job {
-    int JobID;
     Recruiter recruiter;
-    String company;
+
     String jobTitle;
     String state;
     String cat;
@@ -12,9 +11,40 @@ public class Job {
     String keywords;
     String jobDescription;
     Boolean published = false;
+    public Job(){}
+    public Job(String jobDetails){
+        String[] setValues = jobDetails.split("|");
+        ;
+        this.jobTitle = setValues[0];
+        this.state =setValues[1];
+        this.cat =setValues[2];
+        this.salary =Integer.parseInt(setValues[3]);
+        this.jobType =setValues[4];
+        this.keywords =setValues[5];
+        this.jobDescription =setValues[6];
+        this.recruiter = Runtime.accountManager().getRecruiters().get(setValues[7]);
+        this.published =Boolean.parseBoolean(setValues[8]);
+    }
+    public Boolean getPublished() {
+        return published;
+    }
 
-    public int getJobID() {
-        return JobID;
+    public void setPublished(Boolean published) {
+        this.published = published;
+    }
+
+    @Override
+    public String toString() {
+        return  recruiter.getEmail() +
+                "=" + jobTitle + '|' +
+                 state + '|' +
+                 cat + '|' +
+                 salary + '|' +
+                 jobType + '|' +
+                 keywords + '|' +
+                 jobDescription + '|' +
+                 recruiter.getEmail() + '|' +
+                 published;
     }
 
     public Recruiter getRecruiter() {
@@ -41,22 +71,8 @@ public class Job {
         return jobType;
     }
 
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
-    }
-
-    public String getJobCompany() {return company;}
-
     public String getKeywords() {
         return keywords;
-    }
-
-    public void setJobID(int jobID) {
-        JobID = jobID;
     }
 
     public void setRecruiter(Recruiter recruiter) {
@@ -71,7 +87,6 @@ public class Job {
         this.state = state;
     }
 
-    public void setJobCompany(String company) {this.company = company;}
 
     public void setCat(String cat) {
         this.cat = cat;

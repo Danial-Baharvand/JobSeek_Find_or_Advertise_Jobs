@@ -92,7 +92,7 @@ public class SearchResultsPage {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     super.mouseClicked(e);
-                    if (AccountManagement.getCurrentUser() == null) {
+                    if (Runtime.accountManager().getCurrentUser() == null) {
                         Runtime.showLoginPage(new JFrame());
                     } else {
                         JPanel clickedPanel = (JPanel) e.getSource();

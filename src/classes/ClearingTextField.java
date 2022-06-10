@@ -10,15 +10,17 @@ public class ClearingTextField extends JTextField implements FocusListener {
     private boolean clicked = false;
     private String defaultText;
 
-    public static void main(String[] args) {
-        new ClearingTextField();
-    }
-
     public ClearingTextField() {
         setForeground(Color.gray);
         addFocusListener(this);
     }
-
+    public String forceGetText() throws Exception {
+        if (!clicked || getText().equals("")){
+            throw new Exception();
+        }else {
+            return getText();
+        }
+    }
     @Override
     public void focusGained(FocusEvent e) {
         if (!clicked){

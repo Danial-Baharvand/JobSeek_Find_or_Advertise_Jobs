@@ -14,7 +14,13 @@ public class ClearingTextArea extends JTextArea implements FocusListener {
         setForeground(Color.gray);
         addFocusListener(this);
     }
-
+    public String forceGetText() throws Exception {
+        if (!clicked || getText().equals("")){
+            throw new Exception();
+        }else {
+            return getText();
+        }
+    }
     @Override
     public void focusGained(FocusEvent e) {
         if (!clicked){
