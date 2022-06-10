@@ -12,6 +12,7 @@ public class EditCategoryPage {
     private ClearingTextField catTB;
     private JScrollPane catsScroller;
     private JPanel catsPanel;
+    private JTextArea textArea1;
 
     public EditCategoryPage(JFrame frame, CreateJobPage jobPage) {
         Runtime.categories.readFromFile(Config.DT_CATEGORIES);
