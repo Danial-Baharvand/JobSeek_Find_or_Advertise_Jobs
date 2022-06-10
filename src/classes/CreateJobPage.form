@@ -122,8 +122,8 @@
               </grid>
             </constraints>
             <properties>
-              <text value="Type in skills seprated by comma (&quot;,&quot;)"/>
-              <toolTipText value="Coding, Java, SQL"/>
+              <text value="Type in skills seprated by space (&quot; &quot;)"/>
+              <toolTipText value="Coding Java SQL"/>
             </properties>
           </component>
         </children>

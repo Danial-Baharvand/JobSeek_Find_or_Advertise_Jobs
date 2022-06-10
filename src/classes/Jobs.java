@@ -12,6 +12,8 @@ public class Jobs extends AdvancedSetMap {
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             while ((line = reader.readLine()) != null && !line.equals("")) {
                 String[] userData = line.split("=");
+                System.out.println(userData[0]);
+                System.out.println(userData[1]);
 /*                HashSet<Object> cat = new HashSet<>(Arrays.asList(userData[1]
                         .substring(1, userData[1].length() - 1).split(", ")));*/
                 HashSet<Object> cat = createJobs(userData[1].substring(1, userData[1].length() - 1));
