@@ -6,7 +6,7 @@ import javax.swing.plaf.basic.*;
 
 class PromptComboBoxRenderer extends BasicComboBoxRenderer
 {
-    private String prompt;
+    private final String prompt;
 
     /*
      *  Set the text to display when no item has been selected.

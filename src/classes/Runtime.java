@@ -1,6 +1,8 @@
 package classes;
 
 import javax.swing.*;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -9,8 +11,23 @@ public class Runtime {
     public static Tests testObject = new Tests();
     private static AccountManagement accMan;
     public static Categories categories = new Categories();
-    private static Jobs jobs = new Jobs();
+    private static final Jobs jobs = new Jobs();
     private static AdvancedSetMap Skills = new AdvancedSetMap();
+    /**
+     * pagesVisited is a static attribute that is used at Runtime to create a LIFO structure of the pages visited by the user
+     * Each time a page is navigated away from, that page is pushed to the front of the deque
+     * Each time a user navigates backwards from a page using the "Back" button, the page at the front of the deque is popped
+     * The backwards navigation is implemented by the navigateBack method
+     */
+    private static Deque<String> pagesVisited = new ArrayDeque<String>();
+
+    /**
+     * currentSearch is an object of Search
+     * currentSearch is used to facilitate returning to the SearchResultsPage via the "Back" button
+     * when a new Search is made, currentSearch is set to that Search object and overwritten when a new Search is made
+     */
+
+    private static Search currentSearch;
 
     public static void main(String[] args) {
         accMan = new AccountManagement();
@@ -56,7 +73,7 @@ public class Runtime {
         frame.setTitle("Search Page");
         frame.getContentPane().removeAll();
         frame.repaint();
-        frame.setContentPane(new SearchPage(testObject.createExampleJobs()).getSearchPanel());
+        frame.setContentPane(new SearchPage(Tests.createExampleJobs()).getSearchPanel());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
@@ -80,11 +97,31 @@ public class Runtime {
         frame.setVisible(true);
     }
 
+    public static void showLoginPage(JFrame frame, String navigatedFrom) {
+        pagesVisited.push(navigatedFrom);
+        frame.setTitle("Login Page");
+        frame.getContentPane().removeAll();
+        frame.repaint();
+        frame.setContentPane(new LoginPage(frame, accMan).getLoginPagePanel());
+        frame.pack();
+        frame.setVisible(true);
+    }
+
     public static void showLoginPage(JFrame frame) {
         frame.setTitle("Login Page");
         frame.getContentPane().removeAll();
         frame.repaint();
         frame.setContentPane(new LoginPage(frame, accMan).getLoginPagePanel());
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    public static void showCreateAccountPage(JFrame frame, String navigatedFrom) {
+        pagesVisited.push(navigatedFrom);
+        frame.setTitle("Create Account Page");
+        frame.getContentPane().removeAll();
+        frame.repaint();
+        frame.setContentPane(new CreateAccountPage(frame).getCreateAccountPanel());
         frame.pack();
         frame.setVisible(true);
     }
@@ -142,5 +179,52 @@ public class Runtime {
 
     public static void setSkills(AdvancedSetMap skills) {
         Skills = skills;
+    }
+
+    /**
+     * navigateBack is called when the "Back" button is pressed
+     * the first element in the pagesVisited deque is popped and stored in a String variable called lastPage
+     * the String variable called lastPage is used to determine the page to display
+     */
+    public static void navigateBack() {
+        String lastPage = pagesVisited.pop();
+        switch (lastPage) {
+            case "ApplicantPage":
+                System.out.println("Cannot navigate to ApplicantPage yet. Must be set up in Runtime.navigateBack().");
+                break;
+            case "CreateAccountPage":
+                showCreateAccountPage(frame);
+                break;
+            case "CreateJobPage":
+                showCreateJobPage(frame);
+                break;
+            case "DescriptionPage":
+                System.out.println("Cannot navigate to DescriptionPage yet. Must be set up in Runtime.navigateBack().");
+                break;
+            case "EditCategoryPage":
+                System.out.println("Cannot navigate to EditCategoryPage yet. Must be set up in Runtime.navigateBack().");
+                break;
+            case "JobEditPage":
+                System.out.println("Cannot navigate to JobEditPage yet. Must be set up in Runtime.navigateBack().");
+                break;
+            case "JobSeekerProfilePage":
+                showJobSeekerHome(frame);
+                break;
+            case "LoginPage":
+                showLoginPage(frame);
+                break;
+            case "RecruiterHomePage":
+                System.out.println("Cannot navigate to RecruiterHomePage yet. Must be set up in Runtime.navigateBack().");
+                break;
+            case "RecruiterProfilePage":
+                showRecruiterProfilePage(frame);
+                break;
+            case "SearchPage":
+                showSearchPage(frame);
+                break;
+            case "SearchResultsPage":
+                showSearchResultsPage(frame, currentSearch);
+                break;
+        }
     }
 }
