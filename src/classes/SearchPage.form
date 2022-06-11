@@ -56,15 +56,17 @@
           <grid row="4" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font name="Calibri Light" size="16" style="1"/>
           <foreground color="-592138"/>
           <text value="State"/>
         </properties>
       </component>
       <component id="f3fe5" class="javax.swing.JLabel" binding="catLabel">
         <constraints>
-          <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font name="Calibri Light" size="16" style="1"/>
           <foreground color="-592138"/>
           <text value="Categories"/>
         </properties>
@@ -129,6 +131,7 @@
           <grid row="12" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font name="Calibri Light" size="16" style="1"/>
           <foreground color="-592138"/>
           <text value="Job Type"/>
         </properties>
@@ -144,18 +147,22 @@
       </grid>
       <component id="dc863" class="javax.swing.JLabel">
         <constraints>
-          <grid row="12" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="12" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font name="Calibri Light" size="16" style="1"/>
           <foreground color="-592138"/>
           <text value="Minimum Salary"/>
         </properties>
       </component>
       <component id="69caa" class="javax.swing.JLabel" binding="lowSalLabel">
         <constraints>
-          <grid row="13" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="13" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="50" height="-1"/>
+          </grid>
         </constraints>
         <properties>
+          <font name="Calibri Light" size="16"/>
           <foreground color="-592138"/>
           <text value="$30K"/>
         </properties>
@@ -172,25 +179,31 @@
       </component>
       <component id="75567" class="javax.swing.JLabel" binding="highSalLabel">
         <constraints>
-          <grid row="13" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="13" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="4" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="50" height="-1"/>
+          </grid>
         </constraints>
         <properties>
+          <font name="Calibri Light" size="16"/>
           <foreground color="-592138"/>
           <text value="$270K"/>
         </properties>
       </component>
       <component id="88c10" class="javax.swing.JLabel" binding="midSalLabel">
         <constraints>
-          <grid row="13" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="13" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="50" height="-1"/>
+          </grid>
         </constraints>
         <properties>
+          <font name="Calibri Light" size="16"/>
           <foreground color="-592138"/>
           <text value="$150K"/>
         </properties>
       </component>
       <component id="dc692" class="javax.swing.JLabel">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="6" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="1" col-span="7" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font name="Calibri Light" size="22"/>
