@@ -343,42 +343,6 @@
           <text value="Label"/>
         </properties>
       </component>
-      <component id="29d8d" class="javax.swing.JLabel" binding="recruiterEmail">
-        <constraints>
-          <grid row="4" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <foreground color="-592138"/>
-          <text value="Email"/>
-        </properties>
-      </component>
-      <component id="e6a1b" class="javax.swing.JLabel" binding="recruiterWebsite">
-        <constraints>
-          <grid row="6" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <foreground color="-592138"/>
-          <text value="Website"/>
-        </properties>
-      </component>
-      <component id="c10df" class="javax.swing.JLabel" binding="recruiterSocial">
-        <constraints>
-          <grid row="8" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <foreground color="-592138"/>
-          <text value="Socials"/>
-        </properties>
-      </component>
-      <component id="bd0e8" class="javax.swing.JLabel" binding="recruiterPhoneNo">
-        <constraints>
-          <grid row="10" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <foreground color="-592138"/>
-          <text value="Phone"/>
-        </properties>
-      </component>
       <component id="1963f" class="javax.swing.JLabel" binding="contactLabel">
         <constraints>
           <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
@@ -391,34 +355,78 @@
       </component>
       <component id="160c" class="javax.swing.JLabel">
         <constraints>
-          <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Label"/>
+          <font style="1"/>
+          <foreground color="-592138"/>
+          <text value="Email:"/>
+        </properties>
+      </component>
+      <component id="29d8d" class="javax.swing.JLabel" binding="recruiterEmail">
+        <constraints>
+          <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <foreground color="-592138"/>
+          <text value="Email"/>
+        </properties>
+      </component>
+      <component id="e6a1b" class="javax.swing.JLabel" binding="recruiterWebsite">
+        <constraints>
+          <grid row="7" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <foreground color="-592138"/>
+          <text value="Website"/>
         </properties>
       </component>
       <component id="d77ff" class="javax.swing.JLabel">
         <constraints>
-          <grid row="7" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Label"/>
+          <font style="1"/>
+          <foreground color="-592138"/>
+          <text value="Website:"/>
         </properties>
       </component>
       <component id="5ec8" class="javax.swing.JLabel">
         <constraints>
-          <grid row="9" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="8" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Label"/>
+          <font style="1"/>
+          <foreground color="-592138"/>
+          <text value="Socials:"/>
+        </properties>
+      </component>
+      <component id="c10df" class="javax.swing.JLabel" binding="recruiterSocial">
+        <constraints>
+          <grid row="9" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <foreground color="-592138"/>
+          <text value="Socials"/>
         </properties>
       </component>
       <component id="206b5" class="javax.swing.JLabel">
         <constraints>
-          <grid row="11" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="10" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Label"/>
+          <font style="1"/>
+          <foreground color="-592138"/>
+          <text value="Phone:"/>
+        </properties>
+      </component>
+      <component id="bd0e8" class="javax.swing.JLabel" binding="recruiterPhoneNo">
+        <constraints>
+          <grid row="11" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <foreground color="-592138"/>
+          <text value="Phone"/>
         </properties>
       </component>
     </children>

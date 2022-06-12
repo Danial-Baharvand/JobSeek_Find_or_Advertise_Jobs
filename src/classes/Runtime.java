@@ -45,7 +45,7 @@ public class Runtime {
 
 
         // SHOW SEARCH PAGE
-        showSearchPage(frame);
+        //showSearchPage(frame);
 
         //SHOW Create Job PAGE
         //showCreateJobPage(frame);
@@ -60,10 +60,11 @@ public class Runtime {
         //showCreateAccountPage(frame);
 
         //SHOW RECRUITER PROFILE PAGE
-        //showRecruiterProfilePage(frame);
+        showRecruiterProfilePage(frame);
 
         //SHOW JOB SEEKER PROFILE
         //showJobSeekerHome(frame);
+
 
     }
 
