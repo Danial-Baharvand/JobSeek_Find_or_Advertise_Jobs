@@ -18,15 +18,17 @@ public class EditCategoryPage {
     private JTextArea textArea1;
 
     public EditCategoryPage(JFrame frame, CreateJobPage jobPage) {
-        Runtime.categories.readFromFile(Config.DT_CATEGORIES);
-        GuiHelper.createOptionBox(catsPanel, Runtime.categories.getUserCategories(Runtime.accountManager().getCurrentUser()));
+        Runtime.accountManager().getCategories().readFromFile(Config.DT_CATEGORIES);
+        GuiHelper.createOptionBox(catsPanel, Runtime.accountManager().getCategories().
+                getKeysForValue(Runtime.accountManager().getCurrentUser().getEmail()));
         addBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Runtime.categories.add(catTB.getText(), Runtime.accountManager().getCurrentUser().getEmail());
-                Runtime.categories.writeToFile(Config.DT_CATEGORIES);
-                GuiHelper.createOptionBox(catsPanel,
-                        Runtime.categories.getUserCategories(Runtime.accountManager().getCurrentUser()));
+                Runtime.accountManager().getCategories().put(catTB.getText(), Runtime.accountManager().getCurrentUser()
+                        .getEmail());
+                Runtime.accountManager().getCategories().writeToFile(Config.DT_CATEGORIES);
+                GuiHelper.createOptionBox(catsPanel, Runtime.accountManager().getCategories().getKeysForValue(Runtime
+                        .accountManager().getCurrentUser().getEmail()));
                 catTB.setText("");
                 frame.setVisible(true);
                 frame.repaint();
@@ -38,11 +40,12 @@ public class EditCategoryPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (String catName : GuiHelper.getSelectedOptions(catsPanel)) {
-                    Runtime.categories.remove(catName, Runtime.accountManager().getCurrentUser().getEmail());
+                    Runtime.accountManager().getCategories().remove(catName, Runtime.accountManager().getCurrentUser()
+                            .getEmail());
                 }
-                Runtime.categories.writeToFile(Config.DT_CATEGORIES);
-                GuiHelper.createOptionBox(catsPanel,
-                        Runtime.categories.getUserCategories(Runtime.accountManager().getCurrentUser()));
+                Runtime.accountManager().getCategories().writeToFile(Config.DT_CATEGORIES);
+                GuiHelper.createOptionBox(catsPanel, Runtime.accountManager().getCategories().getKeysForValue(Runtime.
+                        accountManager().getCurrentUser().getEmail()));
                 jobPage.updateCategories();
                 frame.setVisible(true);
                 frame.repaint();

@@ -1,11 +1,18 @@
 package classes;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
+
 import java.util.HashMap;
 public class AccountManagement {
     private HashMap<String, JobSeeker> jobseekers = new HashMap<>();
     private HashMap<String, Recruiter> recruiters = new HashMap<>();
     private HashMap<String, Admin> admins = new HashMap<>();
+    private BiMultiMap categories = new BiMultiMap();
+    private BiMultiMap Skills = new BiMultiMap();
+    private Jobs jobs = new Jobs();
     private User currentUser;
+
 
 
     public AccountManagement() {
@@ -54,5 +61,17 @@ public class AccountManagement {
 
     public HashMap<String, Admin> getAdmins() {
         return admins;
+    }
+
+    public BiMultiMap getCategories() {
+        return categories;
+    }
+
+    public BiMultiMap getSkills() {
+        return Skills;
+    }
+
+    public Jobs getJobs() {
+        return jobs;
     }
 }

@@ -1,5 +1,5 @@
 package classes;
 
-public class Skills extends AdvancedSetMap{
+public class Skills extends BiMultiMap {
 
 }

@@ -23,8 +23,9 @@ public class CreateJobPage {
     private JTextArea textArea1;
 
     public CreateJobPage() {
-        Runtime.getJobs().readFromFile(Config.DT_JOBS);
-        Runtime.categories.readFromFile(Config.DT_CATEGORIES);
+        Runtime.accountManager().getJobs().readFromFile(Config.DT_JOBS);
+        System.out.println(Runtime.accountManager().getJobs().getMap().size());
+        Runtime.accountManager().getCategories().readFromFile(Config.DT_CATEGORIES);
         stateCB.setRenderer(new PromptComboBoxRenderer("Location"));
         catCB.setRenderer(new PromptComboBoxRenderer("Category"));
         jobTypeCB.setRenderer(new PromptComboBoxRenderer("Job Type"));
@@ -64,11 +65,11 @@ public class CreateJobPage {
             newJob.setJobType(jobTypeCB.getSelectedItem().toString());
             newJob.setKeywords(keywordsTB.forceGetText());
             newJob.setPublished(publish);
-            System.out.println(newJob);
-            Runtime.getJobs().add(newJob.getRecruiter().getEmail(), newJob);
-            Runtime.getJobs().writeToFile(Config.DT_JOBS);
+            Runtime.accountManager().getJobs().put(newJob.getRecruiter().getEmail(), newJob);
+            Runtime.accountManager().getJobs().writeToFile(Config.DT_JOBS);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Please fill in all fields");
+            e.printStackTrace();
         }
 
     }
@@ -78,8 +79,8 @@ public class CreateJobPage {
     }
 
     public void updateCategories() {
-        catCB.setModel(new DefaultComboBoxModel<>(Runtime.categories.getUserCategories(Runtime.accountManager().
-                getCurrentUser()).toArray(new String[0])));
+        catCB.setModel(new DefaultComboBoxModel<>(Runtime.accountManager().getCategories().getKeysForValue(Runtime.
+                accountManager().getCurrentUser().getEmail()).toArray(new String[0])));
         catCB.setSelectedIndex(-1);
         catCB.setRenderer(new PromptComboBoxRenderer("Category"));
 

@@ -7,9 +7,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.*;
 
 public class JobSeekerHomePage {
@@ -35,9 +32,9 @@ public class JobSeekerHomePage {
 
     public JobSeekerHomePage() {
         JobSeeker currentUser = (JobSeeker) Runtime.accountManager().getCurrentUser();
-        Runtime.getSkills().readFromFile(Config.DT_SKILLS);
+        Runtime.accountManager().getSkills().readFromFile(Config.DT_SKILLS);
         currentUser.getSkills().clear();
-        for (Object skill : Runtime.getSkills().getMap().get(currentUser.getEmail())) {
+        for (Object skill : Runtime.accountManager().getSkills().getMap().get(currentUser.getEmail())) {
             String stringSkill = (String) skill;
             currentUser.getSkills().add(stringSkill);
         }
@@ -60,8 +57,8 @@ public class JobSeekerHomePage {
                     GuiHelper.createOptionBox(skillsList, new ArrayList<>(currentUser.getSkills()));
                     skillsInput.setText("");
                     skillsList.updateUI();
-                    Runtime.getSkills().add(currentUser.getEmail(), sk);
-                    Runtime.getSkills().writeToFile(Config.DT_SKILLS);
+                    Runtime.accountManager().getSkills().put(currentUser.getEmail(), sk);
+                    Runtime.accountManager().getSkills().writeToFile(Config.DT_SKILLS);
                 }
             }
 
@@ -74,21 +71,16 @@ public class JobSeekerHomePage {
                 Set<String> strings = currentUser.getSkills();
                 for (String s : GuiHelper.getSelectedOptions(skillsList)) {
                     strings.remove(s);
-                    Runtime.getSkills().remove(currentUser.getEmail(), s);
+                    Runtime.accountManager().getSkills().remove(currentUser.getEmail(), s);
                 }
                 //refreshOptionBox(skillsList, currentUser.getSkills());
                 GuiHelper.createOptionBox(skillsList, new ArrayList<>(currentUser.getSkills()));
                 skillsList.updateUI();
-                Runtime.getSkills().writeToFile(Config.DT_SKILLS);
+                Runtime.accountManager().getSkills().writeToFile(Config.DT_SKILLS);
 
             }
         });
 
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
 
         uploadResumeButton.addActionListener(new ActionListener() {
             @Override

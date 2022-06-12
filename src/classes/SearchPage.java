@@ -6,7 +6,6 @@ import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Locale;
 
@@ -38,7 +37,7 @@ public class SearchPage {
         /**test code to check categories' functionality
          should be removed when adding categories by recruiters is implemented
          */
-        Categories categories = Tests.createExampleCats();
+        BiMultiMap categories = Tests.createExampleCats();
         GuiHelper.createOptionBox(statePanel, Config.STATES);
         GuiHelper.createOptionBox(catPanel, new ArrayList<>(categories.getMap().keySet()));
         GuiHelper.createOptionBox(jobTypePanel, Config.JOB_TYPES);

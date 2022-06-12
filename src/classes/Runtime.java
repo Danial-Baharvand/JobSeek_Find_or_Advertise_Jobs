@@ -8,9 +8,8 @@ public class Runtime {
     public static JFrame frame = new JFrame();
     public static Tests testObject = new Tests();
     private static AccountManagement accMan;
-    public static Categories categories = new Categories();
-    private static final Jobs jobs = new Jobs();
-    private static AdvancedSetMap Skills = new AdvancedSetMap();
+
+
     /**
      * pagesVisited is a static attribute that is used at Runtime to create a LIFO structure of the pages visited by the user
      * Each time a page is navigated away from, that page is pushed to the front of the deque
@@ -60,10 +59,10 @@ public class Runtime {
         //showCreateAccountPage(frame);
 
         //SHOW RECRUITER PROFILE PAGE
-        showRecruiterProfilePage(frame);
+        //showRecruiterProfilePage(frame);
 
         //SHOW JOB SEEKER PROFILE
-        //showJobSeekerHome(frame);
+        showJobSeekerHome(frame);
 
 
     }
@@ -168,17 +167,6 @@ public class Runtime {
         return accMan;
     }
 
-    public static Jobs getJobs() {
-        return jobs;
-    }
-
-    public static AdvancedSetMap getSkills() {
-        return Skills;
-    }
-
-    public static void setSkills(AdvancedSetMap skills) {
-        Skills = skills;
-    }
 
     /**
      * navigateBack is called when the "Back" button is pressed

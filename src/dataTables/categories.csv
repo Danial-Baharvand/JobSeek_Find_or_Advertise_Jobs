@@ -1,9 +1,11 @@
-computer science=[hulk@gmail.com]
-java=[captain@example.com, hulk@gmail.com]
-networking=[hulk@gmail.com]
-coding=[captain@example.com]
-machine learning=[hulk@gmail.com]
-ai=[hulk@gmail.com]
-math=[hulk@gmail.com]
-python=[captain@example.com, hulk@gmail.com]
-sql=[hulk@gmail.com]
+python=captain@example.com
+ai=hulk@gmail.com
+networking=hulk@gmail.com
+machine learning=hulk@gmail.com
+sql=hulk@gmail.com
+coding=captain@example.com
+java=captain@example.com
+computer science=hulk@gmail.com
+debugging=hulk@gmail.com
+math=hulk@gmail.com
+
