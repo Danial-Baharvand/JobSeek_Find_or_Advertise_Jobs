@@ -3,8 +3,6 @@ package classes;
 import javax.swing.*;
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.HashMap;
-import java.util.HashSet;
 
 public class Runtime {
     public static JFrame frame = new JFrame();
@@ -149,7 +147,7 @@ public class Runtime {
         frame.setTitle("Job Seeker Home");
         frame.getContentPane().removeAll();
         frame.repaint();
-        frame.setContentPane(new JobSeekerProfilePage().getJobSeekerProfile());
+        frame.setContentPane(new JobSeekerHomePage().getJobSeekerProfile());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
