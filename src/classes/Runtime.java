@@ -137,7 +137,7 @@ public class Runtime {
         frame.setTitle("Recruiter Profile Page");
         frame.getContentPane().removeAll();
         frame.repaint();
-        frame.setContentPane(new RecruiterProfilePage().getRecruiterProfilePage());
+        frame.setContentPane(new RecruiterProfilePage(Tests.createExampleRecruiter()).getRecruiterProfilePage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
