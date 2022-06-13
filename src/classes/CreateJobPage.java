@@ -24,7 +24,6 @@ public class CreateJobPage {
 
     public CreateJobPage() {
         Runtime.accountManager().getJobs().readFromFile(Config.DT_JOBS);
-        System.out.println(Runtime.accountManager().getJobs().getMap().size());
         Runtime.accountManager().getCategories().readFromFile(Config.DT_CATEGORIES);
         stateCB.setRenderer(new PromptComboBoxRenderer("Location"));
         catCB.setRenderer(new PromptComboBoxRenderer("Category"));

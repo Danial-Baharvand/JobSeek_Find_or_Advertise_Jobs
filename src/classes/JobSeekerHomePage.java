@@ -34,7 +34,7 @@ public class JobSeekerHomePage {
         JobSeeker currentUser = (JobSeeker) Runtime.accountManager().getCurrentUser();
         Runtime.accountManager().getSkills().readFromFile(Config.DT_SKILLS);
         currentUser.getSkills().clear();
-        for (Object skill : Runtime.accountManager().getSkills().getMap().get(currentUser.getEmail())) {
+        for (Object skill : Runtime.accountManager().getSkills().get(currentUser.getEmail())) {
             String stringSkill = (String) skill;
             currentUser.getSkills().add(stringSkill);
         }

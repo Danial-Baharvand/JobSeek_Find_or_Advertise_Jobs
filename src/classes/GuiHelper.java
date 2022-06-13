@@ -3,6 +3,7 @@ package classes;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class GuiHelper {
@@ -17,7 +18,7 @@ public class GuiHelper {
         return selectedOptions;
     }
 
-    public static void createOptionBox(JPanel optionsPanel, List<String> options) {
+    public static void createOptionBox(JPanel optionsPanel, Collection<String> options) {
         optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));
         optionsPanel.removeAll();
         for (String option : options) {

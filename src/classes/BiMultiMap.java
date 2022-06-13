@@ -2,19 +2,19 @@ package classes;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
 
 import java.io.*;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-// comment for test branch
-// Holds data for all categories provided by recruiters
+/**
+ * Wrapper class for 2 ArraListMultiMaps with needed functionality implemented
+ */
 public class BiMultiMap {
     //HashMap<String, Set<Object>> map = new HashMap<>();
     Multimap<String,Object> map = ArrayListMultimap.create();
+    Multimap<Object,String> invertedMap = ArrayListMultimap.create();
     /**
      * Inserts an object into the value set for the given key in a <String, Set<Object>> map.
      * @param key in the map
@@ -25,14 +25,18 @@ public class BiMultiMap {
         key = key.toLowerCase();
         // Add object to the value set for the key
         map.put(key, value);
+        invertedMap.put(value, key);
     }
 
     public void remove(String key, Object value) {
         map.remove(key, value);
+        invertedMap.remove(value, key);
     }
 
-    public List<String> getKeysForValue(String value){
-        return Multimaps.invertFrom(map, ArrayListMultimap.create()).get(value);
+    public Collection<String> getKeysForValue(String value){
+        System.out.println(map);
+        System.out.println(invertedMap);
+        return invertedMap.get(value);
     }
     public Collection<Object> get(String key){
         return map.get(key);
@@ -49,18 +53,19 @@ public class BiMultiMap {
     }
     public void readFromFile(String path){
         map.clear();
+        invertedMap.clear();
         String line;
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             while ((line = reader.readLine()) != null && !line.equals("")) {
                 String[] userData = line.split("=");
                 map.put(userData[0], userData[1]);
+                invertedMap.put(userData[1], userData[0]);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-    public Multimap<String, Object> getMap() {
-        return map;
+    public Set<String> keySet(){
+        return map.keySet();
     }
 }

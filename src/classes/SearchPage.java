@@ -39,7 +39,7 @@ public class SearchPage {
          */
         BiMultiMap categories = Tests.createExampleCats();
         GuiHelper.createOptionBox(statePanel, Config.STATES);
-        GuiHelper.createOptionBox(catPanel, new ArrayList<>(categories.getMap().keySet()));
+        GuiHelper.createOptionBox(catPanel, categories.keySet());
         GuiHelper.createOptionBox(jobTypePanel, Config.JOB_TYPES);
         searchButton.addActionListener(new ActionListener() {
             @Override
