@@ -43,6 +43,7 @@ public class DescriptionPage {
                 JobSeeker jobSeeker = (JobSeeker) Runtime.accountManager().getCurrentUser();
                 Runtime.accountManager().getJobApplications().put(jobSeeker.getEmail(), job);
                 Runtime.accountManager().getJobApplications().writeToFile(Config.DT_JOB_APPLICATIONS);
+                System.out.println(Runtime.accountManager().getJobApplications().map.size());
             }
         });
     }

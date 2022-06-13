@@ -1,6 +1,7 @@
 package classes;
 
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
 import java.io.*;
@@ -13,8 +14,8 @@ import java.util.Set;
  */
 public class BiMultiMap <V> {
     //HashMap<String, Set<Object>> map = new HashMap<>();
-    Multimap<String,V> map = ArrayListMultimap.create();
-    Multimap<V,String> invertedMap = ArrayListMultimap.create();
+    Multimap<String,V> map = HashMultimap.create();
+    Multimap<V,String> invertedMap = HashMultimap.create();
     /**
      * Inserts an object into the value set for the given key in a <String, Set<Object>> map.
      * @param key in the map
