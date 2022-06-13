@@ -1,3 +1,4 @@
-hulk@gmail.com=title|VIC|Networking|125|Part-Time|hi hey|desc|false
-hulk@gmail.com=Test job 2|ACT|machine learning|126000|Casual|Java sql|this is a description|false
-
+hulk@gmail.com=title|VIC|Networking|125|Part-Time|hi hey|desc|hulk@gmail.com|false
+jack@gmail.com=Network Architect|VIC|Networking|80|Part-Time|hi hey|desc|jack@gmail.com|true
+jack@gmail.com=Support|VIC|AI|125|Part-Time|hi hey|desc|jack@gmail.com|true
+jack@gmail.com=Developer|VIC|Java|100|Part-Time|hi hey|desc|jack@gmail.com|false
