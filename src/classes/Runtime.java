@@ -2,6 +2,7 @@ package classes;
 
 import javax.swing.*;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
 
 public class Runtime {
@@ -114,6 +115,14 @@ public class Runtime {
         frame.pack();
         frame.setVisible(true);
     }
+    public static void showAppliedJobsPage(JFrame frame) {
+        frame.setTitle("Applied Jobs");
+        frame.getContentPane().removeAll();
+        frame.repaint();
+        frame.setContentPane(new AppliedJobsPage(frame).getAppliedJobsPanel());
+        frame.pack();
+        frame.setVisible(true);
+    }
 
     public static void showCreateAccountPage(JFrame frame, String navigatedFrom) {
         pagesVisited.push(navigatedFrom);
@@ -154,11 +163,11 @@ public class Runtime {
         frame.setVisible(true);
     }
 
-    public static void showSearchResultsPage(JFrame frame, Search search){
+    public static void showSearchResultsPage(JFrame frame, ArrayList<ScoredJob> jobList){
         frame.setTitle("Search Results Page");
         frame.getContentPane().removeAll();
         frame.repaint();
-        frame.setContentPane(new SearchResultsPage(search).getSearchResultsPanel());
+        frame.setContentPane(new SearchResultsPage(jobList).getSearchResultsPanel());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
@@ -211,7 +220,7 @@ public class Runtime {
                 showSearchPage(frame);
                 break;
             case "SearchResultsPage":
-                showSearchResultsPage(frame, currentSearch);
+                showSearchResultsPage(frame, currentSearch.getScoredJobs());
                 break;
         }
     }

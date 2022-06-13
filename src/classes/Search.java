@@ -23,8 +23,13 @@ public class Search {
     public void setScores(){
         Scorer scorer = new Scorer();
         for (Job job: jobs){
-            int score = scorer.scoreAgaintSearch(this, job);
-            scoredJobs.add(new ScoredJob(job, score));
+            int skillScore = 100; //to be implemented
+            int searchScore = skillScore;
+            if (getSearchText() != null){
+                searchScore = scorer.scoreAgaintSearch(this, job);
+            }
+
+            scoredJobs.add(new ScoredJob(job, searchScore/2 + skillScore/2));
         }
         scoredJobs.sort(Comparator.comparing(ScoredJob::getScore).reversed());
     }

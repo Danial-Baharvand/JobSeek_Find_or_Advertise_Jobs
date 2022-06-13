@@ -146,6 +146,18 @@ public class JobSeekerHomePage {
                 }
             }
         });
+        appliedJobsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Search appliedSearch = new Search(Runtime.accountManager().getJobApplications().
+                        get(Runtime.accountManager().getCurrentUser().getEmail()));
+                System.out.println(Runtime.accountManager().getJobApplications().
+                        get(Runtime.accountManager().getCurrentUser().getEmail()));
+                appliedSearch.setScores();
+                ArrayList<ScoredJob> jobList = appliedSearch.getScoredJobs();
+                Runtime.showSearchResultsPage(Runtime.frame, jobList);
+            }
+        });
     }
 
 

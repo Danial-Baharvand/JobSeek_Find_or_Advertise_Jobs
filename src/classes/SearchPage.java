@@ -6,6 +6,7 @@ import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Locale;
 
@@ -45,14 +46,19 @@ public class SearchPage {
             public void actionPerformed(ActionEvent e) {
 
                 // Creates a new search object and adds the user's selected criteria to it
-                Search search = new Search(Runtime.accountManager().getJobs().values());
+                Collection<Job> appliedJobs = Runtime.accountManager().getJobApplications().
+                        get(Runtime.accountManager().getCurrentUser().getEmail());
+                Collection<Job> availableJobs = Runtime.accountManager().getJobs().values();
+                availableJobs.removeAll(appliedJobs);
+                Search search = new Search(availableJobs);
                 search.setSearchText(searchTBox.getText());
                 search.setStates(GuiHelper.getSelectedOptions(statePanel));
                 search.setCats(GuiHelper.getSelectedOptions(catPanel));
                 search.setJobTypes(GuiHelper.getSelectedOptions(jobTypePanel));
                 search.setSalary(salarySlider.getValue() * 3000);
                 search.setScores();
-                Runtime.showSearchResultsPage(Runtime.frame, search);
+                ArrayList<ScoredJob> jobList = search.getScoredJobs();
+                Runtime.showSearchResultsPage(Runtime.frame, jobList);
             }
         });
     }

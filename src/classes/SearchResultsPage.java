@@ -41,8 +41,8 @@ public class SearchResultsPage {
     private int pageNumber = 0;
     ArrayList<ScoredJob> jobList;
 
-    public SearchResultsPage(Search search) {
-        jobList = search.getScoredJobs();
+    public SearchResultsPage(ArrayList<ScoredJob> jobList) {
+        this.jobList = jobList;
         createPage(pageNumber);
         addButtonListeners(nextButton, prevButton);
         addPanelListeners();
@@ -110,7 +110,7 @@ public class SearchResultsPage {
                         JPanel clickedPanel = (JPanel) e.getSource();
                         int indexOfClick = panels.get(clickedPanel);
                         JFrame desFrame = new JFrame("Description Page");
-                        desFrame.setContentPane(new DescriptionPage(jobList, pageNumber, indexOfClick).getDescriptionPanel());
+                        desFrame.setContentPane(new DescriptionPage(desFrame, jobList, pageNumber, indexOfClick).getDescriptionPanel());
                         desFrame.pack();
                         desFrame.setVisible(true);
                     }

@@ -17,16 +17,23 @@ public class DescriptionPage {
     private JPanel DescriptionPanel;
     private JLabel salary;
     private JTextArea textArea1;
+    private JButton removeButton;
 
     /**
      * Creates the detailed description page.
      *
+     * @param desFrame
      * @param jobList      the arraylist of scoredJob objects for the current search
      * @param pageNumber   the page number the that this job is on
      * @param indexOfClick indicating which job was clicked on the page
      */
-    public DescriptionPage(ArrayList<ScoredJob> jobList, int pageNumber, int indexOfClick) {
+    public DescriptionPage(JFrame desFrame, ArrayList<ScoredJob> jobList, int pageNumber, int indexOfClick) {
         Job job = jobList.get(pageNumber * 3 + indexOfClick).getJob();
+        if (Runtime.accountManager().getJobApplications().get(Runtime.accountManager().
+                getCurrentUser().getEmail()).contains(job)) {
+            removeButton.setVisible(true);
+            applyButton.setVisible(false);
+        }
         description.setText(job.getJobDescription());
         location.setText(job.getState());
         cat.setText(job.getCat());
@@ -43,7 +50,26 @@ public class DescriptionPage {
                 JobSeeker jobSeeker = (JobSeeker) Runtime.accountManager().getCurrentUser();
                 Runtime.accountManager().getJobApplications().put(jobSeeker.getEmail(), job);
                 Runtime.accountManager().getJobApplications().writeToFile(Config.DT_JOB_APPLICATIONS);
-                System.out.println(Runtime.accountManager().getJobApplications().map.size());
+                removeButton.setVisible(true);
+                applyButton.setVisible(false);
+                jobList.remove(pageNumber * 3 + indexOfClick);
+                JOptionPane.showMessageDialog(desFrame, "Your application was sent!");
+                desFrame.dispose();
+                Runtime.showSearchResultsPage(Runtime.frame, jobList);
+            }
+        });
+        removeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JobSeeker jobSeeker = (JobSeeker) Runtime.accountManager().getCurrentUser();
+                Runtime.accountManager().getJobApplications().remove(jobSeeker.getEmail(), job);
+                Runtime.accountManager().getJobApplications().writeToFile(Config.DT_JOB_APPLICATIONS);
+                removeButton.setVisible(false);
+                applyButton.setVisible(true);
+                jobList.remove(pageNumber * 3 + indexOfClick);
+                JOptionPane.showMessageDialog(desFrame, "Your application was deleted!");
+                desFrame.dispose();
+                Runtime.showSearchResultsPage(Runtime.frame, jobList);
             }
         });
     }
@@ -68,7 +94,7 @@ public class DescriptionPage {
      */
     private void $$$setupUI$$$() {
         DescriptionPanel = new JPanel();
-        DescriptionPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(12, 2, new Insets(20, 20, 20, 20), -1, -1));
+        DescriptionPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(13, 2, new Insets(20, 20, 20, 20), -1, -1));
         DescriptionPanel.setBackground(new Color(-13224648));
         description = new JLabel();
         description.setForeground(new Color(-592138));
@@ -123,6 +149,10 @@ public class DescriptionPage {
         final JPanel panel1 = new JPanel();
         panel1.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         DescriptionPanel.add(panel1, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        removeButton = new JButton();
+        removeButton.setText("Remove Application");
+        removeButton.setVisible(false);
+        DescriptionPanel.add(removeButton, new com.intellij.uiDesigner.core.GridConstraints(12, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, new Dimension(150, -1), 0, false));
     }
 
     /**
@@ -153,4 +183,5 @@ public class DescriptionPage {
     public JComponent $$$getRootComponent$$$() {
         return DescriptionPanel;
     }
+
 }
