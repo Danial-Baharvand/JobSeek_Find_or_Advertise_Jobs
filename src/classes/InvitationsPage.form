@@ -53,6 +53,7 @@
                   <foreground color="-13224648"/>
                   <gridColor color="-1"/>
                   <selectionForeground color="-1973791"/>
+                  <showVerticalLines value="true"/>
                 </properties>
               </component>
             </children>
