@@ -1,12 +1,13 @@
 package classes;
 
+
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Locale;
+import java.util.*;
 
 /*
  * Recruiter profile is what the job seeker can see of the recruiter.
@@ -48,82 +49,59 @@ public class RecruiterProfilePage {
     private JButton viewButton1;
     private JButton viewButton2;
     private JTextArea textArea1;
+    Collection<Job> jobs;
+
+    public RecruiterProfilePage(Recruiter recruiter) {
+        recruiterOrg.setText(recruiter.getOrg());
+        recruiterProfileDescriptionText.setText(recruiter.getRecruiterDescription());
+        recruiterEmail.setText(recruiter.getEmail());
+        recruiterWebsite.setText("www." + recruiter.getOrg() + ".com");
+        recruiterSocial.setText("@" + recruiter.getOrg());
+
+        //obtain collection of jobs by using recruiter email as key
+        jobs = Runtime.accountManager().getJobs().get(Runtime.accountManager().getCurrentUser().getEmail());
+
+        ArrayList<Job> jobList = new ArrayList<>(jobs);
 
 
-    /**
-     * test recruiter profile
-     */
-    public RecruiterProfilePage() {
-        Recruiter testRecruiter = new Recruiter();
-        testRecruiter.setOrg("Not Seek");
-        testRecruiter.setEmail("recruiter@notseek.com");
-        testRecruiter.setRecruiterDescription("If you seek, you will find...");
+            job1Title.setText(jobList.get(0).getJobTitle());
+            job1Company.setText(recruiter.getOrg());
+            //job2Title.setText(jobList.get(1).getJobTitle());
+            //job2Company.setText(recruiter.getOrg());
+            //job3Title.setText(jobList.get(2).getJobTitle());
+            //job3Company.setText(recruiter.getOrg());
 
-        Job testJob = new Job();
-        testJob.setJobTitle("Software Engineer");
-        testJob.setRecruiter(testRecruiter);
-        testJob.setCat("compSie");
-        testJob.setJobDescription("This is a job. Please apply");
-        testJob.setState("QLD");
-        testJob.setSalary(125000);
-
-        Job testJob1 = new Job();
-        testJob1.setJobTitle("UI Designer");
-        testJob1.setRecruiter(testRecruiter);
-        testJob1.setCat("compSie");
-        testJob1.setJobDescription("This is a job. Please apply");
-        testJob1.setState("VIC");
-        testJob1.setSalary(99000);
-
-        Job testJob2 = new Job();
-        testJob2.setJobTitle("Software Technician");
-        testJob2.setRecruiter(testRecruiter);
-        testJob2.setCat("AI");
-        testJob2.setJobDescription("This is a job. Please apply");
-        testJob2.setState("QLD");
-        testJob2.setSalary(75000);
-
-
-        recruiterOrg.setText(testRecruiter.getOrg());
-        recruiterProfileDescriptionText.setText(testRecruiter.getRecruiterDescription());
-        recruiterEmail.setText(testRecruiter.getEmail());
-        recruiterWebsite.setText(testRecruiter.getOrg());
-        job1Title.setText(testJob.jobTitle);
-        job1Company.setText(testJob.getRecruiter().getOrg());
-        job2Title.setText(testJob1.getJobTitle());
-        job2Company.setText(testJob1.getRecruiter().getOrg());
-        job3Title.setText(testJob2.jobTitle);
-        job3Company.setText(testJob2.getRecruiter().getOrg());
-
+        //each button pressed = will display job description and ability to apply
         viewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                selectedJobDescription.setText(testJob.getJobDescription());
-                selectedJobCompensation.setText(String.valueOf(testJob.getSalary()));
-                selectedJobLocation.setText(testJob.getState());
-                selectJobCategory.setText(testJob.cat);
+                selectedJobDescription.setText(jobList.get(0).getJobDescription());
+                selectedJobCompensation.setText(String.valueOf(jobList.get(0).getSalary()));
+                selectedJobLocation.setText(jobList.get(0).getState());
+                selectJobCategory.setText(jobList.get(0).getCat());
             }
         });
 
         viewButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                selectedJobDescription.setText(testJob1.getJobDescription());
-                selectedJobCompensation.setText(String.valueOf(testJob1.getSalary()));
-                selectedJobLocation.setText(testJob1.getState());
-                selectJobCategory.setText(testJob1.cat);
+                selectedJobDescription.setText(jobList.get(1).getJobDescription());
+                selectedJobCompensation.setText(String.valueOf(jobList.get(1).getSalary()));
+                selectedJobLocation.setText(jobList.get(1).getState());
+                selectJobCategory.setText(jobList.get(1).getCat());
             }
         });
 
         viewButton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                selectedJobDescription.setText(testJob2.getJobDescription());
-                selectedJobCompensation.setText(String.valueOf(testJob2.getSalary()));
-                selectedJobLocation.setText(testJob2.getState());
-                selectJobCategory.setText(testJob2.cat);
+                selectedJobDescription.setText(jobList.get(2).getJobDescription());
+                selectedJobCompensation.setText(String.valueOf(jobList.get(2).getSalary()));
+                selectedJobLocation.setText(jobList.get(2).getState());
+                selectJobCategory.setText(jobList.get(2).getCat());
             }
         });
+
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -133,9 +111,11 @@ public class RecruiterProfilePage {
     }
 
 
+
     public JPanel getRecruiterProfilePage() {
         return recruiterProfile;
     }
+
 
     {
 // GUI initializer generated by IntelliJ IDEA GUI Designer
@@ -351,5 +331,7 @@ public class RecruiterProfilePage {
     }
 
 }
+
+
 
 

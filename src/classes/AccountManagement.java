@@ -1,14 +1,16 @@
 package classes;
 
 import java.util.HashMap;
+
 public class AccountManagement {
-    private HashMap<String, JobSeeker> jobseekers = new HashMap<>();
-    private HashMap<String, Recruiter> recruiters = new HashMap<>();
-    private HashMap<String, Admin> admins = new HashMap<>();
+    private HashMap<String, JobSeeker> jobSeekers;
+    private HashMap<String, Recruiter> recruiters;
+    private HashMap<String, Admin> admins;
+    private HashMap<String, Job> jobs;
     private BiMultiMap<String> categories = new BiMultiMap();
     private BiMultiMap<String> skills = new BiMultiMap();
-    private Jobs jobs = new Jobs();
-    private Jobs jobApplications = new Jobs();
+    private BiMultiMap<String> recruiterJobs = new BiMultiMap();
+    private BiMultiMap<String> jobApplications = new BiMultiMap();
     private User currentUser;
 
 
@@ -20,17 +22,17 @@ public class AccountManagement {
         IO io = new IO();
         skills.readFromFile(Config.DT_SKILLS);
         categories.readFromFile(Config.DT_CATEGORIES);
-        jobseekers = io.readJobSeekers(skills);
+        jobSeekers = io.readJobSeekers(skills);
         recruiters = io.readRecruiters();
         admins = io.readAdmins();
+        jobs = io.readJobs(recruiters);
 
-
-        jobs.readFromFile(Config.DT_JOBS);
+        recruiterJobs.readFromFile(Config.DT_RECRUITER_JOBS);
         jobApplications.readFromFile(Config.DT_JOB_APPLICATIONS);
     }
     public void addUser(User user){
         if (user instanceof JobSeeker){
-            jobseekers.put(user.getEmail(), (JobSeeker) user);
+            jobSeekers.put(user.getEmail(), (JobSeeker) user);
         }else if (user instanceof Recruiter) {
             recruiters.put(user.getEmail(), (Recruiter) user);
         }else if (user instanceof Admin) {
@@ -52,11 +54,11 @@ public class AccountManagement {
      * @return true if the email already exists as a Key in the registeredUsers Hashmap, else false
      */
     public boolean isRegisteredUser(String email) {
-        return jobseekers.containsKey(email) || recruiters.containsKey(email) || admins.containsKey(email);
+        return jobSeekers.containsKey(email) || recruiters.containsKey(email) || admins.containsKey(email);
     }
 
-    public HashMap<String, JobSeeker> getJobseekers() {
-        return jobseekers;
+    public HashMap<String, JobSeeker> getJobSeekers() {
+        return jobSeekers;
     }
 
     public HashMap<String, Recruiter> getRecruiters() {
@@ -75,11 +77,15 @@ public class AccountManagement {
         return skills;
     }
 
-    public Jobs getJobs() {
-        return jobs;
+    public BiMultiMap<String> getRecruiterJobs() {
+        return recruiterJobs;
     }
 
-    public Jobs getJobApplications() {
+    public BiMultiMap<String> getJobApplications() {
         return jobApplications;
+    }
+
+    public HashMap<String, Job> getJobs() {
+        return jobs;
     }
 }

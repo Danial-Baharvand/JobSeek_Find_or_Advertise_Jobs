@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Jobs extends BiMultiMap<Job> {
-    @Override
+/*    @Override
     public void readFromFile(String path){
         map.clear();
         invertedMap.clear();
@@ -20,5 +20,5 @@ public class Jobs extends BiMultiMap<Job> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }

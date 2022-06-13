@@ -37,16 +37,15 @@ public class SearchPage {
         /**test code to check categories' functionality
          should be removed when adding categories by recruiters is implemented
          */
-        BiMultiMap categories = Tests.createExampleCats();
         GuiHelper.createOptionBox(statePanel, Config.STATES);
-        GuiHelper.createOptionBox(catPanel, categories.keySet());
+        GuiHelper.createOptionBox(catPanel, Runtime.accountManager().getCategories().keySet());
         GuiHelper.createOptionBox(jobTypePanel, Config.JOB_TYPES);
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 // Creates a new search object and adds the user's selected criteria to it
-                Search search = new Search(jobs);
+                Search search = new Search(Runtime.accountManager().getJobs().values());
                 search.setSearchText(searchTBox.getText());
                 search.setStates(GuiHelper.getSelectedOptions(statePanel));
                 search.setCats(GuiHelper.getSelectedOptions(catPanel));

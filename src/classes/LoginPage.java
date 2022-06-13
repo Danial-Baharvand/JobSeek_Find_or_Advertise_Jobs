@@ -70,8 +70,8 @@ public class LoginPage extends JFrame {
     }
 
     public boolean userLogin(AccountManagement accMan) {
-        if (validateUser(accMan.getJobseekers())) {
-            accMan.setCurrentUser(accMan.getJobseekers().get(emailClearingTextField.getText()));
+        if (validateUser(accMan.getJobSeekers())) {
+            accMan.setCurrentUser(accMan.getJobSeekers().get(emailClearingTextField.getText()));
             return true;
         } else if (validateUser(accMan.getRecruiters())) {
             accMan.setCurrentUser(accMan.getRecruiters().get(emailClearingTextField.getText()));

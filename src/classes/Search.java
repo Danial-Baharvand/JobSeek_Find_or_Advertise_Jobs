@@ -9,10 +9,10 @@ public class Search {
     ArrayList<String> jobTypes;
     int salary;
     String keywords;
-    HashSet<Job> jobs;
+    Collection<Job> jobs;
     ArrayList<ScoredJob> scoredJobs = new ArrayList<>();
 
-    public Search(HashSet<Job> jobs){
+    public Search(Collection<Job> jobs){
         this.jobs = jobs;
         //setScores(jobs);
     }
@@ -44,7 +44,7 @@ public class Search {
         return keywords;
     }
 
-    public HashSet<Job> getJobs() {
+    public Collection<Job> getJobs() {
         return jobs;
     }
 

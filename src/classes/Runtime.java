@@ -28,8 +28,8 @@ public class Runtime {
 
     public static void main(String[] args) {
         accMan = new AccountManagement();
-        //accMan.setCurrentUser(new Recruiter("hulk@gmail.com", "bruce", "1234", "Google"));
-        accMan.setCurrentUser(accMan.getJobseekers().get("hulk@gmail.com"));
+        //accMan.setCurrentUser(accMan.getRecruiters().get("hulk@gmail.com"));
+        accMan.setCurrentUser(accMan.getJobSeekers().get("hulk@gmail.com"));
 
         //currentApplication = new Application();
         //currentApplication.getRegisteredUsers();
@@ -44,13 +44,13 @@ public class Runtime {
 
 
         // SHOW SEARCH PAGE
-        //showSearchPage(frame);
+        showSearchPage(frame);
 
         //SHOW Create Job PAGE
         //showCreateJobPage(frame);
 
         //SHOW Edit Category Page
-        showEditCategoryPage(frame, new CreateJobPage());
+        //showEditCategoryPage(frame, new CreateJobPage());
 
         //SHOW LOGIN PAGE
         //showLoginPage(frame);
@@ -137,7 +137,7 @@ public class Runtime {
         frame.setTitle("Recruiter Profile Page");
         frame.getContentPane().removeAll();
         frame.repaint();
-        frame.setContentPane(new RecruiterProfilePage().getRecruiterProfilePage());
+        frame.setContentPane(new RecruiterProfilePage(Tests.createExampleRecruiter()).getRecruiterProfilePage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);

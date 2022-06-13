@@ -111,4 +111,37 @@ public class Tests {
         //return false;
     }
 
+    public static Recruiter createExampleRecruiter(){
+        Recruiter testRecruiter = new Recruiter();
+        testRecruiter.setOrg("Not Seek");
+        testRecruiter.setEmail("recruiter@notseek.com");
+        testRecruiter.setRecruiterDescription("If you seek, you will find...");
+
+        Job testJob = new Job();
+        testJob.setJobTitle("Software Engineer");
+        testJob.setRecruiter(testRecruiter);
+        testJob.setCat("compSie");
+        testJob.setJobDescription("This is a job. Please apply");
+        testJob.setState("QLD");
+        testJob.setSalary(125000);
+
+        Job testJob1 = new Job();
+        testJob1.setJobTitle("UI Designer");
+        testJob1.setRecruiter(testRecruiter);
+        testJob1.setCat("compSie");
+        testJob1.setJobDescription("This is a job. Please apply");
+        testJob1.setState("VIC");
+        testJob1.setSalary(99000);
+
+        Job testJob2 = new Job();
+        testJob2.setJobTitle("Software Technician");
+        testJob2.setRecruiter(testRecruiter);
+        testJob2.setCat("AI");
+        testJob2.setJobDescription("This is a job. Please apply");
+        testJob2.setState("QLD");
+        testJob2.setSalary(75000);
+
+        return testRecruiter;
+    }
+
 }
