@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Jobs extends BiMultiMap {
+public class Jobs extends BiMultiMap<Job> {
     @Override
     public void readFromFile(String path){
         map.clear();

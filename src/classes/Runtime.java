@@ -29,7 +29,7 @@ public class Runtime {
     public static void main(String[] args) {
         accMan = new AccountManagement();
         //accMan.setCurrentUser(new Recruiter("hulk@gmail.com", "bruce", "1234", "Google"));
-        accMan.setCurrentUser(new JobSeeker("hulk@gmail.com", "bruce", "1234"));
+        accMan.setCurrentUser(accMan.getJobseekers().get("hulk@gmail.com"));
 
         //currentApplication = new Application();
         //currentApplication.getRegisteredUsers();
@@ -44,13 +44,13 @@ public class Runtime {
 
 
         // SHOW SEARCH PAGE
-        showSearchPage(frame);
+        //showSearchPage(frame);
 
         //SHOW Create Job PAGE
         //showCreateJobPage(frame);
 
         //SHOW Edit Category Page
-        //showEditCategoryPage(frame, new CreateJobPage());
+        showEditCategoryPage(frame, new CreateJobPage());
 
         //SHOW LOGIN PAGE
         //showLoginPage(frame);

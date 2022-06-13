@@ -21,8 +21,8 @@ public class Job {
         this.jobType =setValues[4];
         this.keywords =setValues[5];
         this.jobDescription =setValues[6];
-        this.recruiter = Runtime.accountManager().getRecruiters().get(setValues[7]);
-        this.published =Boolean.parseBoolean(setValues[8]);
+        //this.recruiter = Runtime.accountManager().getRecruiters().get(setValues[7]);
+        this.published =Boolean.parseBoolean(setValues[7]);
     }
     public Boolean getPublished() {
         return published;
@@ -41,7 +41,7 @@ public class Job {
                  jobType + '|' +
                  keywords + '|' +
                  jobDescription + '|' +
-                 recruiter.getEmail() + '|' +
+                 //recruiter.getEmail() + '|' +
                  published;
     }
 

@@ -5,8 +5,8 @@ public class AccountManagement {
     private HashMap<String, JobSeeker> jobseekers = new HashMap<>();
     private HashMap<String, Recruiter> recruiters = new HashMap<>();
     private HashMap<String, Admin> admins = new HashMap<>();
-    private BiMultiMap categories = new BiMultiMap();
-    private BiMultiMap skills = new BiMultiMap();
+    private BiMultiMap<String> categories = new BiMultiMap();
+    private BiMultiMap<String> skills = new BiMultiMap();
     private Jobs jobs = new Jobs();
     private Jobs jobApplications = new Jobs();
     private User currentUser;
@@ -18,11 +18,13 @@ public class AccountManagement {
     }
     private void readDatabase() {
         IO io = new IO();
-        jobseekers = io.readJobSeekers();
-        recruiters = io.readRecruiters();
-        admins = io.readAdmins();
         skills.readFromFile(Config.DT_SKILLS);
         categories.readFromFile(Config.DT_CATEGORIES);
+        jobseekers = io.readJobSeekers(skills);
+        recruiters = io.readRecruiters();
+        admins = io.readAdmins();
+
+
         jobs.readFromFile(Config.DT_JOBS);
         jobApplications.readFromFile(Config.DT_JOB_APPLICATIONS);
     }

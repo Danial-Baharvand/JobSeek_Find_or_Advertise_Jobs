@@ -1,7 +1,11 @@
 package classes;
 
+import com.google.common.collect.Sets;
+
 import java.io.*;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Set;
 
 import static classes.Config.*;
 
@@ -35,14 +39,17 @@ public class IO {
             newLine(DT_RECRUITERS, user.toString());
         }
     }
-    public HashMap<String, JobSeeker> readJobSeekers(){
+    public HashMap<String, JobSeeker> readJobSeekers(BiMultiMap<String> skills){
         String line;
         HashMap<String, JobSeeker> jobSeekers = new HashMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(Config.DT_JOBSEEKERS))) {
             while ((line = reader.readLine()) != null && !line.equals("")) {
                 String[] userData = line.split(",");
                 JobSeeker jobSeeker = new JobSeeker(userData[EMAIL], userData[NAME], userData[PASSWORD]);
+                jobSeeker.getSkills().addAll(skills.get(userData[EMAIL]));
+                jobSeeker.setSkills(Sets.newHashSet(skills.get(jobSeeker.getEmail())));
                 jobSeekers.putIfAbsent(userData[EMAIL], jobSeeker);
+
             }
         } catch (IOException e) {
             e.printStackTrace();

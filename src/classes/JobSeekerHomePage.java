@@ -32,12 +32,6 @@ public class JobSeekerHomePage {
 
     public JobSeekerHomePage() {
         JobSeeker currentUser = (JobSeeker) Runtime.accountManager().getCurrentUser();
-        Runtime.accountManager().getSkills().readFromFile(Config.DT_SKILLS);
-        currentUser.getSkills().clear();
-        for (Object skill : Runtime.accountManager().getSkills().get(currentUser.getEmail())) {
-            String stringSkill = (String) skill;
-            currentUser.getSkills().add(stringSkill);
-        }
         GuiHelper.createOptionBox(skillsList, new ArrayList<>(currentUser.getSkills()));
         skillsList.updateUI();
         nameLabel.setText(currentUser.getFullName());
@@ -73,7 +67,6 @@ public class JobSeekerHomePage {
                     strings.remove(s);
                     Runtime.accountManager().getSkills().remove(currentUser.getEmail(), s);
                 }
-                //refreshOptionBox(skillsList, currentUser.getSkills());
                 GuiHelper.createOptionBox(skillsList, new ArrayList<>(currentUser.getSkills()));
                 skillsList.updateUI();
                 Runtime.accountManager().getSkills().writeToFile(Config.DT_SKILLS);
