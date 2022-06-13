@@ -24,7 +24,7 @@ public class Runtime {
      * when a new Search is made, currentSearch is set to that Search object and overwritten when a new Search is made
      */
 
-    private static Search currentSearch;
+    private static Search currentSearch; // Look into making non-static
 
     public static void main(String[] args) {
         accMan = new AccountManagement();

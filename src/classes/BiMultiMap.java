@@ -5,8 +5,10 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 
 import java.io.*;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 // comment for test branch
 // Holds data for all categories provided by recruiters
@@ -31,6 +33,9 @@ public class BiMultiMap {
 
     public List<String> getKeysForValue(String value){
         return Multimaps.invertFrom(map, ArrayListMultimap.create()).get(value);
+    }
+    public Collection<Object> get(String key){
+        return map.get(key);
     }
 
     public void writeToFile(String path){
