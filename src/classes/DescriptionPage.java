@@ -37,6 +37,14 @@ public class DescriptionPage {
 
             }
         });
+        applyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JobSeeker jobSeeker = (JobSeeker) Runtime.accountManager().getCurrentUser();
+                Runtime.accountManager().getJobApplications().put(jobSeeker.getEmail(), job);
+                Runtime.accountManager().getJobApplications().writeToFile(Config.DT_JOB_APPLICATIONS);
+            }
+        });
     }
 
     public JPanel getDescriptionPanel() {

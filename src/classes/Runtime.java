@@ -30,6 +30,7 @@ public class Runtime {
         accMan = new AccountManagement();
         //accMan.setCurrentUser(accMan.getRecruiters().get("hulk@gmail.com"));
         accMan.setCurrentUser(accMan.getJobSeekers().get("hulk@gmail.com"));
+        System.out.println(accMan);
 
         //currentApplication = new Application();
         //currentApplication.getRegisteredUsers();
