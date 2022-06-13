@@ -7,10 +7,12 @@ public class AccountManagement {
     private HashMap<String, Recruiter> recruiters;
     private HashMap<String, Admin> admins;
     private HashMap<String, Job> jobs;
+    private HashMap<String, String> messages;
     private final BiMultiMap<String> categories = new BiMultiMap<>();
     private final BiMultiMap<String> skills = new BiMultiMap<>();
     private final JobMap recruiterJobs = new JobMap();
     private final JobMap jobApplications = new JobMap();
+    private final JobMap jobInvitations = new JobMap();
     private User currentUser;
 
 
@@ -26,8 +28,10 @@ public class AccountManagement {
         recruiters = io.readRecruiters();
         admins = io.readAdmins();
         jobs = io.readJobs(recruiters);
+        messages = io.readMessages();
         recruiterJobs.readFromFile(Config.DT_RECRUITER_JOBS, jobs);
         jobApplications.readFromFile(Config.DT_JOB_APPLICATIONS, jobs);
+        jobInvitations.readFromFile(Config.DT_JOB_INVITATIONS, jobs);
     }
     public void addUser(User user){
         if (user instanceof JobSeeker){
@@ -86,5 +90,13 @@ public class AccountManagement {
 
     public HashMap<String, Job> getJobs() {
         return jobs;
+    }
+
+    public JobMap getJobInvitations() {
+        return jobInvitations;
+    }
+
+    public HashMap<String, String> getMessages() {
+        return messages;
     }
 }

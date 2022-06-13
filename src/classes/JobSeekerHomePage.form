@@ -181,7 +181,7 @@
           <text value="Applied Jobs"/>
         </properties>
       </component>
-      <component id="8e722" class="javax.swing.JButton" binding="jobInterviewsButton" default-binding="true">
+      <component id="8e722" class="javax.swing.JButton" binding="jobInvitationsButton">
         <constraints>
           <grid row="11" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="9" fill="0" indent="0" use-parent-layout="false">
             <minimum-size width="120" height="-1"/>
@@ -190,7 +190,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="Job Interviews"/>
+          <text value="Job Invitations"/>
         </properties>
       </component>
       <component id="890a0" class="javax.swing.JLabel">

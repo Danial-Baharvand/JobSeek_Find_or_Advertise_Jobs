@@ -13,7 +13,7 @@ public class JobSeekerHomePage {
     private JPanel JobSeekerProfile;
     private JButton backButton;
     private JButton appliedJobsButton;
-    private JButton jobInterviewsButton;
+    private JButton jobInvitationsButton;
     private JButton uploadResumeButton;
     private JButton addButton;
     private JButton deleteButton;
@@ -151,10 +151,18 @@ public class JobSeekerHomePage {
             public void actionPerformed(ActionEvent e) {
                 Search appliedSearch = new Search(Runtime.accountManager().getJobApplications().
                         get(Runtime.accountManager().getCurrentUser().getEmail()));
-                System.out.println(Runtime.accountManager().getJobApplications().
-                        get(Runtime.accountManager().getCurrentUser().getEmail()));
                 appliedSearch.setScores();
                 ArrayList<ScoredJob> jobList = appliedSearch.getScoredJobs();
+                Runtime.showSearchResultsPage(Runtime.frame, jobList);
+            }
+        });
+        jobInvitationsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Search invitedSearch = new Search(Runtime.accountManager().getJobInvitations().
+                        get(Runtime.accountManager().getCurrentUser().getEmail()));
+                invitedSearch.setScores();
+                ArrayList<ScoredJob> jobList = invitedSearch.getScoredJobs();
                 Runtime.showSearchResultsPage(Runtime.frame, jobList);
             }
         });
@@ -284,9 +292,9 @@ public class JobSeekerHomePage {
         appliedJobsButton = new JButton();
         appliedJobsButton.setText("Applied Jobs");
         JobSeekerProfile.add(appliedJobsButton, new com.intellij.uiDesigner.core.GridConstraints(10, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(120, -1), new Dimension(150, -1), new Dimension(150, -1), 0, false));
-        jobInterviewsButton = new JButton();
-        jobInterviewsButton.setText("Job Interviews");
-        JobSeekerProfile.add(jobInterviewsButton, new com.intellij.uiDesigner.core.GridConstraints(11, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(120, -1), new Dimension(150, -1), new Dimension(150, -1), 0, false));
+        jobInvitationsButton = new JButton();
+        jobInvitationsButton.setText("Job Invitations");
+        JobSeekerProfile.add(jobInvitationsButton, new com.intellij.uiDesigner.core.GridConstraints(11, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(120, -1), new Dimension(150, -1), new Dimension(150, -1), 0, false));
         final JLabel label1 = new JLabel();
         Font label1Font = this.$$$getFont$$$("Calibri Light", Font.BOLD, 16, label1.getFont());
         if (label1Font != null) label1.setFont(label1Font);

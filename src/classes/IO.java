@@ -37,6 +37,8 @@ public class IO {
             newLine(DT_RECRUITERS, data.toString());
         }else if (data instanceof Job) {
             newLine(DT_JOBS, data.toString());
+        }else if (data instanceof String) {
+            newLine(DT_MESSAGES, data.toString());
         }
     }
     public HashMap<String, JobSeeker> readJobSeekers(BiMultiMap<String> skills){
@@ -98,5 +100,19 @@ public class IO {
             e.printStackTrace();
         }
         return jobs;
+    }
+
+    public HashMap<String, String> readMessages() {
+        String line;
+        HashMap<String, String> messages = new HashMap<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(DT_MESSAGES))) {
+            while ((line = reader.readLine()) != null && !line.equals("")) {
+                String[] userData = line.split("=");
+                messages.putIfAbsent(userData[0], userData[1]);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return messages;
     }
 }
