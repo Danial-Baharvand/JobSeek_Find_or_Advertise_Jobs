@@ -1,28 +1,30 @@
 package classes;
 
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Multimap;
-
 import java.util.HashMap;
 public class AccountManagement {
     private HashMap<String, JobSeeker> jobseekers = new HashMap<>();
     private HashMap<String, Recruiter> recruiters = new HashMap<>();
     private HashMap<String, Admin> admins = new HashMap<>();
     private BiMultiMap categories = new BiMultiMap();
-    private BiMultiMap Skills = new BiMultiMap();
+    private BiMultiMap skills = new BiMultiMap();
     private Jobs jobs = new Jobs();
+    private Jobs jobApplications = new Jobs();
     private User currentUser;
 
 
 
     public AccountManagement() {
-        this.readUsers();
+        this.readDatabase();
     }
-    private void readUsers() {
+    private void readDatabase() {
         IO io = new IO();
         jobseekers = io.readJobSeekers();
         recruiters = io.readRecruiters();
         admins = io.readAdmins();
+        skills.readFromFile(Config.DT_SKILLS);
+        categories.readFromFile(Config.DT_CATEGORIES);
+        jobs.readFromFile(Config.DT_JOBS);
+        jobApplications.readFromFile(Config.DT_JOB_APPLICATIONS);
     }
     public void addUser(User user){
         if (user instanceof JobSeeker){
@@ -68,10 +70,14 @@ public class AccountManagement {
     }
 
     public BiMultiMap getSkills() {
-        return Skills;
+        return skills;
     }
 
     public Jobs getJobs() {
         return jobs;
+    }
+
+    public Jobs getJobApplications() {
+        return jobApplications;
     }
 }

@@ -4,6 +4,8 @@ import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -29,6 +31,12 @@ public class DescriptionPage {
         location.setText(job.getState());
         cat.setText(job.getCat());
         salary.setText("$" + String.valueOf(job.getSalary()));
+        applyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
     public JPanel getDescriptionPanel() {
