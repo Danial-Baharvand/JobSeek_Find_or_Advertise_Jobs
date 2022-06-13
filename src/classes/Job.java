@@ -1,5 +1,7 @@
 package classes;
 
+import java.util.HashMap;
+
 public class Job {
     Recruiter recruiter;
 
@@ -12,7 +14,7 @@ public class Job {
     String jobDescription;
     Boolean published = false;
     public Job(){}
-    public Job(String jobDetails){
+    public Job(String jobDetails, HashMap<String, Recruiter> recruiters){
         String[] setValues = jobDetails.split("\\|");
         this.jobTitle = setValues[0];
         this.state =setValues[1];
@@ -21,8 +23,8 @@ public class Job {
         this.jobType =setValues[4];
         this.keywords =setValues[5];
         this.jobDescription =setValues[6];
-        //this.recruiter = Runtime.accountManager().getRecruiters().get(setValues[7]);
-        this.published =Boolean.parseBoolean(setValues[7]);
+        this.recruiter = recruiters.get(setValues[7]);
+        this.published =Boolean.parseBoolean(setValues[8]);
     }
     public Boolean getPublished() {
         return published;
@@ -41,8 +43,11 @@ public class Job {
                  jobType + '|' +
                  keywords + '|' +
                  jobDescription + '|' +
-                 //recruiter.getEmail() + '|' +
+                 recruiter.getEmail() + '|' +
                  published;
+    }
+    public String getID(){
+        return jobTitle + recruiter.getEmail();
     }
 
     public Recruiter getRecruiter() {

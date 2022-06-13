@@ -3,9 +3,7 @@ package classes;
 import com.google.common.collect.Sets;
 
 import java.io.*;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Set;
 
 import static classes.Config.*;
 
@@ -30,13 +28,15 @@ public class IO {
             e.printStackTrace();
         }
     }
-    public void writeUser(User user){
-        if (user instanceof JobSeeker){
-            newLine(DT_JOBSEEKERS, user.toString());
-        }else if (user instanceof Recruiter) {
-            newLine(DT_RECRUITERS, user.toString());
-        }else if (user instanceof Admin) {
-            newLine(DT_RECRUITERS, user.toString());
+    public void writeToDB(Object data){
+        if (data instanceof JobSeeker){
+            newLine(DT_JOBSEEKERS, data.toString());
+        }else if (data instanceof Recruiter) {
+            newLine(DT_RECRUITERS, data.toString());
+        }else if (data instanceof Admin) {
+            newLine(DT_RECRUITERS, data.toString());
+        }else if (data instanceof Job) {
+            newLine(DT_JOBS, data.toString());
         }
     }
     public HashMap<String, JobSeeker> readJobSeekers(BiMultiMap<String> skills){
@@ -84,5 +84,19 @@ public class IO {
             e.printStackTrace();
         }
         return admins;
+    }
+    public HashMap<String, Job> readJobs(HashMap<String, Recruiter> recruiters){
+        String line;
+        HashMap<String, Job> jobs = new HashMap<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(DT_JOBS))) {
+            while ((line = reader.readLine()) != null && !line.equals("")) {
+                String[] userData = line.split("\\|");
+                Job job = new Job(line, recruiters);
+                jobs.putIfAbsent(userData[JOB_TITLE] + userData[JOB_RECRUITER], job);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return jobs;
     }
 }

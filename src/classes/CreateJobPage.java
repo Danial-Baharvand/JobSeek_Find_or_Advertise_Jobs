@@ -23,7 +23,7 @@ public class CreateJobPage {
     private JTextArea textArea1;
 
     public CreateJobPage() {
-        Runtime.accountManager().getJobs().readFromFile(Config.DT_JOBS);
+        //Runtime.accountManager().getRecruiterJobs().readFromFile(Config.DT_JOBS);
         Runtime.accountManager().getCategories().readFromFile(Config.DT_CATEGORIES);
         stateCB.setRenderer(new PromptComboBoxRenderer("Location"));
         catCB.setRenderer(new PromptComboBoxRenderer("Category"));
@@ -64,8 +64,13 @@ public class CreateJobPage {
             newJob.setJobType(jobTypeCB.getSelectedItem().toString());
             newJob.setKeywords(keywordsTB.forceGetText());
             newJob.setPublished(publish);
-            Runtime.accountManager().getJobs().put(newJob.getRecruiter().getEmail(), newJob);
-            Runtime.accountManager().getJobs().writeToFile(Config.DT_JOBS);
+            Runtime.accountManager().getRecruiterJobs().put(newJob.getRecruiter().getEmail(), newJob.getID());
+            Runtime.accountManager().getRecruiterJobs().writeToFile(Config.DT_RECRUITER_JOBS);
+            IO io = new IO();
+            Runtime.accountManager().getJobs().put(newJob.getID(), newJob);
+            io.writeToDB(newJob);
+
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Please fill in all fields");
             e.printStackTrace();

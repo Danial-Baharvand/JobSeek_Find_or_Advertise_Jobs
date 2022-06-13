@@ -89,7 +89,7 @@ public class CreateAccountPage {
                 }
 
                 IO writer = new IO();
-                writer.writeUser(newUser);
+                writer.writeToDB(newUser);
                 Runtime.accountManager().addUser(newUser);
                 System.out.printf("New %s account successfully created for %s!%n", email);
                 return String.format("New account successfully created for %s!", email);
