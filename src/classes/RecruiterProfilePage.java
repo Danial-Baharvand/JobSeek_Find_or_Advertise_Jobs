@@ -59,7 +59,7 @@ public class RecruiterProfilePage {
         recruiterSocial.setText("@" + recruiter.getOrg());
 
         //obtain collection of jobs by using recruiter email as key
-        jobs = Runtime.accountManager().getJobs().get(Runtime.accountManager().getCurrentUser().getEmail());
+        jobs = Runtime.accountManager().getRecruiterJobs().get(Runtime.accountManager().getCurrentUser().getEmail());
 
         ArrayList<Job> jobList = new ArrayList<>(jobs);
 

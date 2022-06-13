@@ -64,7 +64,7 @@ public class CreateJobPage {
             newJob.setJobType(jobTypeCB.getSelectedItem().toString());
             newJob.setKeywords(keywordsTB.forceGetText());
             newJob.setPublished(publish);
-            Runtime.accountManager().getRecruiterJobs().put(newJob.getRecruiter().getEmail(), newJob.getID());
+            Runtime.accountManager().getRecruiterJobs().put(newJob.getRecruiter().getEmail(), newJob);
             Runtime.accountManager().getRecruiterJobs().writeToFile(Config.DT_RECRUITER_JOBS);
             IO io = new IO();
             Runtime.accountManager().getJobs().put(newJob.getID(), newJob);

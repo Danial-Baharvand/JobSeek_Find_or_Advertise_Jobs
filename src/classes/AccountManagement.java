@@ -9,7 +9,7 @@ public class AccountManagement {
     private HashMap<String, Job> jobs;
     private BiMultiMap<String> categories = new BiMultiMap();
     private BiMultiMap<String> skills = new BiMultiMap();
-    private BiMultiMap<String> recruiterJobs = new BiMultiMap();
+    private JobMap recruiterJobs = new JobMap();
     private BiMultiMap<String> jobApplications = new BiMultiMap();
     private User currentUser;
 
@@ -27,7 +27,7 @@ public class AccountManagement {
         admins = io.readAdmins();
         jobs = io.readJobs(recruiters);
 
-        recruiterJobs.readFromFile(Config.DT_RECRUITER_JOBS);
+        recruiterJobs.readFromFile(Config.DT_RECRUITER_JOBS, jobs);
         jobApplications.readFromFile(Config.DT_JOB_APPLICATIONS);
     }
     public void addUser(User user){
@@ -77,7 +77,7 @@ public class AccountManagement {
         return skills;
     }
 
-    public BiMultiMap<String> getRecruiterJobs() {
+    public JobMap getRecruiterJobs() {
         return recruiterJobs;
     }
 
