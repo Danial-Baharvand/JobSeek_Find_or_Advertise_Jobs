@@ -7,8 +7,11 @@ import java.awt.event.ActionListener;
 
 public class Header {
     private JPanel headerPanel;
-    private JButton backButton;
-    private JButton homeButton;
+    private JButton backBtn;
+    private JButton homeBtn;
+    private JButton loginBtn;
+    private JButton searchBtn;
+    private JButton logOutBtn;
 
     public Header() {
         try {
@@ -21,15 +24,14 @@ public class Header {
         } catch (Exception e) {
             // If Nimbus is not available, you can set the GUI to another look and feel.
         }
-        backButton.addActionListener(new ActionListener() {
+        backBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            Runtime.getPagesVisited().removeLast();
-            Runtime.showPage(Runtime.getPagesVisited().removeLast());
+                Runtime.showPreviousPage();
 
             }
         });
-        homeButton.addActionListener(new ActionListener() {
+        homeBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (Runtime.accountManager().getCurrentUser() instanceof JobSeeker) {
@@ -39,6 +41,39 @@ public class Header {
                 }
             }
         });
+        searchBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Runtime.showSearchPage();
+            }
+        });
+        logOutBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Runtime.accountManager().setCurrentUser(null);
+                Runtime.getPagesVisited().clear();
+                Runtime.showSearchPage();
+            }
+        });
+        loginBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Runtime.showLoginPage();
+            }
+        });
+    }
+
+    public JPanel getPanel() {
+        return headerPanel;
+    }
+
+    public void updateButtons() {
+        User currentUser = Runtime.accountManager().getCurrentUser();
+        backBtn.setVisible(Runtime.getPagesVisited().size() > 1);
+        loginBtn.setVisible(currentUser == null);
+        logOutBtn.setVisible(!loginBtn.isVisible());
+        searchBtn.setVisible(!(currentUser instanceof Recruiter));
+        homeBtn.setVisible(logOutBtn.isVisible());
     }
 
     {
@@ -57,15 +92,24 @@ public class Header {
      */
     private void $$$setupUI$$$() {
         headerPanel = new JPanel();
-        headerPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 3, new Insets(0, 0, 0, 0), -1, -1));
-        backButton = new JButton();
-        backButton.setText("Back");
-        headerPanel.add(backButton, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        headerPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 6, new Insets(0, 0, 0, 0), -1, -1));
+        backBtn = new JButton();
+        backBtn.setText("Back");
+        headerPanel.add(backBtn, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final com.intellij.uiDesigner.core.Spacer spacer1 = new com.intellij.uiDesigner.core.Spacer();
-        headerPanel.add(spacer1, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-        homeButton = new JButton();
-        homeButton.setText("Home");
-        headerPanel.add(homeButton, new com.intellij.uiDesigner.core.GridConstraints(0, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        headerPanel.add(spacer1, new com.intellij.uiDesigner.core.GridConstraints(0, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        loginBtn = new JButton();
+        loginBtn.setText("Login");
+        headerPanel.add(loginBtn, new com.intellij.uiDesigner.core.GridConstraints(0, 5, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        logOutBtn = new JButton();
+        logOutBtn.setText("Log Out");
+        headerPanel.add(logOutBtn, new com.intellij.uiDesigner.core.GridConstraints(0, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        homeBtn = new JButton();
+        homeBtn.setText("Home");
+        headerPanel.add(homeBtn, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        searchBtn = new JButton();
+        searchBtn.setText("Search");
+        headerPanel.add(searchBtn, new com.intellij.uiDesigner.core.GridConstraints(0, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
@@ -75,15 +119,4 @@ public class Header {
         return headerPanel;
     }
 
-    public JPanel getPanel() {
-        return headerPanel;
-    }
-
-    public void updateButtons() {
-        if (Runtime.getPagesVisited().size() <= 1) {
-            backButton.setVisible(false);
-        } else {
-            backButton.setVisible(true);
-        }
-    }
 }

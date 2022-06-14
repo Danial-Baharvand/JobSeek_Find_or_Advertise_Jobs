@@ -157,7 +157,10 @@ public class Runtime {
         frame.pack();
         frame.setVisible(true);
     }
-
+    public static void showPreviousPage(){
+        pagesVisited.removeLast();
+        showPage(pagesVisited.removeLast());
+    }
 
 
     public static AccountManagement accountManager() {

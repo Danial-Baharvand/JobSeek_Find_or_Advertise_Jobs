@@ -40,6 +40,7 @@ public class LoginPage implements Page {
             public void actionPerformed(ActionEvent e) {
                 if (userLogin(accMan)) {
                     JOptionPane.showMessageDialog(null, "You have successfully logged in!");
+                    Runtime.showPreviousPage();
                 } else {
                     JOptionPane.showMessageDialog(null, "The username of password is incorrect.");
                 }
