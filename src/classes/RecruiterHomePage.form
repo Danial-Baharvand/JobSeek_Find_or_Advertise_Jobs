@@ -8,7 +8,7 @@
     <properties/>
     <border type="none"/>
     <children>
-      <grid id="23893" binding="recruiterHome" layout-manager="GridLayoutManager" row-count="17" column-count="7" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="23893" binding="recruiterHome" layout-manager="GridLayoutManager" row-count="9" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="20" left="20" bottom="20" right="20"/>
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -22,7 +22,7 @@
         <children>
           <component id="5c46f" class="javax.swing.JButton" binding="backButton">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+              <grid row="0" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
                 <preferred-size width="30" height="30"/>
               </grid>
             </constraints>
@@ -30,287 +30,9 @@
               <text value="Back"/>
             </properties>
           </component>
-          <scrollpane id="c3ca3" binding="recruiterProfileDescription">
-            <constraints>
-              <grid row="5" column="0" row-span="8" col-span="5" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <preferred-size width="750" height="350"/>
-              </grid>
-            </constraints>
-            <properties>
-              <horizontalScrollBarPolicy value="30"/>
-            </properties>
-            <border type="none"/>
-            <children>
-              <component id="d5519" class="javax.swing.JLabel" binding="recruiterProfileDescriptionText">
-                <constraints/>
-                <properties>
-                  <text value="Label"/>
-                  <verticalAlignment value="1"/>
-                </properties>
-              </component>
-            </children>
-          </scrollpane>
-          <scrollpane id="fdd28" binding="jobDescription">
-            <constraints>
-              <grid row="14" column="4" row-span="3" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <background color="-330497"/>
-            </properties>
-            <border type="none"/>
-            <children>
-              <grid id="d7573" binding="jobDescriptionPanel" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
-                <constraints/>
-                <properties>
-                  <background color="-1973791"/>
-                  <foreground color="-13224648"/>
-                </properties>
-                <border type="none"/>
-                <children>
-                  <component id="79653" class="javax.swing.JLabel" binding="selectJobCategory">
-                    <constraints>
-                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <foreground color="-13224648"/>
-                      <text value="Category"/>
-                    </properties>
-                  </component>
-                  <grid id="a9e44" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                    <margin top="0" left="0" bottom="0" right="0"/>
-                    <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties/>
-                    <border type="none"/>
-                    <children>
-                      <component id="b9f1d" class="javax.swing.JLabel" binding="selectedJobDescription">
-                        <constraints>
-                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <enabled value="false"/>
-                          <text value=""/>
-                        </properties>
-                      </component>
-                      <component id="4aeec" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="Description"/>
-                        </properties>
-                      </component>
-                    </children>
-                  </grid>
-                  <component id="7957" class="javax.swing.JLabel" binding="selectedJobLocation">
-                    <constraints>
-                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
-                        <preferred-size width="106" height="16"/>
-                      </grid>
-                    </constraints>
-                    <properties>
-                      <foreground color="-13224648"/>
-                      <text value="Location"/>
-                    </properties>
-                  </component>
-                  <component id="74399" class="javax.swing.JLabel" binding="selectedJobCompensation">
-                    <constraints>
-                      <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false">
-                        <preferred-size width="106" height="16"/>
-                      </grid>
-                    </constraints>
-                    <properties>
-                      <foreground color="-13224648"/>
-                      <text value="Compensation"/>
-                    </properties>
-                  </component>
-                </children>
-              </grid>
-            </children>
-          </scrollpane>
-          <grid id="99681" binding="jobListingsPanel" layout-manager="GridLayoutManager" row-count="5" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-            <margin top="0" left="0" bottom="0" right="0"/>
-            <constraints>
-              <grid row="14" column="0" row-span="3" col-span="3" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties/>
-            <border type="none"/>
-            <children>
-              <grid id="ac692" binding="job1ListingPanel" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties/>
-                <border type="none"/>
-                <children>
-                  <component id="1179b" class="javax.swing.JLabel" binding="job1Title">
-                    <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
-                        <preferred-size width="135" height="16"/>
-                      </grid>
-                    </constraints>
-                    <properties>
-                      <text value="Label"/>
-                    </properties>
-                  </component>
-                  <component id="7bf33" class="javax.swing.JLabel" binding="job1Company">
-                    <constraints>
-                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
-                        <preferred-size width="135" height="16"/>
-                      </grid>
-                    </constraints>
-                    <properties>
-                      <text value="Label"/>
-                    </properties>
-                  </component>
-                  <component id="223a7" class="javax.swing.JButton" binding="viewButton" default-binding="true">
-                    <constraints>
-                      <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false">
-                        <preferred-size width="150" height="-1"/>
-                        <maximum-size width="150" height="-1"/>
-                      </grid>
-                    </constraints>
-                    <properties>
-                      <text value="View"/>
-                    </properties>
-                  </component>
-                  <component id="25b2" class="javax.swing.JLabel" binding="job1Score">
-                    <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Score"/>
-                    </properties>
-                  </component>
-                </children>
-              </grid>
-              <grid id="ad57f" binding="job2ListingPanel" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
-                <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties/>
-                <border type="none"/>
-                <children>
-                  <component id="f5a4b" class="javax.swing.JLabel" binding="job2Title">
-                    <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
-                        <preferred-size width="133" height="16"/>
-                      </grid>
-                    </constraints>
-                    <properties>
-                      <text value="Label"/>
-                    </properties>
-                  </component>
-                  <component id="32505" class="javax.swing.JLabel" binding="job2Score">
-                    <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Score"/>
-                    </properties>
-                  </component>
-                  <component id="bdec0" class="javax.swing.JLabel" binding="job2Company">
-                    <constraints>
-                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
-                        <preferred-size width="133" height="16"/>
-                      </grid>
-                    </constraints>
-                    <properties>
-                      <text value="Label"/>
-                    </properties>
-                  </component>
-                  <component id="4e4d2" class="javax.swing.JButton" binding="viewButton1" default-binding="true">
-                    <constraints>
-                      <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false">
-                        <preferred-size width="150" height="-1"/>
-                        <maximum-size width="150" height="-1"/>
-                      </grid>
-                    </constraints>
-                    <properties>
-                      <text value="View"/>
-                    </properties>
-                  </component>
-                </children>
-              </grid>
-              <grid id="51e39" binding="job3ListingPanel" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
-                <constraints>
-                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties/>
-                <border type="none"/>
-                <children>
-                  <component id="f267e" class="javax.swing.JLabel" binding="job3Title">
-                    <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
-                        <preferred-size width="133" height="16"/>
-                      </grid>
-                    </constraints>
-                    <properties>
-                      <text value="Label"/>
-                    </properties>
-                  </component>
-                  <component id="5cd2b" class="javax.swing.JLabel" binding="job3Score">
-                    <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Score"/>
-                    </properties>
-                  </component>
-                  <component id="dbac5" class="javax.swing.JLabel" binding="job3Company">
-                    <constraints>
-                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
-                        <preferred-size width="133" height="16"/>
-                      </grid>
-                    </constraints>
-                    <properties>
-                      <text value="Label"/>
-                    </properties>
-                  </component>
-                  <component id="97cad" class="javax.swing.JButton" binding="viewButton2" default-binding="true">
-                    <constraints>
-                      <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false">
-                        <preferred-size width="150" height="-1"/>
-                      </grid>
-                    </constraints>
-                    <properties>
-                      <text value="View"/>
-                    </properties>
-                  </component>
-                </children>
-              </grid>
-              <hspacer id="c740f">
-                <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-              </hspacer>
-              <hspacer id="2e69c">
-                <constraints>
-                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-              </hspacer>
-            </children>
-          </grid>
-          <component id="ff5bb" class="javax.swing.JLabel" binding="whoWeAreLabel">
-            <constraints>
-              <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="1" hsize-policy="1" anchor="8" fill="0" indent="0" use-parent-layout="false">
-                <preferred-size width="249" height="16"/>
-              </grid>
-            </constraints>
-            <properties>
-              <font size="16" style="1"/>
-              <foreground color="-592138"/>
-              <text value="Who We Are:"/>
-            </properties>
-          </component>
           <component id="57e42" class="javax.swing.JLabel" binding="jobListingsLabel">
             <constraints>
-              <grid row="13" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="10" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="5" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="10" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font size="16" style="1"/>
@@ -320,7 +42,7 @@
           </component>
           <component id="c143f" class="javax.swing.JTextArea" binding="textArea1" default-binding="true">
             <constraints>
-              <grid row="1" column="0" row-span="1" col-span="7" vsize-policy="1" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+              <grid row="1" column="0" row-span="1" col-span="4" vsize-policy="1" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <preferred-size width="1000" height="50"/>
                 <maximum-size width="-1" height="1"/>
               </grid>
@@ -329,91 +51,36 @@
               <background color="-11348236"/>
             </properties>
           </component>
-          <component id="d3e6a" class="javax.swing.JLabel" binding="recruiterEmail">
+          <scrollpane id="22893">
             <constraints>
-              <grid row="5" column="5" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="6" column="0" row-span="3" col-span="4" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
-            <properties>
-              <foreground color="-592138"/>
-              <text value="Email"/>
-            </properties>
-          </component>
-          <component id="f8297" class="javax.swing.JLabel" binding="recruiterWebsite">
+            <properties/>
+            <border type="none"/>
+            <children>
+              <grid id="99681" binding="jobListingsPanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints/>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <hspacer id="c740f">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                  </hspacer>
+                  <hspacer id="2e69c">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                  </hspacer>
+                </children>
+              </grid>
+            </children>
+          </scrollpane>
+          <component id="446e5" class="javax.swing.JLabel" binding="emailText">
             <constraints>
-              <grid row="7" column="5" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <foreground color="-592138"/>
-              <text value="Website"/>
-            </properties>
-          </component>
-          <component id="87a81" class="javax.swing.JLabel" binding="recruiterSocial">
-            <constraints>
-              <grid row="9" column="5" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <foreground color="-592138"/>
-              <text value="Socials"/>
-            </properties>
-          </component>
-          <component id="6e91e" class="javax.swing.JLabel" binding="recruiterPhoneNo">
-            <constraints>
-              <grid row="11" column="5" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <foreground color="-592138"/>
-              <text value="Phone"/>
-            </properties>
-          </component>
-          <component id="7d679" class="javax.swing.JLabel" binding="contactLabel">
-            <constraints>
-              <grid row="4" column="5" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <font size="16" style="1"/>
-              <foreground color="-592138"/>
-              <text value="Contact"/>
-            </properties>
-          </component>
-          <component id="be109" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="6" column="5" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <foreground color="-592138"/>
-              <text value="Label"/>
-            </properties>
-          </component>
-          <component id="9a594" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="8" column="5" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <foreground color="-592138"/>
-              <text value="Label"/>
-            </properties>
-          </component>
-          <component id="b2ee7" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="10" column="5" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <foreground color="-592138"/>
-              <text value="Label"/>
-            </properties>
-          </component>
-          <component id="baab2" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="12" column="5" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <foreground color="-592138"/>
-              <text value="Label"/>
-            </properties>
-          </component>
-          <component id="d77aa" class="javax.swing.JLabel" binding="recruiterOrg">
-            <constraints>
-              <grid row="3" column="0" row-span="1" col-span="7" vsize-policy="0" hsize-policy="7" anchor="0" fill="0" indent="0" use-parent-layout="false">
+              <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="0" fill="0" indent="0" use-parent-layout="false">
                 <preferred-size width="-1" height="16"/>
               </grid>
             </constraints>
@@ -423,9 +90,19 @@
               <text value="Label"/>
             </properties>
           </component>
+          <component id="65618" class="javax.swing.JButton" binding="createJobButton">
+            <constraints>
+              <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Create a new Job"/>
+            </properties>
+          </component>
           <component id="62fa" class="javax.swing.JLabel" binding="welcomeLabel">
             <constraints>
-              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="176" height="20"/>
+              </grid>
             </constraints>
             <properties>
               <font name="Calibri Light" size="16"/>
@@ -433,25 +110,46 @@
               <text value="Welcome Back:"/>
             </properties>
           </component>
-          <component id="786a7" class="javax.swing.JButton" binding="viewApplicantsButton" default-binding="true">
+          <component id="d3e6a" class="javax.swing.JLabel" binding="recruiterEmail">
             <constraints>
-              <grid row="2" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="4" fill="0" indent="0" use-parent-layout="false">
-                <maximum-size width="150" height="-1"/>
-              </grid>
+              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="View Applicants"/>
+              <foreground color="-592138"/>
+              <text value="Email"/>
             </properties>
           </component>
-          <component id="fab51" class="javax.swing.JButton" binding="saveChangesButton" default-binding="true">
+          <component id="d77aa" class="javax.swing.JLabel" binding="nameText">
             <constraints>
-              <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="4" fill="0" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-                <maximum-size width="150" height="-1"/>
+              <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="-1" height="16"/>
               </grid>
             </constraints>
             <properties>
-              <text value="Save Changes"/>
+              <font name="Calibri Light" size="22"/>
+              <foreground color="-592138"/>
+              <text value="Label"/>
+            </properties>
+          </component>
+          <component id="be109" class="javax.swing.JLabel" binding="orgLabel">
+            <constraints>
+              <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <foreground color="-592138"/>
+              <text value="Organisation"/>
+            </properties>
+          </component>
+          <component id="f21de" class="javax.swing.JLabel" binding="orgText">
+            <constraints>
+              <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="-1" height="16"/>
+              </grid>
+            </constraints>
+            <properties>
+              <font name="Calibri Light" size="22"/>
+              <foreground color="-592138"/>
+              <text value="Label"/>
             </properties>
           </component>
         </children>

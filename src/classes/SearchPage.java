@@ -49,7 +49,8 @@ public class SearchPage {
                 Collection<Job> appliedJobs = Runtime.accountManager().getJobApplications().
                         get(Runtime.accountManager().getCurrentUser().getEmail());
                 Collection<Job> availableJobs = Runtime.accountManager().getJobs().values();
-                availableJobs.removeAll(appliedJobs);
+                // To only show jobs that have not been applied for
+                //availableJobs.removeAll(appliedJobs);
                 Search search = new Search(availableJobs);
                 search.setSearchText(searchTBox.getText());
                 search.setStates(GuiHelper.getSelectedOptions(statePanel));

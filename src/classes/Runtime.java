@@ -29,8 +29,8 @@ public class Runtime {
 
     public static void main(String[] args) {
         accMan = new AccountManagement();
-        //accMan.setCurrentUser(accMan.getRecruiters().get("hulk@gmail.com"));
-        accMan.setCurrentUser(accMan.getJobSeekers().get("hulk@gmail.com"));
+        accMan.setCurrentUser(accMan.getRecruiters().get("hulk@gmail.com"));
+        //accMan.setCurrentUser(accMan.getJobSeekers().get("hulk@gmail.com"));
 
         //currentApplication = new Application();
         //currentApplication.getRegisteredUsers();
@@ -62,8 +62,11 @@ public class Runtime {
         //SHOW RECRUITER PROFILE PAGE
         //showRecruiterProfilePage(frame);
 
-        //SHOW JOB SEEKER PROFILE
-        showJobSeekerHome(frame);
+        //SHOW RECRUITER HOME PAGE
+        showRecruiterHome(frame);
+
+        //SHOW JOB SEEKER HOME Page
+        //showJobSeekerHome(frame);
 
 
     }
@@ -161,7 +164,15 @@ public class Runtime {
         frame.pack();
         frame.setVisible(true);
     }
-
+    public static void showRecruiterHome(JFrame frame){
+        frame.setTitle("Recruiter Home");
+        frame.getContentPane().removeAll();
+        frame.repaint();
+        frame.setContentPane(new RecruiterHomePage().getRecruiterHomePanel());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
     public static void showSearchResultsPage(JFrame frame, ArrayList<ScoredJob> jobList){
         frame.setTitle("Search Results Page");
         frame.getContentPane().removeAll();

@@ -33,6 +33,12 @@ public class BiMultiMap <V> {
         map.remove(key, value);
         invertedMap.remove(value, key);
     }
+    public boolean containsKey(String key){
+        return map.containsKey(key);
+    }
+    public boolean containsValue(V value){
+        return map.containsValue(value);
+    }
 
     public Collection<String> getKeysForValue(V value){
         return invertedMap.get(value);

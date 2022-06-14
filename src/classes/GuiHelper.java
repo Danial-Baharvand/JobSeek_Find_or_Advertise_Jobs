@@ -26,4 +26,21 @@ public class GuiHelper {
             optionsPanel.add(new JCheckBox(option));
         }
     }
+    public static <V> boolean createJobList(Collection<V> jobList, JPanel jobsPanel) {
+        if (jobList.isEmpty()){
+            return false;
+        }
+        for (V job : jobList) {
+            JPanel jPanel;
+            if (job instanceof Job) {
+                jPanel = new JobListing((Job) job).getJobListingPanel();
+            } else {
+                jPanel = new JobListing((ScoredJob) job).getJobListingPanel();
+            }
+
+            jobsPanel.setLayout(new BoxLayout(jobsPanel, BoxLayout.Y_AXIS));
+            jobsPanel.add(jPanel);
+        }
+        return true;
+    }
 }

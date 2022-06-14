@@ -6,7 +6,6 @@ import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Locale;
 
 public class DescriptionPage {
@@ -21,6 +20,12 @@ public class DescriptionPage {
     private JLabel messageLabel;
     private JTextPane messageText;
     private JPanel messagePanel;
+    private JButton editBtn;
+    private JButton removeBtn;
+    private JButton suitablesBtn;
+    private JButton viewApplicantsBtn;
+    private JPanel jobseekerButtons;
+    private JPanel recruiterButtons;
 
     /**
      * Creates the detailed description page.
@@ -30,35 +35,48 @@ public class DescriptionPage {
      * @param pageNumber   the page number the that this job is on
      * @param indexOfClick indicating which job was clicked on the page
      */
-    public DescriptionPage(JFrame desFrame, ArrayList<ScoredJob> jobList, int pageNumber, int indexOfClick) {
-        Job job = jobList.get(pageNumber * 3 + indexOfClick).getJob();
-        String currentUser = Runtime.accountManager().getCurrentUser().getEmail();
-        //test
-/*        Runtime.accountManager().getMessages().put(currentUser + job.getID(), "this is a invitation");
-        IO io = new IO();
-        io.writeToDB(currentUser + job.getID() + "=this is a invitation");*/
-        //end test
-        if (Runtime.accountManager().getJobInvitations().get(Runtime.accountManager().
-                getCurrentUser().getEmail()).contains(job)) {
+    public DescriptionPage(Job job) {
+        if (Runtime.accountManager().getCurrentUser() instanceof JobSeeker) {
+            checkJobSeekerJobStatus(job);
+            addJobSeekerJobListenrs(job);
+        } else if (Runtime.accountManager().getCurrentUser() instanceof Recruiter) {
+            checkRecruiterJobStatus(job);
+            //addRecruiterJobListenrs(job);
+        }
+
+        description.setText(job.getJobDescription());
+        location.setText(job.getState());
+        cat.setText(job.getCat());
+        salary.setText("$" + job.getSalary());
+
+    }
+
+    private void checkRecruiterJobStatus(Job job) {
+        String userEmail = Runtime.accountManager().getCurrentUser().getEmail();
+        jobseekerButtons.setVisible(false);
+        recruiterButtons.setVisible(true);
+        if (Runtime.accountManager().getJobApplications().containsValue(job)) {
+            editBtn.setVisible(false);
+        }
+    }
+
+    public void checkJobSeekerJobStatus(Job job) {
+        String userEmail = Runtime.accountManager().getCurrentUser().getEmail();
+        jobseekerButtons.setVisible(true);
+        recruiterButtons.setVisible(false);
+        if (Runtime.accountManager().getJobInvitations().get(userEmail).contains(job)) {
             removeButton.setVisible(false);
             applyButton.setVisible(false);
             messagePanel.setVisible(true);
             messageLabel.setVisible(true);
-            messageText.setText(Runtime.accountManager().getMessages().get(currentUser + job.getID()));
-        } else if (Runtime.accountManager().getJobApplications().get(currentUser).contains(job)) {
+            messageText.setText(Runtime.accountManager().getMessages().get(userEmail + job.getID()));
+        } else if (Runtime.accountManager().getJobApplications().get(userEmail).contains(job)) {
             removeButton.setVisible(true);
             applyButton.setVisible(false);
         }
-        description.setText(job.getJobDescription());
-        location.setText(job.getState());
-        cat.setText(job.getCat());
-        salary.setText("$" + String.valueOf(job.getSalary()));
-        applyButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+    }
 
-            }
-        });
+    public void addJobSeekerJobListenrs(Job job) {
         applyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -67,10 +85,6 @@ public class DescriptionPage {
                 Runtime.accountManager().getJobApplications().writeToFile(Config.DT_JOB_APPLICATIONS);
                 removeButton.setVisible(true);
                 applyButton.setVisible(false);
-                jobList.remove(pageNumber * 3 + indexOfClick);
-                JOptionPane.showMessageDialog(desFrame, "Your application was sent!");
-                desFrame.dispose();
-                Runtime.showSearchResultsPage(Runtime.frame, jobList);
             }
         });
         removeButton.addActionListener(new ActionListener() {
@@ -81,10 +95,6 @@ public class DescriptionPage {
                 Runtime.accountManager().getJobApplications().writeToFile(Config.DT_JOB_APPLICATIONS);
                 removeButton.setVisible(false);
                 applyButton.setVisible(true);
-                jobList.remove(pageNumber * 3 + indexOfClick);
-                JOptionPane.showMessageDialog(desFrame, "Your application was deleted!");
-                desFrame.dispose();
-                Runtime.showSearchResultsPage(Runtime.frame, jobList);
             }
         });
     }
@@ -119,9 +129,6 @@ public class DescriptionPage {
         salary.setForeground(new Color(-592138));
         salary.setText("Salary");
         DescriptionPanel.add(salary, new com.intellij.uiDesigner.core.GridConstraints(14, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, new Dimension(-1, 100), 0, false));
-        applyButton = new JButton();
-        applyButton.setText("Apply");
-        DescriptionPanel.add(applyButton, new com.intellij.uiDesigner.core.GridConstraints(15, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, new Dimension(150, -1), 0, false));
         final JLabel label1 = new JLabel();
         Font label1Font = this.$$$getFont$$$("Calibri Light", Font.BOLD, 16, label1.getFont());
         if (label1Font != null) label1.setFont(label1Font);
@@ -164,10 +171,6 @@ public class DescriptionPage {
         final JPanel panel1 = new JPanel();
         panel1.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         DescriptionPanel.add(panel1, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        removeButton = new JButton();
-        removeButton.setText("Remove Application");
-        removeButton.setVisible(false);
-        DescriptionPanel.add(removeButton, new com.intellij.uiDesigner.core.GridConstraints(16, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, new Dimension(150, -1), 0, false));
         final com.intellij.uiDesigner.core.Spacer spacer3 = new com.intellij.uiDesigner.core.Spacer();
         DescriptionPanel.add(spacer3, new com.intellij.uiDesigner.core.GridConstraints(5, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_VERTICAL, 1, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         messagePanel = new JPanel();
@@ -184,6 +187,35 @@ public class DescriptionPage {
         messageLabel.setText("Message");
         messageLabel.setVisible(false);
         DescriptionPanel.add(messageLabel, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        recruiterButtons = new JPanel();
+        recruiterButtons.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 5, new Insets(0, 0, 0, 0), -1, -1));
+        recruiterButtons.setBackground(new Color(-13224648));
+        DescriptionPanel.add(recruiterButtons, new com.intellij.uiDesigner.core.GridConstraints(16, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        editBtn = new JButton();
+        editBtn.setText("Edit Job");
+        recruiterButtons.add(editBtn, new com.intellij.uiDesigner.core.GridConstraints(0, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        removeBtn = new JButton();
+        removeBtn.setText("Remove Job");
+        recruiterButtons.add(removeBtn, new com.intellij.uiDesigner.core.GridConstraints(0, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        suitablesBtn = new JButton();
+        suitablesBtn.setText("View Suitable JobSeekers");
+        recruiterButtons.add(suitablesBtn, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        viewApplicantsBtn = new JButton();
+        viewApplicantsBtn.setText("View Applicants");
+        recruiterButtons.add(viewApplicantsBtn, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final com.intellij.uiDesigner.core.Spacer spacer4 = new com.intellij.uiDesigner.core.Spacer();
+        recruiterButtons.add(spacer4, new com.intellij.uiDesigner.core.GridConstraints(0, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        jobseekerButtons = new JPanel();
+        jobseekerButtons.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
+        jobseekerButtons.setBackground(new Color(-13224648));
+        DescriptionPanel.add(jobseekerButtons, new com.intellij.uiDesigner.core.GridConstraints(15, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        applyButton = new JButton();
+        applyButton.setText("Apply");
+        jobseekerButtons.add(applyButton, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, new Dimension(150, -1), 0, false));
+        removeButton = new JButton();
+        removeButton.setText("Remove Application");
+        removeButton.setVisible(false);
+        jobseekerButtons.add(removeButton, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, new Dimension(150, -1), 0, false));
     }
 
     /**
