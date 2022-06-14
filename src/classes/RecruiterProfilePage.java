@@ -334,7 +334,10 @@ public class RecruiterProfilePage implements Page {
     public void update() {
         // Do Nothing
     }
-
+    @Override
+    public String pageName() {
+        return "RecruiterProfile";
+    }
     @Override
     public JPanel getPanel() {
         return recruiterProfile;

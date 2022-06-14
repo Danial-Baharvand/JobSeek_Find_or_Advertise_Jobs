@@ -162,7 +162,10 @@ public class RecruiterHomePage implements Page {
     public void update() {
         //
     }
-
+    @Override
+    public String pageName() {
+        return "RecruiterHome";
+    }
     @Override
     public JPanel getPanel() {
         return recruiterHomePanel;

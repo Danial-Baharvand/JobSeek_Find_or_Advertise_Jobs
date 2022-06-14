@@ -182,7 +182,10 @@ public class JobListing implements Page {
     public void update() {
         // Do nothing
     }
-
+    @Override
+    public String pageName() {
+        return "Job";
+    }
     @Override
     public JPanel getPanel() {
         return jobListingPanel;

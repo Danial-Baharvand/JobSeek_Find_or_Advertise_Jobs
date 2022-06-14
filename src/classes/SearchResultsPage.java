@@ -101,7 +101,10 @@ public class SearchResultsPage<V> implements Page {
     public void update() {
         // Do nothing
     }
-
+    @Override
+    public String pageName() {
+        return "SearchResults";
+    }
     @Override
     public JPanel getPanel() {
         return searchResultsPanel;

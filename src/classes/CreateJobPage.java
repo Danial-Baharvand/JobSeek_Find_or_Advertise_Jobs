@@ -282,7 +282,10 @@ public class CreateJobPage implements Page {
     public void update() {
         // do nothing
     }
-
+    @Override
+    public String pageName() {
+        return "Create a Job";
+    }
     @Override
     public JPanel getPanel() {
         return createJobPanel;

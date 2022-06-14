@@ -93,7 +93,10 @@ public class AppliedJobsPage implements Page {
     public void update() {
         // Do nothing
     }
-
+    @Override
+    public String pageName() {
+        return "Applied Jobs";
+    }
     @Override
     public JPanel getPanel() {
         return appliedJobsPanel;

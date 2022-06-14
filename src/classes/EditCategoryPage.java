@@ -142,7 +142,10 @@ public class EditCategoryPage implements Page {
     public void update() {
         //Do nothing
     }
-
+    @Override
+    public String pageName() {
+        return "Edit Category";
+    }
     @Override
     public JPanel getPanel() {
         return catPagePanel;

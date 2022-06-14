@@ -125,4 +125,9 @@ public class ApplicationFormPage implements Page {
     public JPanel getPanel() {
         return panel1;
     }
+
+    @Override
+    public String pageName() {
+        return "Application Form";
+    }
 }

@@ -251,7 +251,10 @@ public class DescriptionPage implements Page {
     public void update() {
         // Do nothing
     }
-
+    @Override
+    public String pageName() {
+        return "Description";
+    }
     @Override
     public JPanel getPanel() {
         return descriptionPanel;

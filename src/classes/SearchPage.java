@@ -46,8 +46,6 @@ public class SearchPage implements Page {
             public void actionPerformed(ActionEvent e) {
 
                 // Creates a new search object and adds the user's selected criteria to it
-                Collection<Job> appliedJobs = Runtime.accountManager().getJobApplications().
-                        get(Runtime.accountManager().getCurrentUser().getEmail());
                 Collection<Job> availableJobs = Runtime.accountManager().getJobs().values();
                 // To only show jobs that have not been applied for
                 //availableJobs.removeAll(appliedJobs);
@@ -210,7 +208,10 @@ public class SearchPage implements Page {
     public void update() {
         // Do nothing
     }
-
+    @Override
+    public String pageName() {
+        return "Search";
+    }
     @Override
     public JPanel getPanel() {
         return searchPanel;

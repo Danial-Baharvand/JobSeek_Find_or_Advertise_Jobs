@@ -337,7 +337,10 @@ public class JobSeekerHomePage implements Page {
     public void update() {
         // Do nothing
     }
-
+    @Override
+    public String pageName() {
+        return "Job Seeker Home";
+    }
     @Override
     public JPanel getPanel() {
         return jobSeekerProfile;

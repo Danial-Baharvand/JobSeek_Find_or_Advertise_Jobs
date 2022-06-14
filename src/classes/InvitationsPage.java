@@ -148,7 +148,10 @@ public class InvitationsPage implements Page {
     public void update() {
         // Do nothing
     }
-
+    @Override
+    public String pageName() {
+        return "Invitations";
+    }
     @Override
     public JPanel getPanel() {
         return panel1;

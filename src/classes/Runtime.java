@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Deque;
 
 public class Runtime {
-    private static JFrame frame = new JFrame();
+    public static final JFrame frame = new JFrame();
     private static Header header;
     private static AccountManagement accMan;
 
@@ -49,8 +49,9 @@ public class Runtime {
         //showLoginPage();
 
         // SHOW SEARCH PAGE
+        //accMan.setCurrentUser(accMan.getJobSeekers().get("hulk@gmail.com"));
         showSearchPage();
-        accMan.setCurrentUser(accMan.getJobSeekers().get("hulk@gmail.com"));
+
 
 
         //SHOW RECRUITER HOME PAGE
@@ -85,43 +86,48 @@ public class Runtime {
     }
 
     public static void showSearchPage() {
-        showPage("Search Page", new SearchPage());
+        showPage( new SearchPage());
     }
     public static void showCreateJobPage() {
-        showPage("Create Job Page", new CreateJobPage());
+        showPage( new CreateJobPage());
     }
     public static void showEditCategoryPage(CreateJobPage jobPage) {
-        showPage("Edit Categories", new EditCategoryPage(jobPage));
+        showPage( new EditCategoryPage(jobPage));
     }
     public static void showLoginPage() {
-        showPage("Login Page", new LoginPage(accMan));
+        showPage( new LoginPage(accMan));
     }
     public static void showAppliedJobsPage() {
-        showPage("Applied Jobs", new AppliedJobsPage());
+        showPage( new AppliedJobsPage());
     }
     public static void showCreateAccountPage( String navigatedFrom) {
-        showPage("Create Account Page", new CreateAccountPage());
+        showPage( new CreateAccountPage());
     }
     public static void showCreateAccountPage() {
-        showPage("Create Account Page", new CreateAccountPage());
+        showPage( new CreateAccountPage());
     }
     public static void showRecruiterProfilePage(){
-        showPage("Recruiter Profile Page", new RecruiterProfilePage(Tests.createExampleRecruiter()));
+        showPage( new RecruiterProfilePage(Tests.createExampleRecruiter()));
     }
     public static void showJobSeekerHome(){
-        showPage("Job Seeker Home", new JobSeekerHomePage());
+        showPage( new JobSeekerHomePage());
     }
     public static void showRecruiterHome(){
-        showPage("Recruiter Home", new RecruiterHomePage());
+        showPage( new RecruiterHomePage());
     }
     public static void showSearchResultsPage(ArrayList<ScoredJob> jobList){
-        showPage("Search Results Page", new SearchResultsPage(jobList));
+        showPage(new SearchResultsPage(jobList));
     }
-    public static void showPage(String pageTitle, Page page){
-        frame.setTitle(pageTitle);
+    public static void showPage(Page page){
+        frame.setTitle(page.pageName());
         frame.getContentPane().removeAll();
         frame.repaint();
-        pagesVisited.add(page);
+        if (pagesVisited.isEmpty()||!pagesVisited.peekLast().getClass().equals(page.getClass())){
+            pagesVisited.add(page);
+        }else {
+            pagesVisited.removeLast();
+            pagesVisited.add(page);
+        }
         header.updateButtons();
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));

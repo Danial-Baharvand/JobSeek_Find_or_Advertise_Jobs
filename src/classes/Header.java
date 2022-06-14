@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Header extends JMenuBar {
+public class Header {
     private JPanel headerPanel;
     private JButton backButton;
     private JButton homeButton;
@@ -24,7 +24,8 @@ public class Header extends JMenuBar {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+            Runtime.getPagesVisited().removeLast();
+            Runtime.showPage(Runtime.getPagesVisited().removeLast());
 
             }
         });
