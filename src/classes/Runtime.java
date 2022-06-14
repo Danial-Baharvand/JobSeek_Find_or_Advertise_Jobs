@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Deque;
 
 public class Runtime {
-    public static JFrame frame = new JFrame();
+    private static JFrame frame = new JFrame();
     private static Header header;
     private static AccountManagement accMan;
 
@@ -46,37 +46,37 @@ public class Runtime {
         //testObject.testLogin(testLoginPage, testApplication);
 
         //SHOW LOGIN PAGE
-        //showLoginPage(frame);
+        //showLoginPage();
 
         // SHOW SEARCH PAGE
-        showSearchPage(frame);
+        showSearchPage();
         accMan.setCurrentUser(accMan.getJobSeekers().get("hulk@gmail.com"));
 
 
         //SHOW RECRUITER HOME PAGE
         //accMan.setCurrentUser(accMan.getRecruiters().get("hulk@gmail.com"));
-        //showRecruiterHome(frame);
+        //showRecruiterHome();
 
 
         //SHOW JOB SEEKER HOME Page
         //accMan.setCurrentUser(accMan.getJobSeekers().get("hulk@gmail.com"));
-        //showJobSeekerHome(frame);
+        //showJobSeekerHome();
 
 
         //SHOW Create Job PAGE
-        //showCreateJobPage(frame);
+        //showCreateJobPage();
         //accMan.setCurrentUser(accMan.getRecruiters().get("hulk@gmail.com"));
 
         //SHOW Edit Category Page
-        //showEditCategoryPage(frame, new CreateJobPage());
+        //showEditCategoryPage( new CreateJobPage());
         //accMan.setCurrentUser(accMan.getRecruiters().get("hulk@gmail.com"));
 
         //SHOW CREATE ACCOUNT PAGE
-        //showCreateAccountPage(frame);
+        //showCreateAccountPage();
 
         //SHOW RECRUITER PROFILE PAGE
         //accMan.setCurrentUser(accMan.getRecruiters().get("hulk@gmail.com"));
-        //showRecruiterProfilePage(frame);
+        //showRecruiterProfilePage();
 
 
 
@@ -84,37 +84,37 @@ public class Runtime {
 
     }
 
-    public static void showSearchPage(JFrame frame) {
+    public static void showSearchPage() {
         showPage("Search Page", new SearchPage());
     }
-    public static void showCreateJobPage(JFrame frame) {
+    public static void showCreateJobPage() {
         showPage("Create Job Page", new CreateJobPage());
     }
-    public static void showEditCategoryPage(JFrame frame, CreateJobPage jobPage) {
-        showPage("Edit Categories", new EditCategoryPage(frame, jobPage));
+    public static void showEditCategoryPage(CreateJobPage jobPage) {
+        showPage("Edit Categories", new EditCategoryPage(jobPage));
     }
-    public static void showLoginPage(JFrame frame) {
-        showPage("Login Page", new LoginPage(frame, accMan));
+    public static void showLoginPage() {
+        showPage("Login Page", new LoginPage(accMan));
     }
-    public static void showAppliedJobsPage(JFrame frame) {
-        showPage("Applied Jobs", new AppliedJobsPage(frame));
+    public static void showAppliedJobsPage() {
+        showPage("Applied Jobs", new AppliedJobsPage());
     }
-    public static void showCreateAccountPage(JFrame frame, String navigatedFrom) {
-        showPage("Create Account Page", new CreateAccountPage(frame));
+    public static void showCreateAccountPage( String navigatedFrom) {
+        showPage("Create Account Page", new CreateAccountPage());
     }
-    public static void showCreateAccountPage(JFrame frame) {
-        showPage("Create Account Page", new CreateAccountPage(frame));
+    public static void showCreateAccountPage() {
+        showPage("Create Account Page", new CreateAccountPage());
     }
-    public static void showRecruiterProfilePage(JFrame frame){
+    public static void showRecruiterProfilePage(){
         showPage("Recruiter Profile Page", new RecruiterProfilePage(Tests.createExampleRecruiter()));
     }
-    public static void showJobSeekerHome(JFrame frame){
+    public static void showJobSeekerHome(){
         showPage("Job Seeker Home", new JobSeekerHomePage());
     }
-    public static void showRecruiterHome(JFrame frame){
+    public static void showRecruiterHome(){
         showPage("Recruiter Home", new RecruiterHomePage());
     }
-    public static void showSearchResultsPage(JFrame frame, ArrayList<ScoredJob> jobList){
+    public static void showSearchResultsPage(ArrayList<ScoredJob> jobList){
         showPage("Search Results Page", new SearchResultsPage(jobList));
     }
     public static void showPage(String pageTitle, Page page){

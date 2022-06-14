@@ -14,7 +14,6 @@ import java.util.Locale;
 public class LoginPage implements Page {
 
     private JPanel mainPanel;
-    private final JFrame frame;
     private ClearingTextField emailClearingTextField;
     private ClearingPasswordField passwordClearingPasswordField;
     private JButton loginButton;
@@ -24,8 +23,7 @@ public class LoginPage implements Page {
     private JButton searchButton;
     private boolean passClicked = false;
 
-    public LoginPage(JFrame frame, AccountManagement accMan) {
-        this.frame = frame;
+    public LoginPage(AccountManagement accMan) {
 
         /**
          * @param email is String that is a User's email
@@ -53,7 +51,7 @@ public class LoginPage implements Page {
         createNewAccountButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Runtime.showCreateAccountPage(frame, "LoginPage");
+                Runtime.showCreateAccountPage();
             }
         });
         passwordClearingPasswordField.addMouseListener(new MouseAdapter() {

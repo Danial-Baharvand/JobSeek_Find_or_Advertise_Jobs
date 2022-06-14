@@ -4,7 +4,6 @@ import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
-import java.util.Collection;
 import java.util.Locale;
 
 public class AppliedJobsPage implements Page {
@@ -13,7 +12,7 @@ public class AppliedJobsPage implements Page {
     private JPanel jobsPanel;
     private JScrollPane jobsScroller;
 
-    public AppliedJobsPage(Frame frame) {
+    public AppliedJobsPage() {
         //GuiHelper.createOptionBox(jobsPanel, Runtime.accountManager().getJobApplications().get(Runtime.accountManager().getCurrentUser().getEmail()));
 
     }

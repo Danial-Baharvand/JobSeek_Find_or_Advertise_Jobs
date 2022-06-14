@@ -39,7 +39,7 @@ public class RecruiterHomePage implements Page {
         createJobButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Runtime.showCreateJobPage(Runtime.frame);
+                Runtime.showCreateJobPage();
             }
         });
     }

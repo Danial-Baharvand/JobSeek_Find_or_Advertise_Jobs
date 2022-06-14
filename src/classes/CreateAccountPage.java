@@ -11,7 +11,6 @@ import java.awt.event.ItemListener;
 import java.util.Locale;
 
 public class CreateAccountPage implements Page {
-    private final JFrame frame;
     private JComboBox userTypeComboBox;
     private ClearingTextField fullNameTextField;
     private ClearingTextField emailTextField;
@@ -25,14 +24,13 @@ public class CreateAccountPage implements Page {
     private JButton backButton;
     private JButton homeButton;
 
-    public CreateAccountPage(JFrame frame) {
-        this.frame = frame;
+    public CreateAccountPage() {
 
         createAccountButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 createJobSeeker();
-                Runtime.showLoginPage(frame);
+                Runtime.showLoginPage();
             }
         });
         userTypeComboBox.addItemListener(new ItemListener() {

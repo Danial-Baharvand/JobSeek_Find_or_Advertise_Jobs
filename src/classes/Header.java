@@ -32,9 +32,9 @@ public class Header extends JMenuBar {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (Runtime.accountManager().getCurrentUser() instanceof JobSeeker) {
-                    Runtime.showJobSeekerHome(Runtime.frame);
+                    Runtime.showJobSeekerHome();
                 } else if (Runtime.accountManager().getCurrentUser() instanceof Recruiter) {
-                    Runtime.showRecruiterHome(Runtime.frame);
+                    Runtime.showRecruiterHome();
                 }
             }
         });

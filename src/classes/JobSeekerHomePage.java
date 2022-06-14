@@ -152,7 +152,7 @@ public class JobSeekerHomePage implements Page {
                         get(Runtime.accountManager().getCurrentUser().getEmail()));
                 appliedSearch.setScores();
                 ArrayList<ScoredJob> jobList = appliedSearch.getScoredJobs();
-                Runtime.showSearchResultsPage(Runtime.frame, jobList);
+                Runtime.showSearchResultsPage(jobList);
             }
         });
         jobInvitationsButton.addActionListener(new ActionListener() {
@@ -162,7 +162,7 @@ public class JobSeekerHomePage implements Page {
                         get(Runtime.accountManager().getCurrentUser().getEmail()));
                 invitedSearch.setScores();
                 ArrayList<ScoredJob> jobList = invitedSearch.getScoredJobs();
-                Runtime.showSearchResultsPage(Runtime.frame, jobList);
+                Runtime.showSearchResultsPage(jobList);
             }
         });
     }

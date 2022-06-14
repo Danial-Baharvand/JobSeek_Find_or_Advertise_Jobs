@@ -32,7 +32,7 @@ public class CreateJobPage implements Page {
         catButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Runtime.showEditCategoryPage(new JFrame(), getPage());
+                Runtime.showEditCategoryPage(getPage());
             }
         });
         catCB.addFocusListener(new FocusAdapter() {

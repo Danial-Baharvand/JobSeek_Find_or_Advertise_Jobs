@@ -17,7 +17,7 @@ public class EditCategoryPage implements Page {
     private JPanel catsPanel;
     private JTextArea textArea1;
 
-    public EditCategoryPage(JFrame frame, CreateJobPage jobPage) {
+    public EditCategoryPage(CreateJobPage jobPage) {
         Runtime.accountManager().getCategories().readFromFile(Config.DT_CATEGORIES);
         GuiHelper.createOptionBox(catsPanel, Runtime.accountManager().getCategories().
                 getKeysForValue(Runtime.accountManager().getCurrentUser().getEmail()));
@@ -30,8 +30,6 @@ public class EditCategoryPage implements Page {
                 GuiHelper.createOptionBox(catsPanel, Runtime.accountManager().getCategories().getKeysForValue(Runtime
                         .accountManager().getCurrentUser().getEmail()));
                 catTB.setText("");
-                frame.setVisible(true);
-                frame.repaint();
                 jobPage.updateCategories();
 
             }
@@ -47,8 +45,6 @@ public class EditCategoryPage implements Page {
                 GuiHelper.createOptionBox(catsPanel, Runtime.accountManager().getCategories().getKeysForValue(Runtime.
                         accountManager().getCurrentUser().getEmail()));
                 jobPage.updateCategories();
-                frame.setVisible(true);
-                frame.repaint();
 
             }
         });

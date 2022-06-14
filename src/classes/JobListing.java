@@ -51,7 +51,7 @@ public class JobListing implements Page {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if (Runtime.accountManager().getCurrentUser() == null) {
-                    Runtime.showLoginPage(new JFrame());
+                    Runtime.showLoginPage();
                 } else {
                     JFrame desFrame = new JFrame("Description Page");
                     desFrame.setContentPane(new DescriptionPage(job).getDescriptionPanel());

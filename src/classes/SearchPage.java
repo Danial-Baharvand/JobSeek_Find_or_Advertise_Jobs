@@ -59,7 +59,7 @@ public class SearchPage implements Page {
                 search.setSalary(salarySlider.getValue() * 3000);
                 search.setScores();
                 ArrayList<ScoredJob> jobList = search.getScoredJobs();
-                Runtime.showSearchResultsPage(Runtime.frame, jobList);
+                Runtime.showSearchResultsPage(jobList);
             }
         });
     }
