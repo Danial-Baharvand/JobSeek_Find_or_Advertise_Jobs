@@ -68,7 +68,8 @@ public class Runtime {
         //SHOW JOB SEEKER HOME Page
         //showJobSeekerHome(frame);
 
-
+        //SHOW ADMIN HOME Page
+        showAdminHomePage(frame);
     }
 
     public static void showSearchPage(JFrame frame) {
@@ -173,6 +174,16 @@ public class Runtime {
         frame.pack();
         frame.setVisible(true);
     }
+
+    public static void showAdminHomePage(JFrame frame){
+        frame.setTitle("Admin Home Page");
+        frame.getContentPane().removeAll();
+        frame.repaint();
+        frame.setContentPane(new AdminHomePage().getAdminHomePage());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);}
+
     public static void showSearchResultsPage(JFrame frame, ArrayList<ScoredJob> jobList){
         frame.setTitle("Search Results Page");
         frame.getContentPane().removeAll();
