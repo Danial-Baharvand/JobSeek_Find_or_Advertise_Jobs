@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Wrapper class for 2 ArraListMultiMaps with needed functionality implemented
+ * Wrapper class for 2 ArrayListMultiMaps with needed functionality implemented
  */
 public class BiMultiMap <V> {
     //HashMap<String, Set<Object>> map = new HashMap<>();
