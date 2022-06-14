@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Locale;
 
-public class SearchPage {
+public class SearchPage implements Page {
     private final boolean searchClicked = false;
     private ClearingTextField searchTBox;
     private JButton searchButton;
@@ -34,7 +34,7 @@ public class SearchPage {
         return searchPanel;
     }
 
-    public SearchPage(HashSet<Job> jobs) {
+    public SearchPage() {
         /**test code to check categories' functionality
          should be removed when adding categories by recruiters is implemented
          */
@@ -206,4 +206,13 @@ public class SearchPage {
         return searchPanel;
     }
 
+    @Override
+    public void update() {
+        // Do nothing
+    }
+
+    @Override
+    public JPanel getPanel() {
+        return searchPanel;
+    }
 }

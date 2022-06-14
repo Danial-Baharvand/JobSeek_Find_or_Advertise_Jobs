@@ -6,7 +6,7 @@ import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.util.Locale;
 
-public class InvitationsPage {
+public class InvitationsPage implements Page {
     private JPanel panel1;
     private JTable table1;
     private JRadioButton radioButton1;
@@ -141,6 +141,16 @@ public class InvitationsPage {
      * @noinspection ALL
      */
     public JComponent $$$getRootComponent$$$() {
+        return panel1;
+    }
+
+    @Override
+    public void update() {
+        // Do nothing
+    }
+
+    @Override
+    public JPanel getPanel() {
         return panel1;
     }
 }

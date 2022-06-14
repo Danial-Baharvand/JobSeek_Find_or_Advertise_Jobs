@@ -11,7 +11,7 @@ import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Locale;
 
-public class LoginPage extends JFrame {
+public class LoginPage implements Page {
 
     private JPanel mainPanel;
     private final JFrame frame;
@@ -176,6 +176,16 @@ public class LoginPage extends JFrame {
      * @noinspection ALL
      */
     public JComponent $$$getRootComponent$$$() {
+        return mainPanel;
+    }
+
+    @Override
+    public void update() {
+        // Do nothing
+    }
+
+    @Override
+    public JPanel getPanel() {
         return mainPanel;
     }
 }

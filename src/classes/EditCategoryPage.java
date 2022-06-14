@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
 
-public class EditCategoryPage {
+public class EditCategoryPage implements Page {
     private JPanel catPagePanel;
     private JButton addBtn;
     private JButton removeBtn;
@@ -139,6 +139,16 @@ public class EditCategoryPage {
      * @noinspection ALL
      */
     public JComponent $$$getRootComponent$$$() {
+        return catPagePanel;
+    }
+
+    @Override
+    public void update() {
+        //Do nothing
+    }
+
+    @Override
+    public JPanel getPanel() {
         return catPagePanel;
     }
 }

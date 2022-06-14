@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class SearchResultsPage<V> {
+public class SearchResultsPage<V> implements Page {
     private final int NO_OF_RESULTS = 3;
     private JPanel searchResultsPanel;
     private JButton backButton;
@@ -97,4 +97,13 @@ public class SearchResultsPage<V> {
         return searchResultsPanel;
     }
 
+    @Override
+    public void update() {
+        // Do nothing
+    }
+
+    @Override
+    public JPanel getPanel() {
+        return searchResultsPanel;
+    }
 }

@@ -8,7 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Locale;
 
-public class JobListing {
+public class JobListing implements Page {
     private JPanel jobListingPanel;
     private JPanel jobPanel;
     private JLabel jobTitle;
@@ -51,7 +51,7 @@ public class JobListing {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if (Runtime.accountManager().getCurrentUser() == null) {
-                    Runtime.showLoginPage(new JFrame(), "Search Results Page");
+                    Runtime.showLoginPage(new JFrame());
                 } else {
                     JFrame desFrame = new JFrame("Description Page");
                     desFrame.setContentPane(new DescriptionPage(job).getDescriptionPanel());
@@ -175,6 +175,16 @@ public class JobListing {
      * @noinspection ALL
      */
     public JComponent $$$getRootComponent$$$() {
+        return jobListingPanel;
+    }
+
+    @Override
+    public void update() {
+        // Do nothing
+    }
+
+    @Override
+    public JPanel getPanel() {
         return jobListingPanel;
     }
 }

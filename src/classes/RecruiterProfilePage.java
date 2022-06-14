@@ -12,7 +12,7 @@ import java.util.*;
 /*
  * Recruiter profile is what the job seeker can see of the recruiter.
  */
-public class RecruiterProfilePage {
+public class RecruiterProfilePage implements Page {
     private JPanel recruiterProfile;
     private JButton backButton;
     private JScrollPane recruiterProfileDescription;
@@ -330,6 +330,15 @@ public class RecruiterProfilePage {
         return recruiterProfile;
     }
 
+    @Override
+    public void update() {
+        // Do Nothing
+    }
+
+    @Override
+    public JPanel getPanel() {
+        return recruiterProfile;
+    }
 }
 
 

@@ -7,7 +7,7 @@ import java.awt.*;
 import java.util.Collection;
 import java.util.Locale;
 
-public class AppliedJobsPage {
+public class AppliedJobsPage implements Page {
     private JPanel appliedJobsPanel;
     private JTextArea textArea1;
     private JPanel jobsPanel;
@@ -87,6 +87,16 @@ public class AppliedJobsPage {
     }
 
     public JPanel getAppliedJobsPanel() {
+        return appliedJobsPanel;
+    }
+
+    @Override
+    public void update() {
+        // Do nothing
+    }
+
+    @Override
+    public JPanel getPanel() {
         return appliedJobsPanel;
     }
 }

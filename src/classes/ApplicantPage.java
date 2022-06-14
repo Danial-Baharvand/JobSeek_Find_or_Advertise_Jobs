@@ -7,7 +7,7 @@ import javax.swing.plaf.FontUIResource;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.StyleContext;
 
-public class ApplicantPage {
+public class ApplicantPage implements Page {
     private JPanel panel1;
     private JButton sendInterviewRequestButton;
     private JTextArea textArea1;
@@ -105,4 +105,13 @@ public class ApplicantPage {
     }
 
 
+    @Override
+    public void update() {
+
+    }
+
+    @Override
+    public JPanel getPanel() {
+        return panel1;
+    }
 }

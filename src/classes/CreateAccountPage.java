@@ -10,7 +10,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Locale;
 
-public class CreateAccountPage {
+public class CreateAccountPage implements Page {
     private final JFrame frame;
     private JComboBox userTypeComboBox;
     private ClearingTextField fullNameTextField;
@@ -32,7 +32,7 @@ public class CreateAccountPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 createJobSeeker();
-                Runtime.showLoginPage(frame, "CreateAccountPage");
+                Runtime.showLoginPage(frame);
             }
         });
         userTypeComboBox.addItemListener(new ItemListener() {
@@ -51,7 +51,7 @@ public class CreateAccountPage {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Runtime.navigateBack();
+                //Runtime.navigateBack();
             }
         });
     }
@@ -271,6 +271,16 @@ public class CreateAccountPage {
      * @noinspection ALL
      */
     public JComponent $$$getRootComponent$$$() {
+        return mainPanel;
+    }
+
+    @Override
+    public void update() {
+        //Do nothing
+    }
+
+    @Override
+    public JPanel getPanel() {
         return mainPanel;
     }
 }

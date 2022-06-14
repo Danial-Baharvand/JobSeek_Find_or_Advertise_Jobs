@@ -3,7 +3,7 @@ package classes;
 import javax.swing.*;
 import java.awt.*;
 
-public class ApplicationFormPage {
+public class ApplicationFormPage implements Page {
     private JPanel panel1;
     private JTextArea textArea1;
     private JButton viewResumeButton;
@@ -113,6 +113,16 @@ public class ApplicationFormPage {
      * @noinspection ALL
      */
     public JComponent $$$getRootComponent$$$() {
+        return panel1;
+    }
+
+    @Override
+    public void update() {
+        // Do nothing
+    }
+
+    @Override
+    public JPanel getPanel() {
         return panel1;
     }
 }
