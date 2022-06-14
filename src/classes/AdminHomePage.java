@@ -10,7 +10,7 @@ import java.util.*;
 import java.util.Collection;
 import java.util.Locale;
 
-public class AdminHomePage {
+public class AdminHomePage implements Page {
     private JPanel panel1;
     private JTextArea textArea1;
     private JPanel CategoriesList;
@@ -237,6 +237,21 @@ public class AdminHomePage {
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
+    }
+
+    @Override
+    public void update() {
+        // Do nothing
+    }
+
+    @Override
+    public JPanel getPanel() {
+        return panel1;
+    }
+
+    @Override
+    public String pageName() {
+        return "Admin Home";
     }
 }
 

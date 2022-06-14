@@ -23,7 +23,6 @@ public class RecruiterHomePage implements Page {
     private JButton createJobButton;
     private JLabel emailText;
     private JLabel orgText;
-    private JPanel headerContainer;
 
     public RecruiterHomePage() {
 
@@ -60,13 +59,13 @@ public class RecruiterHomePage implements Page {
      */
     private void $$$setupUI$$$() {
         recruiterHomePanel = new JPanel();
-        recruiterHomePanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
+        recruiterHomePanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         recruiterHome = new JPanel();
         recruiterHome.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(8, 4, new Insets(20, 20, 20, 20), -1, -1));
         recruiterHome.setBackground(new Color(-13224648));
         recruiterHome.setEnabled(false);
         recruiterHome.setForeground(new Color(-5592406));
-        recruiterHomePanel.add(recruiterHome, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        recruiterHomePanel.add(recruiterHome, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         jobListingsLabel = new JLabel();
         Font jobListingsLabelFont = this.$$$getFont$$$(null, Font.BOLD, 16, jobListingsLabel.getFont());
         if (jobListingsLabelFont != null) jobListingsLabel.setFont(jobListingsLabelFont);
@@ -120,9 +119,6 @@ public class RecruiterHomePage implements Page {
         orgText.setForeground(new Color(-592138));
         orgText.setText("Label");
         recruiterHome.add(orgText, new com.intellij.uiDesigner.core.GridConstraints(3, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 16), null, 0, false));
-        headerContainer = new JPanel();
-        headerContainer.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        recruiterHomePanel.add(headerContainer, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
     }
 
     /**
@@ -162,10 +158,12 @@ public class RecruiterHomePage implements Page {
     public void update() {
         //
     }
+
     @Override
     public String pageName() {
         return "RecruiterHome";
     }
+
     @Override
     public JPanel getPanel() {
         return recruiterHomePanel;

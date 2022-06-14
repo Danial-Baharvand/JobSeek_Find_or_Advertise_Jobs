@@ -12,6 +12,7 @@ public class Runtime {
     public static final JFrame frame = new JFrame();
     private static Header header;
     private static AccountManagement accMan;
+    private static Dimension screenSize;
 
 
     /**
@@ -32,6 +33,8 @@ public class Runtime {
 
     public static void main(String[] args) {
         setLookAndFeel();
+        screenSize = getPageSize();
+        frame.setLocation(screenSize.width/2, screenSize.height/2);
         header = new Header();
         accMan = new AccountManagement();
         //accMan.setCurrentUser(accMan.getRecruiters().get("hulk@gmail.com"));
@@ -82,17 +85,12 @@ public class Runtime {
         //accMan.setCurrentUser(accMan.getRecruiters().get("hulk@gmail.com"));
         //showRecruiterProfilePage();
 
-
-
-
-        Toolkit tk=Toolkit.getDefaultToolkit(); //Initializing the Toolkit class.
-        Dimension screenSize = tk.getScreenSize(); //Get the Screen resolution of our device.
-        Point center = GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint();
-        int width = screenSize.width/2;
-        int height = screenSize.height/2;
-        frame.setBounds(center.x - width / 2, center.y - height / 2, width, height);
         //SHOW ADMIN HOME Page
-        showAdminHomePage(frame);
+        //showAdminHomePage();
+
+
+
+
     }
 
     public static void showSearchPage() {
@@ -128,6 +126,9 @@ public class Runtime {
     public static void showSearchResultsPage(ArrayList<ScoredJob> jobList){
         showPage(new SearchResultsPage(jobList));
     }
+    public static void showAdminHomePage(){
+        showPage(new AdminHomePage());
+    }
     public static void showPage(Page page){
         frame.setTitle(page.pageName());
         frame.getContentPane().removeAll();
@@ -141,32 +142,23 @@ public class Runtime {
         header.updateButtons();
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+
+
+
+        JPanel pagePanel = page.getPanel();
+        pagePanel.setPreferredSize(screenSize);
+
+
         panel.add(header.getPanel());
-        panel.add(page.getPanel());
+        panel.add(pagePanel);
         frame.setContentPane(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
 
-    public static void showAdminHomePage(JFrame frame){
-        frame.setTitle("Admin Home Page");
-        frame.getContentPane().removeAll();
-        frame.repaint();
-        frame.setContentPane(new AdminHomePage().getAdminHomePage());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);}
 
-    public static void showSearchResultsPage(JFrame frame, ArrayList<ScoredJob> jobList){
-        frame.setTitle("Search Results Page");
-        frame.getContentPane().removeAll();
-        frame.repaint();
-        frame.setContentPane(new SearchResultsPage(jobList).getSearchResultsPanel());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-    }
 
     public static AccountManagement accountManager() {
         return accMan;
@@ -183,7 +175,14 @@ public class Runtime {
             System.out.println("Nimbus isn't availible!");
         }
     }
-
+    private static Dimension getPageSize(){
+        Toolkit tk=Toolkit.getDefaultToolkit(); //Initializing the Toolkit class.
+        Dimension screenSize = tk.getScreenSize(); //Get the Screen resolution of our device.
+        Point center = GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint();
+        int width = screenSize.width/2;
+        int height = screenSize.height/2;
+        return new Dimension(width, height);
+    }
 
     public static Header getHeader() {
         return header;
