@@ -23,20 +23,16 @@ public class RecruiterProfilePage implements Page {
     private JLabel recruiterEmail;
     private JLabel recruiterWebsite;
     private JLabel recruiterSocial;
-    private JLabel recruiterPhoneNo;
     private JLabel jobListingsLabel;
     private JPanel jobListingsPanel;
     private JPanel job1ListingPanel;
     private JLabel job1Title;
-    private JLabel job1Score;
     private JLabel job1Company;
     private JPanel job2ListingPanel;
     private JLabel job2Title;
-    private JLabel job2Score;
     private JLabel job2Company;
     private JPanel job3ListingPanel;
     private JLabel job3Title;
-    private JLabel job3Score;
     private JLabel job3Company;
     private JPanel jobDescriptionPanel;
     private JLabel selectedJobLocation;
@@ -63,16 +59,25 @@ public class RecruiterProfilePage implements Page {
 
         ArrayList<Job> jobList = new ArrayList<>(jobs);
 
+        //each button pressed = will display job description and ability to apply
 
+        if (jobList.get(0) != null) {
             job1Title.setText(jobList.get(0).getJobTitle());
             job1Company.setText(recruiter.getOrg());
-            //job2Title.setText(jobList.get(1).getJobTitle());
-            //job2Company.setText(recruiter.getOrg());
-            //job3Title.setText(jobList.get(2).getJobTitle());
-            //job3Company.setText(recruiter.getOrg());
 
-        //each button pressed = will display job description and ability to apply
-        viewButton.addActionListener(new ActionListener() {
+            viewButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    selectedJobDescription.setText(jobList.get(0).getJobDescription());
+                    selectedJobCompensation.setText(String.valueOf(jobList.get(0).getSalary()));
+                    selectedJobLocation.setText(jobList.get(0).getState());
+                    selectJobCategory.setText(jobList.get(0).getCat());
+                }
+            });
+        }
+
+
+        /*viewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 selectedJobDescription.setText(jobList.get(0).getJobDescription());
@@ -80,9 +85,23 @@ public class RecruiterProfilePage implements Page {
                 selectedJobLocation.setText(jobList.get(0).getState());
                 selectJobCategory.setText(jobList.get(0).getCat());
             }
-        });
+        });*/
 
-        viewButton1.addActionListener(new ActionListener() {
+        if (jobList.get(1) != null) {
+            job2Title.setText(jobList.get(1).getJobTitle());
+            job2Company.setText(recruiter.getOrg());
+
+            viewButton1.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    selectedJobDescription.setText(jobList.get(1).getJobDescription());
+                    selectedJobCompensation.setText(String.valueOf(jobList.get(1).getSalary()));
+                    selectedJobLocation.setText(jobList.get(1).getState());
+                    selectJobCategory.setText(jobList.get(1).getCat());
+                }
+            });
+        }
+        /*viewButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 selectedJobDescription.setText(jobList.get(1).getJobDescription());
@@ -90,17 +109,21 @@ public class RecruiterProfilePage implements Page {
                 selectedJobLocation.setText(jobList.get(1).getState());
                 selectJobCategory.setText(jobList.get(1).getCat());
             }
-        });
+        });*/
 
-        viewButton2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                selectedJobDescription.setText(jobList.get(2).getJobDescription());
-                selectedJobCompensation.setText(String.valueOf(jobList.get(2).getSalary()));
-                selectedJobLocation.setText(jobList.get(2).getState());
-                selectJobCategory.setText(jobList.get(2).getCat());
-            }
-        });
+        if (jobList.get(2) != null) {
+            job3Title.setText(jobList.get(2).getJobTitle());
+            job3Company.setText(recruiter.getOrg());
+            viewButton2.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    selectedJobDescription.setText(jobList.get(2).getJobDescription());
+                    selectedJobCompensation.setText(String.valueOf(jobList.get(2).getSalary()));
+                    selectedJobLocation.setText(jobList.get(2).getState());
+                    selectJobCategory.setText(jobList.get(2).getCat());
+                }
+            });
+        }
 
         backButton.addActionListener(new ActionListener() {
             @Override
@@ -109,7 +132,6 @@ public class RecruiterProfilePage implements Page {
             }
         });
     }
-
 
 
     public JPanel getRecruiterProfilePage() {
@@ -195,18 +217,12 @@ public class RecruiterProfilePage implements Page {
         viewButton = new JButton();
         viewButton.setText("View");
         job1ListingPanel.add(viewButton, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_EAST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), new Dimension(150, -1), 0, false));
-        job1Score = new JLabel();
-        job1Score.setText("Score");
-        job1ListingPanel.add(job1Score, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_EAST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         job2ListingPanel = new JPanel();
         job2ListingPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
         jobListingsPanel.add(job2ListingPanel, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         job2Title = new JLabel();
         job2Title.setText("Label");
         job2ListingPanel.add(job2Title, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(133, 16), null, 0, false));
-        job2Score = new JLabel();
-        job2Score.setText("Score");
-        job2ListingPanel.add(job2Score, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_EAST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         job2Company = new JLabel();
         job2Company.setText("Label");
         job2ListingPanel.add(job2Company, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(133, 16), null, 0, false));
@@ -219,9 +235,6 @@ public class RecruiterProfilePage implements Page {
         job3Title = new JLabel();
         job3Title.setText("Label");
         job3ListingPanel.add(job3Title, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(133, 16), null, 0, false));
-        job3Score = new JLabel();
-        job3Score.setText("Score");
-        job3ListingPanel.add(job3Score, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_EAST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         job3Company = new JLabel();
         job3Company.setText("Label");
         job3ListingPanel.add(job3Company, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(133, 16), null, 0, false));
@@ -289,16 +302,6 @@ public class RecruiterProfilePage implements Page {
         recruiterSocial.setForeground(new Color(-592138));
         recruiterSocial.setText("Socials");
         recruiterProfile.add(recruiterSocial, new com.intellij.uiDesigner.core.GridConstraints(9, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JLabel label5 = new JLabel();
-        Font label5Font = this.$$$getFont$$$(null, Font.BOLD, -1, label5.getFont());
-        if (label5Font != null) label5.setFont(label5Font);
-        label5.setForeground(new Color(-592138));
-        label5.setText("Phone:");
-        recruiterProfile.add(label5, new com.intellij.uiDesigner.core.GridConstraints(10, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        recruiterPhoneNo = new JLabel();
-        recruiterPhoneNo.setForeground(new Color(-592138));
-        recruiterPhoneNo.setText("Phone");
-        recruiterProfile.add(recruiterPhoneNo, new com.intellij.uiDesigner.core.GridConstraints(11, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**

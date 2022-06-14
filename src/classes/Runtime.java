@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
+import java.awt.*;
+import java.awt.Toolkit;
+import javax.swing.JFrame;
 
 public class Runtime {
     public static final JFrame frame = new JFrame();
@@ -82,7 +85,14 @@ public class Runtime {
 
 
 
-
+        Toolkit tk=Toolkit.getDefaultToolkit(); //Initializing the Toolkit class.
+        Dimension screenSize = tk.getScreenSize(); //Get the Screen resolution of our device.
+        Point center = GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint();
+        int width = screenSize.width/2;
+        int height = screenSize.height/2;
+        frame.setBounds(center.x - width / 2, center.y - height / 2, width, height);
+        //SHOW ADMIN HOME Page
+        showAdminHomePage(frame);
     }
 
     public static void showSearchPage() {
@@ -138,6 +148,26 @@ public class Runtime {
         frame.pack();
         frame.setVisible(true);
     }
+
+    public static void showAdminHomePage(JFrame frame){
+        frame.setTitle("Admin Home Page");
+        frame.getContentPane().removeAll();
+        frame.repaint();
+        frame.setContentPane(new AdminHomePage().getAdminHomePage());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);}
+
+    public static void showSearchResultsPage(JFrame frame, ArrayList<ScoredJob> jobList){
+        frame.setTitle("Search Results Page");
+        frame.getContentPane().removeAll();
+        frame.repaint();
+        frame.setContentPane(new SearchResultsPage(jobList).getSearchResultsPanel());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
     public static AccountManagement accountManager() {
         return accMan;
     }

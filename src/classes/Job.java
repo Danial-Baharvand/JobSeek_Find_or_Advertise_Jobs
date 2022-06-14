@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 public class Job {
     Recruiter recruiter;
-
     String jobTitle;
     String state;
     String cat;
@@ -13,6 +12,7 @@ public class Job {
     String keywords;
     String jobDescription;
     Boolean published = false;
+
     public Job(){}
     public Job(String jobDetails, HashMap<String, Recruiter> recruiters){
         String[] setValues = jobDetails.split("\\|");

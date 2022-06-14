@@ -5,11 +5,13 @@ public class User {
     private String email;
     private String password;
     private String fullName;
+    private boolean active;
 
     public User(String email, String fullName, String password) {
         this.email = email;
         this.fullName = fullName;
         this.password = password;
+        this.active = true;
     }
 
     public String getEmail() {
@@ -36,4 +38,11 @@ public class User {
         this.fullName = fullName;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 }
