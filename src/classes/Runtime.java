@@ -66,8 +66,8 @@ public class Runtime {
 
 
         //SHOW JOB SEEKER HOME Page
-        //accMan.setCurrentUser(accMan.getJobSeekers().get("hulk@gmail.com"));
-        //showJobSeekerHome();
+        accMan.setCurrentUser(accMan.getJobSeekers().get("hulk@gmail.com"));
+        showJobSeekerHome();
 
 
         //SHOW Create Job PAGE
@@ -86,8 +86,8 @@ public class Runtime {
         //showRecruiterProfilePage();
 
         //SHOW ADMIN HOME Page
-        accMan.setCurrentUser(accMan.getAdmins().get("admin@admin.com"));
-        showAdminHomePage();
+        //accMan.setCurrentUser(accMan.getAdmins().get("admin@admin.com"));
+        //showAdminHomePage();
 
 
 
