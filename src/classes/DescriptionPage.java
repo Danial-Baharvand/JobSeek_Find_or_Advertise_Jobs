@@ -15,7 +15,6 @@ public class DescriptionPage implements Page {
     private JLabel cat;
     private JPanel descriptionPanel;
     private JLabel salary;
-    private JTextArea textArea1;
     private JButton removeButton;
     private JLabel messageLabel;
     private JTextPane messageText;

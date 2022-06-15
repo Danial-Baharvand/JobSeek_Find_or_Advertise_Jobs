@@ -16,7 +16,6 @@ import java.util.Map;
 public class SearchResultsPage<V> implements Page {
     private final int NO_OF_RESULTS = 3;
     private JPanel searchResultsPanel;
-    private JTextArea textArea1;
     private JPanel jobsPanel;
     private JLabel noJobsLabel;
     private JScrollPane jobsScroller;
@@ -60,14 +59,11 @@ public class SearchResultsPage<V> implements Page {
      */
     private void $$$setupUI$$$() {
         searchResultsPanel = new JPanel();
-        searchResultsPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(3, 5, new Insets(20, 20, 20, 20), -1, -1));
+        searchResultsPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 4, new Insets(20, 20, 20, 20), -1, -1));
         searchResultsPanel.setBackground(new Color(-13224648));
         searchResultsPanel.setVisible(true);
-        textArea1 = new JTextArea();
-        textArea1.setBackground(new Color(-11348236));
-        searchResultsPanel.add(textArea1, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 5, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTH, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, 1, 1, null, new Dimension(1000, 15), new Dimension(-1, 1), 0, false));
         jobsScroller = new JScrollPane();
-        searchResultsPanel.add(jobsScroller, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 4, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        searchResultsPanel.add(jobsScroller, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 4, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         jobsPanel = new JPanel();
         jobsPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         jobsScroller.setViewportView(jobsPanel);
@@ -75,7 +71,7 @@ public class SearchResultsPage<V> implements Page {
         noJobsLabel.setForeground(new Color(-1));
         noJobsLabel.setText("No jobs could be found!");
         noJobsLabel.setVisible(true);
-        searchResultsPanel.add(noJobsLabel, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 4, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        searchResultsPanel.add(noJobsLabel, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 4, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**

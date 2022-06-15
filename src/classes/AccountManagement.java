@@ -1,11 +1,14 @@
 package classes;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
 public class AccountManagement {
     private HashMap<String, JobSeeker> jobSeekers;
     private HashMap<String, Recruiter> recruiters;
     private HashMap<String, Admin> admins;
+    private Set<String> inactiveUsers;
     private HashMap<String, Job> jobs;
     private HashMap<String, String> messages;
     private final BiMultiMap<String> categories = new BiMultiMap<>();
@@ -34,9 +37,7 @@ public class AccountManagement {
         jobApplications.readFromFile(Config.DT_JOB_APPLICATIONS, jobs);
         jobInvitations.readFromFile(Config.DT_JOB_INVITATIONS, jobs);
         jobCategories.readFromFile(Config.DT_JOB_CATEGORIES, jobs);
-        System.out.println(jobCategories.map);
-        System.out.println(jobInvitations.map);
-        System.out.println(jobApplications.map);;
+        inactiveUsers = io.readInactiveUsers();
     }
     public void addUser(User user){
         if (user instanceof JobSeeker){
@@ -107,5 +108,9 @@ public class AccountManagement {
 
     public JobMap getJobCategories() {
         return jobCategories;
+    }
+
+    public Set<String> getInactiveUsers(){
+        return inactiveUsers;
     }
 }

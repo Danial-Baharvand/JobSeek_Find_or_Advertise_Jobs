@@ -17,6 +17,7 @@ public class Config {
     final static String DT_JOB_INVITATIONS = "src/dataTables/jobInvitations.csv";
     final static String DT_JOB_CATEGORIES = "src/dataTables/jobCategories.csv";
     final static String DT_MESSAGES =  "src/dataTables/messages.csv";
+    final static String DT_INACTIVE_USERS = "src/dataTables/inactiveUsers.csv";
     final static int EMAIL = 0;
     final static int NAME = 1;
     final static int PASSWORD = 2;

@@ -92,6 +92,14 @@ public class Runtime {
 
 
 
+        Thesaurus testRequest = new Thesaurus("bottle", "en_US", "json");
+
+        Toolkit tk=Toolkit.getDefaultToolkit(); //Initializing the Toolkit class.
+        Dimension screenSize = tk.getScreenSize(); //Get the Screen resolution of our device.
+        Point center = GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint();
+        int width = screenSize.width/2;
+        int height = screenSize.height/2;
+        frame.setBounds(center.x - width / 2, center.y - height / 2, width, height);
 
     }
 

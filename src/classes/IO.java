@@ -4,6 +4,8 @@ import com.google.common.collect.Sets;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import static classes.Config.*;
 
@@ -21,27 +23,30 @@ public class IO {
             e.printStackTrace();
         }
     }
-    public void clearFileContent(String path){
+
+    public void clearFileContent(String path) {
         try {
             PrintWriter pw = new PrintWriter(path);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
-    public void writeToDB(Object data){
-        if (data instanceof JobSeeker){
+
+    public void writeToDB(Object data) {
+        if (data instanceof JobSeeker) {
             newLine(DT_JOBSEEKERS, data.toString());
-        }else if (data instanceof Recruiter) {
+        } else if (data instanceof Recruiter) {
             newLine(DT_RECRUITERS, data.toString());
-        }else if (data instanceof Admin) {
+        } else if (data instanceof Admin) {
             newLine(DT_RECRUITERS, data.toString());
-        }else if (data instanceof Job) {
+        } else if (data instanceof Job) {
             newLine(DT_JOBS, data.toString());
-        }else if (data instanceof String) {
+        } else if (data instanceof String) {
             newLine(DT_MESSAGES, data.toString());
         }
     }
-    public HashMap<String, JobSeeker> readJobSeekers(BiMultiMap<String> skills){
+
+    public HashMap<String, JobSeeker> readJobSeekers(BiMultiMap<String> skills) {
         String line;
         HashMap<String, JobSeeker> jobSeekers = new HashMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(Config.DT_JOBSEEKERS))) {
@@ -58,7 +63,8 @@ public class IO {
         }
         return jobSeekers;
     }
-    public HashMap<String, Recruiter> readRecruiters(){
+
+    public HashMap<String, Recruiter> readRecruiters() {
         String line;
         HashMap<String, Recruiter> recruiters = new HashMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(DT_RECRUITERS))) {
@@ -73,7 +79,8 @@ public class IO {
         }
         return recruiters;
     }
-    public HashMap<String, Admin> readAdmins(){
+
+    public HashMap<String, Admin> readAdmins() {
         String line;
         HashMap<String, Admin> admins = new HashMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(DT_ADMINS))) {
@@ -87,7 +94,8 @@ public class IO {
         }
         return admins;
     }
-    public HashMap<String, Job> readJobs(HashMap<String, Recruiter> recruiters){
+
+    public HashMap<String, Job> readJobs(HashMap<String, Recruiter> recruiters) {
         String line;
         HashMap<String, Job> jobs = new HashMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(DT_JOBS))) {
@@ -114,5 +122,19 @@ public class IO {
             e.printStackTrace();
         }
         return messages;
+    }
+
+    public Set<String> readInactiveUsers() {
+        String line;
+        Set<String> emails = new HashSet<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(DT_INACTIVE_USERS))) {
+            while ((line = reader.readLine()) != null && !line.equals("")) {
+                emails.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return emails;
+
     }
 }
