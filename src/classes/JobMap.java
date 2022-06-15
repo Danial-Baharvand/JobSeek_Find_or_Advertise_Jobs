@@ -13,6 +13,7 @@ public class JobMap extends BiMultiMap<Job> {
         IO io = new IO();
         io.clearFileContent(path);
         for (Map.Entry<String,Job> entry:map.entries()) {
+            System.out.println(entry);
             io.newLine(path, entry.getKey() + "=" + entry.getValue().getID());
         }
         io.newLine(path, String.valueOf(s));
@@ -25,6 +26,9 @@ public class JobMap extends BiMultiMap<Job> {
             while ((line = reader.readLine()) != null && !line.equals("")) {
                 String[] userData = line.split("=");
                 Job fileJob = jobs.get(userData[1]);
+                if (fileJob == null){
+                    fileJob = new Job();
+                }
                 map.put(userData[0], fileJob);
                 invertedMap.put(fileJob, userData[0]);
             }

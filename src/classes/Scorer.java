@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 public class Scorer {
 
     /**
-     * Takes 2 strings and returns the number of matching words as a percentatge of all words in the first string
+     * Takes 2 strings and returns the number of matching words as a percentage of all words in the first string
      * @param title1 first string to be compared. It is used for work count.
      * @param title2 second string to be compared.
      * @return an integer between 0 and 100 representing the percentage of matching between 2 strings
@@ -52,13 +52,14 @@ public class Scorer {
      * Returns the average of the score given to the job for each criterion
      * @param search a search object which has the search criterion
      * @param job the job to be compared to the search parameters
-     * @return an int between 0 and 100 repersenting the score given to the job
+     * @return an int between 0 and 100 representing the score given to the job
      */
-    public int scoreAgaintSearch(Search search, Job job){
+    public int scoreAgainstSearch(Search search, Job job){
         HashSet<Integer> allScores = new HashSet<>();
         if (!search.getSearchText().isEmpty()){allScores.add(scoreStrings(search.getSearchText(), job.getJobTitle()));}
         if (!search.getStates().isEmpty()){allScores.add(scoreComboBox(search.getStates(), job.getState()));}
-        if (!search.getCats().isEmpty()){allScores.add(scoreComboBox(search.getCats(), job.getCat()));}
+        // TODO: implement logic to score job categories against search categories
+        //if (!search.getCats().isEmpty()){allScores.add(scoreComboBox(search.getCats(), job.getCat()));}
         if (!search.getJobTypes().isEmpty()){allScores.add(scoreComboBox(search.getJobTypes(), job.getJobType()));}
         if (search.getSalary() > 0){allScores.add(scoreSalary(search.getSalary(), job.getSalary()));}
         return  (int) allScores.stream().mapToDouble(a -> a).average().orElse(0.0);

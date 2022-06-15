@@ -53,10 +53,11 @@ public class JobListing implements Page {
                 if (Runtime.accountManager().getCurrentUser() == null) {
                     Runtime.showLoginPage();
                 } else {
-                    JFrame desFrame = new JFrame("Description Page");
+                    Runtime.showDescriptionPage(job);
+                    /*JFrame desFrame = new JFrame("Description Page");
                     desFrame.setContentPane(new DescriptionPage(job).getDescriptionPanel());
                     desFrame.pack();
-                    desFrame.setVisible(true);
+                    desFrame.setVisible(true);*/
                 }
             }
 

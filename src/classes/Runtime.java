@@ -61,18 +61,19 @@ public class Runtime {
 
 
         //SHOW RECRUITER HOME PAGE
-        //accMan.setCurrentUser(accMan.getRecruiters().get("hulk@gmail.com"));
-        //showRecruiterHome();
+        accMan.setCurrentUser(accMan.getRecruiters().get("fury@recruiter.com"));
+        showRecruiterHome();
 
 
         //SHOW JOB SEEKER HOME Page
-        accMan.setCurrentUser(accMan.getJobSeekers().get("hulk@gmail.com"));
-        showJobSeekerHome();
+        //accMan.setCurrentUser(accMan.getJobSeekers().get("hulk@gmail.com"));
+        //showJobSeekerHome();
 
 
         //SHOW Create Job PAGE
+        //accMan.setCurrentUser(accMan.getRecruiters().get("fury@recruiter.com"));
         //showCreateJobPage();
-        //accMan.setCurrentUser(accMan.getRecruiters().get("hulk@gmail.com"));
+
 
         //SHOW Edit Category Page
         //showEditCategoryPage( new CreateJobPage());
@@ -82,7 +83,7 @@ public class Runtime {
         //showCreateAccountPage();
 
         //SHOW RECRUITER PROFILE PAGE
-        //accMan.setCurrentUser(accMan.getRecruiters().get("hulk@gmail.com"));
+        //accMan.setCurrentUser(accMan.getRecruiters().get("fury@recruiter.com"));
         //showRecruiterProfilePage();
 
         //SHOW ADMIN HOME Page
@@ -91,7 +92,7 @@ public class Runtime {
 
 
 
-
+        Thesaurus testRequest = new Thesaurus("bottle", "en_US", "json");
     }
 
     public static void showSearchPage() {
@@ -99,6 +100,9 @@ public class Runtime {
     }
     public static void showCreateJobPage() {
         showPage( new CreateJobPage());
+    }
+    public static void showDescriptionPage(Job job) {
+        showPage( new DescriptionPage(job));
     }
     public static void showEditCategoryPage(String category) {
         showPage( new EditCategoryPage(category));

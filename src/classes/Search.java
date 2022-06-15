@@ -26,7 +26,7 @@ public class Search {
             int skillScore = 100; //to be implemented
             int searchScore = skillScore;
             if (getSearchText() != null){
-                searchScore = scorer.scoreAgaintSearch(this, job);
+                searchScore = scorer.scoreAgainstSearch(this, job);
             }
 
             scoredJobs.add(new ScoredJob(job, searchScore/2 + skillScore/2));

@@ -102,7 +102,7 @@ public class IO {
             while ((line = reader.readLine()) != null && !line.equals("")) {
                 String[] userData = line.split("\\|");
                 Job job = new Job(line, recruiters);
-                jobs.putIfAbsent(userData[JOB_TITLE] + userData[JOB_RECRUITER], job);
+                jobs.putIfAbsent(job.getID(), job);
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -70,7 +70,7 @@ public class RecruiterProfilePage implements Page {
                     selectedJobDescription.setText(jobList.get(0).getJobDescription());
                     selectedJobCompensation.setText(String.valueOf(jobList.get(0).getSalary()));
                     selectedJobLocation.setText(jobList.get(0).getState());
-                    selectJobCategory.setText(jobList.get(0).getCat());
+                    //selectJobCategory.setText(jobList.get(0).getCat());
                 }
             });
         }
@@ -96,7 +96,7 @@ public class RecruiterProfilePage implements Page {
                     selectedJobDescription.setText(jobList.get(1).getJobDescription());
                     selectedJobCompensation.setText(String.valueOf(jobList.get(1).getSalary()));
                     selectedJobLocation.setText(jobList.get(1).getState());
-                    selectJobCategory.setText(jobList.get(1).getCat());
+                    //selectJobCategory.setText(jobList.get(1).getCat());
                 }
             });
         }
@@ -119,17 +119,10 @@ public class RecruiterProfilePage implements Page {
                     selectedJobDescription.setText(jobList.get(2).getJobDescription());
                     selectedJobCompensation.setText(String.valueOf(jobList.get(2).getSalary()));
                     selectedJobLocation.setText(jobList.get(2).getState());
-                    selectJobCategory.setText(jobList.get(2).getCat());
+                    //selectJobCategory.setText(jobList.get(2).getCat());
                 }
             });
         }
-
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
     }
 
 
