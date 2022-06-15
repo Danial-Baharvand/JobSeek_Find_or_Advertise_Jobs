@@ -18,8 +18,8 @@ public class AdminHomePage implements Page {
     private JButton jobSeekerDeactivateButton;
     private JButton jobSeekerReActivateButton;
     private JButton catRemoveButton;
-    private JButton recruiterDeactiveButton;
-    private JButton recruiterReActivateButton1;
+    private JButton recruiterDeactivateButton;
+    private JButton recruiterReActivateButton;
     private JLabel adminLabel;
     private JPanel inactiveJobSeekersList;
     private JPanel inactiveRecruitersList;
@@ -28,6 +28,8 @@ public class AdminHomePage implements Page {
     private JTextArea textArea1;
     private ClearingTextField catNameTB;
     private JLabel userList;
+    IO io = new IO();
+    Set<String> inactive;
 
     public AdminHomePage() {
         populateCatsPanel();
@@ -36,30 +38,34 @@ public class AdminHomePage implements Page {
         Collection<JobSeeker> jobSeekers = Runtime.accountManager().getJobSeekers().values();
         Collection<Recruiter> recruiters = Runtime.accountManager().getRecruiters().values();
 
+        inactive = new HashSet<String>();
+
+        inactive.add("captain@example.com");
+        inactive.add("fury@recruiter.com");
 
         ArrayList<String> activeJobSeekerUsers = new ArrayList<String>();
         for (JobSeeker jobSeeker : jobSeekers) {
-            if (jobSeeker.isActive()) {
+            if (!inactive.contains(jobSeeker.getEmail()))
                 activeJobSeekerUsers.add(jobSeeker.getEmail());
-            }
         }
+
         ArrayList<String> inactiveJobSeekersUsers = new ArrayList<String>();
         for (JobSeeker jobSeeker : jobSeekers) {
-            if (!jobSeeker.isActive()) {
+            if (inactive.contains(jobSeeker.getEmail())) {
                 inactiveJobSeekersUsers.add(jobSeeker.getEmail());
             }
         }
 
         ArrayList<String> activeRecruiterUsers = new ArrayList<String>();
         for (Recruiter recruiter : recruiters) {
-            if (recruiter.isActive()) {
+            if (!inactive.contains(recruiter.getEmail()))
                 activeRecruiterUsers.add(recruiter.getEmail());
             }
-        }
+
 
         ArrayList<String> inactiveRecruiterUsers = new ArrayList<String>();
         for (Recruiter recruiter : recruiters) {
-            if (!recruiter.isActive()) {
+            if (inactive.contains(recruiter.getEmail())) {
                 inactiveRecruiterUsers.add(recruiter.getEmail());
             }
         }
@@ -70,22 +76,69 @@ public class AdminHomePage implements Page {
         GuiHelper.createOptionBox(inactiveRecruitersList, inactiveRecruiterUsers);
 
 
-
-        /*jobSeekerDeactivateButton.addActionListener(new ActionListener() {
+        jobSeekerDeactivateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                        Set<JobSeeker> js = currentUser.getSkills();
-                        for (String s : GuiHelper.getSelectedOptions(skillsList)) {
-                            strings.remove(s);
-                            Runtime.accountManager().getSkills().remove(currentUser.getEmail(), s);
-                        }
-                        GuiHelper.createOptionBox(skillsList, new ArrayList<>(currentUser.getSkills()));
-                        Runtime.accountManager().getSkills().writeToFile(Config.DT_SKILLS);
-
-                    }
-                });
+                for (String s : GuiHelper.getSelectedOptions(activeJobSeekerList)) {
+                    inactive.add(Runtime.accountManager().getJobSeekers().get(s).getEmail());
+                    activeJobSeekerUsers.remove(s);
+                    inactiveJobSeekersUsers.add(s);
+                    GuiHelper.createOptionBox(activeJobSeekerList, activeJobSeekerUsers);
+                    GuiHelper.createOptionBox(inactiveJobSeekersList, inactiveJobSeekersUsers);
+                    //io.writeToDB(Runtime.accountManager().getJobSeekers());
+                }
+                activeJobSeekerList.updateUI();
+                inactiveJobSeekersList.updateUI();
             }
-        });*/
+        });
+
+        jobSeekerReActivateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (String s : GuiHelper.getSelectedOptions(inactiveJobSeekersList)) {
+                    inactive.remove(Runtime.accountManager().getJobSeekers().get(s).getEmail());
+                    inactiveJobSeekersUsers.remove(s);
+                    activeJobSeekerUsers.add(s);
+                    GuiHelper.createOptionBox(inactiveJobSeekersList, inactiveJobSeekersUsers);
+                    GuiHelper.createOptionBox(activeJobSeekerList, activeJobSeekerUsers);
+                    //io.writeToDB(Runtime.accountManager().getJobSeekers());
+                }
+                activeJobSeekerList.updateUI();
+                inactiveJobSeekersList.updateUI();
+            }
+        });
+
+        recruiterDeactivateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (String s : GuiHelper.getSelectedOptions(activeRecruiterList)) {
+                    inactive.add(Runtime.accountManager().getRecruiters().get(s).getEmail());
+                    activeRecruiterUsers.remove(s);
+                    inactiveRecruiterUsers.add(s);
+                    GuiHelper.createOptionBox(activeRecruiterList, activeRecruiterUsers);
+                    GuiHelper.createOptionBox(inactiveRecruitersList, inactiveRecruiterUsers);
+                    //io.writeToDB(Runtime.accountManager().getJobSeekers());
+                }
+                activeJobSeekerList.updateUI();
+                inactiveJobSeekersList.updateUI();
+            }
+        });
+
+        recruiterReActivateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (String s : GuiHelper.getSelectedOptions(inactiveRecruitersList)) {
+                    inactive.remove(Runtime.accountManager().getRecruiters().get(s).getEmail());
+                    inactiveRecruiterUsers.remove(s);
+                    activeRecruiterUsers.add(s);
+                    GuiHelper.createOptionBox(inactiveRecruitersList, inactiveRecruiterUsers);
+                    GuiHelper.createOptionBox(activeRecruiterList, activeRecruiterUsers);
+                }
+                activeJobSeekerList.updateUI();
+                inactiveJobSeekersList.updateUI();
+            }
+        });
+
         catAddButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -99,6 +152,7 @@ public class AdminHomePage implements Page {
                 }
             }
         });
+
         catRemoveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -122,7 +176,10 @@ public class AdminHomePage implements Page {
                 }
             }
         });
+
+
     }
+
 
     private void populateCatsPanel() {
         GuiHelper.createRadioBox(categoriesList, Runtime.accountManager().getCategories().keySet());
@@ -218,18 +275,18 @@ public class AdminHomePage implements Page {
         jobSeekerReActivateButton = new JButton();
         jobSeekerReActivateButton.setText("Re-Activate");
         panel2.add(jobSeekerReActivateButton, new com.intellij.uiDesigner.core.GridConstraints(3, 4, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        recruiterDeactiveButton = new JButton();
-        recruiterDeactiveButton.setText("Deactivate");
-        panel2.add(recruiterDeactiveButton, new com.intellij.uiDesigner.core.GridConstraints(8, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        recruiterDeactivateButton = new JButton();
+        recruiterDeactivateButton.setText("Deactivate");
+        panel2.add(recruiterDeactivateButton, new com.intellij.uiDesigner.core.GridConstraints(8, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label5 = new JLabel();
         Font label5Font = this.$$$getFont$$$("Calibri Light", Font.BOLD, 16, label5.getFont());
         if (label5Font != null) label5.setFont(label5Font);
         label5.setForeground(new Color(-592138));
         label5.setText("Recruiters (Active)");
         panel2.add(label5, new com.intellij.uiDesigner.core.GridConstraints(8, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        recruiterReActivateButton1 = new JButton();
-        recruiterReActivateButton1.setText("Re-Activate");
-        panel2.add(recruiterReActivateButton1, new com.intellij.uiDesigner.core.GridConstraints(8, 5, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        recruiterReActivateButton = new JButton();
+        recruiterReActivateButton.setText("Re-Activate");
+        panel2.add(recruiterReActivateButton, new com.intellij.uiDesigner.core.GridConstraints(8, 5, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label6 = new JLabel();
         Font label6Font = this.$$$getFont$$$("Calibri Light", Font.BOLD, 16, label6.getFont());
         if (label6Font != null) label6.setFont(label6Font);
