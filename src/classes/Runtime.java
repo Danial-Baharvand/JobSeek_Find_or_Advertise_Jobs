@@ -101,6 +101,9 @@ public class Runtime {
     public static void showCreateJobPage() {
         showPage( new CreateJobPage());
     }
+    public static void showCreateJobPage(Job job) {
+        showPage( new CreateJobPage(job));
+    }
     public static void showDescriptionPage(Job job) {
         showPage( new DescriptionPage(job));
     }

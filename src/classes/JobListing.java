@@ -54,10 +54,6 @@ public class JobListing implements Page {
                     Runtime.showLoginPage();
                 } else {
                     Runtime.showDescriptionPage(job);
-                    /*JFrame desFrame = new JFrame("Description Page");
-                    desFrame.setContentPane(new DescriptionPage(job).getDescriptionPanel());
-                    desFrame.pack();
-                    desFrame.setVisible(true);*/
                 }
             }
 

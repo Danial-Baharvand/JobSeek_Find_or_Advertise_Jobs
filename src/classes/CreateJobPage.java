@@ -20,58 +20,94 @@ public class CreateJobPage implements Page {
     private ClearingTextField keywordsTB;
     private JTextArea textArea1;
     private JPanel catOptions;
+    private Job job;
 
     public CreateJobPage() {
-        //Runtime.accountManager().getRecruiterJobs().readFromFile(Config.DT_JOBS);
-        Runtime.accountManager().getCategories().readFromFile(Config.DT_CATEGORIES);
-        stateCB.setRenderer(new PromptComboBoxRenderer("Location"));
-        jobTypeCB.setRenderer(new PromptComboBoxRenderer("Job Type"));
-        GuiHelper.createOptionBox(catOptions, Runtime.accountManager().getCategories().keySet());
+        setUpPage();
+        addListeners(false);
+    }
 
+    public CreateJobPage(Job job) {
+        setUpPage();
+        this.job = job;
+        jobTitleTB.setText(job.getJobTitle());
+        jobTitleTB.setDefaultText("Job Listing Title", true);
+        stateCB.setSelectedItem(job.getState());
+        jobTypeCB.setSelectedItem(job.getJobType());
+        jobDescTA.setText(job.getJobDescription());
+        jobDescTA.setDefaultText("Job Description", true);
+        GuiHelper.setSelectedOptions(catOptions, Runtime.accountManager().getJobCategories().getKeysForValue(job));
+        keywordsTB.setText(job.getKeywords());
+        keywordsTB.setDefaultText("Type in keywords separated by space (\" \")", true);
+        salaryTB.setText(String.valueOf(job.getSalary()));
+        salaryTB.setDefaultText("Salary", true);
+
+        addListeners(true);
+    }
+
+    private void addListeners(boolean edit) {
         saveBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                createJob(false);
+                try {
+                    if (edit) {
+                        Job.removeJob(job);
+                    }
+                    createJob(false);
+                    Runtime.getPagesVisited().clear();
+                    Runtime.showRecruiterHome();
+                    JOptionPane.showMessageDialog(null, "Job was saved!");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                }
             }
         });
         publishBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                createJob(true);
+                try {
+                    if (edit) {
+                        Job.removeJob(job);
+                    }
+                    createJob(true);
+                    Runtime.getPagesVisited().clear();
+                    Runtime.showRecruiterHome();
+                    JOptionPane.showMessageDialog(null, "Job was published!");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                }
             }
         });
     }
 
-    private void createJob(boolean publish) {
+    private void setUpPage() {
+        stateCB.setRenderer(new PromptComboBoxRenderer("Location"));
+        jobTypeCB.setRenderer(new PromptComboBoxRenderer("Job Type"));
+        GuiHelper.createOptionBox(catOptions, Runtime.accountManager().getCategories().keySet());
+    }
 
-        try {
-            Job newJob = new Job();
-            newJob.setJobTitle(jobTitleTB.forceGetText());
-            newJob.setRecruiter((Recruiter) Runtime.accountManager().getCurrentUser());
-            newJob.setJobDescription(jobDescTA.forceGetText());
-            newJob.setState(stateCB.getSelectedItem().toString());
-            newJob.setSalary(Integer.parseInt(salaryTB.forceGetText()));
-            newJob.setJobType(jobTypeCB.getSelectedItem().toString());
-            newJob.setKeywords(keywordsTB.forceGetText());
-            newJob.setPublished(publish);
-            if (Runtime.accountManager().getJobs().containsKey(newJob.getID())) {
-                throw new Exception("Duplicate Job: You already have a job with the same title!");
-            }
-            Runtime.accountManager().getRecruiterJobs().put(newJob.getRecruiter().getEmail(), newJob);
-            Runtime.accountManager().getRecruiterJobs().writeToFile(Config.DT_RECRUITER_JOBS);
-            for (String category : GuiHelper.getSelectedOptions(catOptions)) {
-                Runtime.accountManager().getJobCategories().put(category, newJob);
-            }
-            Runtime.accountManager().getJobCategories().writeToFile(Config.DT_JOB_CATEGORIES);
-            IO io = new IO();
-            Runtime.accountManager().getJobs().put(newJob.getID(), newJob);
-            io.writeToDB(newJob);
-
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+    private void createJob(boolean publish) throws Exception {
+        Job newJob = new Job();
+        newJob.setJobTitle(jobTitleTB.forceGetText());
+        newJob.setRecruiter((Recruiter) Runtime.accountManager().getCurrentUser());
+        newJob.setJobDescription(jobDescTA.forceGetText());
+        newJob.setState(stateCB.getSelectedItem().toString());
+        newJob.setSalary(Integer.parseInt(salaryTB.forceGetText()));
+        newJob.setJobType(jobTypeCB.getSelectedItem().toString());
+        newJob.setKeywords(keywordsTB.forceGetText());
+        newJob.setPublished(publish);
+        if (Runtime.accountManager().getJobs().containsKey(newJob.getID())) {
+            throw new Exception("Duplicate Job: You already have a job with the same title!");
         }
-
+        Runtime.accountManager().getRecruiterJobs().put(newJob.getRecruiter().getEmail(), newJob);
+        Runtime.accountManager().getRecruiterJobs().writeToFile(Config.DT_RECRUITER_JOBS);
+        for (String category : GuiHelper.getSelectedOptions(catOptions)) {
+            Runtime.accountManager().getJobCategories().put(category, newJob);
+        }
+        Runtime.accountManager().getJobCategories().writeToFile(Config.DT_JOB_CATEGORIES);
+        IO io = new IO();
+        Runtime.accountManager().getJobs().put(newJob.getID(), newJob);
+        io.writeToDB(newJob);
     }
 
     public CreateJobPage getPage() {
@@ -100,6 +136,7 @@ public class CreateJobPage implements Page {
         createJobPanel = new JPanel();
         createJobPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(15, 4, new Insets(20, 20, 20, 20), -1, -1));
         createJobPanel.setBackground(new Color(-13224648));
+        createJobPanel.setEnabled(true);
         final com.intellij.uiDesigner.core.Spacer spacer1 = new com.intellij.uiDesigner.core.Spacer();
         createJobPanel.add(spacer1, new com.intellij.uiDesigner.core.GridConstraints(3, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         jobDescTA = new ClearingTextArea();
@@ -127,6 +164,7 @@ public class CreateJobPage implements Page {
         saveBtn.setText("Save");
         panel1.add(saveBtn, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), new Dimension(150, -1), 0, false));
         publishBtn = new JButton();
+        publishBtn.setEnabled(true);
         publishBtn.setText("Publish");
         panel1.add(publishBtn, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), new Dimension(150, -1), 0, false));
         textArea1 = new JTextArea();
@@ -217,12 +255,12 @@ public class CreateJobPage implements Page {
         Font label8Font = this.$$$getFont$$$("Calibri Light", Font.BOLD, 16, label8.getFont());
         if (label8Font != null) label8.setFont(label8Font);
         label8.setForeground(new Color(-592138));
-        label8.setText("Skills");
+        label8.setText("Keywords");
         createJobPanel.add(label8, new com.intellij.uiDesigner.core.GridConstraints(11, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         keywordsTB = new ClearingTextField();
         keywordsTB.setBackground(new Color(-1973791));
         keywordsTB.setForeground(new Color(-13224648));
-        keywordsTB.setText("Type in skills seprated by space (\" \")");
+        keywordsTB.setText("Type in keywords separated by space (\" \")");
         keywordsTB.setToolTipText("Coding Java SQL");
         createJobPanel.add(keywordsTB, new com.intellij.uiDesigner.core.GridConstraints(12, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 25), null, 0, false));
     }

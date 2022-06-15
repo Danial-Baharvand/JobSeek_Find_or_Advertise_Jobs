@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class DescriptionPage implements Page {
     private JButton applyButton;
@@ -41,48 +42,47 @@ public class DescriptionPage implements Page {
             addJobSeekerJobListenrs(job);
         } else if (Runtime.accountManager().getCurrentUser() instanceof Recruiter) {
             checkRecruiterJobStatus(job);
-            //addRecruiterJobListenrs(job);
+            addRecruiterJobListenrs(job);
         }
 
         description.setText(job.getJobDescription());
         location.setText(job.getState());
-        cat.setText(Runtime.accountManager().getJobCategories().getKeysForValue(job).toString());
+        // Getting job categories, capitalizing the first letter and adding a comma between them and setting to label
+        cat.setText(Runtime.accountManager().getJobCategories().getKeysForValue(job).stream().
+                map(s -> Character.toUpperCase(s.charAt(0)) + s.substring(1)).
+                collect(Collectors.joining(", ")));
+
         salary.setText("$" + job.getSalary());
 
+
+    }
+
+    private void addRecruiterJobListenrs(Job job) {
         removeBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                removeJob(job);
+                Job.removeJob(job);
+                Runtime.getPagesVisited().clear();
+                Runtime.showRecruiterHome();
+                JOptionPane.showMessageDialog(null, "Job was deleted!");
+            }
+        });
+        editBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Runtime.showCreateJobPage(job);
             }
         });
     }
 
-    private void removeJob(Job job) {
-        AccountManagement ac = Runtime.accountManager();
-        ac.getJobApplications().removeAllKeys(job);
-        ac.getJobCategories().removeAllKeys(job);
-        ac.getJobInvitations().removeAllKeys(job);
-        ac.getRecruiterJobs().removeAllKeys(job);
-        ac.getJobs().remove(job.getID());
-        ac.getJobApplications().writeToFile(Config.DT_JOB_APPLICATIONS);
-        ac.getJobCategories().writeToFile(Config.DT_JOB_CATEGORIES);
-        ac.getJobInvitations().writeToFile(Config.DT_JOB_INVITATIONS);
-        ac.getRecruiterJobs().writeToFile(Config.DT_RECRUITER_JOBS);
-        IO io = new IO();
-        for (Job jobToWrite : ac.getJobs().values()) {
-            io.writeToDB(jobToWrite);
-        }
-        Runtime.getPagesVisited().clear();
-        Runtime.showRecruiterHome();
-        JOptionPane.showMessageDialog(null, "Job was deleted!");
-    }
 
     private void checkRecruiterJobStatus(Job job) {
         String userEmail = Runtime.accountManager().getCurrentUser().getEmail();
         jobseekerButtons.setVisible(false);
         recruiterButtons.setVisible(true);
         if (Runtime.accountManager().getJobApplications().containsValue(job)) {
-            editBtn.setVisible(false);
+            editBtn.setEnabled(false);
+            editBtn.setToolTipText("Jobs with ongoing applications can't be edited");
         }
     }
 

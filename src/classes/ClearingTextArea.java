@@ -39,4 +39,8 @@ public class ClearingTextArea extends JTextArea implements FocusListener {
             clicked = false;
         }
     }
+    public void setDefaultText(String defaultText, boolean clicked) {
+        this.defaultText = defaultText;
+        this.clicked = clicked;
+    }
 }

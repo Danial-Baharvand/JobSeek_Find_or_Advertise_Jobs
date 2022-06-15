@@ -225,7 +225,7 @@
           </vspacer>
           <component id="19a55" class="classes.ClearingTextField" binding="catNameTB">
             <constraints>
-              <grid row="3" column="7" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+              <grid row="3" column="7" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
                 <maximum-size width="150" height="-1"/>
               </grid>
             </constraints>

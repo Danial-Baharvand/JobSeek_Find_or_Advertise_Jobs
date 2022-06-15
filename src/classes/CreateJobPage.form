@@ -7,6 +7,7 @@
     </constraints>
     <properties>
       <background color="-13224648"/>
+      <enabled value="true"/>
     </properties>
     <border type="none"/>
     <children>
@@ -81,6 +82,7 @@
               </grid>
             </constraints>
             <properties>
+              <enabled value="true"/>
               <text value="Publish"/>
             </properties>
           </component>
@@ -254,7 +256,7 @@
         <properties>
           <font name="Calibri Light" size="16" style="1"/>
           <foreground color="-592138"/>
-          <text value="Skills"/>
+          <text value="Keywords"/>
         </properties>
       </component>
       <component id="c2e8a" class="classes.ClearingTextField" binding="keywordsTB">
@@ -266,7 +268,7 @@
         <properties>
           <background color="-1973791"/>
           <foreground color="-13224648"/>
-          <text value="Type in skills seprated by space (&quot; &quot;)"/>
+          <text value="Type in keywords separated by space (&quot; &quot;)"/>
           <toolTipText value="Coding Java SQL"/>
         </properties>
       </component>

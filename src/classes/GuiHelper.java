@@ -18,6 +18,14 @@ public class GuiHelper {
         }
         return selectedOptions;
     }
+    public static void setSelectedOptions(JPanel optionsPanel, Collection<String> selected) {
+        Component[] allOptions = optionsPanel.getComponents();
+        for (Component option : allOptions) {
+            if (selected.contains(((JCheckBox)option).getText().toLowerCase())) {
+                ((JCheckBox) option).setSelected(true);
+            }
+        }
+    }
     public static String  getSelectedRadio(JPanel optionsPanel) throws Exception {
         Component[] allOptions = optionsPanel.getComponents();
         for (Component option : allOptions) {

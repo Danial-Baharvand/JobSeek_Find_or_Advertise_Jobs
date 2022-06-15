@@ -39,4 +39,9 @@ public class ClearingTextField extends JTextField implements FocusListener {
             clicked = false;
         }
     }
+
+    public void setDefaultText(String defaultText, boolean clicked) {
+        this.defaultText = defaultText;
+        this.clicked = clicked;
+    }
 }
