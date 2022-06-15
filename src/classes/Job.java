@@ -1,30 +1,33 @@
 package classes;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Set;
 
 public class Job {
     Recruiter recruiter;
     String jobTitle;
     String state;
-    String cat;
     int salary;
     String jobType;
     String keywords;
     String jobDescription;
     Boolean published = false;
 
-    public Job(){}
+    public Job(){
+        this.jobTitle = "This job was removed";
+    }
     public Job(String jobDetails, HashMap<String, Recruiter> recruiters){
+        //this.categories = Runtime.accountManager().getJobCategories().
         String[] setValues = jobDetails.split("\\|");
         this.jobTitle = setValues[0];
         this.state =setValues[1];
-        this.cat =setValues[2];
-        this.salary =Integer.parseInt(setValues[3]);
-        this.jobType =setValues[4];
-        this.keywords =setValues[5];
-        this.jobDescription =setValues[6];
-        this.recruiter = recruiters.get(setValues[7]);
-        this.published =Boolean.parseBoolean(setValues[8]);
+        this.salary =Integer.parseInt(setValues[2]);
+        this.jobType =setValues[3];
+        this.keywords =setValues[4];
+        this.jobDescription =setValues[5].replace("$$newline$$", "\n");
+        this.recruiter = recruiters.get(setValues[6]);
+        this.published =Boolean.parseBoolean(setValues[7]);
     }
     public Boolean getPublished() {
         return published;
@@ -38,11 +41,11 @@ public class Job {
     public String toString() {
         return   jobTitle + '|' +
                  state + '|' +
-                 cat + '|' +
                  salary + '|' +
                  jobType + '|' +
                  keywords + '|' +
-                 jobDescription + '|' +
+                 jobDescription.replace("\n", "$$newline$$")
+                         .replace("\r", "$$newline$$") + '|' +
                  recruiter.getEmail() + '|' +
                  published;
     }
@@ -60,10 +63,6 @@ public class Job {
 
     public String getState() {
         return state;
-    }
-
-    public String getCat() {
-        return cat;
     }
 
     public int getSalary() {
@@ -88,11 +87,6 @@ public class Job {
 
     public void setState(String state) {
         this.state = state;
-    }
-
-
-    public void setCat(String cat) {
-        this.cat = cat;
     }
 
     public void setSalary(int salary) {

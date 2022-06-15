@@ -104,7 +104,7 @@ public class AdminHomePage implements Page {
             public void actionPerformed(ActionEvent e) {
                 try {
                     String deleteStr = GuiHelper.getSelectedRadio(categoriesList);
-                    Runtime.accountManager().getCategories().removeAll(deleteStr);
+                    Runtime.accountManager().getCategories().removeAllValues(deleteStr);
                     Runtime.accountManager().getCategories().writeToFile(Config.DT_CATEGORIES);
                     populateCatsPanel();
                 } catch (Exception ex) {

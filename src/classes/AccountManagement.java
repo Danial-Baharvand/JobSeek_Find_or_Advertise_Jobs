@@ -13,6 +13,7 @@ public class AccountManagement {
     private final JobMap recruiterJobs = new JobMap();
     private final JobMap jobApplications = new JobMap();
     private final JobMap jobInvitations = new JobMap();
+    private final JobMap jobCategories = new JobMap();
     private User currentUser;
 
 
@@ -32,6 +33,10 @@ public class AccountManagement {
         recruiterJobs.readFromFile(Config.DT_RECRUITER_JOBS, jobs);
         jobApplications.readFromFile(Config.DT_JOB_APPLICATIONS, jobs);
         jobInvitations.readFromFile(Config.DT_JOB_INVITATIONS, jobs);
+        jobCategories.readFromFile(Config.DT_JOB_CATEGORIES, jobs);
+        System.out.println(jobCategories.map);
+        System.out.println(jobInvitations.map);
+        System.out.println(jobApplications.map);;
     }
     public void addUser(User user){
         if (user instanceof JobSeeker){
@@ -98,5 +103,9 @@ public class AccountManagement {
 
     public HashMap<String, String> getMessages() {
         return messages;
+    }
+
+    public JobMap getJobCategories() {
+        return jobCategories;
     }
 }

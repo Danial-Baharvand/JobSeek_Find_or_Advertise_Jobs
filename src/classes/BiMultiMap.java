@@ -35,9 +35,13 @@ public class BiMultiMap <V> {
         map.remove(key, value);
         invertedMap.remove(value, key);
     }
-    public void removeAll(String key){
+    public void removeAllValues(String key){
         map.removeAll(key);
         invertedMap =Multimaps.invertFrom(map, ArrayListMultimap.create());
+    }
+    public void removeAllKeys(V value){
+        invertedMap.removeAll(value);
+        map = Multimaps.invertFrom(invertedMap, HashMultimap.create());
     }
     public boolean containsKey(String key){
         return map.containsKey(key);

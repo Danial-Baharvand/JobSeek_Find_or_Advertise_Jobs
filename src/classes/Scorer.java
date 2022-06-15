@@ -58,7 +58,8 @@ public class Scorer {
         HashSet<Integer> allScores = new HashSet<>();
         if (!search.getSearchText().isEmpty()){allScores.add(scoreStrings(search.getSearchText(), job.getJobTitle()));}
         if (!search.getStates().isEmpty()){allScores.add(scoreComboBox(search.getStates(), job.getState()));}
-        if (!search.getCats().isEmpty()){allScores.add(scoreComboBox(search.getCats(), job.getCat()));}
+        // TODO: implement logic to score job categories against search categories
+        //if (!search.getCats().isEmpty()){allScores.add(scoreComboBox(search.getCats(), job.getCat()));}
         if (!search.getJobTypes().isEmpty()){allScores.add(scoreComboBox(search.getJobTypes(), job.getJobType()));}
         if (search.getSalary() > 0){allScores.add(scoreSalary(search.getSalary(), job.getSalary()));}
         return  (int) allScores.stream().mapToDouble(a -> a).average().orElse(0.0);

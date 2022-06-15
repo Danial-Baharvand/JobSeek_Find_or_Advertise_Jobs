@@ -18,7 +18,6 @@ public class Tests {
         Job job1 = new Job();
         job1.setJobTitle("Software Engineer");
         job1.setRecruiter(recruiter1);
-        job1.setCat("compSci");
         job1.setJobDescription("This is a job. Please apply");
         job1.setState("QLD");
         job1.setSalary(125000);
@@ -29,7 +28,6 @@ public class Tests {
         Job job2 = new Job();
         job2.setJobTitle("It Specialist");
         job2.setRecruiter(recruiter1);
-        job2.setCat("compSci");
         job2.setJobDescription("This is a job. Please apply");
         job2.setState("QLD");
         job2.setSalary(125000);
@@ -38,7 +36,6 @@ public class Tests {
         Job job3 = new Job();
         job3.setJobTitle("Data Analyst");
         job3.setRecruiter(recruiter1);
-        job3.setCat("compSci");
         job3.setJobDescription("This is a job. Please apply");
         job3.setState("QLD");
         job3.setSalary(125000);
@@ -47,7 +44,6 @@ public class Tests {
         Job job4 = new Job();
         job4.setJobTitle("DevOps");
         job4.setRecruiter(recruiter1);
-        job4.setCat("compSci");
         job4.setJobDescription("This is a job. Please apply");
         job4.setState("QLD");
         job4.setSalary(125000);
@@ -56,7 +52,6 @@ public class Tests {
         Job job5 = new Job();
         job5.setJobTitle("Web Dev");
         job5.setRecruiter(recruiter1);
-        job5.setCat("compSci");
         job5.setJobDescription("This is a job. Please apply");
         job5.setState("QLD");
         job5.setSalary(125000);
@@ -65,7 +60,6 @@ public class Tests {
         Job job6 = new Job();
         job6.setJobTitle("Backend");
         job6.setRecruiter(recruiter1);
-        job6.setCat("compSci");
         job6.setJobDescription("This is a job. Please apply");
         job6.setState("QLD");
         job6.setSalary(125000);
@@ -120,7 +114,6 @@ public class Tests {
         Job testJob = new Job();
         testJob.setJobTitle("Software Engineer");
         testJob.setRecruiter(testRecruiter);
-        testJob.setCat("compSie");
         testJob.setJobDescription("This is a job. Please apply");
         testJob.setState("QLD");
         testJob.setSalary(125000);
@@ -128,7 +121,6 @@ public class Tests {
         Job testJob1 = new Job();
         testJob1.setJobTitle("UI Designer");
         testJob1.setRecruiter(testRecruiter);
-        testJob1.setCat("compSie");
         testJob1.setJobDescription("This is a job. Please apply");
         testJob1.setState("VIC");
         testJob1.setSalary(99000);
@@ -136,7 +128,6 @@ public class Tests {
         Job testJob2 = new Job();
         testJob2.setJobTitle("Software Technician");
         testJob2.setRecruiter(testRecruiter);
-        testJob2.setCat("AI");
         testJob2.setJobDescription("This is a job. Please apply");
         testJob2.setState("QLD");
         testJob2.setSalary(75000);
