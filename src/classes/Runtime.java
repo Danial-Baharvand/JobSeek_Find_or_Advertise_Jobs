@@ -1,6 +1,5 @@
 package classes;
 
-import javax.swing.*;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -46,9 +45,8 @@ public class Runtime {
         //LoginPage testLoginPage = new LoginPage();
         //testObject.testLogin(testLoginPage, testApplication);
 
-
         // SHOW SEARCH PAGE
-        showSearchPage(frame);
+        //showSearchPage(frame);
 
         //SHOW Create Job PAGE
         //showCreateJobPage(frame);
@@ -71,12 +69,15 @@ public class Runtime {
         //SHOW JOB SEEKER HOME Page
         //showJobSeekerHome(frame);
 
+        Thesaurus testRequest = new Thesaurus("bottle", "en_US", "json");
+
         Toolkit tk=Toolkit.getDefaultToolkit(); //Initializing the Toolkit class.
         Dimension screenSize = tk.getScreenSize(); //Get the Screen resolution of our device.
         Point center = GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint();
         int width = screenSize.width/2;
         int height = screenSize.height/2;
         frame.setBounds(center.x - width / 2, center.y - height / 2, width, height);
+
     }
 
     public static void showSearchPage(JFrame frame) {
