@@ -12,6 +12,7 @@ public class Job {
     String keywords;
     String jobDescription;
     Boolean published = false;
+
     public Job(){}
     public Job(String jobDetails, HashMap<String, Recruiter> recruiters){
         String[] setValues = jobDetails.split("\\|");

@@ -1,5 +1,6 @@
 package classes;
 
+import javax.naming.NotContextException;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -17,14 +18,39 @@ public class GuiHelper {
         }
         return selectedOptions;
     }
-
-    public static void createOptionBox(JPanel optionsPanel, Collection<String> options) {
+    public static String  getSelectedRadio(JPanel optionsPanel) throws Exception {
+        Component[] allOptions = optionsPanel.getComponents();
+        for (Component option : allOptions) {
+            if (((JRadioButton) option).isSelected()) {
+                return ((JRadioButton) option).getText().toLowerCase();
+            }
+        }
+        throw new Exception();
+    }
+    public static void createOptionBox(JPanel optionsPanel, Collection<String> options, String hidden) {
         optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));
         optionsPanel.removeAll();
+        options.remove(hidden);
         for (String option : options) {
             option = option.substring(0,1).toUpperCase() + option.substring(1).toLowerCase();
             optionsPanel.add(new JCheckBox(option));
         }
+        optionsPanel.updateUI();
+    }
+    public static void createOptionBox(JPanel optionsPanel, Collection<String> options) {
+        createOptionBox(optionsPanel, options, null);
+    }
+    public static void createRadioBox(JPanel optionsPanel, Collection<String> options) {
+        optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));
+        optionsPanel.removeAll();
+        ButtonGroup buttonGroup = new ButtonGroup();
+        for (String option : options) {
+            option = option.substring(0,1).toUpperCase() + option.substring(1).toLowerCase();
+            JRadioButton radioButton = new JRadioButton(option);
+            buttonGroup.add(radioButton);
+            optionsPanel.add(radioButton);
+        }
+        optionsPanel.updateUI();
     }
     public static <V> boolean createJobList(Collection<V> jobList, JPanel jobsPanel) {
         if (jobList.isEmpty()){

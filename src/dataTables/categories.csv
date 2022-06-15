@@ -1,11 +1,13 @@
-python=captain@example.com
-ai=hulk@gmail.com
-networking=hulk@gmail.com
-machine learning=hulk@gmail.com
-sql=hulk@gmail.com
-coding=captain@example.com
-java=captain@example.com
-computer science=hulk@gmail.com
-debugging=hulk@gmail.com
-math=hulk@gmail.com
+networking=networking
+networking=sql
+networking=network
+machine learning=machine learning
+machine learning=ai
+machine learning=robotics
+science=science
+software engineering=coding
+software engineering=debugging
+software engineering=software engineering
+software engineering=java
+software engineering=computer science
 

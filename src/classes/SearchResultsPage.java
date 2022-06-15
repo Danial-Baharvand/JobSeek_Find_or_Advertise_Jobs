@@ -13,13 +13,9 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class SearchResultsPage<V> {
+public class SearchResultsPage<V> implements Page {
     private final int NO_OF_RESULTS = 3;
     private JPanel searchResultsPanel;
-    private JButton backButton;
-    private JButton searchButton;
-    private JTextArea textArea1;
-    private JButton loginButton;
     private JPanel jobsPanel;
     private JLabel noJobsLabel;
     private JScrollPane jobsScroller;
@@ -63,23 +59,11 @@ public class SearchResultsPage<V> {
      */
     private void $$$setupUI$$$() {
         searchResultsPanel = new JPanel();
-        searchResultsPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(4, 5, new Insets(20, 20, 20, 20), -1, -1));
+        searchResultsPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 4, new Insets(20, 20, 20, 20), -1, -1));
         searchResultsPanel.setBackground(new Color(-13224648));
         searchResultsPanel.setVisible(true);
-        backButton = new JButton();
-        backButton.setText("Back");
-        searchResultsPanel.add(backButton, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(120, -1), null, new Dimension(120, -1), 0, false));
-        searchButton = new JButton();
-        searchButton.setText("Search");
-        searchResultsPanel.add(searchButton, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(200, -1), null, new Dimension(200, -1), 0, false));
-        textArea1 = new JTextArea();
-        textArea1.setBackground(new Color(-11348236));
-        searchResultsPanel.add(textArea1, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 5, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTH, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, 1, 1, null, new Dimension(1000, 15), new Dimension(-1, 1), 0, false));
-        loginButton = new JButton();
-        loginButton.setText("Login");
-        searchResultsPanel.add(loginButton, new com.intellij.uiDesigner.core.GridConstraints(0, 3, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_EAST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(120, -1), null, new Dimension(120, -1), 0, false));
         jobsScroller = new JScrollPane();
-        searchResultsPanel.add(jobsScroller, new com.intellij.uiDesigner.core.GridConstraints(3, 0, 1, 4, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        searchResultsPanel.add(jobsScroller, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 4, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         jobsPanel = new JPanel();
         jobsPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         jobsScroller.setViewportView(jobsPanel);
@@ -87,7 +71,7 @@ public class SearchResultsPage<V> {
         noJobsLabel.setForeground(new Color(-1));
         noJobsLabel.setText("No jobs could be found!");
         noJobsLabel.setVisible(true);
-        searchResultsPanel.add(noJobsLabel, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 4, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        searchResultsPanel.add(noJobsLabel, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 4, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
@@ -97,4 +81,18 @@ public class SearchResultsPage<V> {
         return searchResultsPanel;
     }
 
+    @Override
+    public void update() {
+        // Do nothing
+    }
+
+    @Override
+    public String pageName() {
+        return "SearchResults";
+    }
+
+    @Override
+    public JPanel getPanel() {
+        return searchResultsPanel;
+    }
 }

@@ -1,5 +1,6 @@
 package classes;
 
+import javax.swing.*;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -8,9 +9,10 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 
 public class Runtime {
-    public static JFrame frame = new JFrame();
-    public static Tests testObject = new Tests();
+    public static final JFrame frame = new JFrame();
+    private static Header header;
     private static AccountManagement accMan;
+    private static Dimension screenSize;
 
 
     /**
@@ -19,7 +21,7 @@ public class Runtime {
      * Each time a user navigates backwards from a page using the "Back" button, the page at the front of the deque is popped
      * The backwards navigation is implemented by the navigateBack method
      */
-    private static Deque<String> pagesVisited = new ArrayDeque<String>();
+    private static Deque<Page> pagesVisited = new ArrayDeque<>();
 
     /**
      * currentSearch is an object of Search
@@ -30,8 +32,12 @@ public class Runtime {
     private static Search currentSearch; // Look into making non-static
 
     public static void main(String[] args) {
+        setLookAndFeel();
+        screenSize = getPageSize();
+        frame.setLocation(screenSize.width/2, screenSize.height/2);
+        header = new Header();
         accMan = new AccountManagement();
-        accMan.setCurrentUser(accMan.getRecruiters().get("hulk@gmail.com"));
+        //accMan.setCurrentUser(accMan.getRecruiters().get("hulk@gmail.com"));
         //accMan.setCurrentUser(accMan.getJobSeekers().get("hulk@gmail.com"));
 
         //currentApplication = new Application();
@@ -45,29 +51,46 @@ public class Runtime {
         //LoginPage testLoginPage = new LoginPage();
         //testObject.testLogin(testLoginPage, testApplication);
 
-        // SHOW SEARCH PAGE
-        //showSearchPage(frame);
-
-        //SHOW Create Job PAGE
-        //showCreateJobPage(frame);
-
-        //SHOW Edit Category Page
-        //showEditCategoryPage(frame, new CreateJobPage());
-
         //SHOW LOGIN PAGE
-        //showLoginPage(frame);
+        //showLoginPage();
 
-        //SHOW CREATE ACCOUNT PAGE
-        //showCreateAccountPage(frame);
+        // SHOW SEARCH PAGE
+        //accMan.setCurrentUser(accMan.getJobSeekers().get("hulk@gmail.com"));
+        //showSearchPage();
 
-        //SHOW RECRUITER PROFILE PAGE
-        //showRecruiterProfilePage(frame);
+
 
         //SHOW RECRUITER HOME PAGE
-        //showRecruiterHome(frame);
+        //accMan.setCurrentUser(accMan.getRecruiters().get("hulk@gmail.com"));
+        //showRecruiterHome();
+
 
         //SHOW JOB SEEKER HOME Page
-        //showJobSeekerHome(frame);
+        accMan.setCurrentUser(accMan.getJobSeekers().get("hulk@gmail.com"));
+        showJobSeekerHome();
+
+
+        //SHOW Create Job PAGE
+        //showCreateJobPage();
+        //accMan.setCurrentUser(accMan.getRecruiters().get("hulk@gmail.com"));
+
+        //SHOW Edit Category Page
+        //showEditCategoryPage( new CreateJobPage());
+        //accMan.setCurrentUser(accMan.getRecruiters().get("hulk@gmail.com"));
+
+        //SHOW CREATE ACCOUNT PAGE
+        //showCreateAccountPage();
+
+        //SHOW RECRUITER PROFILE PAGE
+        //accMan.setCurrentUser(accMan.getRecruiters().get("hulk@gmail.com"));
+        //showRecruiterProfilePage();
+
+        //SHOW ADMIN HOME Page
+        //accMan.setCurrentUser(accMan.getAdmins().get("admin@admin.com"));
+        //showAdminHomePage();
+
+
+
 
         Thesaurus testRequest = new Thesaurus("bottle", "en_US", "json");
 
@@ -80,167 +103,106 @@ public class Runtime {
 
     }
 
-    public static void showSearchPage(JFrame frame) {
-        frame.setTitle("Search Page");
+    public static void showSearchPage() {
+        showPage( new SearchPage());
+    }
+    public static void showCreateJobPage() {
+        showPage( new CreateJobPage());
+    }
+    public static void showEditCategoryPage(String category) {
+        showPage( new EditCategoryPage(category));
+    }
+    public static void showLoginPage() {
+        showPage( new LoginPage(accMan));
+    }
+    public static void showAppliedJobsPage() {
+        showPage( new AppliedJobsPage());
+    }
+    public static void showCreateAccountPage( String navigatedFrom) {
+        showPage( new CreateAccountPage());
+    }
+    public static void showCreateAccountPage() {
+        showPage( new CreateAccountPage());
+    }
+    public static void showRecruiterProfilePage(){
+        showPage( new RecruiterProfilePage(Tests.createExampleRecruiter()));
+    }
+    public static void showJobSeekerHome(){
+        showPage( new JobSeekerHomePage());
+    }
+    public static void showRecruiterHome(){
+        showPage( new RecruiterHomePage());
+    }
+    public static void showSearchResultsPage(ArrayList<ScoredJob> jobList){
+        showPage(new SearchResultsPage(jobList));
+    }
+    public static void showAdminHomePage(){
+        showPage(new AdminHomePage());
+    }
+    public static void showPage(Page page){
+        frame.setTitle(page.pageName());
         frame.getContentPane().removeAll();
         frame.repaint();
-        frame.setContentPane(new SearchPage(Tests.createExampleJobs()).getSearchPanel());
+        if (pagesVisited.isEmpty()||!pagesVisited.peekLast().getClass().equals(page.getClass())){
+            pagesVisited.add(page);
+        }else {
+            pagesVisited.removeLast();
+            pagesVisited.add(page);
+        }
+        header.updateButtons();
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+
+
+
+        JPanel pagePanel = page.getPanel();
+        pagePanel.setPreferredSize(screenSize);
+
+
+
+        panel.add(header.getPanel());
+        panel.add(pagePanel);
+        frame.setContentPane(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
-
-    public static void showCreateJobPage(JFrame frame) {
-        frame.setTitle("Create Job Page");
-        frame.getContentPane().removeAll();
-        frame.repaint();
-        frame.setContentPane(new CreateJobPage().getCreateJobPanel());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-    }
-    public static void showEditCategoryPage(JFrame frame, CreateJobPage jobPage) {
-        frame.setTitle("Edit Categories");
-        frame.getContentPane().removeAll();
-        frame.repaint();
-        frame.setContentPane(new EditCategoryPage(frame, jobPage).getCatPagePanel());
-        frame.pack();
-        frame.setVisible(true);
+    public static void showPreviousPage(){
+        pagesVisited.removeLast();
+        showPage(pagesVisited.removeLast());
     }
 
-    public static void showLoginPage(JFrame frame, String navigatedFrom) {
-        pagesVisited.push(navigatedFrom);
-        frame.setTitle("Login Page");
-        frame.getContentPane().removeAll();
-        frame.repaint();
-        frame.setContentPane(new LoginPage(frame, accMan).getLoginPagePanel());
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-    public static void showLoginPage(JFrame frame) {
-        frame.setTitle("Login Page");
-        frame.getContentPane().removeAll();
-        frame.repaint();
-        frame.setContentPane(new LoginPage(frame, accMan).getLoginPagePanel());
-        frame.pack();
-        frame.setVisible(true);
-    }
-    public static void showAppliedJobsPage(JFrame frame) {
-        frame.setTitle("Applied Jobs");
-        frame.getContentPane().removeAll();
-        frame.repaint();
-        frame.setContentPane(new AppliedJobsPage(frame).getAppliedJobsPanel());
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-    public static void showCreateAccountPage(JFrame frame, String navigatedFrom) {
-        pagesVisited.push(navigatedFrom);
-        frame.setTitle("Create Account Page");
-        frame.getContentPane().removeAll();
-        frame.repaint();
-        frame.setContentPane(new CreateAccountPage(frame).getCreateAccountPanel());
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-    public static void showCreateAccountPage(JFrame frame) {
-        frame.setTitle("Create Account Page");
-        frame.getContentPane().removeAll();
-        frame.repaint();
-        frame.setContentPane(new CreateAccountPage(frame).getCreateAccountPanel());
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-    public static void showRecruiterProfilePage(JFrame frame){
-        frame.setTitle("Recruiter Profile Page");
-        frame.getContentPane().removeAll();
-        frame.repaint();
-        frame.setContentPane(new RecruiterProfilePage(Tests.createExampleRecruiter()).getRecruiterProfilePage());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-    public static void showJobSeekerHome(JFrame frame){
-        frame.setTitle("Job Seeker Home");
-        frame.getContentPane().removeAll();
-        frame.repaint();
-        frame.setContentPane(new JobSeekerHomePage().getJobSeekerProfile());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-    }
-    public static void showRecruiterHome(JFrame frame){
-        frame.setTitle("Recruiter Home");
-        frame.getContentPane().removeAll();
-        frame.repaint();
-        frame.setContentPane(new RecruiterHomePage().getRecruiterHomePanel());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-    }
-    public static void showSearchResultsPage(JFrame frame, ArrayList<ScoredJob> jobList){
-        frame.setTitle("Search Results Page");
-        frame.getContentPane().removeAll();
-        frame.repaint();
-        frame.setContentPane(new SearchResultsPage(jobList).getSearchResultsPanel());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-    }
 
     public static AccountManagement accountManager() {
         return accMan;
     }
-
-
-    /**
-     * navigateBack is called when the "Back" button is pressed
-     * the first element in the pagesVisited deque is popped and stored in a String variable called lastPage
-     * the String variable called lastPage is used to determine the page to display
-     */
-    public static void navigateBack() {
-        String lastPage = pagesVisited.pop();
-        switch (lastPage) {
-            case "ApplicantPage":
-                System.out.println("Cannot navigate to ApplicantPage yet. Must be set up in Runtime.navigateBack().");
-                break;
-            case "CreateAccountPage":
-                showCreateAccountPage(frame);
-                break;
-            case "CreateJobPage":
-                showCreateJobPage(frame);
-                break;
-            case "DescriptionPage":
-                System.out.println("Cannot navigate to DescriptionPage yet. Must be set up in Runtime.navigateBack().");
-                break;
-            case "EditCategoryPage":
-                System.out.println("Cannot navigate to EditCategoryPage yet. Must be set up in Runtime.navigateBack().");
-                break;
-            case "JobEditPage":
-                System.out.println("Cannot navigate to JobEditPage yet. Must be set up in Runtime.navigateBack().");
-                break;
-            case "JobSeekerProfilePage":
-                showJobSeekerHome(frame);
-                break;
-            case "LoginPage":
-                showLoginPage(frame);
-                break;
-            case "RecruiterHomePage":
-                System.out.println("Cannot navigate to RecruiterHomePage yet. Must be set up in Runtime.navigateBack().");
-                break;
-            case "RecruiterProfilePage":
-                showRecruiterProfilePage(frame);
-                break;
-            case "SearchPage":
-                showSearchPage(frame);
-                break;
-            case "SearchResultsPage":
-                showSearchResultsPage(frame, currentSearch.getScoredJobs());
-                break;
+    public static void setLookAndFeel(){
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Nimbus isn't availible!");
         }
+    }
+    private static Dimension getPageSize(){
+        Toolkit tk=Toolkit.getDefaultToolkit(); //Initializing the Toolkit class.
+        Dimension screenSize = tk.getScreenSize(); //Get the Screen resolution of our device.
+        Point center = GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint();
+        int width = screenSize.width/2;
+        int height = screenSize.height/2;
+        return new Dimension(width, height);
+    }
+
+    public static Header getHeader() {
+        return header;
+    }
+
+    public static Deque<Page> getPagesVisited() {
+        return pagesVisited;
     }
 }
