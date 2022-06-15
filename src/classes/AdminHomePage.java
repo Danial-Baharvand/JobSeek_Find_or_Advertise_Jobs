@@ -40,8 +40,8 @@ public class AdminHomePage implements Page {
 
         inactive = io.readInactiveUsers();
 
-        inactive.add("captain@example.com");
-        inactive.add("fury@recruiter.com");
+        //inactive.add("captain@example.com");
+        //inactive.add("fury@recruiter.com");
 
         ArrayList<String> activeJobSeekerUsers = new ArrayList<String>();
         for (JobSeeker jobSeeker : jobSeekers) {
@@ -83,9 +83,9 @@ public class AdminHomePage implements Page {
                     inactive.add(Runtime.accountManager().getJobSeekers().get(s).getEmail());
                     activeJobSeekerUsers.remove(s);
                     inactiveJobSeekersUsers.add(s);
+                    io.newLine(Config.DT_INACTIVE_USERS, s);
                     GuiHelper.createOptionBox(activeJobSeekerList, activeJobSeekerUsers);
                     GuiHelper.createOptionBox(inactiveJobSeekersList, inactiveJobSeekersUsers);
-                    io.newLine(Config.DT_INACTIVE_USERS, s);
                 }
                 activeJobSeekerList.updateUI();
                 inactiveJobSeekersList.updateUI();
@@ -99,9 +99,12 @@ public class AdminHomePage implements Page {
                     inactive.remove(Runtime.accountManager().getJobSeekers().get(s).getEmail());
                     inactiveJobSeekersUsers.remove(s);
                     activeJobSeekerUsers.add(s);
+                    Runtime.accountManager().getInactiveUsers().remove(s);
+                    io.clearFileContent(Config.DT_INACTIVE_USERS);
+                    io.writeToDB(Runtime.accountManager().getJobSeekers().get(s).getEmail());
                     GuiHelper.createOptionBox(inactiveJobSeekersList, inactiveJobSeekersUsers);
                     GuiHelper.createOptionBox(activeJobSeekerList, activeJobSeekerUsers);
-                    Runtime.accountManager().getInactiveUsers().remove(s);
+
                 }
                 activeJobSeekerList.updateUI();
                 inactiveJobSeekersList.updateUI();
@@ -118,7 +121,6 @@ public class AdminHomePage implements Page {
                     io.newLine(Config.DT_INACTIVE_USERS, s);
                     GuiHelper.createOptionBox(activeRecruiterList, activeRecruiterUsers);
                     GuiHelper.createOptionBox(inactiveRecruitersList, inactiveRecruiterUsers);
-                    //io.writeToDB(Runtime.accountManager().getJobSeekers());
                 }
                 activeJobSeekerList.updateUI();
                 inactiveJobSeekersList.updateUI();
@@ -132,6 +134,9 @@ public class AdminHomePage implements Page {
                     inactive.remove(Runtime.accountManager().getRecruiters().get(s).getEmail());
                     inactiveRecruiterUsers.remove(s);
                     activeRecruiterUsers.add(s);
+                    Runtime.accountManager().getInactiveUsers().remove(s);
+                    io.clearFileContent(Config.DT_INACTIVE_USERS);
+                    io.writeToDB(Runtime.accountManager().getRecruiters().get(s).getEmail());
                     GuiHelper.createOptionBox(inactiveRecruitersList, inactiveRecruiterUsers);
                     GuiHelper.createOptionBox(activeRecruiterList, activeRecruiterUsers);
                     Runtime.accountManager().getInactiveUsers().remove(s);
