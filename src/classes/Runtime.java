@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.awt.*;
 import java.awt.Toolkit;
+import java.util.HashMap;
 import javax.swing.JFrame;
 
 public class Runtime {
@@ -112,6 +113,9 @@ public class Runtime {
     }
     public static void showLoginPage() {
         showPage( new LoginPage(accMan));
+    }
+    public static void showJobSeekerResultsPage(HashMap<JobSeeker, Integer> jobSeekerScores) {
+        showPage( new JobSeekerResultsPage(jobSeekerScores));
     }
     public static void showAppliedJobsPage() {
         showPage( new AppliedJobsPage());

@@ -1,6 +1,7 @@
 package classes;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class Tests {
@@ -74,7 +75,11 @@ public class Tests {
         categories.put("AI", "0003");
         return categories;
     }
-
+    public static HashMap<JobSeeker, Integer> createTestJobSeekerScores(){
+        HashMap<JobSeeker, Integer> scoredJobSeekers = new HashMap<>();
+        Runtime.accountManager().getJobSeekers().values().stream().forEach(j -> scoredJobSeekers.put(j, 100));
+        return scoredJobSeekers;
+    }
     public static JobSeeker createExampleJobSeekers(){
         JobSeeker js = new JobSeeker();
         js.setFullName("Jack Lu");

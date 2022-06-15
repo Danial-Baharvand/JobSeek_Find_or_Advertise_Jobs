@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 public class GuiHelper {
@@ -74,6 +75,18 @@ public class GuiHelper {
 
             jobsPanel.setLayout(new BoxLayout(jobsPanel, BoxLayout.Y_AXIS));
             jobsPanel.add(jPanel);
+        }
+        return true;
+    }
+    public static boolean createJobSeekerList(HashMap<JobSeeker, Integer> jobSeekerList, JPanel jobSeekerPanel) {
+        if (jobSeekerList.isEmpty()){
+            return false;
+        }
+        jobSeekerPanel.setLayout(new BoxLayout(jobSeekerPanel, BoxLayout.Y_AXIS));
+        for (JobSeeker jobSeeker : jobSeekerList.keySet()) {
+            JPanel jPanel;
+            jPanel = new JobSeekerItem(jobSeeker, jobSeekerList.get(jobSeeker)).getPanel();
+            jobSeekerPanel.add(jPanel);
         }
         return true;
     }

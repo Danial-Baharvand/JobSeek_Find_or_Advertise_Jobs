@@ -6,6 +6,7 @@ import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
@@ -55,6 +56,13 @@ public class DescriptionPage implements Page {
         salary.setText("$" + job.getSalary());
 
 
+        viewApplicantsBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                HashMap<JobSeeker, Integer> jobSeekerScores = Tests.createTestJobSeekerScores();
+                Runtime.showJobSeekerResultsPage(jobSeekerScores);
+            }
+        });
     }
 
     private void addRecruiterJobListenrs(Job job) {
