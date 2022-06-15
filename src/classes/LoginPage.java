@@ -40,7 +40,6 @@ public class LoginPage implements Page {
             public void actionPerformed(ActionEvent e) {
                 if (userLogin(accMan)) {
                     JOptionPane.showMessageDialog(null, "You have successfully logged in!");
-                    Runtime.showPreviousPage();
                 } else {
                     JOptionPane.showMessageDialog(null, "The username of password is incorrect.");
                 }
@@ -68,12 +67,15 @@ public class LoginPage implements Page {
     public boolean userLogin(AccountManagement accMan) {
         if (validateUser(accMan.getJobSeekers())) {
             accMan.setCurrentUser(accMan.getJobSeekers().get(emailClearingTextField.getText()));
+            Runtime.showPreviousPage();
             return true;
         } else if (validateUser(accMan.getRecruiters())) {
             accMan.setCurrentUser(accMan.getRecruiters().get(emailClearingTextField.getText()));
+            Runtime.showRecruiterHome();
             return true;
         } else if (validateUser(accMan.getAdmins())) {
             accMan.setCurrentUser(accMan.getAdmins().get(emailClearingTextField.getText()));
+            Runtime.showAdminHomePage();
             return true;
         } else return false;
     }

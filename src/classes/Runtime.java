@@ -56,7 +56,7 @@ public class Runtime {
 
         // SHOW SEARCH PAGE
         //accMan.setCurrentUser(accMan.getJobSeekers().get("hulk@gmail.com"));
-        showSearchPage();
+        //showSearchPage();
 
 
 
@@ -86,7 +86,8 @@ public class Runtime {
         //showRecruiterProfilePage();
 
         //SHOW ADMIN HOME Page
-        //showAdminHomePage();
+        accMan.setCurrentUser(accMan.getAdmins().get("admin@admin.com"));
+        showAdminHomePage();
 
 
 
@@ -99,8 +100,8 @@ public class Runtime {
     public static void showCreateJobPage() {
         showPage( new CreateJobPage());
     }
-    public static void showEditCategoryPage(CreateJobPage jobPage) {
-        showPage( new EditCategoryPage(jobPage));
+    public static void showEditCategoryPage(String category) {
+        showPage( new EditCategoryPage(category));
     }
     public static void showLoginPage() {
         showPage( new LoginPage(accMan));
@@ -148,6 +149,7 @@ public class Runtime {
 
         JPanel pagePanel = page.getPanel();
         pagePanel.setPreferredSize(screenSize);
+
 
 
         panel.add(header.getPanel());

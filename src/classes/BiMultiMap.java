@@ -3,6 +3,7 @@ package classes;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
 
 import java.io.*;
 import java.util.Collection;
@@ -15,7 +16,7 @@ import java.util.Set;
 public class BiMultiMap <V> {
     //HashMap<String, Set<Object>> map = new HashMap<>();
     Multimap<String,V> map = HashMultimap.create();
-    Multimap<V,String> invertedMap = HashMultimap.create();
+    Multimap<V,String> invertedMap = ArrayListMultimap.create();
     /**
      * Inserts an object into the value set for the given key in a <String, Set<Object>> map.
      * @param key in the map
@@ -25,13 +26,18 @@ public class BiMultiMap <V> {
         // convert key to correct text format
         key = key.toLowerCase();
         // Add object to the value set for the key
-        map.put(key, value);
-        invertedMap.put(value, key);
+        if (map.put(key, value)){
+            invertedMap.put(value, key);
+        }
     }
 
     public void remove(String key, V value) {
         map.remove(key, value);
         invertedMap.remove(value, key);
+    }
+    public void removeAll(String key){
+        map.removeAll(key);
+        invertedMap =Multimaps.invertFrom(map, ArrayListMultimap.create());
     }
     public boolean containsKey(String key){
         return map.containsKey(key);
