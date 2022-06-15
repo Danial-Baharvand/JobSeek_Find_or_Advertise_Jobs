@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 public class Job {
     Recruiter recruiter;
-
     String jobTitle;
     String state;
     String cat;
