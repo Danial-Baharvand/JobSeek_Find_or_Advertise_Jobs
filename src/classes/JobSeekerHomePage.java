@@ -79,10 +79,14 @@ public class JobSeekerHomePage implements Page {
                 if (res == JFileChooser.APPROVE_OPTION) {
                     File file_absolute_path = new File(file_upload.getSelectedFile().getAbsolutePath());
                     File file_name = new File(file_upload.getSelectedFile().getName());
+                    File dest = new File("src\\resumes");
 
                     //Code to duplicate uploaded file to project resume folder
-                    //Files.copy(file_absolute_path, "src/resumes");
-                    //Code to set jobseeker's resume
+                    try {
+                        Files.copy(file_absolute_path.toPath(), dest.toPath());
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
                     ((JobSeeker) Runtime.accountManager().getCurrentUser()).setResumeFile(file_absolute_path.toString());
                     resumeFileAddress.setText(file_name.toString());
                 }
@@ -131,13 +135,12 @@ public class JobSeekerHomePage implements Page {
         viewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (((JobSeeker) Runtime.accountManager().getCurrentUser()).getResumeFile() != null) {
-                    JFileChooser file_open = new JFileChooser();
-                    int res = file_open.showOpenDialog(null);
-                    if (res == JFileChooser.APPROVE_OPTION) {
-                        File selectedFile = file_open.getSelectedFile();
-                        System.out.println("Selected file: " + selectedFile.getAbsolutePath());
-                    }
+                //JOptionPane.showMessageDialog(null, "Location of resume:" + ((JobSeeker) Runtime.accountManager().getCurrentUser()).getResumeFile());
+                try {
+                    Scanner input = new Scanner(new File(((JobSeeker) Runtime.accountManager().getCurrentUser()).getResumeFile()));
+                    JOptionPane.showMessageDialog(null, input.toString());
+                } catch (FileNotFoundException fileNotFoundException) {
+                    fileNotFoundException.printStackTrace();
                 }
             }
         });

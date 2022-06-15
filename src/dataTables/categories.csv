@@ -1,13 +1,13 @@
+ai=AI
 networking=networking
 networking=sql
 networking=network
-machine learning=machine learning
-machine learning=ai
-machine learning=robotics
-science=science
 software engineering=coding
-software engineering=debugging
-software engineering=software engineering
 software engineering=java
 software engineering=computer science
+software engineering=debugging
+software engineering=Testing
+machine learning=UI design
+machine learning=ai
+machine learning=robotics
 
