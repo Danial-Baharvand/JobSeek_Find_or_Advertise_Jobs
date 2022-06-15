@@ -98,7 +98,7 @@ public class CreateJobPage implements Page {
      */
     private void $$$setupUI$$$() {
         createJobPanel = new JPanel();
-        createJobPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(16, 4, new Insets(20, 20, 20, 20), -1, -1));
+        createJobPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(15, 4, new Insets(20, 20, 20, 20), -1, -1));
         createJobPanel.setBackground(new Color(-13224648));
         final com.intellij.uiDesigner.core.Spacer spacer1 = new com.intellij.uiDesigner.core.Spacer();
         createJobPanel.add(spacer1, new com.intellij.uiDesigner.core.GridConstraints(3, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
