@@ -37,14 +37,15 @@ public class Scorer {
     }
 
     /**
-     * Returns 100 if the salary is higher than the minimum salary. Returns 0 otherwise.
+     * Returns 100 if the salary is higher than the minimum salary.
+     * Otherwise, returns how close the salary is to minimum salary as a percentage.
      * @param minSalary minimum salary selected by the user.
      * @param salary salary of a job advertised by the recruiter.
-     * @return an int which can either be 0 or 100.
+     * @return How close the salary is to minimum salary as an int which can be between 0 and 100.
      */
     public int scoreSalary(int minSalary, int salary){
         if (salary >= minSalary){return 100;}
-        return 0;
+        return salary/minSalary;
     }
 
     /**

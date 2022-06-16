@@ -54,6 +54,7 @@ public class DescriptionPage implements Page {
                 collect(Collectors.joining(", ")));
 
         salary.setText("$" + job.getSalary());
+
     }
 
     private void addRecruiterJobListenrs(Job job) {
@@ -73,6 +74,13 @@ public class DescriptionPage implements Page {
             }
         });
         viewApplicantsBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                HashMap<JobSeeker, Integer> jobSeekerScores = Tests.createTestJobSeekerScores();
+                Runtime.showJobSeekerResultsPage(jobSeekerScores, job);
+            }
+        });
+        suitablesBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 HashMap<JobSeeker, Integer> jobSeekerScores = Tests.createTestJobSeekerScores();
