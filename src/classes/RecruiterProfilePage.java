@@ -38,13 +38,14 @@ public class RecruiterProfilePage implements Page {
     private JPanel jobDescriptionPanel;
     private JLabel selectedJobLocation;
     private JLabel selectedJobCompensation;
-    private JLabel selectJobCategory;
+    private JLabel selectedJobCategory;
     private JButton applyButton;
     private JLabel selectedJobDescription;
     private JLabel recruiterProfileDescriptionText;
     private JButton viewButton;
     private JButton viewButton1;
     private JButton viewButton2;
+    private JLabel descriptionLabel;
     Collection<Job> jobs;
 
     public RecruiterProfilePage(Recruiter recruiter) {
@@ -73,20 +74,13 @@ public class RecruiterProfilePage implements Page {
                     selectedJobLocation.setText(jobList.get(0).getStates().stream().map(s -> Character.toUpperCase(s.charAt(0)) +
                             s.substring(1)).collect(Collectors.joining(", ")));
                     //selectJobCategory.setText(jobList.get(0).getCat());
+                    selectedJobLocation.setText(jobList.get(0).getState());
+                    selectedJobCategory.setText(jobList.get(0).getJobType());
+                    descriptionLabel.setText(jobList.get(0).getJobTitle());
                 }
             });
         }
 
-
-        /*viewButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                selectedJobDescription.setText(jobList.get(0).getJobDescription());
-                selectedJobCompensation.setText(String.valueOf(jobList.get(0).getSalary()));
-                selectedJobLocation.setText(jobList.get(0).getState());
-                selectJobCategory.setText(jobList.get(0).getCat());
-            }
-        });*/
 
         if (jobList.get(1) != null) {
             job2Title.setText(jobList.get(1).getJobTitle());
@@ -100,18 +94,12 @@ public class RecruiterProfilePage implements Page {
                     selectedJobLocation.setText(jobList.get(1).getStates().stream().map(s -> Character.toUpperCase(s.charAt(0)) +
                             s.substring(1)).collect(Collectors.joining(", ")));
                     //selectJobCategory.setText(jobList.get(1).getCat());
+                    selectedJobLocation.setText(jobList.get(1).getState());
+                    selectedJobCategory.setText(jobList.get(1).getJobType());
+                    descriptionLabel.setText(jobList.get(1).getJobTitle());
                 }
             });
         }
-        /*viewButton1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                selectedJobDescription.setText(jobList.get(1).getJobDescription());
-                selectedJobCompensation.setText(String.valueOf(jobList.get(1).getSalary()));
-                selectedJobLocation.setText(jobList.get(1).getState());
-                selectJobCategory.setText(jobList.get(1).getCat());
-            }
-        });*/
 
         if (jobList.get(2) != null) {
             job3Title.setText(jobList.get(2).getJobTitle());
@@ -121,6 +109,9 @@ public class RecruiterProfilePage implements Page {
                 public void actionPerformed(ActionEvent e) {
                     selectedJobDescription.setText(jobList.get(2).getJobDescription());
                     selectedJobCompensation.setText(String.valueOf(jobList.get(2).getSalary()));
+                    selectedJobLocation.setText(jobList.get(2).getState());
+                    selectedJobCategory.setText(jobList.get(2).getJobType());
+                    descriptionLabel.setText(jobList.get(2).getJobTitle());
                     selectedJobLocation.setText(jobList.get(2).getStates().stream().map(s -> Character.toUpperCase(s.charAt(0)) +
                             s.substring(1)).collect(Collectors.joining(", ")));
                     //selectJobCategory.setText(jobList.get(2).getCat());
@@ -170,10 +161,6 @@ public class RecruiterProfilePage implements Page {
         jobDescriptionPanel.setBackground(new Color(-1973791));
         jobDescriptionPanel.setForeground(new Color(-13224648));
         jobDescription.setViewportView(jobDescriptionPanel);
-        selectJobCategory = new JLabel();
-        selectJobCategory.setForeground(new Color(-13224648));
-        selectJobCategory.setText("Category");
-        jobDescriptionPanel.add(selectJobCategory, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         applyButton = new JButton();
         applyButton.setText("Apply");
         jobDescriptionPanel.add(applyButton, new com.intellij.uiDesigner.core.GridConstraints(2, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_EAST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
@@ -184,9 +171,9 @@ public class RecruiterProfilePage implements Page {
         selectedJobDescription.setEnabled(false);
         selectedJobDescription.setText("");
         panel1.add(selectedJobDescription, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final JLabel label1 = new JLabel();
-        label1.setText("Description");
-        panel1.add(label1, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        descriptionLabel = new JLabel();
+        descriptionLabel.setText("Description");
+        panel1.add(descriptionLabel, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         selectedJobLocation = new JLabel();
         selectedJobLocation.setForeground(new Color(-13224648));
         selectedJobLocation.setText("Location");
@@ -195,6 +182,10 @@ public class RecruiterProfilePage implements Page {
         selectedJobCompensation.setForeground(new Color(-13224648));
         selectedJobCompensation.setText("Compensation");
         jobDescriptionPanel.add(selectedJobCompensation, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_EAST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(106, 16), null, 0, false));
+        selectedJobCategory = new JLabel();
+        selectedJobCategory.setForeground(new Color(-13224648));
+        selectedJobCategory.setText("Job Type");
+        jobDescriptionPanel.add(selectedJobCategory, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 1, false));
         jobListingsPanel = new JPanel();
         jobListingsPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(5, 1, new Insets(0, 0, 0, 0), -1, -1));
         recruiterProfile.add(jobListingsPanel, new com.intellij.uiDesigner.core.GridConstraints(11, 0, 1, 3, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
@@ -262,12 +253,12 @@ public class RecruiterProfilePage implements Page {
         contactLabel.setForeground(new Color(-592138));
         contactLabel.setText("Contact");
         recruiterProfile.add(contactLabel, new com.intellij.uiDesigner.core.GridConstraints(1, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JLabel label2 = new JLabel();
-        Font label2Font = this.$$$getFont$$$(null, Font.BOLD, -1, label2.getFont());
-        if (label2Font != null) label2.setFont(label2Font);
-        label2.setForeground(new Color(-592138));
-        label2.setText("Email:");
-        recruiterProfile.add(label2, new com.intellij.uiDesigner.core.GridConstraints(2, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JLabel label1 = new JLabel();
+        Font label1Font = this.$$$getFont$$$(null, Font.BOLD, -1, label1.getFont());
+        if (label1Font != null) label1.setFont(label1Font);
+        label1.setForeground(new Color(-592138));
+        label1.setText("Email:");
+        recruiterProfile.add(label1, new com.intellij.uiDesigner.core.GridConstraints(2, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         recruiterEmail = new JLabel();
         recruiterEmail.setForeground(new Color(-592138));
         recruiterEmail.setText("Email");
@@ -276,6 +267,12 @@ public class RecruiterProfilePage implements Page {
         recruiterWebsite.setForeground(new Color(-592138));
         recruiterWebsite.setText("Website");
         recruiterProfile.add(recruiterWebsite, new com.intellij.uiDesigner.core.GridConstraints(5, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JLabel label2 = new JLabel();
+        Font label2Font = this.$$$getFont$$$(null, Font.BOLD, -1, label2.getFont());
+        if (label2Font != null) label2.setFont(label2Font);
+        label2.setForeground(new Color(-592138));
+        label2.setText("Website:");
+        recruiterProfile.add(label2, new com.intellij.uiDesigner.core.GridConstraints(4, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label3 = new JLabel();
         Font label3Font = this.$$$getFont$$$(null, Font.BOLD, -1, label3.getFont());
         if (label3Font != null) label3.setFont(label3Font);

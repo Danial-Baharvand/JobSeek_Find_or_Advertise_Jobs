@@ -3,12 +3,12 @@
   <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="514" width="1051" height="629"/>
+      <xy x="20" y="514" width="1117" height="629"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
-      <grid id="3045d" layout-manager="GridLayoutManager" row-count="10" column-count="9" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="3045d" layout-manager="GridLayoutManager" row-count="13" column-count="9" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="20" left="20" bottom="20" right="20"/>
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -64,7 +64,7 @@
           </component>
           <scrollpane id="97564">
             <constraints>
-              <grid row="4" column="7" row-span="6" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+              <grid row="4" column="7" row-span="9" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <preferred-size width="24" height="654"/>
               </grid>
             </constraints>
@@ -84,7 +84,7 @@
           </scrollpane>
           <scrollpane id="4e5b">
             <constraints>
-              <grid row="3" column="0" row-span="5" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="3" column="0" row-span="6" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <background color="-1973791"/>
@@ -102,7 +102,7 @@
           </scrollpane>
           <scrollpane id="f0c26">
             <constraints>
-              <grid row="9" column="0" row-span="1" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="11" column="0" row-span="2" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
             <border type="none"/>
@@ -118,7 +118,7 @@
           </scrollpane>
           <scrollpane id="d4969">
             <constraints>
-              <grid row="3" column="3" row-span="5" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="3" column="3" row-span="6" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
             <border type="none"/>
@@ -144,7 +144,7 @@
           </component>
           <scrollpane id="7cf4">
             <constraints>
-              <grid row="9" column="3" row-span="1" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="11" column="3" row-span="2" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
             <border type="none"/>
@@ -180,7 +180,7 @@
           </component>
           <component id="9041a" class="javax.swing.JButton" binding="recruiterDeactivateButton">
             <constraints>
-              <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false">
+              <grid row="10" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false">
                 <maximum-size width="150" height="-1"/>
               </grid>
             </constraints>
@@ -190,7 +190,7 @@
           </component>
           <component id="7299d" class="javax.swing.JLabel">
             <constraints>
-              <grid row="8" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="10" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font name="Calibri Light" size="16" style="1"/>
@@ -200,7 +200,7 @@
           </component>
           <component id="6b28" class="javax.swing.JButton" binding="recruiterReActivateButton">
             <constraints>
-              <grid row="8" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false">
+              <grid row="10" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false">
                 <maximum-size width="150" height="-1"/>
               </grid>
             </constraints>
@@ -210,7 +210,7 @@
           </component>
           <component id="57ac" class="javax.swing.JLabel">
             <constraints>
-              <grid row="8" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="10" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font name="Calibri Light" size="16" style="1"/>
@@ -262,6 +262,54 @@
             </constraints>
             <properties>
               <text value="Edit"/>
+            </properties>
+          </component>
+          <component id="a5d5" class="javax.swing.JButton" binding="totalInterviewRequestsButton" default-binding="true">
+            <constraints>
+              <grid row="12" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Total Interview Requests"/>
+            </properties>
+          </component>
+          <component id="1e5f7" class="javax.swing.JButton" binding="totalApplicationsButton" default-binding="true">
+            <constraints>
+              <grid row="11" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Total Applications"/>
+            </properties>
+          </component>
+          <component id="37693" class="javax.swing.JButton" binding="totalRecruitersButton" default-binding="true">
+            <constraints>
+              <grid row="10" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Total Recruiters"/>
+            </properties>
+          </component>
+          <component id="333d8" class="javax.swing.JButton" binding="totalJobsButton" default-binding="true">
+            <constraints>
+              <grid row="8" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Total Jobs"/>
+            </properties>
+          </component>
+          <component id="24909" class="javax.swing.JButton" binding="totalJobsSeekersButton" default-binding="true">
+            <constraints>
+              <grid row="9" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Total Job Seekers"/>
+            </properties>
+          </component>
+          <component id="96d00" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="7" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Generate Reports"/>
             </properties>
           </component>
         </children>
