@@ -44,9 +44,6 @@ public class AdminHomePage implements Page {
 
         inactive = io.readInactiveUsers();
 
-        //inactive.add("captain@example.com");
-        //inactive.add("fury@recruiter.com");
-
         ArrayList<String> activeJobSeekerUsers = new ArrayList<String>();
         for (JobSeeker jobSeeker : jobSeekers) {
             if (!inactive.contains(jobSeeker.getEmail()))

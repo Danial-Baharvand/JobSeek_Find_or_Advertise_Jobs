@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Set;
 
 public class LoginPage implements Page {
 
@@ -19,6 +20,7 @@ public class LoginPage implements Page {
     private JButton loginButton;
     private JButton createNewAccountButton;
     private boolean passClicked = false;
+    Set<String> inactiveUsers;
 
     public LoginPage(AccountManagement accMan) {
 
@@ -41,7 +43,7 @@ public class LoginPage implements Page {
                 if (userLogin(accMan)) {
                     JOptionPane.showMessageDialog(null, "You have successfully logged in!");
                 } else {
-                    JOptionPane.showMessageDialog(null, "The username of password is incorrect.");
+                    JOptionPane.showMessageDialog(null, "The username or password is incorrect.");
                 }
             }
         });
@@ -65,20 +67,32 @@ public class LoginPage implements Page {
     }
 
     public boolean userLogin(AccountManagement accMan) {
-        if (validateUser(accMan.getJobSeekers())) {
+        if (validateUser(accMan.getJobSeekers()) && userLoginIsActive()) {
             accMan.setCurrentUser(accMan.getJobSeekers().get(emailClearingTextField.getText()));
             Runtime.showPreviousPage();
             return true;
-        } else if (validateUser(accMan.getRecruiters())) {
+        } else if (validateUser(accMan.getRecruiters()) && userLoginIsActive()) {
             accMan.setCurrentUser(accMan.getRecruiters().get(emailClearingTextField.getText()));
             Runtime.showRecruiterHome();
             return true;
-        } else if (validateUser(accMan.getAdmins())) {
+        } else if (validateUser(accMan.getAdmins()) && userLoginIsActive()) {
             accMan.setCurrentUser(accMan.getAdmins().get(emailClearingTextField.getText()));
             Runtime.showAdminHomePage();
             return true;
         } else return false;
     }
+
+    public boolean userLoginIsActive() {
+        IO io = new IO();
+        inactiveUsers = io.readInactiveUsers();
+        if (!inactiveUsers.contains(emailClearingTextField.getText())) {
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Your account is locked, please contact your administrator");
+            return false;
+        }
+    }
+
 
     private boolean validateUser(HashMap<String, ? extends User> users) {
         if (users.containsKey(emailClearingTextField.getText())) {
