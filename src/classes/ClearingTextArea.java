@@ -5,7 +5,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 import javax.swing.*;
-
+// TODO: don't allow special characters
 public class ClearingTextArea extends JTextArea implements FocusListener {
     private boolean clicked = false;
     private String defaultText;

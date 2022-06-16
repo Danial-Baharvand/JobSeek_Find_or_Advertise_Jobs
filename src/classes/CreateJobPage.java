@@ -1,13 +1,17 @@
 package classes;
 
+import com.google.common.collect.Sets;
+
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;import java.awt.event.FocusAdapter;
+import java.awt.event.ActionListener;
 import java.util.Locale;
+import java.util.Set;
 
+// TODO: publish functionality
 public class CreateJobPage implements Page {
     private ClearingTextField jobTitleTB;
     private JPanel createJobPanel;
@@ -20,6 +24,8 @@ public class CreateJobPage implements Page {
     private ClearingTextField keywordsTB;
     private JTextArea textArea1;
     private JPanel catOptions;
+    private JPanel statesPanel;
+    private JScrollPane statesScroller;
     private Job job;
 
     public CreateJobPage() {
@@ -32,7 +38,7 @@ public class CreateJobPage implements Page {
         this.job = job;
         jobTitleTB.setText(job.getJobTitle());
         jobTitleTB.setDefaultText("Job Listing Title", true);
-        stateCB.setSelectedItem(job.getState());
+        stateCB.setSelectedItem(job.getStates());
         jobTypeCB.setSelectedItem(job.getJobType());
         jobDescTA.setText(job.getJobDescription());
         jobDescTA.setDefaultText("Job Description", true);
@@ -81,9 +87,9 @@ public class CreateJobPage implements Page {
     }
 
     private void setUpPage() {
-        stateCB.setRenderer(new PromptComboBoxRenderer("Location"));
-        jobTypeCB.setRenderer(new PromptComboBoxRenderer("Job Type"));
+        GuiHelper.createOptionBox(statesPanel, Config.STATES);
         GuiHelper.createOptionBox(catOptions, Runtime.accountManager().getCategories().keySet());
+        jobTypeCB.setRenderer(new PromptComboBoxRenderer("Job Type"));
     }
 
     private void createJob(boolean publish) throws Exception {
@@ -91,7 +97,7 @@ public class CreateJobPage implements Page {
         newJob.setJobTitle(jobTitleTB.forceGetText());
         newJob.setRecruiter((Recruiter) Runtime.accountManager().getCurrentUser());
         newJob.setJobDescription(jobDescTA.forceGetText());
-        newJob.setState(stateCB.getSelectedItem().toString());
+        newJob.setStates(Sets.newHashSet(GuiHelper.getSelectedOptions(statesPanel)));
         newJob.setSalary(Integer.parseInt(salaryTB.forceGetText()));
         newJob.setJobType(jobTypeCB.getSelectedItem().toString());
         newJob.setKeywords(keywordsTB.forceGetText());
@@ -134,32 +140,18 @@ public class CreateJobPage implements Page {
      */
     private void $$$setupUI$$$() {
         createJobPanel = new JPanel();
-        createJobPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(15, 4, new Insets(20, 20, 20, 20), -1, -1));
+        createJobPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(11, 2, new Insets(20, 20, 20, 20), -1, -1));
         createJobPanel.setBackground(new Color(-13224648));
         createJobPanel.setEnabled(true);
-        final com.intellij.uiDesigner.core.Spacer spacer1 = new com.intellij.uiDesigner.core.Spacer();
-        createJobPanel.add(spacer1, new com.intellij.uiDesigner.core.GridConstraints(3, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-        jobDescTA = new ClearingTextArea();
-        jobDescTA.setBackground(new Color(-1973791));
-        Font jobDescTAFont = this.$$$getFont$$$(null, -1, -1, jobDescTA.getFont());
-        if (jobDescTAFont != null) jobDescTA.setFont(jobDescTAFont);
-        jobDescTA.setForeground(new Color(-13224648));
-        jobDescTA.setText("Job Description");
-        createJobPanel.add(jobDescTA, new com.intellij.uiDesigner.core.GridConstraints(9, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 100), null, 0, false));
         jobTitleTB = new ClearingTextField();
         jobTitleTB.setBackground(new Color(-1973791));
         jobTitleTB.setForeground(new Color(-13224648));
         jobTitleTB.setText("Job Listing Title");
         createJobPanel.add(jobTitleTB, new com.intellij.uiDesigner.core.GridConstraints(3, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(222, 30), null, 0, false));
-        salaryTB = new ClearingTextField();
-        salaryTB.setBackground(new Color(-1973791));
-        salaryTB.setForeground(new Color(-13224648));
-        salaryTB.setText("Salary");
-        createJobPanel.add(salaryTB, new com.intellij.uiDesigner.core.GridConstraints(12, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(100, 25), null, null, 0, false));
         final JPanel panel1 = new JPanel();
         panel1.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
         panel1.setBackground(new Color(-13224648));
-        createJobPanel.add(panel1, new com.intellij.uiDesigner.core.GridConstraints(14, 0, 1, 4, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        createJobPanel.add(panel1, new com.intellij.uiDesigner.core.GridConstraints(10, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         saveBtn = new JButton();
         saveBtn.setText("Save");
         panel1.add(saveBtn, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), new Dimension(150, -1), 0, false));
@@ -169,41 +161,39 @@ public class CreateJobPage implements Page {
         panel1.add(publishBtn, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), new Dimension(150, -1), 0, false));
         textArea1 = new JTextArea();
         textArea1.setBackground(new Color(-11348236));
-        createJobPanel.add(textArea1, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 4, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, new Dimension(1000, 50), new Dimension(-1, 1), 0, false));
+        createJobPanel.add(textArea1, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, new Dimension(1000, 50), new Dimension(-1, 1), 0, false));
         final JLabel label1 = new JLabel();
         Font label1Font = this.$$$getFont$$$("Calibri Light", Font.BOLD, 16, label1.getFont());
         if (label1Font != null) label1.setFont(label1Font);
         label1.setForeground(new Color(-592138));
-        label1.setText("Salary");
-        createJobPanel.add(label1, new com.intellij.uiDesigner.core.GridConstraints(11, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        label1.setText("Description");
+        createJobPanel.add(label1, new com.intellij.uiDesigner.core.GridConstraints(4, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label2 = new JLabel();
-        Font label2Font = this.$$$getFont$$$("Calibri Light", Font.BOLD, 16, label2.getFont());
+        Font label2Font = this.$$$getFont$$$("Calibri Light", -1, 22, label2.getFont());
         if (label2Font != null) label2.setFont(label2Font);
         label2.setForeground(new Color(-592138));
-        label2.setText("Description");
-        createJobPanel.add(label2, new com.intellij.uiDesigner.core.GridConstraints(8, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        label2.setText("Create Job");
+        createJobPanel.add(label2, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label3 = new JLabel();
-        Font label3Font = this.$$$getFont$$$("Calibri Light", -1, 22, label3.getFont());
+        Font label3Font = this.$$$getFont$$$("Calibri Light", Font.BOLD, 16, label3.getFont());
         if (label3Font != null) label3.setFont(label3Font);
         label3.setForeground(new Color(-592138));
-        label3.setText("Create Job");
-        createJobPanel.add(label3, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 4, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        label3.setText("Title");
+        createJobPanel.add(label3, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label4 = new JLabel();
         Font label4Font = this.$$$getFont$$$("Calibri Light", Font.BOLD, 16, label4.getFont());
         if (label4Font != null) label4.setFont(label4Font);
         label4.setForeground(new Color(-592138));
-        label4.setText("Title");
-        createJobPanel.add(label4, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final com.intellij.uiDesigner.core.Spacer spacer2 = new com.intellij.uiDesigner.core.Spacer();
-        createJobPanel.add(spacer2, new com.intellij.uiDesigner.core.GridConstraints(4, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_VERTICAL, 1, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(-1, 20), null, 0, false));
-        final com.intellij.uiDesigner.core.Spacer spacer3 = new com.intellij.uiDesigner.core.Spacer();
-        createJobPanel.add(spacer3, new com.intellij.uiDesigner.core.GridConstraints(7, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_VERTICAL, 1, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(-1, 20), null, 0, false));
-        final com.intellij.uiDesigner.core.Spacer spacer4 = new com.intellij.uiDesigner.core.Spacer();
-        createJobPanel.add(spacer4, new com.intellij.uiDesigner.core.GridConstraints(10, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_VERTICAL, 1, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(-1, 20), null, 0, false));
-        final com.intellij.uiDesigner.core.Spacer spacer5 = new com.intellij.uiDesigner.core.Spacer();
-        createJobPanel.add(spacer5, new com.intellij.uiDesigner.core.GridConstraints(13, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_VERTICAL, 1, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(-1, 20), null, 0, false));
+        label4.setText("Keywords");
+        createJobPanel.add(label4, new com.intellij.uiDesigner.core.GridConstraints(8, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        keywordsTB = new ClearingTextField();
+        keywordsTB.setBackground(new Color(-1973791));
+        keywordsTB.setForeground(new Color(-13224648));
+        keywordsTB.setText("Type in keywords separated by space (\" \")");
+        keywordsTB.setToolTipText("Coding Java SQL");
+        createJobPanel.add(keywordsTB, new com.intellij.uiDesigner.core.GridConstraints(9, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 25), null, 0, false));
         final JScrollPane scrollPane1 = new JScrollPane();
-        createJobPanel.add(scrollPane1, new com.intellij.uiDesigner.core.GridConstraints(9, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        createJobPanel.add(scrollPane1, new com.intellij.uiDesigner.core.GridConstraints(5, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         catOptions = new JPanel();
         catOptions.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         scrollPane1.setViewportView(catOptions);
@@ -211,58 +201,56 @@ public class CreateJobPage implements Page {
         Font label5Font = this.$$$getFont$$$("Calibri Light", Font.BOLD, 16, label5.getFont());
         if (label5Font != null) label5.setFont(label5Font);
         label5.setForeground(new Color(-592138));
-        label5.setText("Category");
-        createJobPanel.add(label5, new com.intellij.uiDesigner.core.GridConstraints(8, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        label5.setText("Categories");
+        createJobPanel.add(label5, new com.intellij.uiDesigner.core.GridConstraints(4, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        jobTypeCB = new JComboBox();
+        jobTypeCB.setBackground(new Color(-1973791));
+        jobTypeCB.setForeground(new Color(-13224648));
+        final DefaultComboBoxModel defaultComboBoxModel1 = new DefaultComboBoxModel();
+        defaultComboBoxModel1.addElement("Full-Time");
+        defaultComboBoxModel1.addElement("Part-Time");
+        defaultComboBoxModel1.addElement("Casual");
+        defaultComboBoxModel1.addElement("Intern");
+        jobTypeCB.setModel(defaultComboBoxModel1);
+        jobTypeCB.setSelectedIndex(-1);
+        createJobPanel.add(jobTypeCB, new com.intellij.uiDesigner.core.GridConstraints(3, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label6 = new JLabel();
         Font label6Font = this.$$$getFont$$$("Calibri Light", Font.BOLD, 16, label6.getFont());
         if (label6Font != null) label6.setFont(label6Font);
         label6.setForeground(new Color(-592138));
-        label6.setText("State");
-        createJobPanel.add(label6, new com.intellij.uiDesigner.core.GridConstraints(5, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        stateCB = new JComboBox();
-        stateCB.setBackground(new Color(-1973791));
-        stateCB.setForeground(new Color(-13224648));
-        final DefaultComboBoxModel defaultComboBoxModel1 = new DefaultComboBoxModel();
-        defaultComboBoxModel1.addElement("QLD");
-        defaultComboBoxModel1.addElement("NSW");
-        defaultComboBoxModel1.addElement("VIC");
-        defaultComboBoxModel1.addElement("ACT");
-        defaultComboBoxModel1.addElement("WA");
-        defaultComboBoxModel1.addElement("NT");
-        defaultComboBoxModel1.addElement("SA");
-        defaultComboBoxModel1.addElement("TAS");
-        stateCB.setModel(defaultComboBoxModel1);
-        stateCB.setSelectedIndex(-1);
-        createJobPanel.add(stateCB, new com.intellij.uiDesigner.core.GridConstraints(6, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        label6.setText("Type");
+        createJobPanel.add(label6, new com.intellij.uiDesigner.core.GridConstraints(2, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label7 = new JLabel();
         Font label7Font = this.$$$getFont$$$("Calibri Light", Font.BOLD, 16, label7.getFont());
         if (label7Font != null) label7.setFont(label7Font);
         label7.setForeground(new Color(-592138));
-        label7.setText("Type");
-        createJobPanel.add(label7, new com.intellij.uiDesigner.core.GridConstraints(5, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        jobTypeCB = new JComboBox();
-        jobTypeCB.setBackground(new Color(-1973791));
-        jobTypeCB.setForeground(new Color(-13224648));
-        final DefaultComboBoxModel defaultComboBoxModel2 = new DefaultComboBoxModel();
-        defaultComboBoxModel2.addElement("Full-Time");
-        defaultComboBoxModel2.addElement("Part-Time");
-        defaultComboBoxModel2.addElement("Casual");
-        defaultComboBoxModel2.addElement("Intern");
-        jobTypeCB.setModel(defaultComboBoxModel2);
-        jobTypeCB.setSelectedIndex(-1);
-        createJobPanel.add(jobTypeCB, new com.intellij.uiDesigner.core.GridConstraints(6, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        label7.setText("States");
+        createJobPanel.add(label7, new com.intellij.uiDesigner.core.GridConstraints(6, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        statesScroller = new JScrollPane();
+        createJobPanel.add(statesScroller, new com.intellij.uiDesigner.core.GridConstraints(7, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        statesPanel = new JPanel();
+        statesPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        statesScroller.setViewportView(statesPanel);
+        salaryTB = new ClearingTextField();
+        salaryTB.setBackground(new Color(-1973791));
+        salaryTB.setForeground(new Color(-13224648));
+        salaryTB.setText("Salary");
+        createJobPanel.add(salaryTB, new com.intellij.uiDesigner.core.GridConstraints(9, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(100, 25), null, null, 0, false));
         final JLabel label8 = new JLabel();
         Font label8Font = this.$$$getFont$$$("Calibri Light", Font.BOLD, 16, label8.getFont());
         if (label8Font != null) label8.setFont(label8Font);
         label8.setForeground(new Color(-592138));
-        label8.setText("Keywords");
-        createJobPanel.add(label8, new com.intellij.uiDesigner.core.GridConstraints(11, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        keywordsTB = new ClearingTextField();
-        keywordsTB.setBackground(new Color(-1973791));
-        keywordsTB.setForeground(new Color(-13224648));
-        keywordsTB.setText("Type in keywords separated by space (\" \")");
-        keywordsTB.setToolTipText("Coding Java SQL");
-        createJobPanel.add(keywordsTB, new com.intellij.uiDesigner.core.GridConstraints(12, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 25), null, 0, false));
+        label8.setText("Salary");
+        createJobPanel.add(label8, new com.intellij.uiDesigner.core.GridConstraints(8, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JScrollPane scrollPane2 = new JScrollPane();
+        createJobPanel.add(scrollPane2, new com.intellij.uiDesigner.core.GridConstraints(5, 0, 3, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        jobDescTA = new ClearingTextArea();
+        jobDescTA.setBackground(new Color(-1973791));
+        Font jobDescTAFont = this.$$$getFont$$$(null, -1, -1, jobDescTA.getFont());
+        if (jobDescTAFont != null) jobDescTA.setFont(jobDescTAFont);
+        jobDescTA.setForeground(new Color(-13224648));
+        jobDescTA.setText("Job Description");
+        scrollPane2.setViewportView(jobDescTA);
     }
 
     /**

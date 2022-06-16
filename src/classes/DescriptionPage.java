@@ -47,7 +47,8 @@ public class DescriptionPage implements Page {
         }
 
         description.setText(job.getJobDescription());
-        location.setText(job.getState());
+        location.setText(job.getStates().stream().map(s -> Character.toUpperCase(s.charAt(0)) +
+                        s.substring(1)).collect(Collectors.joining(", ")));
         // Getting job categories, capitalizing the first letter and adding a comma between them and setting to label
         cat.setText(Runtime.accountManager().getJobCategories().getKeysForValue(job).stream().
                 map(s -> Character.toUpperCase(s.charAt(0)) + s.substring(1)).

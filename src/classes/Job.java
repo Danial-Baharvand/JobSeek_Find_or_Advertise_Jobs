@@ -1,14 +1,12 @@
 package classes;
 
-import javax.swing.*;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Set;
 
 public class Job {
     Recruiter recruiter;
     String jobTitle;
-    String state;
+    Set<String> states;
     int salary;
     String jobType;
     String keywords;
@@ -22,7 +20,7 @@ public class Job {
         //this.categories = Runtime.accountManager().getJobCategories().
         String[] setValues = jobDetails.split("\\|");
         this.jobTitle = setValues[0];
-        this.state =setValues[1];
+        this.states =Set.of(setValues[1].split("%%"));
         this.salary =Integer.parseInt(setValues[2]);
         this.jobType =setValues[3];
         this.keywords =setValues[4];
@@ -41,7 +39,7 @@ public class Job {
     @Override
     public String toString() {
         return   jobTitle + '|' +
-                 state + '|' +
+                 String.join("%%", states) + '|' +
                  salary + '|' +
                  jobType + '|' +
                  keywords + '|' +
@@ -79,8 +77,8 @@ public class Job {
         return jobTitle;
     }
 
-    public String getState() {
-        return state;
+    public Set<String> getStates() {
+        return states;
     }
 
     public int getSalary() {
@@ -103,8 +101,8 @@ public class Job {
         this.jobTitle = jobTitle;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setStates(Set<String> states) {
+        this.states = states;
     }
 
     public void setSalary(int salary) {

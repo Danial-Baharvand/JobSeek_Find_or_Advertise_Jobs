@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /*
  * Recruiter profile is what the job seeker can see of the recruiter.
@@ -69,7 +70,8 @@ public class RecruiterProfilePage implements Page {
                 public void actionPerformed(ActionEvent e) {
                     selectedJobDescription.setText(jobList.get(0).getJobDescription());
                     selectedJobCompensation.setText(String.valueOf(jobList.get(0).getSalary()));
-                    selectedJobLocation.setText(jobList.get(0).getState());
+                    selectedJobLocation.setText(jobList.get(0).getStates().stream().map(s -> Character.toUpperCase(s.charAt(0)) +
+                            s.substring(1)).collect(Collectors.joining(", ")));
                     //selectJobCategory.setText(jobList.get(0).getCat());
                 }
             });
@@ -95,7 +97,8 @@ public class RecruiterProfilePage implements Page {
                 public void actionPerformed(ActionEvent e) {
                     selectedJobDescription.setText(jobList.get(1).getJobDescription());
                     selectedJobCompensation.setText(String.valueOf(jobList.get(1).getSalary()));
-                    selectedJobLocation.setText(jobList.get(1).getState());
+                    selectedJobLocation.setText(jobList.get(1).getStates().stream().map(s -> Character.toUpperCase(s.charAt(0)) +
+                            s.substring(1)).collect(Collectors.joining(", ")));
                     //selectJobCategory.setText(jobList.get(1).getCat());
                 }
             });
@@ -118,7 +121,8 @@ public class RecruiterProfilePage implements Page {
                 public void actionPerformed(ActionEvent e) {
                     selectedJobDescription.setText(jobList.get(2).getJobDescription());
                     selectedJobCompensation.setText(String.valueOf(jobList.get(2).getSalary()));
-                    selectedJobLocation.setText(jobList.get(2).getState());
+                    selectedJobLocation.setText(jobList.get(2).getStates().stream().map(s -> Character.toUpperCase(s.charAt(0)) +
+                            s.substring(1)).collect(Collectors.joining(", ")));
                     //selectJobCategory.setText(jobList.get(2).getCat());
                 }
             });

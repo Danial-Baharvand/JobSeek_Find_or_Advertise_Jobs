@@ -13,7 +13,6 @@ public class JobMap extends BiMultiMap<Job> {
         IO io = new IO();
         io.clearFileContent(path);
         for (Map.Entry<String,Job> entry:map.entries()) {
-            System.out.println(entry);
             io.newLine(path, entry.getKey() + "=" + entry.getValue().getID());
         }
         io.newLine(path, String.valueOf(s));

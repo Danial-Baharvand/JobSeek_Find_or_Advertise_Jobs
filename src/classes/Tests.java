@@ -20,17 +20,17 @@ public class Tests {
         job1.setJobTitle("Software Engineer");
         job1.setRecruiter(recruiter1);
         job1.setJobDescription("This is a job. Please apply");
-        job1.setState("QLD");
+        //job1.setStates("QLD");
         job1.setSalary(125000);
         job1.setJobType("Casual");
         job1.setKeywords("java, sql");
-        System.out.println(job1);
+
 
         Job job2 = new Job();
         job2.setJobTitle("It Specialist");
         job2.setRecruiter(recruiter1);
         job2.setJobDescription("This is a job. Please apply");
-        job2.setState("QLD");
+        //job2.setStates("QLD");
         job2.setSalary(125000);
         job2.setJobType("full-time");
 
@@ -38,7 +38,7 @@ public class Tests {
         job3.setJobTitle("Data Analyst");
         job3.setRecruiter(recruiter1);
         job3.setJobDescription("This is a job. Please apply");
-        job3.setState("QLD");
+        //job3.setStates("QLD");
         job3.setSalary(125000);
         job3.setJobType("part-time");
 
@@ -46,7 +46,7 @@ public class Tests {
         job4.setJobTitle("DevOps");
         job4.setRecruiter(recruiter1);
         job4.setJobDescription("This is a job. Please apply");
-        job4.setState("QLD");
+        //job4.setStates("QLD");
         job4.setSalary(125000);
         job4.setJobType("Full-time");
 
@@ -54,7 +54,7 @@ public class Tests {
         job5.setJobTitle("Web Dev");
         job5.setRecruiter(recruiter1);
         job5.setJobDescription("This is a job. Please apply");
-        job5.setState("QLD");
+        //job5.setStates("QLD");
         job5.setSalary(125000);
         job5.setJobType("casual");
 
@@ -62,7 +62,7 @@ public class Tests {
         job6.setJobTitle("Backend");
         job6.setRecruiter(recruiter1);
         job6.setJobDescription("This is a job. Please apply");
-        job6.setState("QLD");
+        //job6.setStates("QLD");
         job6.setSalary(125000);
         job6.setJobType("full-time");
         return new HashSet<Job>(Arrays.asList(job1, job2, job3, job4, job5));
@@ -120,21 +120,21 @@ public class Tests {
         testJob.setJobTitle("Software Engineer");
         testJob.setRecruiter(testRecruiter);
         testJob.setJobDescription("This is a job. Please apply");
-        testJob.setState("QLD");
+        //testJob.setStates("QLD");
         testJob.setSalary(125000);
 
         Job testJob1 = new Job();
         testJob1.setJobTitle("UI Designer");
         testJob1.setRecruiter(testRecruiter);
         testJob1.setJobDescription("This is a job. Please apply");
-        testJob1.setState("VIC");
+        //testJob1.setStates("VIC");
         testJob1.setSalary(99000);
 
         Job testJob2 = new Job();
         testJob2.setJobTitle("Software Technician");
         testJob2.setRecruiter(testRecruiter);
         testJob2.setJobDescription("This is a job. Please apply");
-        testJob2.setState("QLD");
+        //testJob2.setStates("QLD");
         testJob2.setSalary(75000);
 
         return testRecruiter;
