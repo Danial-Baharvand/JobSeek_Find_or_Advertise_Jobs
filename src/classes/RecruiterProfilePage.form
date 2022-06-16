@@ -50,15 +50,6 @@
             </properties>
             <border type="none"/>
             <children>
-              <component id="cc0d" class="javax.swing.JLabel" binding="selectJobCategory">
-                <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <foreground color="-13224648"/>
-                  <text value="Category"/>
-                </properties>
-              </component>
               <component id="d7db2" class="javax.swing.JButton" binding="applyButton">
                 <constraints>
                   <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false">
@@ -86,7 +77,7 @@
                       <text value=""/>
                     </properties>
                   </component>
-                  <component id="ce394" class="javax.swing.JLabel">
+                  <component id="ce394" class="javax.swing.JLabel" binding="descriptionLabel">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -116,6 +107,15 @@
                 <properties>
                   <foreground color="-13224648"/>
                   <text value="Compensation"/>
+                </properties>
+              </component>
+              <component id="cc0d" class="javax.swing.JLabel" binding="selectedJobCategory">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <foreground color="-13224648"/>
+                  <text value="Job Type"/>
                 </properties>
               </component>
             </children>
