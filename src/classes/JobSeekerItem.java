@@ -4,6 +4,8 @@ import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Locale;
@@ -19,31 +21,78 @@ public class JobSeekerItem implements Page {
     private JLabel skillsLabel;
     private JLabel scoreLabel;
     private JLabel nameLabel;
+    private JButton resumeButton;
+    private JButton sendInvitationButton;
+    private JButton cancelButton;
+    private JButton sendButton;
+    private JTextArea messageTA;
+    private JPanel messagePanel;
     JobSeeker jobSeeker;
+    Job job;
     int score;
 
-    public JobSeekerItem(JobSeeker jobSeeker, int score) {
+    public JobSeekerItem(JobSeeker jobSeeker, Job job, int score) {
         this.jobSeeker = jobSeeker;
+        this.job = job;
         this.score = score;
         createJobSeekerItem();
         addPanelListeners();
+        if (Runtime.accountManager().getJobInvitations().containsEntry(jobSeeker.getEmail(), job)) {
+            deActivateInvitations();
+        }
+
+    }
+
+    public void deActivateInvitations() {
+        sendInvitationButton.setText("Invitation Sent");
+        sendInvitationButton.setEnabled(false);
     }
 
     public void createJobSeekerItem() {
+
         fullName.setText(jobSeeker.getFullName());
         skills.setText(jobSeeker.getSkills().stream().map(s -> Character.toUpperCase(s.charAt(0))
                 + s.substring(1)).collect(Collectors.joining(", ")));
         jobSeekerScore.setText(String.valueOf(score));
     }
 
-    public void addPanelListeners() {
-        jobSeekerPanel.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                // TODO show jobSeeker detailed page
-            }
+    public void showInvitationComponents(boolean show) {
+        sendButton.setVisible(show);
+        cancelButton.setVisible(show);
+        messagePanel.setVisible(show);
+        sendInvitationButton.setVisible(!show);
+    }
 
+    public void addPanelListeners() {
+        sendInvitationButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showInvitationComponents(true);
+            }
+        });
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showInvitationComponents(false);
+            }
+        });
+        sendButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String message = messageTA.getText().replace("\n", "$$newline$$")
+                        .replace("\r", "$$newline$$");
+                Runtime.accountManager().getJobInvitations().put(jobSeeker.getEmail(), job);
+                Runtime.accountManager().getMessages().put(jobSeeker.getEmail() + job.getID(), message);
+                Runtime.accountManager().getJobInvitations().writeToFile(Config.DT_JOB_INVITATIONS);
+                IO io = new IO();
+                io.writeMapEntry(jobSeeker.getEmail() + job.getID(), message, Config.DT_MESSAGES);
+                showInvitationComponents(false);
+                JOptionPane.showMessageDialog(null, "Invitation sent!");
+                showInvitationComponents(false);
+                deActivateInvitations();
+            }
+        });
+        jobSeekerPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
@@ -94,7 +143,7 @@ public class JobSeekerItem implements Page {
         jobSeekerItemPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         panel1.add(jobSeekerItemPanel, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         jobSeekerPanel = new JPanel();
-        jobSeekerPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(5, 4, new Insets(0, 0, 0, 0), -1, -1));
+        jobSeekerPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(6, 5, new Insets(0, 0, 0, 0), -1, -1));
         jobSeekerPanel.setBackground(new Color(-4144960));
         jobSeekerItemPanel.add(jobSeekerPanel, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         fullName = new JLabel();
@@ -135,6 +184,32 @@ public class JobSeekerItem implements Page {
         jobSeekerPanel.add(spacer4, new com.intellij.uiDesigner.core.GridConstraints(0, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, new Dimension(20, -1), 0, false));
         final com.intellij.uiDesigner.core.Spacer spacer5 = new com.intellij.uiDesigner.core.Spacer();
         jobSeekerPanel.add(spacer5, new com.intellij.uiDesigner.core.GridConstraints(3, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, new Dimension(20, -1), 0, false));
+        final JPanel panel2 = new JPanel();
+        panel2.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(4, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panel2.setOpaque(false);
+        jobSeekerPanel.add(panel2, new com.intellij.uiDesigner.core.GridConstraints(0, 4, 5, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        resumeButton = new JButton();
+        resumeButton.setText("View Resume");
+        panel2.add(resumeButton, new com.intellij.uiDesigner.core.GridConstraints(3, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        sendInvitationButton = new JButton();
+        sendInvitationButton.setText("Send Invitation");
+        panel2.add(sendInvitationButton, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        cancelButton = new JButton();
+        cancelButton.setText("Cancel");
+        cancelButton.setVisible(false);
+        panel2.add(cancelButton, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        sendButton = new JButton();
+        sendButton.setText("Send");
+        sendButton.setVisible(false);
+        panel2.add(sendButton, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        messagePanel = new JPanel();
+        messagePanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 20, 0, 20), -1, -1));
+        messagePanel.setOpaque(false);
+        messagePanel.setVisible(false);
+        jobSeekerPanel.add(messagePanel, new com.intellij.uiDesigner.core.GridConstraints(5, 0, 1, 4, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        messageTA = new JTextArea();
+        messageTA.setText("We would like to invite you for an interview!");
+        messagePanel.add(messageTA, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
     }
 
     /**

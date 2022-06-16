@@ -54,15 +54,6 @@ public class DescriptionPage implements Page {
                 collect(Collectors.joining(", ")));
 
         salary.setText("$" + job.getSalary());
-
-
-        viewApplicantsBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                HashMap<JobSeeker, Integer> jobSeekerScores = Tests.createTestJobSeekerScores();
-                Runtime.showJobSeekerResultsPage(jobSeekerScores);
-            }
-        });
     }
 
     private void addRecruiterJobListenrs(Job job) {
@@ -79,6 +70,13 @@ public class DescriptionPage implements Page {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Runtime.showCreateJobPage(job);
+            }
+        });
+        viewApplicantsBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                HashMap<JobSeeker, Integer> jobSeekerScores = Tests.createTestJobSeekerScores();
+                Runtime.showJobSeekerResultsPage(jobSeekerScores, job);
             }
         });
     }
@@ -103,7 +101,9 @@ public class DescriptionPage implements Page {
             applyButton.setVisible(false);
             messagePanel.setVisible(true);
             messageLabel.setVisible(true);
-            messageText.setText(Runtime.accountManager().getMessages().get(userEmail + job.getID()));
+            String message = Runtime.accountManager().getMessages().get(userEmail + job.getID())
+                    .replace("$$newline$$", "\n");
+            messageText.setText(message);
         } else if (Runtime.accountManager().getJobApplications().get(userEmail).contains(job)) {
             removeButton.setVisible(true);
             applyButton.setVisible(false);

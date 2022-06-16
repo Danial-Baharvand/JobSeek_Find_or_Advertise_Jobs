@@ -10,8 +10,8 @@ public class JobSeekerResultsPage implements Page {
     private JScrollPane jobSeekerScroller;
     private JPanel jobSeekerPanel;
 
-    JobSeekerResultsPage(HashMap<JobSeeker, Integer> jobSeekerScores) {
-        if (!GuiHelper.createJobSeekerList(jobSeekerScores, jobSeekerPanel)) {
+    JobSeekerResultsPage(HashMap<JobSeeker, Integer> jobSeekerScores, Job job) {
+        if (!GuiHelper.createJobSeekerList(jobSeekerScores, job, jobSeekerPanel)) {
             jobSeekerScroller.setVisible(false);
             noJobSeekersLabel.setVisible(true);
         }

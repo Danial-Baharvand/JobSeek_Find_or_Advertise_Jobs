@@ -114,8 +114,8 @@ public class Runtime {
     public static void showLoginPage() {
         showPage( new LoginPage(accMan));
     }
-    public static void showJobSeekerResultsPage(HashMap<JobSeeker, Integer> jobSeekerScores) {
-        showPage( new JobSeekerResultsPage(jobSeekerScores));
+    public static void showJobSeekerResultsPage(HashMap<JobSeeker, Integer> jobSeekerScores, Job job) {
+        showPage( new JobSeekerResultsPage(jobSeekerScores, job));
     }
     public static void showAppliedJobsPage() {
         showPage( new AppliedJobsPage());

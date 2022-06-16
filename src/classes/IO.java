@@ -41,9 +41,12 @@ public class IO {
             newLine(DT_RECRUITERS, data.toString());
         } else if (data instanceof Job) {
             newLine(DT_JOBS, data.toString());
-        } else if (data instanceof String) {
-            newLine(DT_MESSAGES, data.toString());
+        } else {
+            System.out.println("Type not compatible to write to database");
         }
+    }
+    public void writeMapEntry(String key, String value, String path){
+        newLine(path, key + "=" + value);
     }
 
     public HashMap<String, JobSeeker> readJobSeekers(BiMultiMap<String> skills) {

@@ -78,14 +78,14 @@ public class GuiHelper {
         }
         return true;
     }
-    public static boolean createJobSeekerList(HashMap<JobSeeker, Integer> jobSeekerList, JPanel jobSeekerPanel) {
+    public static boolean createJobSeekerList(HashMap<JobSeeker, Integer> jobSeekerList, Job job, JPanel jobSeekerPanel) {
         if (jobSeekerList.isEmpty()){
             return false;
         }
         jobSeekerPanel.setLayout(new BoxLayout(jobSeekerPanel, BoxLayout.Y_AXIS));
         for (JobSeeker jobSeeker : jobSeekerList.keySet()) {
             JPanel jPanel;
-            jPanel = new JobSeekerItem(jobSeeker, jobSeekerList.get(jobSeeker)).getPanel();
+            jPanel = new JobSeekerItem(jobSeeker, job,  jobSeekerList.get(jobSeeker)).getPanel();
             jobSeekerPanel.add(jPanel);
         }
         return true;

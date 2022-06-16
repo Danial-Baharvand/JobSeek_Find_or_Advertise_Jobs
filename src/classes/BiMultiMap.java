@@ -49,6 +49,10 @@ public class BiMultiMap <V> {
     public boolean containsValue(V value){
         return map.containsValue(value);
     }
+    public boolean containsEntry(String key, V value){
+        return map.containsEntry(key, value);
+    }
+
 
     public Collection<String> getKeysForValue(V value){
         return invertedMap.get(value);
