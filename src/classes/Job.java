@@ -13,6 +13,7 @@ public class Job {
     String jobDescription;
     Boolean published = false;
 
+
     public Job(){
         this.jobTitle = "This job was removed";
     }

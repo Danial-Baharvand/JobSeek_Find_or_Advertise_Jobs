@@ -3,6 +3,7 @@ package classes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Stream;
 
 public class Scorer {
@@ -64,6 +65,14 @@ public class Scorer {
         if (!search.getJobTypes().isEmpty()){allScores.add(scoreComboBox(search.getJobTypes(), job.getJobType()));}
         if (search.getSalary() > 0){allScores.add(scoreSalary(search.getSalary(), job.getSalary()));}
         return  (int) allScores.stream().mapToDouble(a -> a).average().orElse(0.0);
+    }
+    public int jobMatchesJobSeeker(Job job, JobSeeker jobSeeker){
+        Set<String> seekerTerms = new HashSet<>();
+        if (!jobSeeker.getSkills().isEmpty()){
+            seekerTerms.addAll(jobSeeker.getSkills());
+        }
+
+
     }
 
 }
