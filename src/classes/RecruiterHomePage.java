@@ -31,7 +31,7 @@ public class RecruiterHomePage implements Page {
         nameText.setText(recruiter.getFullName());
         emailText.setText(recruiter.getEmail());
         orgText.setText(recruiter.getOrg());
-        Collection<Job> recruiterJobs = Runtime.accountManager().getRecruiterJobs().get(recruiter.getEmail());
+        Collection<Job> recruiterJobs = recruiter.getJobs();
         GuiHelper.createJobList(recruiterJobs, jobListingsPanel);
 
         createJobButton.addActionListener(new ActionListener() {

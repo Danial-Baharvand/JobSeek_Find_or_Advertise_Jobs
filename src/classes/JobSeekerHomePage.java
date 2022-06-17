@@ -45,14 +45,13 @@ public class JobSeekerHomePage implements Page {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //add skills to jobseekers skills list
-
                 if (!skillsInput.getText().isEmpty()) {
                     String sk = skillsInput.getText();
                     currentUser.addSkill(sk.toLowerCase());
                     GuiHelper.createOptionBox(skillsList, new ArrayList<>(currentUser.getSkills()));
                     skillsInput.setText("");
-                    Runtime.accountManager().getSkills().put(currentUser.getEmail(), sk);
-                    Runtime.accountManager().getSkills().writeToFile(Config.DT_SKILLS);
+                    currentUser.getSkills().add(sk);
+                    IO.writeJobseekers();
                 }
             }
 
@@ -65,10 +64,10 @@ public class JobSeekerHomePage implements Page {
                 Set<String> strings = currentUser.getSkills();
                 for (String s : GuiHelper.getSelectedOptions(skillsList)) {
                     strings.remove(s);
-                    Runtime.accountManager().getSkills().remove(currentUser.getEmail(), s);
+                    currentUser.getSkills().remove(s);
                 }
-                GuiHelper.createOptionBox(skillsList, new ArrayList<>(currentUser.getSkills()));
-                Runtime.accountManager().getSkills().writeToFile(Config.DT_SKILLS);
+                GuiHelper.createOptionBox(skillsList, currentUser.getSkills());
+                IO.writeJobseekers();
 
             }
         });
@@ -151,8 +150,7 @@ public class JobSeekerHomePage implements Page {
         appliedJobsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Search appliedSearch = new Search(Runtime.accountManager().getJobApplications().
-                        get(Runtime.accountManager().getCurrentUser().getEmail()));
+                Search appliedSearch = new Search(currentUser.applications().getJobs());
                 appliedSearch.setScores();
                 ArrayList<ScoredJob> jobList = appliedSearch.getScoredJobs();
                 Runtime.showSearchResultsPage(jobList);
@@ -161,8 +159,7 @@ public class JobSeekerHomePage implements Page {
         jobInvitationsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Search invitedSearch = new Search(Runtime.accountManager().getJobInvitations().
-                        get(Runtime.accountManager().getCurrentUser().getEmail()));
+                Search invitedSearch = new Search(currentUser.invitations().getJobs());
                 invitedSearch.setScores();
                 ArrayList<ScoredJob> jobList = invitedSearch.getScoredJobs();
                 Runtime.showSearchResultsPage(jobList);

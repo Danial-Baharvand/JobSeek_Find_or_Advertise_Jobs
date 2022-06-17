@@ -1,9 +1,11 @@
 package classes;
 
-import java.awt.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
-public class JobSeeker extends User {
+import static classes.Config.*;
+
+public class JobSeeker extends User implements Inbox {
     private String resumeFile;
     Set<String> skills = new HashSet<>();
 
@@ -12,12 +14,19 @@ public class JobSeeker extends User {
         //this.skills = new HashSet<String>();
     }
 
-    public JobSeeker(String email, String firstName, String lastName) {
-        super(email, firstName, lastName);
+    public JobSeeker(String email, String fullName, String password) {
+        super(email, fullName, password);
     }
 
-    public String toString() {
-        return String.format("%s,%s,%s", super.getEmail(), super.getFullName(), super.getPassword());
+    public String toWriteFormat() {
+        return   getEmail() + SEPARATOR_1 +
+                getFullName() + SEPARATOR_1 +
+                getPassword() + SEPARATOR_1 +
+                isActive() + SEPARATOR_1 +
+                resumeFile + SEPARATOR_1 +
+                String.join(SEPARATOR_2, skills) + SEPARATOR_1 +
+                applications() + SEPARATOR_1 +
+                invitations();
     }
 
     public void addSkill(String skill){

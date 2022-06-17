@@ -84,7 +84,7 @@ public class CreateAccountPage implements Page {
                 }
 
                 IO writer = new IO();
-                writer.writeToDB(newUser);
+                writer.addToDB(newUser);
                 Runtime.accountManager().addUser(newUser);
                 JOptionPane.showMessageDialog(null, String.format("New %s account successfully created " +
                         "for %s!%n", userTypeComboBox.getSelectedItem().toString(), email));

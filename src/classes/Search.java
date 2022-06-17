@@ -4,9 +4,9 @@ import java.util.*;
 
 public class Search {
     String searchText;
-    ArrayList<String> states;
-    ArrayList<String> cats;
-    ArrayList<String> jobTypes;
+    Set<String> states;
+    Set<String> cats;
+    Set<String> jobTypes;
     int salary;
     String keywords;
     Collection<Job> jobs;
@@ -78,27 +78,27 @@ public class Search {
         return scoredJobs;
     }
 
-    public ArrayList<String> getStates() {
+    public Set<String> getStates() {
         return states;
     }
 
-    public void setStates(ArrayList<String> states) {
+    public void setStates(Set<String> states) {
         this.states = states;
     }
 
-    public ArrayList<String> getCats() {
+    public Set<String> getCats() {
         return cats;
     }
 
-    public void setCats(ArrayList<String> cats) {
+    public void setCats(Set<String> cats) {
         this.cats = cats;
     }
 
-    public ArrayList<String> getJobTypes() {
+    public Set<String> getJobTypes() {
         return jobTypes;
     }
 
-    public void setJobTypes(ArrayList<String> jobTypes) {
+    public void setJobTypes(Set<String> jobTypes) {
         this.jobTypes = jobTypes;
     }
 }

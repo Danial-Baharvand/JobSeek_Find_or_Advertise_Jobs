@@ -1,9 +1,11 @@
 package classes;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 
-public class Job {
+public class Job implements Inbox{
+    String jobID;
     Recruiter recruiter;
     String jobTitle;
     Set<String> states;
@@ -12,13 +14,15 @@ public class Job {
     String keywords;
     String jobDescription;
     Boolean published = false;
+    CategoryManager categories;
+
 
 
     public Job(){
         this.jobTitle = "This job was removed";
     }
     public Job(String jobDetails, HashMap<String, Recruiter> recruiters){
-        //this.categories = Runtime.accountManager().getJobCategories().
+        categories = new CategoryManager();
         String[] setValues = jobDetails.split("\\|");
         this.jobTitle = setValues[0];
         this.states =Set.of(setValues[1].split("%%"));
@@ -28,6 +32,7 @@ public class Job {
         this.jobDescription =setValues[5].replace("$$newline$$", "\n");
         this.recruiter = recruiters.get(setValues[6]);
         this.published =Boolean.parseBoolean(setValues[7]);
+        this.jobID = this.jobTitle + this.recruiter;
     }
     public Boolean getPublished() {
         return published;
@@ -37,8 +42,8 @@ public class Job {
         this.published = published;
     }
 
-    @Override
-    public String toString() {
+
+    public String toString2() {
         return   jobTitle + '|' +
                  String.join("%%", states) + '|' +
                  salary + '|' +
@@ -49,23 +54,11 @@ public class Job {
                  recruiter.getEmail() + '|' +
                  published;
     }
-    public static void removeJob(Job job) {
-        AccountManagement ac = Runtime.accountManager();
-        ac.getJobApplications().removeAllKeys(job);
-        ac.getJobCategories().removeAllKeys(job);
-        ac.getJobInvitations().removeAllKeys(job);
-        ac.getRecruiterJobs().removeAllKeys(job);
-        ac.getJobs().remove(job.getID());
-        ac.getJobApplications().writeToFile(Config.DT_JOB_APPLICATIONS);
-        ac.getJobCategories().writeToFile(Config.DT_JOB_CATEGORIES);
-        ac.getJobInvitations().writeToFile(Config.DT_JOB_INVITATIONS);
-        ac.getRecruiterJobs().writeToFile(Config.DT_RECRUITER_JOBS);
-        IO io = new IO();
-        io.clearFileContent(Config.DT_JOBS);
-        for (Job jobToWrite : ac.getJobs().values()) {
-            io.writeToDB(jobToWrite);
-        }
+    @Override
+    public String toString() {
+        return   this.jobID;
     }
+
     public String getID(){
         return jobTitle + recruiter.getEmail();
     }
@@ -113,16 +106,22 @@ public class Job {
     public void setJobType(String jobType) {
         this.jobType = jobType;
     }
-
     public void setKeywords(String keywords) {
         this.keywords = keywords;
     }
-
     public String getJobDescription() {
         return jobDescription;
     }
-
     public void setJobDescription(String jobDescription) {
         this.jobDescription = jobDescription;
     }
+    public CategoryManager categories() {
+        return categories;
+    }
+
+    public void addCategory(Category category) {
+        this.categories.add(category);
+    }
+
+
 }

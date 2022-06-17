@@ -56,7 +56,7 @@ public class RecruiterProfilePage implements Page {
         recruiterSocial.setText("@" + recruiter.getOrg());
 
         //obtain collection of jobs by using recruiter email as key
-        jobs = Runtime.accountManager().getRecruiterJobs().get(Runtime.accountManager().getCurrentUser().getEmail());
+        jobs = recruiter.getJobs();
 
         ArrayList<Job> jobList = new ArrayList<>(jobs);
 
@@ -74,7 +74,7 @@ public class RecruiterProfilePage implements Page {
                     selectedJobLocation.setText(jobList.get(0).getStates().stream().map(s -> Character.toUpperCase(s.charAt(0)) +
                             s.substring(1)).collect(Collectors.joining(", ")));
                     //selectJobCategory.setText(jobList.get(0).getCat());
-                    selectedJobLocation.setText(jobList.get(0).getState());
+                    //selectedJobLocation.setText(jobList.get(0).getState());
                     selectedJobCategory.setText(jobList.get(0).getJobType());
                     descriptionLabel.setText(jobList.get(0).getJobTitle());
                 }
@@ -94,7 +94,7 @@ public class RecruiterProfilePage implements Page {
                     selectedJobLocation.setText(jobList.get(1).getStates().stream().map(s -> Character.toUpperCase(s.charAt(0)) +
                             s.substring(1)).collect(Collectors.joining(", ")));
                     //selectJobCategory.setText(jobList.get(1).getCat());
-                    selectedJobLocation.setText(jobList.get(1).getState());
+                    //selectedJobLocation.setText(jobList.get(1).getState());
                     selectedJobCategory.setText(jobList.get(1).getJobType());
                     descriptionLabel.setText(jobList.get(1).getJobTitle());
                 }
@@ -109,7 +109,7 @@ public class RecruiterProfilePage implements Page {
                 public void actionPerformed(ActionEvent e) {
                     selectedJobDescription.setText(jobList.get(2).getJobDescription());
                     selectedJobCompensation.setText(String.valueOf(jobList.get(2).getSalary()));
-                    selectedJobLocation.setText(jobList.get(2).getState());
+                    //selectedJobLocation.setText(jobList.get(2).getState());
                     selectedJobCategory.setText(jobList.get(2).getJobType());
                     descriptionLabel.setText(jobList.get(2).getJobTitle());
                     selectedJobLocation.setText(jobList.get(2).getStates().stream().map(s -> Character.toUpperCase(s.charAt(0)) +
@@ -277,14 +277,8 @@ public class RecruiterProfilePage implements Page {
         Font label3Font = this.$$$getFont$$$(null, Font.BOLD, -1, label3.getFont());
         if (label3Font != null) label3.setFont(label3Font);
         label3.setForeground(new Color(-592138));
-        label3.setText("Website:");
-        recruiterProfile.add(label3, new com.intellij.uiDesigner.core.GridConstraints(4, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JLabel label4 = new JLabel();
-        Font label4Font = this.$$$getFont$$$(null, Font.BOLD, -1, label4.getFont());
-        if (label4Font != null) label4.setFont(label4Font);
-        label4.setForeground(new Color(-592138));
-        label4.setText("Socials:");
-        recruiterProfile.add(label4, new com.intellij.uiDesigner.core.GridConstraints(6, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        label3.setText("Socials:");
+        recruiterProfile.add(label3, new com.intellij.uiDesigner.core.GridConstraints(6, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         recruiterSocial = new JLabel();
         recruiterSocial.setForeground(new Color(-592138));
         recruiterSocial.setText("Socials");

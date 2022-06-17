@@ -50,9 +50,7 @@ public class DescriptionPage implements Page {
         location.setText(job.getStates().stream().map(s -> Character.toUpperCase(s.charAt(0)) +
                         s.substring(1)).collect(Collectors.joining(", ")));
         // Getting job categories, capitalizing the first letter and adding a comma between them and setting to label
-        cat.setText(Runtime.accountManager().getJobCategories().getKeysForValue(job).stream().
-                map(s -> Character.toUpperCase(s.charAt(0)) + s.substring(1)).
-                collect(Collectors.joining(", ")));
+        cat.setText(job.categories().toCapitalString());
 
         salary.setText("$" + job.getSalary());
 
@@ -62,7 +60,8 @@ public class DescriptionPage implements Page {
         removeBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Job.removeJob(job);
+                Recruiter recruiter = (Recruiter) Runtime.accountManager().getCurrentUser();
+                recruiter.removeJob(job);
                 Runtime.getPagesVisited().clear();
                 Runtime.showRecruiterHome();
                 JOptionPane.showMessageDialog(null, "Job was deleted!");
@@ -95,25 +94,24 @@ public class DescriptionPage implements Page {
         String userEmail = Runtime.accountManager().getCurrentUser().getEmail();
         jobseekerButtons.setVisible(false);
         recruiterButtons.setVisible(true);
-        if (Runtime.accountManager().getJobApplications().containsValue(job)) {
+        if (!job.invitations().isEmpty() || !job.applications().isEmpty()) {
             editBtn.setEnabled(false);
             editBtn.setToolTipText("Jobs with ongoing applications can't be edited");
         }
     }
 
     public void checkJobSeekerJobStatus(Job job) {
-        String userEmail = Runtime.accountManager().getCurrentUser().getEmail();
+        JobSeeker jobSeeker = (JobSeeker) Runtime.accountManager().getCurrentUser();
         jobseekerButtons.setVisible(true);
         recruiterButtons.setVisible(false);
-        if (Runtime.accountManager().getJobInvitations().get(userEmail).contains(job)) {
+        if (jobSeeker.invitations().getJobs().contains(job)) {
             removeButton.setVisible(false);
             applyButton.setVisible(false);
             messagePanel.setVisible(true);
             messageLabel.setVisible(true);
-            String message = Runtime.accountManager().getMessages().get(userEmail + job.getID())
-                    .replace("$$newline$$", "\n");
+            String message = jobSeeker.invitations().getMessage(job);
             messageText.setText(message);
-        } else if (Runtime.accountManager().getJobApplications().get(userEmail).contains(job)) {
+        } else if (jobSeeker.applications().getJobs().contains(job)) {
             removeButton.setVisible(true);
             applyButton.setVisible(false);
         }
@@ -124,8 +122,11 @@ public class DescriptionPage implements Page {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JobSeeker jobSeeker = (JobSeeker) Runtime.accountManager().getCurrentUser();
-                Runtime.accountManager().getJobApplications().put(jobSeeker.getEmail(), job);
-                Runtime.accountManager().getJobApplications().writeToFile(Config.DT_JOB_APPLICATIONS);
+                Application newApp = new Application(jobSeeker, job);
+                jobSeeker.applications().add(newApp);
+                job.applications().add(newApp);
+                IO.writeJobs();
+                IO.writeJobseekers();
                 removeButton.setVisible(true);
                 applyButton.setVisible(false);
             }
@@ -134,8 +135,10 @@ public class DescriptionPage implements Page {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JobSeeker jobSeeker = (JobSeeker) Runtime.accountManager().getCurrentUser();
-                Runtime.accountManager().getJobApplications().remove(jobSeeker.getEmail(), job);
-                Runtime.accountManager().getJobApplications().writeToFile(Config.DT_JOB_APPLICATIONS);
+                jobSeeker.applications().removeByJob(job);
+                job.applications().removeByJobSeeker(jobSeeker);
+                IO.writeJobs();
+                IO.writeJobseekers();
                 removeButton.setVisible(false);
                 applyButton.setVisible(true);
             }

@@ -1,17 +1,19 @@
 package classes;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
+import static classes.Config.SEPARATOR_1;
+import static classes.Config.SEPARATOR_2;
 
 public class Recruiter extends User {
     String org;
-    String recruiterDescription;
-    ArrayList<Job> Jobs = new ArrayList<>();
+    Set<Job> jobs = new HashSet<>();
 
 
     public Recruiter() {
         super("", "", "");
         org = "";
-        recruiterDescription = "";
     }
 
     public Recruiter(String email, String fullName, String password, String org) {
@@ -19,21 +21,47 @@ public class Recruiter extends User {
         this.org = org;
 
     }
+    public String toWriteFormat() {
+        return   getEmail() + SEPARATOR_1 +
+                getFullName() + SEPARATOR_1 +
+                getPassword() + SEPARATOR_1 +
+                isActive() + SEPARATOR_1 +
+                getOrg() + SEPARATOR_1 +
+                printJobs();
+    }
 
     public String getOrg() {
         return org;
+    }
+    private String printJobs(){
+        StringBuilder s = new StringBuilder();
+        String separator = "";
+        for (Job job:jobs) {
+            s.append(separator).append(job);
+            separator = SEPARATOR_2;
+        }
+        return s.toString();
     }
 
     public void setOrg(String org) {
         this.org = org;
     }
 
-    public ArrayList<Job> getJobs() {
-        return Jobs;
+    public Set<Job> getJobs() {
+        return jobs;
     }
 
-    public void setJobs(ArrayList<Job> jobs) {
-        Jobs = jobs;
+    public void setJobs(Set<Job> jobs) {
+        this.jobs = jobs;
+    }
+    public boolean hasJob(String title){
+        return jobs.stream().anyMatch(j -> j.getJobTitle().equals(title));
+    }
+    public void addJob(Job job){
+        jobs.add(job);
+    }
+    public void removeJob(Job job){
+        jobs.remove(job);
     }
 
     public String getRecruiterDescription() {
@@ -42,8 +70,5 @@ public class Recruiter extends User {
 
     public void setRecruiterDescription(String recruiterDescription) {
         this.recruiterDescription = recruiterDescription;
-    }
-    public String toString() {
-        return String.format("%s,%s,%s,%s", getEmail(), getFullName(), getPassword(), org);
     }
 }

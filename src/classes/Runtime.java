@@ -38,6 +38,26 @@ public class Runtime {
         frame.setLocation(screenSize.width/2, screenSize.height/2);
         header = new Header();
         accMan = new AccountManagement();
+        // Tests
+        JobSeeker js = new JobSeeker("email", "name", "pass");
+        Job job = new Job();
+        job.setJobTitle("this is a job");
+        js.setFullName("Jack Lu");
+        js.setEmail("jack@monash.com");
+        js.addSkill("Java");
+        js.addSkill("UI design");
+        js.addSkill("SQL");
+        js.applications().add(new Application(js, job));
+        System.out.println(js.toWriteFormat());
+
+
+
+
+
+
+
+
+        //end test
         //accMan.setCurrentUser(accMan.getRecruiters().get("hulk@gmail.com"));
         //accMan.setCurrentUser(accMan.getJobSeekers().get("hulk@gmail.com"));
 
@@ -56,8 +76,8 @@ public class Runtime {
         //showLoginPage();
 
         // SHOW SEARCH PAGE
-        //accMan.setCurrentUser(accMan.getJobSeekers().get("hulk@gmail.com"));
-        //showSearchPage();
+        accMan.setCurrentUser(js);
+        showSearchPage();
 
 
 
@@ -67,8 +87,8 @@ public class Runtime {
 
 
         //SHOW JOB SEEKER HOME Page
-        accMan.setCurrentUser(accMan.getJobSeekers().get("hulk@gmail.com"));
-        showJobSeekerHome();
+        //accMan.setCurrentUser(accMan.getJobSeekers().get("hulk@gmail.com"));
+        //showJobSeekerHome();
 
 
         //SHOW Create Job PAGE
@@ -88,12 +108,12 @@ public class Runtime {
         //showRecruiterProfilePage();
 
         //SHOW ADMIN HOME Page
-        accMan.setCurrentUser(accMan.getAdmins().get("admin@admin.com"));
-        showAdminHomePage();
+        //accMan.setCurrentUser(accMan.getAdmins().get("admin@admin.com"));
+        //showAdminHomePage();
 
 
 
-        Thesaurus testRequest = new Thesaurus("bottle", "en_US", "json");
+        //Thesaurus testRequest = new Thesaurus("bottle", "en_US", "json");
     }
 
     public static void showSearchPage() {
@@ -108,7 +128,7 @@ public class Runtime {
     public static void showDescriptionPage(Job job) {
         showPage( new DescriptionPage(job));
     }
-    public static void showEditCategoryPage(String category) {
+    public static void showEditCategoryPage(Category category) {
         showPage( new EditCategoryPage(category));
     }
     public static void showLoginPage() {

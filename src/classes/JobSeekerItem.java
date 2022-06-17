@@ -37,7 +37,7 @@ public class JobSeekerItem implements Page {
         this.score = score;
         createJobSeekerItem();
         addPanelListeners();
-        if (Runtime.accountManager().getJobInvitations().containsEntry(jobSeeker.getEmail(), job)) {
+        if (job.invitations().getJobSeekers().contains(jobSeeker)) {
             deActivateInvitations();
         }
 
@@ -81,11 +81,11 @@ public class JobSeekerItem implements Page {
             public void actionPerformed(ActionEvent e) {
                 String message = messageTA.getText().replace("\n", "$$newline$$")
                         .replace("\r", "$$newline$$");
-                Runtime.accountManager().getJobInvitations().put(jobSeeker.getEmail(), job);
-                Runtime.accountManager().getMessages().put(jobSeeker.getEmail() + job.getID(), message);
-                Runtime.accountManager().getJobInvitations().writeToFile(Config.DT_JOB_INVITATIONS);
-                IO io = new IO();
-                io.writeMapEntry(jobSeeker.getEmail() + job.getID(), message, Config.DT_MESSAGES);
+                Invitation invitation = new Invitation(jobSeeker, job, message);
+                job.invitations().add(invitation);
+                jobSeeker.invitations().add(invitation);
+                IO.writeJobs();
+                IO.writeJobseekers();
                 showInvitationComponents(false);
                 JOptionPane.showMessageDialog(null, "Invitation sent!");
                 showInvitationComponents(false);

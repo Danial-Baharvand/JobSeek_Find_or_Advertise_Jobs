@@ -3,6 +3,7 @@ package classes;
 import com.google.common.collect.Sets;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,13 +16,27 @@ public class IO {
 
     }
 
-    public void newLine(String path, String data) {
+    public static void newLine(String path, String data) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path, true))) {
             writer.write(data);
             writer.newLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void writeJobseekers() {
+    }
+
+    public static void writeJobs() {
+
+    }
+
+    public static void writeCategories() {
+
+    }
+
+    public static void writeRecruiters() {
     }
 
     public void clearFileContent(String path) {
@@ -32,18 +47,26 @@ public class IO {
         }
     }
 
-    public void writeToDB(Object data) {
+    public static void addToDB(Object data) {
         if (data instanceof JobSeeker) {
             newLine(DT_JOBSEEKERS, data.toString());
         } else if (data instanceof Recruiter) {
             newLine(DT_RECRUITERS, data.toString());
         } else if (data instanceof Admin) {
-            newLine(DT_RECRUITERS, data.toString());
+            newLine(DT_ADMINS, data.toString());
         } else if (data instanceof Job) {
             newLine(DT_JOBS, data.toString());
+        }else if (data instanceof Category) {
+            newLine(DT_CATEGORIES, data.toString());
         } else {
             System.out.println("Type not compatible to write to database");
         }
+    }
+    public static void updateDB(HashMap<String, Object> data){
+
+    }
+    public static void updateDB(Object data){
+
     }
     public void writeMapEntry(String key, String value, String path){
         newLine(path, key + "=" + value);
@@ -54,12 +77,13 @@ public class IO {
         HashMap<String, JobSeeker> jobSeekers = new HashMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(Config.DT_JOBSEEKERS))) {
             while ((line = reader.readLine()) != null && !line.equals("")) {
-                String[] userData = line.split(",");
+                String[] userData = line.split(SEPARATOR_1);
                 JobSeeker jobSeeker = new JobSeeker(userData[EMAIL], userData[NAME], userData[PASSWORD]);
-                jobSeeker.getSkills().addAll(skills.get(userData[EMAIL]));
+                jobSeeker.setActive(Boolean.parseBoolean(userData[IS_ACTIVE]));
+                jobSeeker.setResumeFile(userData[RESUME]);
+                jobSeeker.getSkills().addAll(Arrays.asList(userData[SKILLS].split(SEPARATOR_2)));
                 jobSeeker.setSkills(Sets.newHashSet(skills.get(jobSeeker.getEmail())));
                 jobSeekers.putIfAbsent(userData[EMAIL], jobSeeker);
-
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -72,9 +96,10 @@ public class IO {
         HashMap<String, Recruiter> recruiters = new HashMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(DT_RECRUITERS))) {
             while ((line = reader.readLine()) != null && !line.equals("")) {
-                String[] userData = line.split(",");
+                String[] userData = line.split(SEPARATOR_1);
                 Recruiter recruiter = new Recruiter(userData[EMAIL], userData[NAME], userData[PASSWORD],
                         userData[ORGANISATION]);
+                recruiter.setActive(Boolean.parseBoolean(userData[IS_ACTIVE]));
                 recruiters.putIfAbsent(userData[EMAIL], recruiter);
             }
         } catch (IOException e) {
@@ -139,5 +164,9 @@ public class IO {
         }
         return emails;
 
+    }
+
+    public CategoryManager readCategories() {
+        return null;
     }
 }

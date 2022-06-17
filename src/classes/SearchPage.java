@@ -38,7 +38,7 @@ public class SearchPage implements Page {
          should be removed when adding categories by recruiters is implemented
          */
         GuiHelper.createOptionBox(statePanel, Config.STATES);
-        GuiHelper.createOptionBox(catPanel, Runtime.accountManager().getCategories().keySet());
+        GuiHelper.createOptionBox(catPanel, Runtime.accountManager().getCategories().names());
         GuiHelper.createOptionBox(jobTypePanel, Config.JOB_TYPES);
         searchButton.addActionListener(new ActionListener() {
             @Override

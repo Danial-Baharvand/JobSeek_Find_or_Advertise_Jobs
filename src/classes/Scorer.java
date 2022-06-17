@@ -29,7 +29,7 @@ public class Scorer {
      * @param targetOption second state.
      * @return an int which can either be 0 or 100.
      */
-    public int scoreComboBox(ArrayList<String> selectedOptions, String targetOption){
+    public int scoreComboBox(Set<String> selectedOptions, String targetOption){
         if (selectedOptions.stream().anyMatch(targetOption::equalsIgnoreCase)) {
             return 100;
 
@@ -72,7 +72,7 @@ public class Scorer {
             seekerTerms.addAll(jobSeeker.getSkills());
         }
 
-
+        return 0;
     }
 
 }

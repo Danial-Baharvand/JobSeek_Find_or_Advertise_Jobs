@@ -3,16 +3,14 @@ package classes;
 import javax.naming.NotContextException;
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class GuiHelper {
-    public static ArrayList<String> getSelectedOptions(JPanel optionsPanel) {
-        ArrayList<String> selectedOptions = new ArrayList<>();
+    public static Set<String> getSelectedOptions(JPanel optionsPanel) {
+        Set<String> selectedOptions = new HashSet<>();
         Component[] allOptions = optionsPanel.getComponents();
         for (Component option : allOptions) {
             if (((JCheckBox) option).isSelected()) {
@@ -38,18 +36,14 @@ public class GuiHelper {
         }
         throw new Exception();
     }
-    public static void createOptionBox(JPanel optionsPanel, Collection<String> options, String hidden) {
+    public static void createOptionBox(JPanel optionsPanel, Collection<String> options) {
         optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));
         optionsPanel.removeAll();
-        options.remove(hidden);
         for (String option : options) {
             option = option.substring(0,1).toUpperCase() + option.substring(1).toLowerCase();
             optionsPanel.add(new JCheckBox(option));
         }
         optionsPanel.updateUI();
-    }
-    public static void createOptionBox(JPanel optionsPanel, Collection<String> options) {
-        createOptionBox(optionsPanel, options, null);
     }
     public static void createRadioBox(JPanel optionsPanel, Collection<String> options) {
         optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));

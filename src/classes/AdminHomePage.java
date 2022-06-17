@@ -1,14 +1,18 @@
 package classes;
 
+import com.google.common.collect.Sets;
+
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.Collection;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class AdminHomePage implements Page {
     private JPanel panel1;
@@ -41,53 +45,41 @@ public class AdminHomePage implements Page {
         adminLabel.setText(Runtime.accountManager().getCurrentUser().getEmail());
         Collection<JobSeeker> jobSeekers = Runtime.accountManager().getJobSeekers().values();
         Collection<Recruiter> recruiters = Runtime.accountManager().getRecruiters().values();
-
-        inactive = io.readInactiveUsers();
-
-        ArrayList<String> activeJobSeekerUsers = new ArrayList<String>();
-        for (JobSeeker jobSeeker : jobSeekers) {
-            if (!inactive.contains(jobSeeker.getEmail()))
-                activeJobSeekerUsers.add(jobSeeker.getEmail());
-        }
-
-        ArrayList<String> inactiveJobSeekersUsers = new ArrayList<String>();
-        for (JobSeeker jobSeeker : jobSeekers) {
-            if (inactive.contains(jobSeeker.getEmail())) {
-                inactiveJobSeekersUsers.add(jobSeeker.getEmail());
+        Set<String> activeJS = new HashSet<>();
+        Set<String> inactiveJS = new HashSet<>();
+        Set<String> activeRec = new HashSet<>();
+        Set<String> inactiveRec = new HashSet<>();
+        jobSeekers.forEach(j -> {
+            if (j.isActive()) {
+                activeJS.add(j.getEmail());
+            } else {
+                inactiveJS.add(j.getEmail());
             }
-        }
-
-        ArrayList<String> activeRecruiterUsers = new ArrayList<String>();
-        for (Recruiter recruiter : recruiters) {
-            if (!inactive.contains(recruiter.getEmail()))
-                activeRecruiterUsers.add(recruiter.getEmail());
-        }
-
-
-        ArrayList<String> inactiveRecruiterUsers = new ArrayList<String>();
-        for (Recruiter recruiter : recruiters) {
-            if (inactive.contains(recruiter.getEmail())) {
-                inactiveRecruiterUsers.add(recruiter.getEmail());
+        });
+        recruiters.forEach(j -> {
+            if (j.isActive()) {
+                activeRec.add(j.getEmail());
+            } else {
+                inactiveRec.add(j.getEmail());
             }
-        }
-
-        GuiHelper.createOptionBox(activeJobSeekerList, activeJobSeekerUsers);
-        GuiHelper.createOptionBox(activeRecruiterList, activeRecruiterUsers);
-        GuiHelper.createOptionBox(inactiveJobSeekersList, inactiveJobSeekersUsers);
-        GuiHelper.createOptionBox(inactiveRecruitersList, inactiveRecruiterUsers);
+        });
+        GuiHelper.createOptionBox(activeJobSeekerList, activeJS);
+        GuiHelper.createOptionBox(activeRecruiterList, activeRec);
+        GuiHelper.createOptionBox(inactiveJobSeekersList, inactiveJS);
+        GuiHelper.createOptionBox(inactiveRecruitersList, inactiveRec);
 
 
         jobSeekerDeactivateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (String s : GuiHelper.getSelectedOptions(activeJobSeekerList)) {
-                    inactive.add(Runtime.accountManager().getJobSeekers().get(s).getEmail());
-                    activeJobSeekerUsers.remove(s);
-                    inactiveJobSeekersUsers.add(s);
-                    io.newLine(Config.DT_INACTIVE_USERS, s);
-                    GuiHelper.createOptionBox(activeJobSeekerList, activeJobSeekerUsers);
-                    GuiHelper.createOptionBox(inactiveJobSeekersList, inactiveJobSeekersUsers);
+                    Runtime.accountManager().getJobSeekers().get(s).setActive(false);
+                    activeJS.remove(s);
+                    inactiveJS.add(s);
                 }
+                GuiHelper.createOptionBox(activeJobSeekerList, activeJS);
+                GuiHelper.createOptionBox(inactiveJobSeekersList, inactiveJS);
+                IO.writeJobseekers();
                 activeJobSeekerList.updateUI();
                 inactiveJobSeekersList.updateUI();
             }
@@ -97,16 +89,13 @@ public class AdminHomePage implements Page {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (String s : GuiHelper.getSelectedOptions(inactiveJobSeekersList)) {
-                    inactive.remove(Runtime.accountManager().getJobSeekers().get(s).getEmail());
-                    inactiveJobSeekersUsers.remove(s);
-                    activeJobSeekerUsers.add(s);
-                    Runtime.accountManager().getInactiveUsers().remove(s);
-                    io.clearFileContent(Config.DT_INACTIVE_USERS);
-                    io.writeMapEntry(Runtime.accountManager().getJobSeekers().get(s).getEmail(), Runtime.accountManager().getJobSeekers().get(s).getEmail(), Config.DT_INACTIVE_USERS);
-                    GuiHelper.createOptionBox(inactiveJobSeekersList, inactiveJobSeekersUsers);
-                    GuiHelper.createOptionBox(activeJobSeekerList, activeJobSeekerUsers);
-
+                    Runtime.accountManager().getJobSeekers().get(s).setActive(true);
+                    inactiveJS.remove(s);
+                    activeJS.add(s);
                 }
+                GuiHelper.createOptionBox(activeJobSeekerList, activeJS);
+                GuiHelper.createOptionBox(inactiveJobSeekersList, inactiveJS);
+                IO.writeJobseekers();
                 activeJobSeekerList.updateUI();
                 inactiveJobSeekersList.updateUI();
             }
@@ -116,13 +105,13 @@ public class AdminHomePage implements Page {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (String s : GuiHelper.getSelectedOptions(activeRecruiterList)) {
-                    inactive.add(Runtime.accountManager().getRecruiters().get(s).getEmail());
-                    activeRecruiterUsers.remove(s);
-                    inactiveRecruiterUsers.add(s);
-                    io.newLine(Config.DT_INACTIVE_USERS, s);
-                    GuiHelper.createOptionBox(activeRecruiterList, activeRecruiterUsers);
-                    GuiHelper.createOptionBox(inactiveRecruitersList, inactiveRecruiterUsers);
+                    Runtime.accountManager().getRecruiters().get(s).setActive(false);
+                    activeRec.remove(s);
+                    inactiveRec.add(s);
                 }
+                GuiHelper.createOptionBox(inactiveRecruitersList, inactiveRec);
+                GuiHelper.createOptionBox(activeRecruiterList, activeRec);
+                IO.writeRecruiters();
                 activeJobSeekerList.updateUI();
                 inactiveJobSeekersList.updateUI();
             }
@@ -132,16 +121,13 @@ public class AdminHomePage implements Page {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (String s : GuiHelper.getSelectedOptions(inactiveRecruitersList)) {
-                    inactive.remove(Runtime.accountManager().getRecruiters().get(s).getEmail());
-                    inactiveRecruiterUsers.remove(s);
-                    activeRecruiterUsers.add(s);
-                    Runtime.accountManager().getInactiveUsers().remove(s);
-                    io.clearFileContent(Config.DT_INACTIVE_USERS);
-                    io.writeMapEntry(Runtime.accountManager().getRecruiters().get(s).getEmail(), Runtime.accountManager().getRecruiters().get(s).getEmail(), Config.DT_INACTIVE_USERS);
-                    GuiHelper.createOptionBox(inactiveRecruitersList, inactiveRecruiterUsers);
-                    GuiHelper.createOptionBox(activeRecruiterList, activeRecruiterUsers);
-                    Runtime.accountManager().getInactiveUsers().remove(s);
+                    Runtime.accountManager().getRecruiters().get(s).setActive(true);
+                    inactiveRec.remove(s);
+                    activeRec.add(s);
                 }
+                GuiHelper.createOptionBox(inactiveRecruitersList, inactiveRec);
+                GuiHelper.createOptionBox(activeRecruiterList, activeRec);
+                IO.writeRecruiters();
                 activeJobSeekerList.updateUI();
                 inactiveJobSeekersList.updateUI();
             }
@@ -152,8 +138,8 @@ public class AdminHomePage implements Page {
             public void actionPerformed(ActionEvent e) {
                 try {
                     String newCat = catNameTB.forceGetText();
-                    Runtime.accountManager().getCategories().put(newCat, newCat);
-                    Runtime.accountManager().getCategories().writeToFile(Config.DT_CATEGORIES);
+                    Runtime.accountManager().getCategories().add(new Category(newCat));
+                    IO.writeCategories();
                     populateCatsPanel();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Please enter a category name!");
@@ -166,8 +152,9 @@ public class AdminHomePage implements Page {
             public void actionPerformed(ActionEvent e) {
                 try {
                     String deleteStr = GuiHelper.getSelectedRadio(categoriesList);
-                    Runtime.accountManager().getCategories().removeAllValues(deleteStr);
-                    Runtime.accountManager().getCategories().writeToFile(Config.DT_CATEGORIES);
+                    Category catToRemove = Runtime.accountManager().getCategories().getByName(deleteStr);
+                    Runtime.accountManager().getCategories().remove(catToRemove);
+                    IO.writeCategories();
                     populateCatsPanel();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Please select a category!");
@@ -178,7 +165,9 @@ public class AdminHomePage implements Page {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Runtime.showEditCategoryPage(GuiHelper.getSelectedRadio(categoriesList));
+                    Category category = Runtime.accountManager().getCategories().getByName(GuiHelper
+                            .getSelectedRadio(categoriesList));
+                    Runtime.showEditCategoryPage(category);
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Please select a category!");
                 }
@@ -207,21 +196,23 @@ public class AdminHomePage implements Page {
         totalApplicationsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Total Job Applications: " + (Runtime.accountManager().getJobApplications().map.size()));
+                JOptionPane.showMessageDialog(null, "Total Job Applications: " +
+                        (Runtime.accountManager().getJobs().values().stream().map(j -> j.applications().stream()).count()));
             }
         });
 
         totalInterviewRequestsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Total Interview Requests: " + (Runtime.accountManager().getJobInvitations().map.size()));
+                JOptionPane.showMessageDialog(null, "Total Interview Requests: " +
+                        (Runtime.accountManager().getJobs().values().stream().map(j -> j.invitations().stream()).count()));
             }
         });
     }
 
 
     private void populateCatsPanel() {
-        GuiHelper.createRadioBox(categoriesList, Runtime.accountManager().getCategories().keySet());
+        GuiHelper.createRadioBox(categoriesList, Runtime.accountManager().getCategories().names());
     }
 
     public JPanel getAdminHomePage() {

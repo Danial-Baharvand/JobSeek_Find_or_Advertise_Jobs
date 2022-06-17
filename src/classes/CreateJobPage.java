@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 // TODO: publish functionality
 public class CreateJobPage implements Page {
@@ -42,7 +42,7 @@ public class CreateJobPage implements Page {
         jobTypeCB.setSelectedItem(job.getJobType());
         jobDescTA.setText(job.getJobDescription());
         jobDescTA.setDefaultText("Job Description", true);
-        GuiHelper.setSelectedOptions(catOptions, Runtime.accountManager().getJobCategories().getKeysForValue(job));
+        GuiHelper.setSelectedOptions(catOptions, job.categories().names());
         keywordsTB.setText(job.getKeywords());
         keywordsTB.setDefaultText("Type in keywords separated by space (\" \")", true);
         salaryTB.setText(String.valueOf(job.getSalary()));
@@ -52,12 +52,14 @@ public class CreateJobPage implements Page {
     }
 
     private void addListeners(boolean edit) {
+        Recruiter recruiter = (Recruiter) Runtime.accountManager().getCurrentUser();
         saveBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     if (edit) {
-                        Job.removeJob(job);
+                        Runtime.accountManager().getJobs().remove(recruiter.getEmail(), job);
+                        recruiter.removeJob(job);
                     }
                     createJob(false);
                     Runtime.getPagesVisited().clear();
@@ -73,7 +75,8 @@ public class CreateJobPage implements Page {
             public void actionPerformed(ActionEvent e) {
                 try {
                     if (edit) {
-                        Job.removeJob(job);
+                        Runtime.accountManager().getJobs().remove(recruiter.getEmail(), job);
+                        recruiter.removeJob(job);
                     }
                     createJob(true);
                     Runtime.getPagesVisited().clear();
@@ -88,7 +91,7 @@ public class CreateJobPage implements Page {
 
     private void setUpPage() {
         GuiHelper.createOptionBox(statesPanel, Config.STATES);
-        GuiHelper.createOptionBox(catOptions, Runtime.accountManager().getCategories().keySet());
+        GuiHelper.createOptionBox(catOptions, Runtime.accountManager().getCategories().names());
         jobTypeCB.setRenderer(new PromptComboBoxRenderer("Job Type"));
     }
 
@@ -102,18 +105,15 @@ public class CreateJobPage implements Page {
         newJob.setJobType(jobTypeCB.getSelectedItem().toString());
         newJob.setKeywords(keywordsTB.forceGetText());
         newJob.setPublished(publish);
-        if (Runtime.accountManager().getJobs().containsKey(newJob.getID())) {
+        if (((Recruiter) Runtime.accountManager().getCurrentUser()).hasJob(newJob.getJobTitle())) {
             throw new Exception("Duplicate Job: You already have a job with the same title!");
         }
-        Runtime.accountManager().getRecruiterJobs().put(newJob.getRecruiter().getEmail(), newJob);
-        Runtime.accountManager().getRecruiterJobs().writeToFile(Config.DT_RECRUITER_JOBS);
-        for (String category : GuiHelper.getSelectedOptions(catOptions)) {
-            Runtime.accountManager().getJobCategories().put(category, newJob);
-        }
-        Runtime.accountManager().getJobCategories().writeToFile(Config.DT_JOB_CATEGORIES);
+        ((Recruiter) Runtime.accountManager().getCurrentUser()).addJob(job);
+        job.categories().addAll(GuiHelper.getSelectedOptions(catOptions).stream().map(c -> Runtime.accountManager()
+                .getCategories().getByName(c)).collect(Collectors.toSet()));
         IO io = new IO();
         Runtime.accountManager().getJobs().put(newJob.getID(), newJob);
-        io.writeToDB(newJob);
+        io.addToDB(newJob);
     }
 
     public CreateJobPage getPage() {

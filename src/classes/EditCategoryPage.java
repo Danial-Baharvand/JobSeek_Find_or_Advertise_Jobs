@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
+import java.util.Set;
 
 public class EditCategoryPage implements Page {
     private JPanel catPagePanel;
@@ -16,27 +17,29 @@ public class EditCategoryPage implements Page {
     private JScrollPane catsScroller;
     private JPanel catsPanel;
 
-    public EditCategoryPage(String catName) {
-        Runtime.accountManager().getCategories().readFromFile(Config.DT_CATEGORIES);
-        GuiHelper.createOptionBox(catsPanel, Runtime.accountManager().getCategories().get(catName), catName);
+    public EditCategoryPage(Category category) {
+        GuiHelper.createOptionBox(catsPanel, category);
         addBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Runtime.accountManager().getCategories().put(catName, catTB.getText());
-                Runtime.accountManager().getCategories().writeToFile(Config.DT_CATEGORIES);
-                GuiHelper.createOptionBox(catsPanel, Runtime.accountManager().getCategories().get(catName), catName);
-                catTB.setText("");
+                try {
+                    category.add(catTB.forceGetText());
+                    IO.updateDB(Runtime.accountManager().getCategories());
+                    GuiHelper.createOptionBox(catsPanel, category);
+                    catTB.setText("");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Please enter a valid keyword");
+                }
+
 
             }
         });
         removeBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for (String keyword : GuiHelper.getSelectedOptions(catsPanel)) {
-                    Runtime.accountManager().getCategories().remove(catName, keyword);
-                }
-                Runtime.accountManager().getCategories().writeToFile(Config.DT_CATEGORIES);
-                GuiHelper.createOptionBox(catsPanel, Runtime.accountManager().getCategories().get(catName), catName);
+                category.removeAll(GuiHelper.getSelectedOptions(catsPanel));
+                IO.updateDB(Runtime.accountManager().getCategories());
+                GuiHelper.createOptionBox(catsPanel, category);
             }
         });
     }
