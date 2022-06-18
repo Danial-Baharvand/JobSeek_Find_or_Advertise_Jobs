@@ -51,8 +51,11 @@ public class JobSeekerItem implements Page {
     public void createJobSeekerItem() {
 
         fullName.setText(jobSeeker.getFullName());
-        skills.setText(jobSeeker.getSkills().stream().map(s -> Character.toUpperCase(s.charAt(0))
-                + s.substring(1)).collect(Collectors.joining(", ")));
+        if (jobSeeker.getSkills() != null) {
+            skills.setText(jobSeeker.getSkills().stream().map(s -> Character.toUpperCase(s.charAt(0))
+                    + s.substring(1)).collect(Collectors.joining(", ")));
+        }
+
         jobSeekerScore.setText(String.valueOf(score));
     }
 

@@ -70,7 +70,7 @@ public class LoginPage implements Page {
             JobSeeker jobSeeker = accMan.getJobSeekers().get(emailClearingTextField.getText());
             if (jobSeeker.isActive()) {
                 accMan.setCurrentUser(jobSeeker);
-                Runtime.showPreviousPage();
+                Runtime.showJobSeekerHome();
                 return true;
             } else {
                 JOptionPane.showMessageDialog(null,

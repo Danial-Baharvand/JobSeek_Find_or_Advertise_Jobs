@@ -38,17 +38,6 @@ public class Runtime {
         frame.setLocation(screenSize.width/2, screenSize.height/2);
         header = new Header();
         accMan = new AccountManagement();
-        // Tests
-        JobSeeker js = new JobSeeker("email", "name", "pass");
-        Job job = new Job();
-        job.setJobTitle("this is a job");
-        js.setFullName("Jack Lu");
-        js.setEmail("jack@monash.com");
-        js.addSkill("Java");
-        js.addSkill("UI design");
-        js.addSkill("SQL");
-        js.applications().add(new Application(js, job));
-
 
 
 
@@ -91,8 +80,8 @@ public class Runtime {
 
 
         //SHOW Create Job PAGE
-        //accMan.setCurrentUser(accMan.getRecruiters().get("fury@recruiter.com"));
-        //showCreateJobPage();
+        accMan.setCurrentUser(accMan.getRecruiters().get("1@rec.com"));
+        showCreateJobPage();
 
 
         //SHOW Edit Category Page
@@ -107,8 +96,8 @@ public class Runtime {
         //showRecruiterProfilePage();
 
         //SHOW ADMIN HOME Page
-        accMan.setCurrentUser(accMan.getAdmins().get("admin@admin.com"));
-        showAdminHomePage();
+        //accMan.setCurrentUser(accMan.getAdmins().get("admin@admin.com"));
+        //showAdminHomePage();
 
 
 

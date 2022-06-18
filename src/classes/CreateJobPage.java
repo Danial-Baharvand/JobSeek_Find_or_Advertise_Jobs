@@ -58,16 +58,18 @@ public class CreateJobPage implements Page {
             public void actionPerformed(ActionEvent e) {
                 try {
                     if (edit) {
-                        Runtime.accountManager().getJobs().remove(recruiter.getEmail(), job);
+                        job.setPublished(false);
                         recruiter.removeJob(job);
                     }
                     createJob(false);
+                    IO.writeRecruiters();
+                    IO.writeJobs();
                     Runtime.getPagesVisited().clear();
                     Runtime.showRecruiterHome();
                     JOptionPane.showMessageDialog(null, "Job was saved!");
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                    JOptionPane.showMessageDialog(null, "Please fill in all options");
                 }
             }
         });
@@ -76,15 +78,18 @@ public class CreateJobPage implements Page {
             public void actionPerformed(ActionEvent e) {
                 try {
                     if (edit) {
-                        Runtime.accountManager().getJobs().remove(recruiter.getEmail(), job);
+                        job.setPublished(false);
                         recruiter.removeJob(job);
                     }
                     createJob(true);
+                    IO.writeRecruiters();
+                    IO.writeJobs();
                     Runtime.getPagesVisited().clear();
                     Runtime.showRecruiterHome();
                     JOptionPane.showMessageDialog(null, "Job was published!");
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Please fill in all options");
                 }
             }
         });
@@ -110,6 +115,7 @@ public class CreateJobPage implements Page {
             throw new Exception("Duplicate Job: You already have a job with the same title!");
         }
         ((Recruiter) Runtime.accountManager().getCurrentUser()).addJob(newJob);
+        newJob.setCategories(new CategoryManager());
         newJob.categories().addAll(GuiHelper.getSelectedOptions(catOptions).stream().map(c -> Runtime.accountManager()
                 .getCategories().getByName(c)).collect(Collectors.toSet()));
         Runtime.accountManager().getJobs().put(newJob.getID(), newJob);

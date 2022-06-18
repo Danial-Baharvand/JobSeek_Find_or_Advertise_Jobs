@@ -25,4 +25,7 @@ public class Applications extends MailManager<Application> {
     public void removeByJobSeeker(JobSeeker jobSeeker){
         this.remove(this.stream().filter(a -> a.getJobSeeker().equals(jobSeeker)).findFirst());
     }
+    public void removeJobSeekerApplications(Job job){
+        this.stream().forEach(a -> a.getJobSeeker());
+    }
 }

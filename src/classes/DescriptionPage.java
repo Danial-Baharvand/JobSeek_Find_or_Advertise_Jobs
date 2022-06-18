@@ -62,6 +62,9 @@ public class DescriptionPage implements Page {
             public void actionPerformed(ActionEvent e) {
                 Recruiter recruiter = (Recruiter) Runtime.accountManager().getCurrentUser();
                 recruiter.removeJob(job);
+                job.setPublished(false);
+                IO.writeRecruiters();
+                IO.writeJobs();
                 Runtime.getPagesVisited().clear();
                 Runtime.showRecruiterHome();
                 JOptionPane.showMessageDialog(null, "Job was deleted!");

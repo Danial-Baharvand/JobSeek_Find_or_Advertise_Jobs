@@ -33,10 +33,13 @@ public class IO {
     }
 
     public static void writeJobseekers() {
+        clearFileContent(DT_JOBSEEKERS);
+        Runtime.accountManager().getJobSeekers().forEach((k, j) -> IO.newLine(DT_JOBSEEKERS, j.toWriteFormat()));
     }
 
     public static void writeJobs() {
-
+        clearFileContent(DT_JOBS);
+        Runtime.accountManager().getJobs().forEach((k, j) -> IO.newLine(DT_JOBS, j.toWriteFormat()));
     }
 
     public static void writeCategories() {
@@ -45,6 +48,9 @@ public class IO {
     }
 
     public static void writeRecruiters() {
+        clearFileContent(DT_RECRUITERS);
+        Runtime.accountManager().getRecruiters().forEach((k, r) -> IO.newLine(DT_RECRUITERS, r.toWriteFormat()));
+
     }
 
 
@@ -162,22 +168,26 @@ public class IO {
     private void readApplications(Job job, String data, HashMap<String, JobSeeker> jobSeekers){
         String[] appsData = data.split(SEPARATOR_2);
         for (String appData:appsData) {
-            String[] fields = appData.split(SEPARATOR_3);
-            JobSeeker jobSeeker = jobSeekers.get(fields[MAIL_JOBSEEKER]);
-            Application application = new Application(jobSeeker,job );
-            job.applications().add(application);
-            jobSeeker.applications().add(application);
+            if (!appData.equals("")){
+                String[] fields = appData.split(SEPARATOR_3);
+                JobSeeker jobSeeker = jobSeekers.get(fields[MAIL_JOBSEEKER]);
+                Application application = new Application(jobSeeker,job );
+                job.applications().add(application);
+                jobSeeker.applications().add(application);
+            }
         }
     }
     private void readInvitations(Job job, String data, HashMap<String, JobSeeker> jobSeekers){
         String[] invsData = data.split(SEPARATOR_2);
         for (String invData:invsData) {
-            String[] fields = invData.split(SEPARATOR_3);
-            JobSeeker jobSeeker = jobSeekers.get(fields[MAIL_JOBSEEKER]);
-            String message = fields[MAIL_MESSAGE].replace(SEPARATOR_4, "\n");
-            Invitation invitation = new Invitation(jobSeeker,job, message );
-            job.invitations().add(invitation);
-            jobSeeker.invitations().add(invitation);
+            if (!invData.equals("")) {
+                String[] fields = invData.split(SEPARATOR_3);
+                JobSeeker jobSeeker = jobSeekers.get(fields[MAIL_JOBSEEKER]);
+                String message = fields[MAIL_MESSAGE].replace(SEPARATOR_4, "\n");
+                Invitation invitation = new Invitation(jobSeeker, job, message);
+                job.invitations().add(invitation);
+                jobSeeker.invitations().add(invitation);
+            }
         }
     }
     public CategoryManager readCategories() {
