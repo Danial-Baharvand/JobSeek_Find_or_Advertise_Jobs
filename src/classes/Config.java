@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Config {
-    final static String DT_USERS = "src/dataTables/Users.csv";
     final static String DT_JOBSEEKERS = "src/dataTables/jobSeekers.csv";
     final static String DT_RESUMES = "src/resumes";
     final static String DT_RECRUITERS = "src/dataTables/recruiters.csv";
