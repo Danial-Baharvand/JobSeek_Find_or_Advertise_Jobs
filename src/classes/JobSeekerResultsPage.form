@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="classes.JobSeekerResultsPage">
-  <grid id="27dc6" binding="jobSeekerResultsPanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="jobSeekerResultsPanel" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="20" left="20" bottom="20" right="20"/>
     <constraints>
       <xy x="20" y="20" width="500" height="414"/>
@@ -12,7 +12,7 @@
     <children>
       <scrollpane id="3de51" binding="jobSeekerScroller">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
         <border type="none"/>
@@ -24,7 +24,13 @@
               <foreground color="-12828863"/>
             </properties>
             <border type="none"/>
-            <children/>
+            <children>
+              <vspacer id="83113">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </vspacer>
+            </children>
           </grid>
         </children>
       </scrollpane>
@@ -36,6 +42,16 @@
           <foreground color="-1"/>
           <text value="No jobseeker could be found"/>
           <visible value="false"/>
+        </properties>
+      </component>
+      <component id="1861c" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Calibri Light" size="22" style="0"/>
+          <foreground color="-592138"/>
+          <text value="Suitable Jobseekers:"/>
         </properties>
       </component>
     </children>
