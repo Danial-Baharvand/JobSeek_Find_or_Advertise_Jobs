@@ -14,7 +14,6 @@ import java.util.Locale;
 import java.util.Map;
 
 public class SearchResultsPage<V> implements Page {
-    private final int NO_OF_RESULTS = 3;
     private JPanel searchResultsPanel;
     private JPanel jobsPanel;
     private JLabel noJobsLabel;
