@@ -70,7 +70,7 @@ public class JobSeekerResultsPage implements Page {
         Font label1Font = this.$$$getFont$$$("Calibri Light", Font.PLAIN, 22, label1.getFont());
         if (label1Font != null) label1.setFont(label1Font);
         label1.setForeground(new Color(-592138));
-        label1.setText("Suitable Jobseekers:");
+        label1.setText("Jobseekers:");
         jobSeekerResultsPanel.add(label1, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 

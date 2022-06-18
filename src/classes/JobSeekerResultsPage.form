@@ -51,7 +51,7 @@
         <properties>
           <font name="Calibri Light" size="22" style="0"/>
           <foreground color="-592138"/>
-          <text value="Suitable Jobseekers:"/>
+          <text value="Jobseekers:"/>
         </properties>
       </component>
     </children>
