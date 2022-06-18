@@ -50,7 +50,6 @@ public class RecruiterProfilePage implements Page {
 
     public RecruiterProfilePage(Recruiter recruiter) {
         recruiterOrg.setText(recruiter.getOrg());
-        recruiterProfileDescriptionText.setText(recruiter.getRecruiterDescription());
         recruiterEmail.setText(recruiter.getEmail());
         recruiterWebsite.setText("www." + recruiter.getOrg() + ".com");
         recruiterSocial.setText("@" + recruiter.getOrg());

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+import static classes.Config.*;
+
 public class Job implements Inbox{
     String jobID;
     Recruiter recruiter;
@@ -23,15 +25,15 @@ public class Job implements Inbox{
     }
     public Job(String jobDetails, HashMap<String, Recruiter> recruiters){
         categories = new CategoryManager();
-        String[] setValues = jobDetails.split("\\|");
-        this.jobTitle = setValues[0];
-        this.states =Set.of(setValues[1].split("%%"));
-        this.salary =Integer.parseInt(setValues[2]);
-        this.jobType =setValues[3];
-        this.keywords =setValues[4];
-        this.jobDescription =setValues[5].replace("$$newline$$", "\n");
-        this.recruiter = recruiters.get(setValues[6]);
-        this.published =Boolean.parseBoolean(setValues[7]);
+        String[] setValues = jobDetails.split(SEPARATOR_1);
+        this.jobTitle = setValues[JOB_TITLE];
+        this.states =Set.of(setValues[JOB_STATES].split(SEPARATOR_2));
+        this.salary =Integer.parseInt(setValues[JOB_SALARY]);
+        this.jobType =setValues[JOB_TYPE];
+        this.keywords =setValues[JOB_KEYWORDS];
+        this.jobDescription =setValues[JOB_DESCRIPTION].replace(SEPARATOR_2, "\n");
+        this.recruiter = recruiters.get(setValues[JOB_RECRUITER]);
+        this.published =Boolean.parseBoolean(setValues[JOB_PUBLISHED]);
         this.jobID = this.jobTitle + this.recruiter;
     }
     public Boolean getPublished() {
@@ -43,15 +45,17 @@ public class Job implements Inbox{
     }
 
 
-    public String toString2() {
-        return   jobTitle + '|' +
-                 String.join("%%", states) + '|' +
-                 salary + '|' +
-                 jobType + '|' +
-                 keywords + '|' +
-                 jobDescription.replace("\n", "$$newline$$")
-                         .replace("\r", "$$newline$$") + '|' +
-                 recruiter.getEmail() + '|' +
+    public String toWriteFormat() {
+        return   jobTitle + SEPARATOR_1 +
+                 String.join(SEPARATOR_2, states) + SEPARATOR_1 +
+                 salary + SEPARATOR_1 +
+                 jobType + SEPARATOR_1 +
+                 keywords + SEPARATOR_1 +
+                 jobDescription.replace("\n", SEPARATOR_2)
+                         .replace("\r", SEPARATOR_2) + SEPARATOR_1 +
+                 applications() + SEPARATOR_1 +
+                 invitations() + SEPARATOR_1 +
+                 recruiter + SEPARATOR_1 +
                  published;
     }
     @Override
@@ -124,4 +128,7 @@ public class Job implements Inbox{
     }
 
 
+    public void setJobID() {
+        this.jobID = this.jobTitle + this.recruiter;
+    }
 }

@@ -63,12 +63,4 @@ public class Recruiter extends User {
     public void removeJob(Job job){
         jobs.remove(job);
     }
-
-    public String getRecruiterDescription() {
-        return recruiterDescription;
-    }
-
-    public void setRecruiterDescription(String recruiterDescription) {
-        this.recruiterDescription = recruiterDescription;
-    }
 }

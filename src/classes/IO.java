@@ -49,13 +49,13 @@ public class IO {
 
     public static void addToDB(Object data) {
         if (data instanceof JobSeeker) {
-            newLine(DT_JOBSEEKERS, data.toString());
+            newLine(DT_JOBSEEKERS, ((JobSeeker) data).toWriteFormat());
         } else if (data instanceof Recruiter) {
-            newLine(DT_RECRUITERS, data.toString());
+            newLine(DT_RECRUITERS, ((Recruiter) data).toWriteFormat());
         } else if (data instanceof Admin) {
             newLine(DT_ADMINS, data.toString());
         } else if (data instanceof Job) {
-            newLine(DT_JOBS, data.toString());
+            newLine(DT_JOBS, ((Job) data).toWriteFormat());
         }else if (data instanceof Category) {
             newLine(DT_CATEGORIES, data.toString());
         } else {
@@ -72,7 +72,7 @@ public class IO {
         newLine(path, key + "=" + value);
     }
 
-    public HashMap<String, JobSeeker> readJobSeekers(BiMultiMap<String> skills) {
+    public HashMap<String, JobSeeker> readJobSeekers() {
         String line;
         HashMap<String, JobSeeker> jobSeekers = new HashMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(Config.DT_JOBSEEKERS))) {
@@ -82,7 +82,6 @@ public class IO {
                 jobSeeker.setActive(Boolean.parseBoolean(userData[IS_ACTIVE]));
                 jobSeeker.setResumeFile(userData[RESUME]);
                 jobSeeker.getSkills().addAll(Arrays.asList(userData[SKILLS].split(SEPARATOR_2)));
-                jobSeeker.setSkills(Sets.newHashSet(skills.get(jobSeeker.getEmail())));
                 jobSeekers.putIfAbsent(userData[EMAIL], jobSeeker);
             }
         } catch (IOException e) {
@@ -123,19 +122,52 @@ public class IO {
         return admins;
     }
 
-    public HashMap<String, Job> readJobs(HashMap<String, Recruiter> recruiters) {
+    public HashMap<String, Job> readJobs(HashMap<String, Recruiter> recruiters, HashMap<String, JobSeeker> jobSeekers) {
         String line;
         HashMap<String, Job> jobs = new HashMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(DT_JOBS))) {
             while ((line = reader.readLine()) != null && !line.equals("")) {
-                String[] userData = line.split("\\|");
-                Job job = new Job(line, recruiters);
+                String[] userData = line.split(SEPARATOR_1);
+                Job job = new Job();
+                job.jobTitle = userData[JOB_TITLE];
+                job.states =Set.of(userData[JOB_STATES].split(SEPARATOR_2));
+                job.salary =Integer.parseInt(userData[JOB_SALARY]);
+                job.jobType =userData[JOB_TYPE];
+                job.keywords =userData[JOB_KEYWORDS];
+                job.jobDescription =userData[JOB_DESCRIPTION].replace(SEPARATOR_2, "\n");
+                job.recruiter = recruiters.get(userData[JOB_RECRUITER]);
+                job.recruiter.addJob(job);
+                job.published =Boolean.parseBoolean(userData[JOB_PUBLISHED]);
+                readApplications(job, userData[APPLICATIONS], jobSeekers);
+                readInvitations(job, userData[INVITATIONS], jobSeekers);
+                job.setJobID();
                 jobs.putIfAbsent(job.getID(), job);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
         return jobs;
+    }
+    private void readApplications(Job job, String data, HashMap<String, JobSeeker> jobSeekers){
+        String[] appsData = data.split(SEPARATOR_2);
+        for (String appData:appsData) {
+            String[] fields = appData.split(SEPARATOR_3);
+            JobSeeker jobSeeker = jobSeekers.get(fields[MAIL_JOBSEEKER]);
+            Application application = new Application(jobSeeker,job );
+            job.applications().add(application);
+            jobSeeker.applications().add(application);
+        }
+    }
+    private void readInvitations(Job job, String data, HashMap<String, JobSeeker> jobSeekers){
+        String[] invsData = data.split(SEPARATOR_2);
+        for (String invData:invsData) {
+            String[] fields = invData.split(SEPARATOR_3);
+            JobSeeker jobSeeker = jobSeekers.get(fields[MAIL_JOBSEEKER]);
+            String message = fields[MAIL_MESSAGE].replace(SEPARATOR_4, "\n");
+            Invitation invitation = new Invitation(jobSeeker,job, message );
+            job.invitations().add(invitation);
+            jobSeeker.invitations().add(invitation);
+        }
     }
 
     public HashMap<String, String> readMessages() {

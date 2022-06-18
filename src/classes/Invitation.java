@@ -1,6 +1,6 @@
 package classes;
 
-import static classes.Config.SEPARATOR_3;
+import static classes.Config.*;
 
 public class Invitation extends Mail {
     String message;
@@ -10,6 +10,7 @@ public class Invitation extends Mail {
     }
     @Override
     public String toString(){
-        return getJobSeeker()+ SEPARATOR_3 + getJob()+ SEPARATOR_3 + message;
+        return getJobSeeker()+ SEPARATOR_3 + getJob()+ SEPARATOR_3 + message.replace("\n", SEPARATOR_4)
+                .replace("\r", SEPARATOR_4);
     }
 }

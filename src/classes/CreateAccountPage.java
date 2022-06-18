@@ -32,6 +32,7 @@ public class CreateAccountPage implements Page {
                         Runtime.showLoginPage();
                     }
                 } catch (Exception ex) {
+                    ex.printStackTrace();
                     JOptionPane.showMessageDialog(null, "Please fill in all fields");
                 }
             }

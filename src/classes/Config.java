@@ -21,6 +21,7 @@ public class Config {
     final static String SEPARATOR_1 = "(>1<)";
     final static String SEPARATOR_2 = "(>2<)";
     final static String SEPARATOR_3 = "(>3<)";
+    final static String SEPARATOR_4 = "(>4<)";
     final static int EMAIL = 0;
     final static int NAME = 1;
     final static int PASSWORD = 2;
@@ -32,7 +33,17 @@ public class Config {
     final static int ORGANISATION = 4;
     final static int RECRUITER_JOBS = 5;
     final static int JOB_TITLE = 0;
-    final static int JOB_RECRUITER = 7;
+    final static int JOB_STATES = 1;
+    final static int JOB_SALARY = 2;
+    final static int JOB_TYPE = 3;
+    final static int JOB_KEYWORDS = 4;
+    final static int JOB_DESCRIPTION = 5;
+    final static int JOB_RECRUITER = 8;
+    final static int JOB_PUBLISHED = 9;
+    final static int MAIL_JOBSEEKER = 0;
+    final static int MAIL_JOB = 1;
+    final static int MAIL_MESSAGE = 3;
+
 
     final static ArrayList<String> STATES =
             new ArrayList<>(Arrays.asList("QLD", "NSW", "VIC", "ACT", "WA", "NT", "SA", "TAS"));

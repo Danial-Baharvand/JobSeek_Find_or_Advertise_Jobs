@@ -114,7 +114,6 @@ public class Tests {
         Recruiter testRecruiter = new Recruiter();
         testRecruiter.setOrg("Not Seek");
         testRecruiter.setEmail("recruiter@notseek.com");
-        testRecruiter.setRecruiterDescription("If you seek, you will find...");
 
         Job testJob = new Job();
         testJob.setJobTitle("Software Engineer");

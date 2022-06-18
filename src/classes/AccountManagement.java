@@ -20,10 +20,10 @@ public class AccountManagement {
     private void readDatabase() {
         IO io = new IO();
         //categories= io.readCategories();
-        //jobSeekers = io.readJobSeekers();
-        //recruiters = io.readRecruiters();
-        //admins = io.readAdmins();
-        //jobs = io.readJobs(recruiters);
+        jobSeekers = io.readJobSeekers();
+        recruiters = io.readRecruiters();
+        admins = io.readAdmins();
+        jobs = io.readJobs(recruiters, jobSeekers);
     }
     public void addUser(User user){
         if (user instanceof JobSeeker){
