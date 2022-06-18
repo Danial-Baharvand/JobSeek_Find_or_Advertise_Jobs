@@ -15,6 +15,13 @@ public class IO {
     public IO() {
 
     }
+    public static void clearFileContent(String path) {
+        try {
+            PrintWriter pw = new PrintWriter(path);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void newLine(String path, String data) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path, true))) {
@@ -33,19 +40,14 @@ public class IO {
     }
 
     public static void writeCategories() {
-
+        clearFileContent(DT_CATEGORIES);
+        newLine(DT_CATEGORIES, Runtime.accountManager().getCategories().toWriteFormat());
     }
 
     public static void writeRecruiters() {
     }
 
-    public void clearFileContent(String path) {
-        try {
-            PrintWriter pw = new PrintWriter(path);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
+
 
     public static void addToDB(Object data) {
         if (data instanceof JobSeeker) {
@@ -122,7 +124,7 @@ public class IO {
         return admins;
     }
 
-    public HashMap<String, Job> readJobs(HashMap<String, Recruiter> recruiters, HashMap<String, JobSeeker> jobSeekers) {
+    public HashMap<String, Job> readJobs(HashMap<String, Recruiter> recruiters, HashMap<String, JobSeeker> jobSeekers, CategoryManager mainCategories) {
         String line;
         HashMap<String, Job> jobs = new HashMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(DT_JOBS))) {
@@ -140,6 +142,7 @@ public class IO {
                 job.published =Boolean.parseBoolean(userData[JOB_PUBLISHED]);
                 readApplications(job, userData[APPLICATIONS], jobSeekers);
                 readInvitations(job, userData[INVITATIONS], jobSeekers);
+                job.setCategories(readJobCategories(mainCategories, userData[JOB_CATEGORIES]));
                 job.setJobID();
                 jobs.putIfAbsent(job.getID(), job);
             }
@@ -147,6 +150,14 @@ public class IO {
             e.printStackTrace();
         }
         return jobs;
+    }
+    private CategoryManager readJobCategories(CategoryManager mainCategories, String data){
+        CategoryManager jobCats = new CategoryManager();
+        String[] catNames = data.split(SEPARATOR_2);
+        for (String catName:catNames) {
+            jobCats.add(mainCategories.getByName(catName));
+        }
+        return jobCats;
     }
     private void readApplications(Job job, String data, HashMap<String, JobSeeker> jobSeekers){
         String[] appsData = data.split(SEPARATOR_2);
@@ -169,36 +180,21 @@ public class IO {
             jobSeeker.invitations().add(invitation);
         }
     }
-
-    public HashMap<String, String> readMessages() {
-        String line;
-        HashMap<String, String> messages = new HashMap<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(DT_MESSAGES))) {
-            while ((line = reader.readLine()) != null && !line.equals("")) {
-                String[] userData = line.split("=");
-                messages.putIfAbsent(userData[0], userData[1]);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return messages;
-    }
-
-    public Set<String> readInactiveUsers() {
-        String line;
-        Set<String> emails = new HashSet<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(DT_INACTIVE_USERS))) {
-            while ((line = reader.readLine()) != null && !line.equals("")) {
-                emails.add(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return emails;
-
-    }
-
     public CategoryManager readCategories() {
-        return null;
+        String line;
+        CategoryManager categories = new CategoryManager();
+        try (BufferedReader reader = new BufferedReader(new FileReader(DT_CATEGORIES))) {
+            while ((line = reader.readLine()) != null && !line.equals("")) {
+                String[] catData = line.split(SEPARATOR_3);
+                Category category = new Category(catData[CATEGORY_NAME]);
+                if (catData.length>1){
+                    category.addAll(Arrays.asList(catData[CATEGORY_KEYWORDS].split(SEPARATOR_4)));
+                }
+                categories.add(category);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return categories;
     }
 }

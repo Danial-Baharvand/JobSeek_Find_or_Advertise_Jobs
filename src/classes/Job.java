@@ -56,7 +56,8 @@ public class Job implements Inbox{
                  applications() + SEPARATOR_1 +
                  invitations() + SEPARATOR_1 +
                  recruiter + SEPARATOR_1 +
-                 published;
+                 published+ SEPARATOR_1 +
+                 categories;
     }
     @Override
     public String toString() {
@@ -130,5 +131,9 @@ public class Job implements Inbox{
 
     public void setJobID() {
         this.jobID = this.jobTitle + this.recruiter;
+    }
+
+    public void setCategories(CategoryManager categories) {
+        this.categories = categories;
     }
 }

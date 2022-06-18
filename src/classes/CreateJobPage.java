@@ -66,6 +66,7 @@ public class CreateJobPage implements Page {
                     Runtime.showRecruiterHome();
                     JOptionPane.showMessageDialog(null, "Job was saved!");
                 } catch (Exception ex) {
+                    ex.printStackTrace();
                     JOptionPane.showMessageDialog(null, ex.getMessage());
                 }
             }
@@ -108,12 +109,11 @@ public class CreateJobPage implements Page {
         if (((Recruiter) Runtime.accountManager().getCurrentUser()).hasJob(newJob.getJobTitle())) {
             throw new Exception("Duplicate Job: You already have a job with the same title!");
         }
-        ((Recruiter) Runtime.accountManager().getCurrentUser()).addJob(job);
-        job.categories().addAll(GuiHelper.getSelectedOptions(catOptions).stream().map(c -> Runtime.accountManager()
+        ((Recruiter) Runtime.accountManager().getCurrentUser()).addJob(newJob);
+        newJob.categories().addAll(GuiHelper.getSelectedOptions(catOptions).stream().map(c -> Runtime.accountManager()
                 .getCategories().getByName(c)).collect(Collectors.toSet()));
-        IO io = new IO();
         Runtime.accountManager().getJobs().put(newJob.getID(), newJob);
-        io.addToDB(newJob);
+        IO.addToDB(newJob);
     }
 
     public CreateJobPage getPage() {

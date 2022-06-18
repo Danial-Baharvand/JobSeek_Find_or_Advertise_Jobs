@@ -43,7 +43,7 @@ public class LoginPage implements Page {
                 if (userLogin(accMan)) {
                     JOptionPane.showMessageDialog(null, "You have successfully logged in!");
                 } else {
-                    JOptionPane.showMessageDialog(null, "The username or password is incorrect.");
+                    JOptionPane.showMessageDialog(null, "User could not be logged in.");
                 }
             }
         });
@@ -67,32 +67,35 @@ public class LoginPage implements Page {
     }
 
     public boolean userLogin(AccountManagement accMan) {
-        if (validateUser(accMan.getJobSeekers()) && userLoginIsActive()) {
-            accMan.setCurrentUser(accMan.getJobSeekers().get(emailClearingTextField.getText()));
-            Runtime.showPreviousPage();
-            return true;
-        } else if (validateUser(accMan.getRecruiters()) && userLoginIsActive()) {
-            accMan.setCurrentUser(accMan.getRecruiters().get(emailClearingTextField.getText()));
-            Runtime.showRecruiterHome();
-            return true;
-        } else if (validateUser(accMan.getAdmins()) && userLoginIsActive()) {
+        if (validateUser(accMan.getJobSeekers())) {
+            JobSeeker jobSeeker = accMan.getJobSeekers().get(emailClearingTextField.getText());
+            if (jobSeeker.isActive()) {
+                accMan.setCurrentUser(jobSeeker);
+                Runtime.showPreviousPage();
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "Your account is locked, please contact your administrator");
+                return false;
+            }
+
+        } else if (validateUser(accMan.getRecruiters())) {
+            Recruiter recruiter = accMan.getRecruiters().get(emailClearingTextField.getText());
+            if (recruiter.isActive()) {
+                accMan.setCurrentUser(recruiter);
+                Runtime.showRecruiterHome();
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "Your account is locked, please contact your administrator");
+                return false;
+            }
+        } else if (validateUser(accMan.getAdmins())) {
             accMan.setCurrentUser(accMan.getAdmins().get(emailClearingTextField.getText()));
             Runtime.showAdminHomePage();
             return true;
         } else return false;
     }
-
-    public boolean userLoginIsActive() {
-        IO io = new IO();
-        inactiveUsers = io.readInactiveUsers();
-        if (!inactiveUsers.contains(emailClearingTextField.getText())) {
-            return true;
-        } else {
-            JOptionPane.showMessageDialog(null, "Your account is locked, please contact your administrator");
-            return false;
-        }
-    }
-
 
     private boolean validateUser(HashMap<String, ? extends User> users) {
         if (users.containsKey(emailClearingTextField.getText())) {

@@ -1,32 +1,47 @@
 package classes;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class CategoryManager {
-    private Set<Category> categories;
-    public CategoryManager(){
-        categories = new HashSet<>();
-    }
+import static classes.Config.SEPARATOR_2;
+
+public class CategoryManager extends HashSet<Category> {
+
     public Set<String> names(){
-        return categories.stream().map(c -> c.name).collect(Collectors.toSet());
+        return this.stream().map(c -> c.name).collect(Collectors.toSet());
     }
-    public void add(Category category){
-        categories.add(category);
-    }
-    public void remove(Category category){
-        categories.remove(category);
-    }
+
+
     public Category getByName(String targetName){
-        return categories.stream().filter(c -> Objects.equals(c.name, targetName)).findFirst().orElse(null);
+        System.out.println(this.stream().map(category -> category.name).collect(Collectors.joining(",")));
+        return this.stream().filter(c -> c.name.equalsIgnoreCase(targetName) ).findFirst().orElse(null);
     }
-    public void addAll(Set<Category> newCategories){
-        categories.addAll(newCategories);
-    }
+
     public String toCapitalString(){
-        return categories.stream().map(c -> Character.toUpperCase(c.name.charAt(0)) + c.name.substring(1)).
+        return this.stream().map(c -> Character.toUpperCase(c.name.charAt(0)) + c.name.substring(1)).
                 collect(Collectors.joining(", "));
     }
+    // Get representation by category names
+    @Override
+    public String toString(){
+        StringBuilder s = new StringBuilder();
+        String separator = "";
+        for (Category category:this) {
+            s.append(separator).append(category.getName());
+            separator = SEPARATOR_2;
+        }
+        return s.toString();
+    }
+    public String toWriteFormat(){
+        StringBuilder s = new StringBuilder();
+        for (Category category:this) {
+            s.append(category).append("\n");
+        }
+        return s.toString();
+    }
+
+
 }

@@ -19,11 +19,11 @@ public class AccountManagement {
     }
     private void readDatabase() {
         IO io = new IO();
-        //categories= io.readCategories();
+        categories= io.readCategories();
         jobSeekers = io.readJobSeekers();
         recruiters = io.readRecruiters();
         admins = io.readAdmins();
-        jobs = io.readJobs(recruiters, jobSeekers);
+        jobs = io.readJobs(recruiters, jobSeekers, categories);
     }
     public void addUser(User user){
         if (user instanceof JobSeeker){

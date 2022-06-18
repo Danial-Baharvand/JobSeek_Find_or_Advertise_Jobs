@@ -24,7 +24,7 @@ public class EditCategoryPage implements Page {
             public void actionPerformed(ActionEvent e) {
                 try {
                     category.add(catTB.forceGetText());
-                    IO.updateDB(Runtime.accountManager().getCategories());
+                    IO.writeCategories();
                     GuiHelper.createOptionBox(catsPanel, category);
                     catTB.setText("");
                 } catch (Exception ex) {
@@ -38,7 +38,7 @@ public class EditCategoryPage implements Page {
             @Override
             public void actionPerformed(ActionEvent e) {
                 category.removeAll(GuiHelper.getSelectedOptions(catsPanel));
-                IO.updateDB(Runtime.accountManager().getCategories());
+                IO.writeCategories();
                 GuiHelper.createOptionBox(catsPanel, category);
             }
         });

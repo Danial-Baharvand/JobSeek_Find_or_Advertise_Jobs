@@ -11,17 +11,10 @@ public class Config {
     final static String DT_ADMINS = "src/dataTables/admins.csv";
     final static String DT_CATEGORIES = "src/dataTables/categories.csv";
     final static String DT_JOBS = "src/dataTables/jobs.csv";
-    final static String DT_RECRUITER_JOBS = "src/dataTables/recruiterJobs.csv";
-    final static String DT_SKILLS = "src/dataTables/skills.csv";
-    final static String DT_JOB_APPLICATIONS = "src/dataTables/jobApplications.csv";
-    final static String DT_JOB_INVITATIONS = "src/dataTables/jobInvitations.csv";
-    final static String DT_JOB_CATEGORIES = "src/dataTables/jobCategories.csv";
-    final static String DT_MESSAGES =  "src/dataTables/messages.csv";
-    final static String DT_INACTIVE_USERS = "src/dataTables/inactiveUsers.csv";
-    final static String SEPARATOR_1 = "(>1<)";
-    final static String SEPARATOR_2 = "(>2<)";
-    final static String SEPARATOR_3 = "(>3<)";
-    final static String SEPARATOR_4 = "(>4<)";
+    final static String SEPARATOR_1 = "%%>1<%%";
+    final static String SEPARATOR_2 = "%%>2<%%";
+    final static String SEPARATOR_3 = "%%>3<%%";
+    final static String SEPARATOR_4 = "%%>4<%%";
     final static int EMAIL = 0;
     final static int NAME = 1;
     final static int PASSWORD = 2;
@@ -40,9 +33,12 @@ public class Config {
     final static int JOB_DESCRIPTION = 5;
     final static int JOB_RECRUITER = 8;
     final static int JOB_PUBLISHED = 9;
+    final static int JOB_CATEGORIES = 10;
     final static int MAIL_JOBSEEKER = 0;
     final static int MAIL_JOB = 1;
     final static int MAIL_MESSAGE = 3;
+    final static int CATEGORY_NAME = 0;
+    final static int CATEGORY_KEYWORDS = 1;
 
 
     final static ArrayList<String> STATES =

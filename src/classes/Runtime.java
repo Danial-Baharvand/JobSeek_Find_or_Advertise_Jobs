@@ -48,7 +48,6 @@ public class Runtime {
         js.addSkill("UI design");
         js.addSkill("SQL");
         js.applications().add(new Application(js, job));
-        System.out.println(js.toWriteFormat());
 
 
 
@@ -76,8 +75,8 @@ public class Runtime {
         //showLoginPage();
 
         // SHOW SEARCH PAGE
-        accMan.setCurrentUser(js);
-        showSearchPage();
+        //accMan.setCurrentUser(js);
+        //showSearchPage();
 
 
 
@@ -108,8 +107,8 @@ public class Runtime {
         //showRecruiterProfilePage();
 
         //SHOW ADMIN HOME Page
-        //accMan.setCurrentUser(accMan.getAdmins().get("admin@admin.com"));
-        //showAdminHomePage();
+        accMan.setCurrentUser(accMan.getAdmins().get("admin@admin.com"));
+        showAdminHomePage();
 
 
 

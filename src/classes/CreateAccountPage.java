@@ -28,11 +28,10 @@ public class CreateAccountPage implements Page {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    if (createJobSeeker()) {
+                    if (createUser()) {
                         Runtime.showLoginPage();
                     }
                 } catch (Exception ex) {
-                    ex.printStackTrace();
                     JOptionPane.showMessageDialog(null, "Please fill in all fields");
                 }
             }
@@ -62,12 +61,11 @@ public class CreateAccountPage implements Page {
      * @param password        of the JobSeeker
      * @param confirmPassword of the JobSeeker
      */
-    public boolean createJobSeeker() throws Exception {
+    public boolean createUser() throws Exception {
         final String email = emailTextField.forceGetText();
         final String name = fullNameTextField.forceGetText();
         final String pass = String.valueOf(passwordPasswordField.getPassword());
         final String passConfirm = String.valueOf(confirmPasswordPasswordField.getPassword());
-        final String org = orgTextField.forceGetText();
         //note: refactored this from line 76 (if (userTypeComboBox.getSelectedItem().toString().equals(JobSeeker.class.getSimpleName()))
         // to make the user type accessible for the purposes of navigation
         final String userType = userTypeComboBox.getSelectedItem().toString();
@@ -80,12 +78,11 @@ public class CreateAccountPage implements Page {
                     //create new JobSeeker object and add new JobSeeker to database
                     newUser = new JobSeeker(email, name, pass);
                 } else {
+                    final String org = orgTextField.forceGetText();
                     //create new Recruiter object and add new Recruiter to database
                     newUser = new Recruiter(email, name, pass, org);
                 }
-
-                IO writer = new IO();
-                writer.addToDB(newUser);
+                IO.addToDB(newUser);
                 Runtime.accountManager().addUser(newUser);
                 JOptionPane.showMessageDialog(null, String.format("New %s account successfully created " +
                         "for %s!%n", userTypeComboBox.getSelectedItem().toString(), email));
