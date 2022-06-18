@@ -20,7 +20,6 @@ public class LoginPage implements Page {
     private JButton loginButton;
     private JButton createNewAccountButton;
     private boolean passClicked = false;
-    Set<String> inactiveUsers;
 
     public LoginPage(AccountManagement accMan) {
 

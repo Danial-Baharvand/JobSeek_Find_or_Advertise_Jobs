@@ -37,23 +37,6 @@ public class JobSeeker extends User implements Inbox {
         return skills;
     }
 
-    public void deleteSkill(String skill) {
-        this.skills.remove(skill);
-    }
-
-    public void setSkills(Set<String> skills) {
-        this.skills = skills;
-    }
-
-
-    /*public ArrayList<String> getSkills() {
-        return skills;
-    }
-
-    public void setSkills(ArrayList<String> skills) {
-        this.skills = skills;
-    }*/
-
     public String getResumeFile() {
         return resumeFile;
     }

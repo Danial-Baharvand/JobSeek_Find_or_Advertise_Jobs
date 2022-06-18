@@ -35,9 +35,7 @@ public class AdminHomePage implements Page {
     private JButton totalRecruitersButton;
     private JButton totalJobsButton;
     private JButton totalJobsSeekersButton;
-    private JLabel userList;
     IO io = new IO();
-    Set<String> inactive;
 
     public AdminHomePage() {
         populateCatsPanel();
@@ -221,10 +219,6 @@ public class AdminHomePage implements Page {
 
     private void populateCatsPanel() {
         GuiHelper.createRadioBox(categoriesList, Runtime.accountManager().getCategories().names());
-    }
-
-    public JPanel getAdminHomePage() {
-        return panel1;
     }
 
     {

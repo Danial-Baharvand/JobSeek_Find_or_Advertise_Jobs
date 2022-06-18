@@ -8,13 +8,6 @@ import java.util.stream.Collectors;
 import static classes.Config.SEPARATOR_2;
 
 public abstract class MailManager<T extends Mail> extends HashSet<T> {
-   /* private Set<T> mails = new HashSet<>();
-    public void add(T mail){
-        mails.add(mail);
-    }
-    public void remove(T mail){
-        mails.remove(mail);
-    }*/
     public Collection<Job> getJobs(){
         return this.stream().map(T::getJob).collect(Collectors.toSet());
     }
@@ -31,8 +24,5 @@ public abstract class MailManager<T extends Mail> extends HashSet<T> {
         }
         return s.toString();
     }
-/*    public Set<T> getAll(){
-        return mails;
-    }*/
 
 }

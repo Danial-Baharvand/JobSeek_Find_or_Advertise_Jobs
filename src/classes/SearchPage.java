@@ -28,11 +28,6 @@ public class SearchPage implements Page {
     private JPanel catPanel;
     private JScrollPane jobTypeScroller;
     private JPanel jobTypePanel;
-
-    public JPanel getSearchPanel() {
-        return searchPanel;
-    }
-
     public SearchPage() {
         /**test code to check categories' functionality
          should be removed when adding categories by recruiters is implemented

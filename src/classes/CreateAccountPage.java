@@ -20,7 +20,6 @@ public class CreateAccountPage implements Page {
     private JPanel mainPanel;
     private JLabel orgLabel;
     private ClearingTextField orgTextField;
-    private JButton backButton;
 
     public CreateAccountPage() {
 

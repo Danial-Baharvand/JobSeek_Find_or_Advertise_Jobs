@@ -98,34 +98,6 @@ public class JobSeekerHomePage implements Page {
             }
         });
 
-        /*viewResumeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                JFileChooser file_chooser = new JFileChooser();
-                StringBuilder sb = new StringBuilder();
-
-                if (file_chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                    File file = file_chooser.getSelectedFile();
-                    Scanner input = null;
-                    try {
-                        input = new Scanner(file);
-                    } catch (FileNotFoundException fileNotFoundException) {
-                        fileNotFoundException.printStackTrace();
-                    }
-
-                    while (input.hasNext()) {
-                        sb.append(input.nextLine());
-                        sb.append("\n");
-
-                    }
-                    input.close();
-                } else {
-                    sb.append("No file was selected");
-                }
-            }
-        });*/
-
         deleteButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

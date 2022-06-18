@@ -24,9 +24,6 @@ public class RecruiterHomePage implements Page {
     private JLabel orgText;
 
     public RecruiterHomePage() {
-
-/*        headerContainer.setLayout(new BoxLayout(headerContainer, BoxLayout.Y_AXIS));
-        headerContainer.add(Runtime.getHeader());*/
         Recruiter recruiter = (Recruiter) Runtime.accountManager().getCurrentUser();
         nameText.setText(recruiter.getFullName());
         emailText.setText(recruiter.getEmail());

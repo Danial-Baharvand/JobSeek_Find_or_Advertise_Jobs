@@ -123,12 +123,6 @@ public class Job implements Inbox{
     public CategoryManager categories() {
         return categories;
     }
-
-    public void addCategory(Category category) {
-        this.categories.add(category);
-    }
-
-
     public void setJobID() {
         this.jobID = this.jobTitle + this.recruiter;
     }
