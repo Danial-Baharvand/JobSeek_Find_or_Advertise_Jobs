@@ -316,14 +316,18 @@
           </component>
           <vspacer id="9eaf5">
             <constraints>
-              <grid row="3" column="3" row-span="7" col-span="1" vsize-policy="7" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
-                <preferred-size width="-1" height="500"/>
+              <grid row="6" column="3" row-span="4" col-span="1" vsize-policy="7" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
+                <minimum-size width="-1" height="100"/>
+                <preferred-size width="-1" height="200"/>
               </grid>
             </constraints>
           </vspacer>
           <vspacer id="a9f5d">
             <constraints>
-              <grid row="12" column="3" row-span="7" col-span="1" vsize-policy="7" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+              <grid row="12" column="3" row-span="1" col-span="1" vsize-policy="7" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
+                <minimum-size width="-1" height="50"/>
+                <preferred-size width="-1" height="200"/>
+              </grid>
             </constraints>
           </vspacer>
           <vspacer id="2994e">
@@ -336,7 +340,7 @@
           <hspacer id="3e530">
             <constraints>
               <grid row="5" column="7" row-span="1" col-span="1" vsize-policy="1" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
-                <preferred-size width="10" height="-1"/>
+                <preferred-size width="15" height="-1"/>
               </grid>
             </constraints>
           </hspacer>
