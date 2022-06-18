@@ -94,10 +94,12 @@ public class Job implements Inbox{
 
     public void setRecruiter(Recruiter recruiter) {
         this.recruiter = recruiter;
+        this.jobID = this.jobTitle + this.recruiter;
     }
 
     public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
+        this.jobID = this.jobTitle + this.recruiter;
     }
 
     public void setStates(Set<String> states) {

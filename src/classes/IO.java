@@ -89,7 +89,8 @@ public class IO {
                 JobSeeker jobSeeker = new JobSeeker(userData[EMAIL], userData[NAME], userData[PASSWORD]);
                 jobSeeker.setActive(Boolean.parseBoolean(userData[IS_ACTIVE]));
                 jobSeeker.setResumeFile(userData[RESUME]);
-                jobSeeker.getSkills().addAll(Arrays.asList(userData[SKILLS].split(SEPARATOR_2)));
+                //jobSeeker.getSkills().addAll(Arrays.asList(userData[SKILLS].split(SEPARATOR_2)));
+                Arrays.stream(userData[SKILLS].split(SEPARATOR_2)).filter(a -> !a.equals("")).forEach(jobSeeker::addSkill);
                 jobSeekers.putIfAbsent(userData[EMAIL], jobSeeker);
             }
         } catch (IOException e) {
