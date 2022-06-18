@@ -3,6 +3,7 @@ package classes;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Set;
 
 public class Tests {
 
@@ -69,9 +70,9 @@ public class Tests {
     }
 
 
-    public static HashMap<JobSeeker, Integer> createTestJobSeekerScores(){
+    public static HashMap<JobSeeker, Integer> createTestJobSeekerScores(Set<JobSeeker> jobseekers){
         HashMap<JobSeeker, Integer> scoredJobSeekers = new HashMap<>();
-        Runtime.accountManager().getJobSeekers().values().stream().forEach(j -> scoredJobSeekers.put(j, 100));
+        jobseekers.forEach(j -> scoredJobSeekers.put(j, 100));
         return scoredJobSeekers;
     }
     public static JobSeeker createExampleJobSeekers(){

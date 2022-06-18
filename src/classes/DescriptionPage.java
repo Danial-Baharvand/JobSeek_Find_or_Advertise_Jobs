@@ -7,7 +7,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class DescriptionPage implements Page {
@@ -28,6 +30,7 @@ public class DescriptionPage implements Page {
     private JPanel jobseekerButtons;
     private JPanel recruiterButtons;
     private JLabel jobTitle;
+    private JButton publishButton;
 
     /**
      * Creates the detailed description page.
@@ -49,7 +52,7 @@ public class DescriptionPage implements Page {
         jobTitle.setText(job.getJobTitle());
         description.setText(job.getJobDescription());
         location.setText(job.getStates().stream().map(s -> Character.toUpperCase(s.charAt(0)) +
-                        s.substring(1)).collect(Collectors.joining(", ")));
+                s.substring(1)).collect(Collectors.joining(", ")));
         // Getting job categories, capitalizing the first letter and adding a comma between them and setting to label
         cat.setText(job.categories().toCapitalString());
 
@@ -77,17 +80,27 @@ public class DescriptionPage implements Page {
                 Runtime.showCreateJobPage(job);
             }
         });
+        publishButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                job.setPublished(true);
+                publishButton.setEnabled(false);
+            }
+        });
         viewApplicantsBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                HashMap<JobSeeker, Integer> jobSeekerScores = Tests.createTestJobSeekerScores();
+                Set<JobSeeker> applicants = job.applications().stream().map(Mail::getJobSeeker).collect(Collectors.toSet());
+                HashMap<JobSeeker, Integer> jobSeekerScores = Tests.createTestJobSeekerScores(applicants);
                 Runtime.showJobSeekerResultsPage(jobSeekerScores, job);
             }
         });
         suitablesBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                HashMap<JobSeeker, Integer> jobSeekerScores = Tests.createTestJobSeekerScores();
+                Set<JobSeeker> applicants = Runtime.accountManager().getJobSeekers().values().stream()
+                        .filter(User::isActive).collect(Collectors.toSet());
+                HashMap<JobSeeker, Integer> jobSeekerScores = Tests.createTestJobSeekerScores(applicants);
                 Runtime.showJobSeekerResultsPage(jobSeekerScores, job);
             }
         });
@@ -95,12 +108,14 @@ public class DescriptionPage implements Page {
 
 
     private void checkRecruiterJobStatus(Job job) {
-        String userEmail = Runtime.accountManager().getCurrentUser().getEmail();
         jobseekerButtons.setVisible(false);
         recruiterButtons.setVisible(true);
         if (!job.invitations().isEmpty() || !job.applications().isEmpty()) {
             editBtn.setEnabled(false);
             editBtn.setToolTipText("Jobs with ongoing applications can't be edited");
+        }
+        if (job.published) {
+            publishButton.setVisible(false);
         }
     }
 
@@ -192,7 +207,7 @@ public class DescriptionPage implements Page {
         messageLabel.setVisible(false);
         descriptionPanel.add(messageLabel, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         recruiterButtons = new JPanel();
-        recruiterButtons.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 5, new Insets(0, 0, 0, 0), -1, -1));
+        recruiterButtons.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 6, new Insets(0, 0, 0, 0), -1, -1));
         recruiterButtons.setBackground(new Color(-13224648));
         descriptionPanel.add(recruiterButtons, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         editBtn = new JButton();
@@ -209,6 +224,9 @@ public class DescriptionPage implements Page {
         recruiterButtons.add(viewApplicantsBtn, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final com.intellij.uiDesigner.core.Spacer spacer4 = new com.intellij.uiDesigner.core.Spacer();
         recruiterButtons.add(spacer4, new com.intellij.uiDesigner.core.GridConstraints(0, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        publishButton = new JButton();
+        publishButton.setText("Publish");
+        recruiterButtons.add(publishButton, new com.intellij.uiDesigner.core.GridConstraints(0, 5, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label1 = new JLabel();
         Font label1Font = this.$$$getFont$$$("Calibri Light", Font.BOLD, 16, label1.getFont());
         if (label1Font != null) label1.setFont(label1Font);

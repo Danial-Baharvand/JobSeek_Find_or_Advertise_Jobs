@@ -57,7 +57,8 @@ public class JobSeekerResultsPage implements Page {
         jobSeekerPanel.setForeground(new Color(-12828863));
         jobSeekerScroller.setViewportView(jobSeekerPanel);
         noJobSeekersLabel = new JLabel();
-        noJobSeekersLabel.setText("Label");
+        noJobSeekersLabel.setForeground(new Color(-1));
+        noJobSeekersLabel.setText("No jobseeker could be found");
         noJobSeekersLabel.setVisible(false);
         jobSeekerResultsPanel.add(noJobSeekersLabel, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
