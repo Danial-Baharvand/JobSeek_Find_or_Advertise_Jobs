@@ -85,7 +85,7 @@ public class IO {
         HashMap<String, JobSeeker> jobSeekers = new HashMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(Config.DT_JOBSEEKERS))) {
             while ((line = reader.readLine()) != null && !line.equals("")) {
-                String[] userData = line.split(SEPARATOR_1);
+                String[] userData = line.split(SEPARATOR_1, -1);
                 JobSeeker jobSeeker = new JobSeeker(userData[EMAIL], userData[NAME], userData[PASSWORD]);
                 jobSeeker.setActive(Boolean.parseBoolean(userData[IS_ACTIVE]));
                 jobSeeker.setResumeFile(userData[RESUME]);
@@ -103,7 +103,7 @@ public class IO {
         HashMap<String, Recruiter> recruiters = new HashMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(DT_RECRUITERS))) {
             while ((line = reader.readLine()) != null && !line.equals("")) {
-                String[] userData = line.split(SEPARATOR_1);
+                String[] userData = line.split(SEPARATOR_1, -1);
                 Recruiter recruiter = new Recruiter(userData[EMAIL], userData[NAME], userData[PASSWORD],
                         userData[ORGANISATION]);
                 recruiter.setActive(Boolean.parseBoolean(userData[IS_ACTIVE]));
@@ -120,7 +120,7 @@ public class IO {
         HashMap<String, Admin> admins = new HashMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(DT_ADMINS))) {
             while ((line = reader.readLine()) != null && !line.equals("")) {
-                String[] userData = line.split(",");
+                String[] userData = line.split(",", -1);
                 Admin admin = new Admin(userData[EMAIL], userData[NAME], userData[PASSWORD]);
                 admins.putIfAbsent(userData[EMAIL], admin);
             }
@@ -135,7 +135,7 @@ public class IO {
         HashMap<String, Job> jobs = new HashMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(DT_JOBS))) {
             while ((line = reader.readLine()) != null && !line.equals("")) {
-                String[] userData = line.split(SEPARATOR_1);
+                String[] userData = line.split(SEPARATOR_1, -1);
                 Job job = new Job();
                 job.jobTitle = userData[JOB_TITLE];
                 job.states =Set.of(userData[JOB_STATES].split(SEPARATOR_2));
