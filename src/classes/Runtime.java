@@ -136,18 +136,14 @@ public class Runtime {
     public static void showJobSeekerResultsPage(HashMap<JobSeeker, Integer> jobSeekerScores, Job job) {
         showPage( new JobSeekerResultsPage(jobSeekerScores, job));
     }
-    public static void showAppliedJobsPage() {
-        showPage( new AppliedJobsPage());
-    }
+
     public static void showCreateAccountPage( String navigatedFrom) {
         showPage( new CreateAccountPage());
     }
     public static void showCreateAccountPage() {
         showPage( new CreateAccountPage());
     }
-    public static void showRecruiterProfilePage(){
-        showPage( new RecruiterProfilePage(Tests.createExampleRecruiter()));
-    }
+
     public static void showJobSeekerHome(){
         showPage( new JobSeekerHomePage());
     }

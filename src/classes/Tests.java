@@ -68,13 +68,7 @@ public class Tests {
         return new HashSet<Job>(Arrays.asList(job1, job2, job3, job4, job5));
     }
 
-    public static BiMultiMap createExampleCats(){
-        BiMultiMap categories = new BiMultiMap();
-        categories.put("compSci", "0001");
-        categories.put("Networking", "0002");
-        categories.put("AI", "0003");
-        return categories;
-    }
+
     public static HashMap<JobSeeker, Integer> createTestJobSeekerScores(){
         HashMap<JobSeeker, Integer> scoredJobSeekers = new HashMap<>();
         Runtime.accountManager().getJobSeekers().values().stream().forEach(j -> scoredJobSeekers.put(j, 100));
