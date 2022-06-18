@@ -137,15 +137,15 @@ public class IO {
             while ((line = reader.readLine()) != null && !line.equals("")) {
                 String[] userData = line.split(SEPARATOR_1, -1);
                 Job job = new Job();
-                job.jobTitle = userData[JOB_TITLE];
-                job.states =Set.of(userData[JOB_STATES].split(SEPARATOR_2));
-                job.salary =Integer.parseInt(userData[JOB_SALARY]);
-                job.jobType =userData[JOB_TYPE];
-                job.keywords =userData[JOB_KEYWORDS];
-                job.jobDescription =userData[JOB_DESCRIPTION].replace(SEPARATOR_2, "\n");
-                job.recruiter = recruiters.get(userData[JOB_RECRUITER]);
-                job.recruiter.addJob(job);
-                job.published =Boolean.parseBoolean(userData[JOB_PUBLISHED]);
+                job.setJobTitle(userData[JOB_TITLE]);
+                job.setStates(Set.of(userData[JOB_STATES].split(SEPARATOR_2)));
+                job.setSalary(Integer.parseInt(userData[JOB_SALARY]));
+                job.setJobType(userData[JOB_TYPE]);
+                job.setKeywords(userData[JOB_KEYWORDS]);
+                job.setJobDescription(userData[JOB_DESCRIPTION].replace(SEPARATOR_2, "\n"));
+                job.setRecruiter(recruiters.get(userData[JOB_RECRUITER]));
+                job.getRecruiter().addJob(job);
+                job.setPublished(Boolean.parseBoolean(userData[JOB_PUBLISHED]));
                 readApplications(job, userData[APPLICATIONS], jobSeekers);
                 readInvitations(job, userData[INVITATIONS], jobSeekers);
                 job.setCategories(readJobCategories(mainCategories, userData[JOB_CATEGORIES]));

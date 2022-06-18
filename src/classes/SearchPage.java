@@ -7,7 +7,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Locale;
 
 public class SearchPage implements Page {
@@ -49,7 +48,7 @@ public class SearchPage implements Page {
                 search.setCats(GuiHelper.getSelectedOptions(catPanel));
                 search.setJobTypes(GuiHelper.getSelectedOptions(jobTypePanel));
                 search.setSalary(salarySlider.getValue() * 3000);
-                search.setScores();
+                search.scoreJobs();
                 ArrayList<ScoredJob> jobList = search.getScoredJobs();
                 Runtime.showSearchResultsPage(jobList);
             }

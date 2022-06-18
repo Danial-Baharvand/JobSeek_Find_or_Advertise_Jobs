@@ -10,7 +10,6 @@ import java.io.*;
 import java.nio.file.Files;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.*;
 
 public class JobSeekerHomePage implements Page {
@@ -123,7 +122,7 @@ public class JobSeekerHomePage implements Page {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Search appliedSearch = new Search(currentUser.applications().getJobs());
-                appliedSearch.setScores();
+                appliedSearch.scoreJobs();
                 ArrayList<ScoredJob> jobList = appliedSearch.getScoredJobs();
                 Runtime.showSearchResultsPage(jobList);
             }
@@ -132,7 +131,7 @@ public class JobSeekerHomePage implements Page {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Search invitedSearch = new Search(currentUser.invitations().getJobs());
-                invitedSearch.setScores();
+                invitedSearch.scoreJobs();
                 ArrayList<ScoredJob> jobList = invitedSearch.getScoredJobs();
                 Runtime.showSearchResultsPage(jobList);
             }

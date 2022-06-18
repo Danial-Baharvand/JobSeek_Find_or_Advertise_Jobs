@@ -114,7 +114,7 @@ public class DescriptionPage implements Page {
             editBtn.setEnabled(false);
             editBtn.setToolTipText("Jobs with ongoing applications can't be edited");
         }
-        if (job.published) {
+        if (job.isPublished()) {
             publishButton.setVisible(false);
         }
     }

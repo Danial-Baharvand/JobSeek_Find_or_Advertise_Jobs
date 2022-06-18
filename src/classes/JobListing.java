@@ -43,7 +43,7 @@ public class JobListing implements Page {
     public void createJobListing() {
         if (Runtime.accountManager().getCurrentUser() instanceof Recruiter) {
             publishedLabel.setVisible(true);
-            if (job.published) {
+            if (job.isPublished()) {
                 publishedLabel.setText("Published");
             }
         }

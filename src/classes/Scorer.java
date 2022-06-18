@@ -1,9 +1,7 @@
 package classes;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Scorer {
@@ -14,7 +12,7 @@ public class Scorer {
      * @param title2 second string to be compared.
      * @return an integer between 0 and 100 representing the percentage of matching between 2 strings
      */
-    public int scoreStrings(String title1, String title2){
+    public int hasWords(String title1, String title2){
         if (title1.equals("")){return 100;}
         // Find the number of mutual words in 2 strings regardless of case
         double mutual = Stream.of(title1.toLowerCase().split(" ")).
@@ -22,7 +20,42 @@ public class Scorer {
         double wordCount = Arrays.stream(title1.split(" ")).count();
         return (int) ((mutual / wordCount) * 100);
     }
+    public int hasSimilarWords(Set<String> keys1, Set<String> keys2){
+        return (int) (keys1.stream().filter(a->keys2.stream().anyMatch(b->areSimilar(a, b))).count()/(double)keys1.size());
+    }
 
+    public static void main(String[] args) {
+        Set<String> a = new HashSet<>();
+        Set<String> b = new HashSet<>();
+        a.add("bookshelf");
+        a.add("shop");
+        a.add("cloths");
+        b.add("self");
+        b.add("saft");
+        b.add("find");
+        Scorer s = new Scorer();
+
+        System.out.println(s.hasSimilarWords(a,b));
+    }
+
+    private boolean areSimilar(String word1, String word2){
+        word1 = word1.toLowerCase();
+        word2 = word2.toLowerCase();
+        if (word2.length()<word1.length()){
+            String temp = word1;
+            word1 = word2;
+            word2 = temp;
+        }
+        if (word1.length()<4){
+            return word1.startsWith(word2)||word1.endsWith(word2);
+        }
+        for (int i = 0; i < word1.length(); i++) {
+            String shorter = word1.substring(0,i)+ '%'+ word1.substring(i+1);
+            String longer = word2.substring(0,i)+ '%'+ word2.substring(i+1);
+            if (longer.startsWith(shorter)||longer.endsWith(shorter)){return true;}
+        }
+        return false;
+    }
     /**
      * Returns 100 if the target option is in selected options match and returns 0 if they don't.
      * @param selectedOptions first state.
@@ -32,7 +65,12 @@ public class Scorer {
     public int scoreComboBox(Set<String> selectedOptions, String targetOption){
         if (selectedOptions.stream().anyMatch(targetOption::equalsIgnoreCase)) {
             return 100;
-
+        }
+        return 0;
+    }
+    public int scoreComboBox(Set<String> selectedOptions, Set<String> targetOptions){
+        if (selectedOptions.stream().anyMatch(targetOptions::contains)) {
+            return 100;
         }
         return 0;
     }
@@ -57,19 +95,33 @@ public class Scorer {
      * @return an int between 0 and 100 representing the score given to the job
      */
     public int scoreAgainstSearch(Search search, Job job){
-        HashSet<Integer> allScores = new HashSet<>();
-        if (!search.getSearchText().isEmpty()){allScores.add(scoreStrings(search.getSearchText(), job.getJobTitle()));}
-        //if (!search.getStates().isEmpty()){allScores.add(scoreComboBox(search.getStates(), job.getStates()));}
-        // TODO: implement logic to score job categories against search categories
-        //if (!search.getCats().isEmpty()){allScores.add(scoreComboBox(search.getCats(), job.getCat()));}
+        ArrayList<Integer> allScores = new ArrayList<>();
+        Set<String> jobTerms = job.searchTerms();
+        JobSeeker jobSeeker = (JobSeeker) Runtime.accountManager().getCurrentUser();
+        if (jobSeeker != null && !jobSeeker.getSkills().isEmpty()){
+            allScores.add(hasSimilarWords(jobSeeker.getSkills(),jobTerms));
+        }
+        if (!search.getCats().isEmpty())
+        {
+            Set<String> searchCats = Runtime.accountManager().getCategories().stream()
+                .filter(a ->search.getCats().contains(a.getName())).flatMap(Set::stream).collect(Collectors.toSet());
+            allScores.add(hasSimilarWords(searchCats, jobTerms));
+        }
+        //searching in jobs for the main search term
+        if (!search.getSearchText().isEmpty()){
+            Set<String>searchText = Set.of(search.getSearchText().split(" "));
+            allScores.add(hasWords(search.getSearchText(), job.getJobTitle()));
+            allScores.add(hasSimilarWords(searchText, Set.of(job.getJobTitle().split(" "))));
+            allScores.add(hasSimilarWords(searchText, jobTerms));
+        }
+        if (!search.getStates().isEmpty()){allScores.add(scoreComboBox(search.getStates(), job.getStates()));}
         if (!search.getJobTypes().isEmpty()){allScores.add(scoreComboBox(search.getJobTypes(), job.getJobType()));}
         if (search.getSalary() > 0){allScores.add(scoreSalary(search.getSalary(), job.getSalary()));}
         return  (int) allScores.stream().mapToDouble(a -> a).average().orElse(0.0);
     }
     public int jobMatchesJobSeeker(Job job, JobSeeker jobSeeker){
-        Set<String> seekerTerms = new HashSet<>();
         if (!jobSeeker.getSkills().isEmpty()){
-            seekerTerms.addAll(jobSeeker.getSkills());
+            return hasSimilarWords(job.searchTerms(), jobSeeker.getSkills());
         }
 
         return 0;

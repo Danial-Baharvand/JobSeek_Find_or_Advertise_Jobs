@@ -1,43 +1,32 @@
 package classes;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static classes.Config.*;
 
 public class Job implements Inbox{
-    String jobID;
-    Recruiter recruiter;
-    String jobTitle;
-    Set<String> states;
-    int salary;
-    String jobType;
-    String keywords;
-    String jobDescription;
-    Boolean published = false;
-    CategoryManager categories;
-    Applications applications = new Applications();
-    Invitations invitations = new Invitations();
+    private String jobID;
+    private Recruiter recruiter;
+    private String jobTitle;
+    private Set<String> states;
+    private int salary;
+    private String jobType;
+    private String keywords;
+    private String jobDescription;
+    private Boolean published = false;
+    private CategoryManager categories;
+    private final Applications applications = new Applications();
+    private final Invitations invitations = new Invitations();
 
 
     public Job(){
         this.jobTitle = "This job was removed";
     }
-    public Job(String jobDetails, HashMap<String, Recruiter> recruiters){
-        categories = new CategoryManager();
-        String[] setValues = jobDetails.split(SEPARATOR_1);
-        this.jobTitle = setValues[JOB_TITLE];
-        this.states =Set.of(setValues[JOB_STATES].split(SEPARATOR_2));
-        this.salary =Integer.parseInt(setValues[JOB_SALARY]);
-        this.jobType =setValues[JOB_TYPE];
-        this.keywords =setValues[JOB_KEYWORDS];
-        this.jobDescription =setValues[JOB_DESCRIPTION].replace(SEPARATOR_2, "\n");
-        this.recruiter = recruiters.get(setValues[JOB_RECRUITER]);
-        this.published =Boolean.parseBoolean(setValues[JOB_PUBLISHED]);
-        this.jobID = this.jobTitle + this.recruiter;
-    }
-    public Boolean getPublished() {
+    public Boolean isPublished() {
         return published;
     }
 
@@ -59,6 +48,15 @@ public class Job implements Inbox{
                  recruiter + SEPARATOR_1 +
                  published+ SEPARATOR_1 +
                  categories;
+    }
+    public Set<String> searchTerms(){
+        Set<String> terms = categories.stream().flatMap(Set::stream).collect(Collectors.toSet());
+        Collections.addAll(terms, jobTitle.split(" "));
+        Collections.addAll(terms, keywords.split(" "));
+        Collections.addAll(terms, jobDescription.split(" "));
+        terms.add(recruiter.getOrg());
+
+        return terms;
     }
     @Override
     public String toString() {
