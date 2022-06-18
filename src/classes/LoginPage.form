@@ -109,7 +109,8 @@
           <vspacer id="5cb58">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
-                <preferred-size width="-1" height="3"/>
+                <preferred-size width="-1" height="2"/>
+                <maximum-size width="-1" height="5"/>
               </grid>
             </constraints>
           </vspacer>
