@@ -38,6 +38,7 @@ public class Runtime {
         frame.setLocation(screenSize.width/2, screenSize.height/2);
         header = new Header();
         accMan = new AccountManagement();
+        System.out.println(accMan.getJobSeekers().get("john@seeker.com").applications());
 
 
 

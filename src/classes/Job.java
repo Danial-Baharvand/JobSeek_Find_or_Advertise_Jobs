@@ -17,7 +17,8 @@ public class Job implements Inbox{
     String jobDescription;
     Boolean published = false;
     CategoryManager categories;
-
+    Applications applications = new Applications();
+    Invitations invitations = new Invitations();
 
 
     public Job(){
@@ -131,5 +132,15 @@ public class Job implements Inbox{
 
     public void setCategories(CategoryManager categories) {
         this.categories = categories;
+    }
+
+    @Override
+    public Applications applications() {
+        return applications;
+    }
+
+    @Override
+    public Invitations invitations() {
+        return invitations;
     }
 }

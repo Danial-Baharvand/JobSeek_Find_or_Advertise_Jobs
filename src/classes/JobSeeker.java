@@ -8,6 +8,8 @@ import static classes.Config.*;
 public class JobSeeker extends User implements Inbox {
     private String resumeFile;
     Set<String> skills = new HashSet<>();
+    Applications applications = new Applications();
+    Invitations invitations = new Invitations();
 
     public JobSeeker(){
         super("","","");
@@ -43,5 +45,15 @@ public class JobSeeker extends User implements Inbox {
 
     public void setResumeFile(String resumeFile) {
         this.resumeFile = resumeFile;
+    }
+
+    @Override
+    public Applications applications() {
+        return applications;
+    }
+
+    @Override
+    public Invitations invitations() {
+        return invitations;
     }
 }

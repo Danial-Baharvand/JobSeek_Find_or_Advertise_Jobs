@@ -35,7 +35,7 @@ public class Config {
     final static int JOB_CATEGORIES = 10;
     final static int MAIL_JOBSEEKER = 0;
     final static int MAIL_JOB = 1;
-    final static int MAIL_MESSAGE = 3;
+    final static int MAIL_MESSAGE = 2;
     final static int CATEGORY_NAME = 0;
     final static int CATEGORY_KEYWORDS = 1;
 
