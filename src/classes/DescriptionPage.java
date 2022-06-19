@@ -67,14 +67,17 @@ public class DescriptionPage implements Page {
         removeBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Recruiter recruiter = (Recruiter) Runtime.accountManager().getCurrentUser();
-                recruiter.removeJob(job);
-                job.setPublished(false);
-                IO.writeRecruiters();
-                IO.writeJobs();
-                Runtime.getPagesVisited().clear();
-                Runtime.showRecruiterHome();
-                JOptionPane.showMessageDialog(null, "Job was deleted!");
+                int option = JOptionPane.showConfirmDialog(null, "Are you sure you wanna delete this job");
+                if (option == 0) {
+                    Recruiter recruiter = (Recruiter) Runtime.accountManager().getCurrentUser();
+                    recruiter.removeJob(job);
+                    job.setPublished(false);
+                    IO.writeRecruiters();
+                    IO.writeJobs();
+                    Runtime.getPagesVisited().clear();
+                    Runtime.showRecruiterHome();
+                    JOptionPane.showMessageDialog(null, "Job was deleted!");
+                }
             }
         });
         editBtn.addActionListener(new ActionListener() {
