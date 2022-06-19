@@ -38,6 +38,8 @@ public class Header {
                     Runtime.showJobSeekerHome();
                 } else if (Runtime.accountManager().getCurrentUser() instanceof Recruiter) {
                     Runtime.showRecruiterHome();
+                } else if (Runtime.accountManager().getCurrentUser() instanceof Admin) {
+                    Runtime.showAdminHomePage();
                 }
             }
         });
