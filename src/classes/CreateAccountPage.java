@@ -31,7 +31,7 @@ public class CreateAccountPage implements Page {
                         Runtime.showLoginPage();
                     }
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Please fill in all fields");
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
                 }
             }
         });
@@ -62,6 +62,9 @@ public class CreateAccountPage implements Page {
      */
     public boolean createUser() throws Exception {
         final String email = emailTextField.forceGetText();
+        if (!email.contains("@") || !email.contains(".")) {
+            throw new Exception("Please enter a valid email");
+        }
         final String name = fullNameTextField.forceGetText();
         final String pass = String.valueOf(passwordPasswordField.getPassword());
         final String passConfirm = String.valueOf(confirmPasswordPasswordField.getPassword());
