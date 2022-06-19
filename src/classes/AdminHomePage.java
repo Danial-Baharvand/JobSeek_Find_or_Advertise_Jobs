@@ -138,7 +138,6 @@ public class AdminHomePage implements Page {
                     String newCat = catNameTB.forceGetText();
                     Category category = new Category(newCat);
                     Runtime.accountManager().getCategories().add(category);
-                    System.out.println(Runtime.accountManager().getCategories().toWriteFormat());
                     IO.writeCategories();
                     populateCatsPanel();
                 } catch (Exception ex) {
@@ -167,9 +166,6 @@ public class AdminHomePage implements Page {
             public void actionPerformed(ActionEvent e) {
 
                 try {
-                    System.out.println(GuiHelper.getSelectedRadio(categoriesList));
-                    System.out.println(Runtime.accountManager().getCategories());
-                    ;
                     Category category = Runtime.accountManager().getCategories().getByName(GuiHelper
                             .getSelectedRadio(categoriesList));
                     Runtime.showEditCategoryPage(category);

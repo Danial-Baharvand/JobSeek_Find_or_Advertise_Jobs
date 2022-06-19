@@ -1,5 +1,7 @@
 package classes;
 
+import com.google.common.collect.TreeMultimap;
+
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
@@ -18,9 +20,9 @@ public class SearchResultsPage<V> implements Page {
     private JPanel jobsPanel;
     private JLabel noJobsLabel;
     private JScrollPane jobsScroller;
-    ArrayList<V> jobList;
+    TreeMultimap<Integer, Job> jobList;
 
-    public SearchResultsPage(ArrayList<V> jobList) {
+    public SearchResultsPage(TreeMultimap<Integer, Job> jobList) {
         this.jobList = jobList;
         if (!GuiHelper.createJobList(jobList, jobsPanel)) {
             jobsScroller.setVisible(false);

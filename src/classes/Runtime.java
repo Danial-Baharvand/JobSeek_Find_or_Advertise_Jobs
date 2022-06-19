@@ -1,12 +1,11 @@
 package classes;
 
+import com.google.common.collect.TreeMultimap;
+
 import javax.swing.*;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
+import java.util.*;
 import java.awt.*;
 import java.awt.Toolkit;
-import java.util.HashMap;
 import javax.swing.JFrame;
 
 public class Runtime {
@@ -38,7 +37,6 @@ public class Runtime {
         frame.setLocation(screenSize.width/2, screenSize.height/2);
         header = new Header();
         accMan = new AccountManagement();
-        System.out.println(accMan.getJobSeekers().get("john@seeker.com").applications());
 
 
 
@@ -76,13 +74,13 @@ public class Runtime {
 
 
         //SHOW JOB SEEKER HOME Page
-        //accMan.setCurrentUser(accMan.getJobSeekers().get("hulk@gmail.com"));
-        //showJobSeekerHome();
+        accMan.setCurrentUser(accMan.getJobSeekers().get("john@seeker.com"));
+        showJobSeekerHome();
 
 
         //SHOW Create Job PAGE
-        accMan.setCurrentUser(accMan.getRecruiters().get("1@rec.com"));
-        showCreateJobPage();
+        //accMan.setCurrentUser(accMan.getRecruiters().get("1@rec.com"));
+        //showCreateJobPage();
 
 
         //SHOW Edit Category Page
@@ -123,8 +121,8 @@ public class Runtime {
     public static void showLoginPage() {
         showPage( new LoginPage(accMan));
     }
-    public static void showJobSeekerResultsPage(HashMap<JobSeeker, Integer> jobSeekerScores, Job job) {
-        showPage( new JobSeekerResultsPage(jobSeekerScores, job));
+    public static void showJobSeekerResultsPage(TreeMultimap<Integer, JobSeeker> jobSeekerScores, Job job, String title) {
+        showPage( new JobSeekerResultsPage(jobSeekerScores, job, title));
     }
 
     public static void showCreateAccountPage( String navigatedFrom) {
@@ -140,7 +138,7 @@ public class Runtime {
     public static void showRecruiterHome(){
         showPage( new RecruiterHomePage());
     }
-    public static void showSearchResultsPage(ArrayList<ScoredJob> jobList){
+    public static void showSearchResultsPage(TreeMultimap<Integer, Job> jobList){
         showPage(new SearchResultsPage(jobList));
     }
     public static void showAdminHomePage(){

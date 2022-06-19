@@ -1,5 +1,7 @@
 package classes;
 
+import com.google.common.collect.TreeMultimap;
+
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
@@ -121,18 +123,18 @@ public class JobSeekerHomePage implements Page {
         appliedJobsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Search appliedSearch = new Search(currentUser.applications().getJobs());
-                appliedSearch.scoreJobs();
-                ArrayList<ScoredJob> jobList = appliedSearch.getScoredJobs();
+                Search appliedSearch = new Search();
+                Scorer scorer = new Scorer();
+                TreeMultimap<Integer, Job> jobList = scorer.scoreJobs(appliedSearch, currentUser.applications.getJobs());
                 Runtime.showSearchResultsPage(jobList);
             }
         });
         jobInvitationsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Search invitedSearch = new Search(currentUser.invitations().getJobs());
-                invitedSearch.scoreJobs();
-                ArrayList<ScoredJob> jobList = invitedSearch.getScoredJobs();
+                Search invitedSearch = new Search();
+                Scorer scorer = new Scorer();
+                TreeMultimap<Integer, Job> jobList = scorer.scoreJobs(invitedSearch, currentUser.invitations().getJobs());
                 Runtime.showSearchResultsPage(jobList);
             }
         });

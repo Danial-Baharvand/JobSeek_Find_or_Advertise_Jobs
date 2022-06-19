@@ -16,7 +16,6 @@ public class CategoryManager extends HashSet<Category> {
 
 
     public Category getByName(String targetName){
-        System.out.println(this.stream().map(category -> category.name).collect(Collectors.joining(",")));
         return this.stream().filter(c -> c.name.equalsIgnoreCase(targetName) ).findFirst().orElse(null);
     }
 

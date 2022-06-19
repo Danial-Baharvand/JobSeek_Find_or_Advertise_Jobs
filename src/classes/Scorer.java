@@ -1,5 +1,8 @@
 package classes;
 
+import com.google.common.collect.Ordering;
+import com.google.common.collect.TreeMultimap;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -21,7 +24,7 @@ public class Scorer {
         return (int) ((mutual / wordCount) * 100);
     }
     public int hasSimilarWords(Set<String> keys1, Set<String> keys2){
-        return (int) (keys1.stream().filter(a->keys2.stream().anyMatch(b->areSimilar(a, b))).count()/(double)keys1.size());
+        return (int) ((keys1.stream().filter(a->keys2.stream().anyMatch(b->areSimilar(a, b))).count()/(double)keys1.size())*100);
     }
 
     public static void main(String[] args) {
@@ -94,14 +97,14 @@ public class Scorer {
      * @param job the job to be compared to the search parameters
      * @return an int between 0 and 100 representing the score given to the job
      */
-    public int scoreAgainstSearch(Search search, Job job){
+    public int searchInJobs(Search search, Job job){
         ArrayList<Integer> allScores = new ArrayList<>();
         Set<String> jobTerms = job.searchTerms();
         JobSeeker jobSeeker = (JobSeeker) Runtime.accountManager().getCurrentUser();
         if (jobSeeker != null && !jobSeeker.getSkills().isEmpty()){
             allScores.add(hasSimilarWords(jobSeeker.getSkills(),jobTerms));
         }
-        if (!search.getCats().isEmpty())
+        if (search.getCats().isEmpty())
         {
             Set<String> searchCats = Runtime.accountManager().getCategories().stream()
                 .filter(a ->search.getCats().contains(a.getName())).flatMap(Set::stream).collect(Collectors.toSet());
@@ -125,6 +128,16 @@ public class Scorer {
         }
 
         return 0;
+    }
+    public TreeMultimap<Integer, Job> scoreJobs(Search search, Collection<Job> jobs){
+        TreeMultimap<Integer, Job> scoredJobs = TreeMultimap.create(Ordering.natural().reverse(), Comparator.comparing(Job::getID));
+        jobs.forEach(job -> scoredJobs.put(searchInJobs(search, job), job));
+        return scoredJobs;
+    }
+    public TreeMultimap<Integer, JobSeeker> scoreJobSeekers(Job job, Collection<JobSeeker> jobSeekers){
+        TreeMultimap<Integer, JobSeeker> scoredJobSeekers = TreeMultimap.create(Ordering.natural().reverse(), Comparator.comparing(JobSeeker::getEmail));
+        jobSeekers.forEach(jobSeeker -> scoredJobSeekers.put(jobMatchesJobSeeker(job, jobSeeker), jobSeeker));
+        return scoredJobSeekers;
     }
 
 }

@@ -12,7 +12,7 @@
     <children>
       <scrollpane id="3de51" binding="jobSeekerScroller">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
         <border type="none"/>
@@ -34,24 +34,24 @@
           </grid>
         </children>
       </scrollpane>
-      <component id="36b0d" class="javax.swing.JLabel" binding="noJobSeekersLabel">
+      <component id="1861c" class="javax.swing.JLabel" binding="pageTitle">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <foreground color="-1"/>
-          <text value="No jobseeker could be found"/>
-          <visible value="false"/>
-        </properties>
-      </component>
-      <component id="1861c" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font name="Calibri Light" size="22" style="0"/>
           <foreground color="-592138"/>
           <text value="Suitable Jobseekers:"/>
+        </properties>
+      </component>
+      <component id="36b0d" class="javax.swing.JLabel" binding="noJobSeekersLabel">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <foreground color="-1"/>
+          <text value="No jobseeker could be found"/>
+          <visible value="false"/>
         </properties>
       </component>
     </children>

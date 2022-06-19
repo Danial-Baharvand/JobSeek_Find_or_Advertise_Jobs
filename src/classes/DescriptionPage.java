@@ -1,5 +1,7 @@
 package classes;
 
+import com.google.common.collect.TreeMultimap;
+
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
@@ -90,18 +92,20 @@ public class DescriptionPage implements Page {
         viewApplicantsBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Scorer scorer = new Scorer();
                 Set<JobSeeker> applicants = job.applications().stream().map(Mail::getJobSeeker).collect(Collectors.toSet());
-                HashMap<JobSeeker, Integer> jobSeekerScores = Tests.createTestJobSeekerScores(applicants);
-                Runtime.showJobSeekerResultsPage(jobSeekerScores, job);
+                TreeMultimap<Integer, JobSeeker> jobSeekerScores = scorer.scoreJobSeekers(job, applicants);
+                Runtime.showJobSeekerResultsPage(jobSeekerScores, job, "Applicants:");
             }
         });
         suitablesBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Set<JobSeeker> applicants = Runtime.accountManager().getJobSeekers().values().stream()
+                Scorer scorer = new Scorer();
+                Set<JobSeeker> suitable = Runtime.accountManager().getJobSeekers().values().stream()
                         .filter(User::isActive).collect(Collectors.toSet());
-                HashMap<JobSeeker, Integer> jobSeekerScores = Tests.createTestJobSeekerScores(applicants);
-                Runtime.showJobSeekerResultsPage(jobSeekerScores, job);
+                TreeMultimap<Integer, JobSeeker> jobSeekerScores = scorer.scoreJobSeekers(job, suitable);
+                Runtime.showJobSeekerResultsPage(jobSeekerScores, job, "Suitable candidates:");
             }
         });
     }

@@ -1,5 +1,7 @@
 package classes;
 
+import com.google.common.collect.TreeMultimap;
+
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
@@ -8,6 +10,8 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Locale;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class SearchPage implements Page {
     private final boolean searchClicked = false;
@@ -27,6 +31,7 @@ public class SearchPage implements Page {
     private JPanel catPanel;
     private JScrollPane jobTypeScroller;
     private JPanel jobTypePanel;
+
     public SearchPage() {
         /**test code to check categories' functionality
          should be removed when adding categories by recruiters is implemented
@@ -39,17 +44,18 @@ public class SearchPage implements Page {
             public void actionPerformed(ActionEvent e) {
 
                 // Creates a new search object and adds the user's selected criteria to it
-                Collection<Job> availableJobs = Runtime.accountManager().getJobs().values();
+                Collection<Job> availableJobs = Runtime.accountManager().getJobs().values().stream()
+                        .filter(Job::isPublished).collect(Collectors.toList());
                 // To only show jobs that have not been applied for
                 //availableJobs.removeAll(appliedJobs);
-                Search search = new Search(availableJobs);
+                Search search = new Search();
                 search.setSearchText(searchTBox.getText());
                 search.setStates(GuiHelper.getSelectedOptions(statePanel));
                 search.setCats(GuiHelper.getSelectedOptions(catPanel));
                 search.setJobTypes(GuiHelper.getSelectedOptions(jobTypePanel));
                 search.setSalary(salarySlider.getValue() * 3000);
-                search.scoreJobs();
-                ArrayList<ScoredJob> jobList = search.getScoredJobs();
+                Scorer scorer = new Scorer();
+                TreeMultimap<Integer, Job> jobList = scorer.scoreJobs(search, availableJobs);
                 Runtime.showSearchResultsPage(jobList);
             }
         });

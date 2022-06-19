@@ -1,5 +1,7 @@
 package classes;
 
+import com.google.common.collect.TreeMultimap;
+
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
@@ -12,8 +14,10 @@ public class JobSeekerResultsPage implements Page {
     private JLabel noJobSeekersLabel;
     private JScrollPane jobSeekerScroller;
     private JPanel jobSeekerPanel;
+    private JLabel pageTitle;
 
-    JobSeekerResultsPage(HashMap<JobSeeker, Integer> jobSeekerScores, Job job) {
+    JobSeekerResultsPage(TreeMultimap<Integer, JobSeeker> jobSeekerScores, Job job, String title) {
+        pageTitle.setText(title);
         if (!GuiHelper.createJobSeekerList(jobSeekerScores, job, jobSeekerPanel)) {
             jobSeekerScroller.setVisible(false);
             noJobSeekersLabel.setVisible(true);
@@ -54,24 +58,24 @@ public class JobSeekerResultsPage implements Page {
         jobSeekerResultsPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(3, 1, new Insets(20, 20, 20, 20), -1, -1));
         jobSeekerResultsPanel.setBackground(new Color(-13224648));
         jobSeekerScroller = new JScrollPane();
-        jobSeekerResultsPanel.add(jobSeekerScroller, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        jobSeekerResultsPanel.add(jobSeekerScroller, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         jobSeekerPanel = new JPanel();
         jobSeekerPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         jobSeekerPanel.setForeground(new Color(-12828863));
         jobSeekerScroller.setViewportView(jobSeekerPanel);
         final com.intellij.uiDesigner.core.Spacer spacer1 = new com.intellij.uiDesigner.core.Spacer();
         jobSeekerPanel.add(spacer1, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_VERTICAL, 1, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        pageTitle = new JLabel();
+        Font pageTitleFont = this.$$$getFont$$$("Calibri Light", Font.PLAIN, 22, pageTitle.getFont());
+        if (pageTitleFont != null) pageTitle.setFont(pageTitleFont);
+        pageTitle.setForeground(new Color(-592138));
+        pageTitle.setText("Suitable Jobseekers:");
+        jobSeekerResultsPanel.add(pageTitle, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         noJobSeekersLabel = new JLabel();
         noJobSeekersLabel.setForeground(new Color(-1));
         noJobSeekersLabel.setText("No jobseeker could be found");
         noJobSeekersLabel.setVisible(false);
-        jobSeekerResultsPanel.add(noJobSeekersLabel, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JLabel label1 = new JLabel();
-        Font label1Font = this.$$$getFont$$$("Calibri Light", Font.PLAIN, 22, label1.getFont());
-        if (label1Font != null) label1.setFont(label1Font);
-        label1.setForeground(new Color(-592138));
-        label1.setText("Suitable Jobseekers:");
-        jobSeekerResultsPanel.add(label1, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        jobSeekerResultsPanel.add(noJobSeekersLabel, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**

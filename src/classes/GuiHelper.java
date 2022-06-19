@@ -1,5 +1,7 @@
 package classes;
 
+import com.google.common.collect.TreeMultimap;
+
 import javax.naming.NotContextException;
 import javax.swing.*;
 import java.awt.*;
@@ -57,31 +59,36 @@ public class GuiHelper {
         }
         optionsPanel.updateUI();
     }
-    public static <V> boolean createJobList(Collection<V> jobList, JPanel jobsPanel) {
+    public static boolean createJobList(TreeMultimap<Integer, Job> jobList, JPanel jobsPanel) {
         if (jobList.isEmpty()){
             return false;
         }
-        for (V job : jobList) {
-            JPanel jPanel;
-            if (job instanceof Job) {
-                jPanel = new JobListing((Job) job).getJobListingPanel();
-            } else {
-                jPanel = new JobListing((ScoredJob) job).getJobListingPanel();
-            }
-
+        for (Map.Entry<Integer, Job> entry : jobList.entries()) {
+            JPanel jPanel = new JobListing(entry.getKey(),entry.getValue()).getJobListingPanel();
             jobsPanel.setLayout(new BoxLayout(jobsPanel, BoxLayout.Y_AXIS));
             jobsPanel.add(jPanel);
         }
         return true;
     }
-    public static boolean createJobSeekerList(HashMap<JobSeeker, Integer> jobSeekerList, Job job, JPanel jobSeekerPanel) {
+    public static boolean createJobList(Collection< Job> jobList, JPanel jobsPanel) {
+        if (jobList.isEmpty()){
+            return false;
+        }
+        for (Job job : jobList) {
+            JPanel jPanel;
+            jPanel = new JobListing(job).getJobListingPanel();
+            jobsPanel.setLayout(new BoxLayout(jobsPanel, BoxLayout.Y_AXIS));
+            jobsPanel.add(jPanel);
+        }
+        return true;
+    }
+    public static boolean createJobSeekerList(TreeMultimap<Integer, JobSeeker> jobSeekerList, Job job, JPanel jobSeekerPanel) {
         if (jobSeekerList.isEmpty()){
             return false;
         }
         jobSeekerPanel.setLayout(new BoxLayout(jobSeekerPanel, BoxLayout.Y_AXIS));
-        for (JobSeeker jobSeeker : jobSeekerList.keySet()) {
-            JPanel jPanel;
-            jPanel = new JobSeekerItem(jobSeeker, job,  jobSeekerList.get(jobSeeker)).getPanel();
+        for (Map.Entry<Integer, JobSeeker> entry : jobSeekerList.entries()) {
+            JPanel jPanel = new JobSeekerItem(entry.getValue(), job, entry.getKey()).getPanel();
             jobSeekerPanel.add(jPanel);
         }
         return true;

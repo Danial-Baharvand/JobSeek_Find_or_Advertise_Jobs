@@ -8,37 +8,22 @@ public class Search {
     Set<String> cats;
     Set<String> jobTypes;
     int salary;
-    Collection<Job> jobs;
-
-
-    public Search(Collection<Job> jobs){
-        this.jobs = jobs;
-        //setScores(jobs);
-    }
 
     /**
      * Uses the scorer object to score all jobs in the Jobs set.
      */
-    public Map<Integer, Job> scoreJobs(){
-        Scorer scorer = new Scorer();
-        Map<Integer, Job> scoredJobs = new TreeMap<>(Collections.reverseOrder());
-        jobs.forEach(j -> scoredJobs.put(scorer.scoreAgainstSearch(this, j), j));
-        return scoredJobs;
-
+    public Search(){
+        searchText = "";
+        states= new HashSet<>();
+        cats = new HashSet<>();
+        jobTypes = new HashSet<>();
+        salary = 0;
     }
     public String getSearchText() {
         return searchText;
     }
-
-
-
-
     public int getSalary() {
         return salary;
-    }
-
-    public Collection<Job> getJobs() {
-        return jobs;
     }
 
     public void setSearchText(String searchText) {
@@ -49,14 +34,6 @@ public class Search {
     public void setSalary(int salary) {
         this.salary = salary;
     }
-
-    public void setJobs(HashSet<Job> jobs) {
-        this.jobs = jobs;
-    }
-    public void addJob(Job job) {
-        this.jobs.add(job);
-    }
-
     public Set<String> getStates() {
         return states;
     }
