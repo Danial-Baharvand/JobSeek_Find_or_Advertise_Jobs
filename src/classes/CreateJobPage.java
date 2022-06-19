@@ -87,7 +87,6 @@ public class CreateJobPage implements Page {
                     Runtime.showRecruiterHome();
                     JOptionPane.showMessageDialog(null, "Job was published!");
                 } catch (Exception ex) {
-                    ex.printStackTrace();
                     JOptionPane.showMessageDialog(null, "Please fill in all options");
                 }
             }
