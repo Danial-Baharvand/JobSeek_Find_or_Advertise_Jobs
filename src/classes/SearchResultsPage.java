@@ -24,6 +24,9 @@ public class SearchResultsPage<V> implements Page {
 
     public SearchResultsPage(TreeMultimap<Integer, Job> jobList) {
         this.jobList = jobList;
+        if (jobList.isEmpty()) {
+            noJobsLabel.setVisible(true);
+        }
         if (!GuiHelper.createJobList(jobList, jobsPanel)) {
             jobsScroller.setVisible(false);
             noJobsLabel.setVisible(true);
@@ -59,7 +62,7 @@ public class SearchResultsPage<V> implements Page {
         noJobsLabel = new JLabel();
         noJobsLabel.setForeground(new Color(-1));
         noJobsLabel.setText("No jobs could be found!");
-        noJobsLabel.setVisible(true);
+        noJobsLabel.setVisible(false);
         searchResultsPanel.add(noJobsLabel, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 4, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label1 = new JLabel();
         Font label1Font = this.$$$getFont$$$("Calibri Light", Font.PLAIN, 22, label1.getFont());

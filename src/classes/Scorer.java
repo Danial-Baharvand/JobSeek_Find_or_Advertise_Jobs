@@ -27,20 +27,6 @@ public class Scorer {
         return (int) ((keys1.stream().filter(a->keys2.stream().anyMatch(b->areSimilar(a, b))).count()/(double)keys1.size())*100);
     }
 
-    public static void main(String[] args) {
-        Set<String> a = new HashSet<>();
-        Set<String> b = new HashSet<>();
-        a.add("bookshelf");
-        a.add("shop");
-        a.add("cloths");
-        b.add("self");
-        b.add("saft");
-        b.add("find");
-        Scorer s = new Scorer();
-
-        System.out.println(s.hasSimilarWords(a,b));
-    }
-
     private boolean areSimilar(String word1, String word2){
         word1 = word1.toLowerCase();
         word2 = word2.toLowerCase();
@@ -106,7 +92,7 @@ public class Scorer {
         }
         if (search.getCats().isEmpty())
         {
-            Set<String> searchCats = Runtime.accountManager().getCategories().stream()
+            Set<String> searchCats = Runtime.accountManager().getCategories().stream().filter(Objects::nonNull)
                 .filter(a ->search.getCats().contains(a.getName())).flatMap(Set::stream).collect(Collectors.toSet());
             allScores.add(hasSimilarWords(searchCats, jobTerms));
         }

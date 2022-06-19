@@ -37,7 +37,7 @@ public class Runtime {
         frame.setLocation(screenSize.width/2, screenSize.height/2);
         header = new Header();
         accMan = new AccountManagement();
-
+        //showSearchPage();
 
 
 
@@ -64,7 +64,7 @@ public class Runtime {
 
         // SHOW SEARCH PAGE
         //accMan.setCurrentUser(js);
-        //showSearchPage();
+        showSearchPage();
 
 
 
@@ -74,8 +74,8 @@ public class Runtime {
 
 
         //SHOW JOB SEEKER HOME Page
-        accMan.setCurrentUser(accMan.getJobSeekers().get("john@seeker.com"));
-        showJobSeekerHome();
+        //accMan.setCurrentUser(accMan.getJobSeekers().get("john@seeker.com"));
+        //showJobSeekerHome();
 
 
         //SHOW Create Job PAGE
@@ -100,7 +100,6 @@ public class Runtime {
 
 
 
-        //Thesaurus testRequest = new Thesaurus("bottle", "en_US", "json");
     }
 
     public static void showSearchPage() {

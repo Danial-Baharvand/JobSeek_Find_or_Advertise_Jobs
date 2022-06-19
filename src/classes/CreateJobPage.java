@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 public class CreateJobPage implements Page {
     private ClearingTextField jobTitleTB;
     private JPanel createJobPanel;
-    private JComboBox<String> stateCB;
     private ClearingTextArea jobDescTA;
     private JComboBox jobTypeCB;
     private ClearingTextField salaryTB;
@@ -37,7 +36,7 @@ public class CreateJobPage implements Page {
         this.job = job;
         jobTitleTB.setText(job.getJobTitle());
         jobTitleTB.setDefaultText("Job Listing Title", true);
-        stateCB.setSelectedItem(job.getStates());
+        GuiHelper.setSelectedOptions(statesPanel, job.getStates());
         jobTypeCB.setSelectedItem(job.getJobType());
         jobDescTA.setText(job.getJobDescription());
         jobDescTA.setDefaultText("Job Description", true);
@@ -68,7 +67,7 @@ public class CreateJobPage implements Page {
                     JOptionPane.showMessageDialog(null, "Job was saved!");
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "Please fill in all options");
+                    JOptionPane.showMessageDialog(null, "Please fill in all options correctly");
                 }
             }
         });
@@ -87,7 +86,8 @@ public class CreateJobPage implements Page {
                     Runtime.showRecruiterHome();
                     JOptionPane.showMessageDialog(null, "Job was published!");
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Please fill in all options");
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Please fill in all options correctly");
                 }
             }
         });

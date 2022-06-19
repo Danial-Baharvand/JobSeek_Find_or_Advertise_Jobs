@@ -17,6 +17,10 @@ public class AccountManagement {
     public AccountManagement() {
         this.readDatabase();
     }
+
+    /**
+     * Reads the database
+     */
     private void readDatabase() {
         IO io = new IO();
         categories= io.readCategories();
@@ -25,6 +29,11 @@ public class AccountManagement {
         admins = io.readAdmins();
         jobs = io.readJobs(recruiters, jobSeekers, categories);
     }
+
+    /**
+     * Adds a a user to the appropriate variable depending on its type
+     * @param user
+     */
     public void addUser(User user){
         if (user instanceof JobSeeker){
             jobSeekers.put(user.getEmail(), (JobSeeker) user);

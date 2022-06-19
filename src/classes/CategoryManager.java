@@ -16,11 +16,11 @@ public class CategoryManager extends HashSet<Category> {
 
 
     public Category getByName(String targetName){
-        return this.stream().filter(c -> c.name.equalsIgnoreCase(targetName) ).findFirst().orElse(null);
+        return this.stream().filter(Objects::nonNull).filter(c -> c.name.equalsIgnoreCase(targetName) ).findFirst().orElse(null);
     }
 
     public String toCapitalString(){
-        return this.stream().map(c -> Character.toUpperCase(c.name.charAt(0)) + c.name.substring(1)).
+        return this.stream().filter(Objects::nonNull).map(c -> Character.toUpperCase(c.name.charAt(0)) + c.name.substring(1)).
                 collect(Collectors.joining(", "));
     }
     // Get representation by category names
