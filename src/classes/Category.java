@@ -7,14 +7,15 @@ import static classes.Config.*;
 
 public class Category extends HashSet<String> {
     String name;
+
+    /**
+     * Stores a category with a set of keywords
+     * @param name of the category
+     */
     public Category(String name){
         super();
         this.name = name;
     }
-
-
-
-
     public String getName() {
         return name;
     }
@@ -22,6 +23,11 @@ public class Category extends HashSet<String> {
     public void setName(String name) {
         this.name = name;
     }
+
+    /**
+     * Generate the proper format to write to database
+     * @return String to be written to database
+     */
     @Override
     public String toString(){
         StringBuilder s = new StringBuilder();
@@ -34,6 +40,7 @@ public class Category extends HashSet<String> {
         }
         return s.toString();
     }
+    // overridden so the set works
     @Override
     public int hashCode() {
         int prime = 31;
@@ -44,6 +51,6 @@ public class Category extends HashSet<String> {
             return false;
         }
         Category otherKey = (Category) other;
-        return this.name == otherKey.name;
+        return this.name == otherKey.name; // compare the name of the category, so we wouldn't have duplicates
     }
 }

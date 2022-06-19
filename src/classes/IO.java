@@ -23,6 +23,11 @@ public class IO {
         }
     }
 
+    /**
+     * Writes the data to path and goes to the next line
+     * @param path
+     * @param data
+     */
     public static void newLine(String path, String data) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path, true))) {
             writer.write(data);
@@ -54,7 +59,10 @@ public class IO {
     }
 
 
-
+    /**
+     * adds the object to file depending on the object type
+     * @param data
+     */
     public static void addToDB(Object data) {
         if (data instanceof JobSeeker) {
             newLine(DT_JOBSEEKERS, ((JobSeeker) data).toWriteFormat());
@@ -69,15 +77,6 @@ public class IO {
         } else {
             System.out.println("Type not compatible to write to database");
         }
-    }
-    public static void updateDB(HashMap<String, Object> data){
-
-    }
-    public static void updateDB(Object data){
-
-    }
-    public void writeMapEntry(String key, String value, String path){
-        newLine(path, key + "=" + value);
     }
 
     public HashMap<String, JobSeeker> readJobSeekers() {

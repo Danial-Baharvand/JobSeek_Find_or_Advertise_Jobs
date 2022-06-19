@@ -1,5 +1,8 @@
 package classes;
 
+/**
+ * Represents of a "mail" between a jobseeker and a job
+ */
 abstract class Mail {
     private JobSeeker jobSeeker;
     private Job job;

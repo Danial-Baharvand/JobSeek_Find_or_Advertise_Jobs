@@ -47,7 +47,6 @@ public class SearchPage implements Page {
                 Collection<Job> availableJobs = Runtime.accountManager().getJobs().values().stream()
                         .filter(Job::isPublished).collect(Collectors.toList());
                 // To only show jobs that have not been applied for
-                //availableJobs.removeAll(appliedJobs);
                 Search search = new Search();
                 search.setSearchText(searchTBox.getText());
                 search.setStates(GuiHelper.getSelectedOptions(statePanel));

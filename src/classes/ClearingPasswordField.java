@@ -11,8 +11,9 @@ public class ClearingPasswordField extends JPasswordField implements FocusListen
     private String defaultText;
 
     public ClearingPasswordField() {
+        // set it to the right color
         setForeground(Color.gray);
-        setEchoChar((char) 0);
+        setEchoChar((char) 0); // show what is typed
         addFocusListener(this);
     }
 
@@ -21,7 +22,7 @@ public class ClearingPasswordField extends JPasswordField implements FocusListen
         if (!clicked){
             setForeground(Color.black);
             defaultText = String.valueOf(getPassword());
-            setEchoChar('*');
+            setEchoChar('*'); //don't show what is typed
             setText("");
             clicked = true;
         }

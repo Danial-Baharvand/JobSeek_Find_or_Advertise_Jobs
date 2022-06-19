@@ -17,6 +17,7 @@ public class JobSeekerResultsPage implements Page {
     private JLabel pageTitle;
 
     JobSeekerResultsPage(TreeMultimap<Integer, JobSeeker> jobSeekerScores, Job job, String title) {
+        // show jobseekers with their scores
         pageTitle.setText(title);
         if (!GuiHelper.createJobSeekerList(jobSeekerScores, job, jobSeekerPanel)) {
             jobSeekerScroller.setVisible(false);

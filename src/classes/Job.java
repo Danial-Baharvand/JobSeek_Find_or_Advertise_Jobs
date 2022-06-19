@@ -24,6 +24,7 @@ public class Job implements Inbox{
 
 
     public Job(){
+        // if job is deleted or can't be found
         this.jobTitle = "This job was removed";
     }
     public Boolean isPublished() {
@@ -49,6 +50,11 @@ public class Job implements Inbox{
                  published+ SEPARATOR_1 +
                  categories;
     }
+
+    /**
+     * returns the relevant terms for the job
+     * @return
+     */
     public Set<String> searchTerms(){
         Set<String> terms = categories.stream().flatMap(Set::stream).collect(Collectors.toSet());
         Collections.addAll(terms, jobTitle.split(" "));
@@ -92,11 +98,13 @@ public class Job implements Inbox{
     }
 
     public void setRecruiter(Recruiter recruiter) {
+        //generate ID
         this.recruiter = recruiter;
         this.jobID = this.jobTitle + this.recruiter;
     }
 
     public void setJobTitle(String jobTitle) {
+        // generate ID
         this.jobTitle = jobTitle;
         this.jobID = this.jobTitle + this.recruiter;
     }

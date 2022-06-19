@@ -47,6 +47,7 @@ public class AdminHomePage implements Page {
         Set<String> inactiveJS = new HashSet<>();
         Set<String> activeRec = new HashSet<>();
         Set<String> inactiveRec = new HashSet<>();
+        // finds active and inactive users
         jobSeekers.forEach(j -> {
             if (j.isActive()) {
                 activeJS.add(j.getEmail());
@@ -61,6 +62,7 @@ public class AdminHomePage implements Page {
                 inactiveRec.add(j.getEmail());
             }
         });
+        // show
         GuiHelper.createOptionBox(activeJobSeekerList, activeJS);
         GuiHelper.createOptionBox(activeRecruiterList, activeRec);
         GuiHelper.createOptionBox(inactiveJobSeekersList, inactiveJS);

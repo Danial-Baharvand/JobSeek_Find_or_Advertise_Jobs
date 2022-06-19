@@ -19,17 +19,8 @@ public class Runtime {
      * pagesVisited is a static attribute that is used at Runtime to create a LIFO structure of the pages visited by the user
      * Each time a page is navigated away from, that page is pushed to the front of the deque
      * Each time a user navigates backwards from a page using the "Back" button, the page at the front of the deque is popped
-     * The backwards navigation is implemented by the navigateBack method
      */
     private static Deque<Page> pagesVisited = new ArrayDeque<>();
-
-    /**
-     * currentSearch is an object of Search
-     * currentSearch is used to facilitate returning to the SearchResultsPage via the "Back" button
-     * when a new Search is made, currentSearch is set to that Search object and overwritten when a new Search is made
-     */
-
-    private static Search currentSearch; // Look into making non-static
 
     public static void main(String[] args) {
         setLookAndFeel();
@@ -37,71 +28,9 @@ public class Runtime {
         frame.setLocation(screenSize.width/2, screenSize.height/2);
         header = new Header();
         accMan = new AccountManagement();
-        //showSearchPage();
-
-
-
-
-
-
-        //end test
-        //accMan.setCurrentUser(accMan.getRecruiters().get("hulk@gmail.com"));
-        //accMan.setCurrentUser(accMan.getJobSeekers().get("hulk@gmail.com"));
-
-        //currentApplication = new Application();
-        //currentApplication.getRegisteredUsers();
-
-        // TEST ACCOUNT CREATION
-        //CreateAccount testCreateAccount = new CreateAccount();
-        //testObject.testCreateAccount(testCreateAccount, currentApplication);
-
-        // TEST LOGIN
-        //LoginPage testLoginPage = new LoginPage();
-        //testObject.testLogin(testLoginPage, testApplication);
-
-        //SHOW LOGIN PAGE
-        //showLoginPage();
-
-        // SHOW SEARCH PAGE
-        //accMan.setCurrentUser(js);
         showSearchPage();
-
-
-
-        //SHOW RECRUITER HOME PAGE
-        //accMan.setCurrentUser(accMan.getRecruiters().get("fury@recruiter.com"));
-        //showRecruiterHome();
-
-
-        //SHOW JOB SEEKER HOME Page
-        //accMan.setCurrentUser(accMan.getJobSeekers().get("john@seeker.com"));
-        //showJobSeekerHome();
-
-
-        //SHOW Create Job PAGE
-        //accMan.setCurrentUser(accMan.getRecruiters().get("1@rec.com"));
-        //showCreateJobPage();
-
-
-        //SHOW Edit Category Page
-        //showEditCategoryPage( new CreateJobPage());
-        //accMan.setCurrentUser(accMan.getRecruiters().get("hulk@gmail.com"));
-
-        //SHOW CREATE ACCOUNT PAGE
-        //showCreateAccountPage();
-
-        //SHOW RECRUITER PROFILE PAGE
-        //accMan.setCurrentUser(accMan.getRecruiters().get("fury@recruiter.com"));
-        //showRecruiterProfilePage();
-
-        //SHOW ADMIN HOME Page
-        //accMan.setCurrentUser(accMan.getAdmins().get("admin@admin.com"));
-        //showAdminHomePage();
-
-
-
     }
-
+    // code to open pages
     public static void showSearchPage() {
         showPage( new SearchPage());
     }
@@ -143,28 +72,30 @@ public class Runtime {
     public static void showAdminHomePage(){
         showPage(new AdminHomePage());
     }
+
+    /**
+     * shows a page in correct format
+     * @param page
+     */
     public static void showPage(Page page){
         frame.setTitle(page.pageName());
+        // refresh page
         frame.getContentPane().removeAll();
         frame.repaint();
+        // handle navigation
         if (pagesVisited.isEmpty()||!pagesVisited.peekLast().getClass().equals(page.getClass())){
             pagesVisited.add(page);
         }else {
             pagesVisited.removeLast();
             pagesVisited.add(page);
         }
+        // update header
         header.updateButtons();
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-
-
-
-
         JPanel pagePanel = page.getPanel();
-        pagePanel.setPreferredSize(screenSize);
-
-
-
+        pagePanel.setPreferredSize(screenSize);// set size to half of screen
+        // add header and page content
         panel.add(header.getPanel());
         panel.add(pagePanel);
         frame.setContentPane(panel);
@@ -182,6 +113,7 @@ public class Runtime {
         return accMan;
     }
     public static void setLookAndFeel(){
+        // try to make the program look pretty
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {

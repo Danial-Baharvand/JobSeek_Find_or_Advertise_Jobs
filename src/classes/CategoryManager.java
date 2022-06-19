@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 
 import static classes.Config.SEPARATOR_2;
 
+/**
+ * holds a set of categories
+ */
 public class CategoryManager extends HashSet<Category> {
 
     public Set<String> names(){
@@ -16,10 +19,16 @@ public class CategoryManager extends HashSet<Category> {
 
 
     public Category getByName(String targetName){
+        // get a category by its name
         return this.stream().filter(Objects::nonNull).filter(c -> c.name.equalsIgnoreCase(targetName) ).findFirst().orElse(null);
     }
 
+    /**
+     * Main print method, changes the first letter to uppercase so it's presentable
+     * @return
+     */
     public String toCapitalString(){
+
         return this.stream().filter(Objects::nonNull).map(c -> Character.toUpperCase(c.name.charAt(0)) + c.name.substring(1)).
                 collect(Collectors.joining(", "));
     }

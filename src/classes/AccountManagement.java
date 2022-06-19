@@ -31,7 +31,7 @@ public class AccountManagement {
     }
 
     /**
-     * Adds a a user to the appropriate variable depending on its type
+     * Adds a user to the appropriate variable depending on its type
      * @param user
      */
     public void addUser(User user){
@@ -53,9 +53,9 @@ public class AccountManagement {
     }
 
     /**
-     * updates the registeredUsers Hashmap by calling the readRegisteredUsers method to read the registeredUsers file
-     * @param email is the email to search for in the registeredUsers Hashmap
-     * @return true if the email already exists as a Key in the registeredUsers Hashmap, else false
+     * Checks if the user email is in the database
+     * @param email to check
+     * @return true of user is registered
      */
     public boolean isRegisteredUser(String email) {
         return jobSeekers.containsKey(email) || recruiters.containsKey(email) || admins.containsKey(email);

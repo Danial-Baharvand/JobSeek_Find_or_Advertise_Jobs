@@ -35,6 +35,9 @@ public class JobSeekerItem implements Page {
         this.jobSeeker = jobSeeker;
         this.job = job;
         this.score = score;
+        if (jobSeeker.getResumeFile().equals("null") || jobSeeker.getResumeFile() == null) {
+            resumeButton.setVisible(false);
+        }
         createJobSeekerItem();
         addPanelListeners();
         if (job.invitations().getJobSeekers().contains(jobSeeker)) {

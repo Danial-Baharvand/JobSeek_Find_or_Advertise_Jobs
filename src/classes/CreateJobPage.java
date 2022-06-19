@@ -32,6 +32,9 @@ public class CreateJobPage implements Page {
     }
 
     public CreateJobPage(Job job) {
+        // This is used for editing the page!
+        // getting filed values from the job to be edited
+        // also setting the default value for fields so if the used deletes the text, it shows proper text
         setUpPage();
         this.job = job;
         jobTitleTB.setText(job.getJobTitle());
@@ -100,6 +103,7 @@ public class CreateJobPage implements Page {
     }
 
     private void createJob(boolean publish) throws Exception {
+        // creating a job
         Job newJob = new Job();
         newJob.setJobTitle(jobTitleTB.forceGetText());
         newJob.setRecruiter((Recruiter) Runtime.accountManager().getCurrentUser());
@@ -114,6 +118,7 @@ public class CreateJobPage implements Page {
         }
         ((Recruiter) Runtime.accountManager().getCurrentUser()).addJob(newJob);
         newJob.setCategories(new CategoryManager());
+        // get category objects
         newJob.categories().addAll(GuiHelper.getSelectedOptions(catOptions).stream().map(c -> Runtime.accountManager()
                 .getCategories().getByName(c)).collect(Collectors.toSet()));
         Runtime.accountManager().getJobs().put(newJob.getID(), newJob);

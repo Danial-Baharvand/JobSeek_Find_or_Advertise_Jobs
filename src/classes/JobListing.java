@@ -8,6 +8,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Locale;
 
+/**
+ * makes a single job listing
+ */
 public class JobListing implements Page {
     private JPanel jobListingPanel;
     private JPanel jobPanel;
@@ -23,6 +26,10 @@ public class JobListing implements Page {
     Job job;
     int score;
 
+    /**
+     * Job listing
+     * @param job
+     */
     public JobListing(Job job) {
         this.job = job;
         createJobListing();
@@ -30,6 +37,11 @@ public class JobListing implements Page {
 
     }
 
+    /**
+     * Job listing that has a score
+     * @param score the score of the job based on how much it matches the current user
+     * @param job
+     */
     public JobListing(int score, Job job) {
         this.job = job;
         this.score = score;
@@ -41,6 +53,7 @@ public class JobListing implements Page {
     }
 
     public void createJobListing() {
+        // only recruiters see job published text
         if (Runtime.accountManager().getCurrentUser() instanceof Recruiter) {
             publishedLabel.setVisible(true);
             if (job.isPublished()) {

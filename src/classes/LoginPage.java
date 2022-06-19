@@ -26,8 +26,7 @@ public class LoginPage implements Page {
         /**
          * @param email is String that is a User's email
          * @param password is a String that is a User's password
-         * @return true if the email and password parameters match a key:value pair in the registeredUsers HashMap
-         * else false
+         * @return true if the email and password parameters match
          */
 
         /**

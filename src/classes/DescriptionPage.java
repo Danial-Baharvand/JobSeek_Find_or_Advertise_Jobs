@@ -37,13 +37,10 @@ public class DescriptionPage implements Page {
 
     /**
      * Creates the detailed description page.
-     *
-     * @param desFrame
-     * @param jobList      the arraylist of scoredJob objects for the current search
-     * @param pageNumber   the page number the that this job is on
-     * @param indexOfClick indicating which job was clicked on the page
      */
     public DescriptionPage(Job job) {
+        // see which view should be shown
+        // probably should have made 2 different classes
         if (Runtime.accountManager().getCurrentUser() instanceof JobSeeker) {
             checkJobSeekerJobStatus(job);
             addJobSeekerJobListenrs(job);
@@ -51,7 +48,7 @@ public class DescriptionPage implements Page {
             checkRecruiterJobStatus(job);
             addRecruiterJobListenrs(job);
         }
-
+        // get job details
         jobTitle.setText(job.getJobTitle());
         description.setText(job.getJobDescription());
         location.setText(job.getStates().stream().map(s -> Character.toUpperCase(s.charAt(0)) +
@@ -64,7 +61,7 @@ public class DescriptionPage implements Page {
     }
 
     private void addRecruiterJobListenrs(Job job) {
-        removeBtn.addActionListener(new ActionListener() {
+        removeBtn.addActionListener(new ActionListener() {// remove job
             @Override
             public void actionPerformed(ActionEvent e) {
                 int option = JOptionPane.showConfirmDialog(null, "Are you sure you wanna delete this job");
@@ -96,6 +93,7 @@ public class DescriptionPage implements Page {
         viewApplicantsBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // getting applicants for this job and scoring them based on their skills
                 Scorer scorer = new Scorer();
                 Set<JobSeeker> applicants = job.applications().stream().map(Mail::getJobSeeker).collect(Collectors.toSet());
                 TreeMultimap<Integer, JobSeeker> jobSeekerScores = scorer.scoreJobSeekers(job, applicants);
@@ -118,7 +116,7 @@ public class DescriptionPage implements Page {
     private void checkRecruiterJobStatus(Job job) {
         jobseekerButtons.setVisible(false);
         recruiterButtons.setVisible(true);
-        if (!job.invitations().isEmpty() || !job.applications().isEmpty()) {
+        if (!job.invitations().isEmpty() || !job.applications().isEmpty()) {// only allow edit when
             editBtn.setEnabled(false);
             editBtn.setToolTipText("Jobs with ongoing applications can't be edited");
         }
@@ -131,7 +129,7 @@ public class DescriptionPage implements Page {
         JobSeeker jobSeeker = (JobSeeker) Runtime.accountManager().getCurrentUser();
         jobseekerButtons.setVisible(true);
         recruiterButtons.setVisible(false);
-        if (jobSeeker.invitations().getJobs().contains(job)) {
+        if (jobSeeker.invitations().getJobs().contains(job)) {// if has invitations
             removeButton.setVisible(false);
             applyButton.setVisible(false);
             messagePanel.setVisible(true);
@@ -148,6 +146,7 @@ public class DescriptionPage implements Page {
         applyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // make and sent a new application
                 JobSeeker jobSeeker = (JobSeeker) Runtime.accountManager().getCurrentUser();
                 Application newApp = new Application(jobSeeker, job);
                 jobSeeker.applications().add(newApp);
@@ -161,6 +160,7 @@ public class DescriptionPage implements Page {
         removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // remove the application
                 JobSeeker jobSeeker = (JobSeeker) Runtime.accountManager().getCurrentUser();
                 jobSeeker.applications().removeByJob(job);
                 job.applications().removeByJobSeeker(jobSeeker);

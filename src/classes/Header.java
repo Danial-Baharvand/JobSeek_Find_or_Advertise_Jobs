@@ -5,6 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * this class makes the navigation header at the top of the gui
+ */
 public class Header {
     private JPanel headerPanel;
     private JButton backBtn;
@@ -14,7 +17,7 @@ public class Header {
     private JButton logOutBtn;
 
     public Header() {
-        try {
+        try { // making the header pretty
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     UIManager.setLookAndFeel(info.getClassName());
@@ -22,7 +25,7 @@ public class Header {
                 }
             }
         } catch (Exception e) {
-            // If Nimbus is not available, you can set the GUI to another look and feel.
+            System.out.println("Nimbus is not availible :(");
         }
         backBtn.addActionListener(new ActionListener() {
             @Override
@@ -32,6 +35,7 @@ public class Header {
             }
         });
         homeBtn.addActionListener(new ActionListener() {
+            // setting the proper home
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (Runtime.accountManager().getCurrentUser() instanceof JobSeeker) {

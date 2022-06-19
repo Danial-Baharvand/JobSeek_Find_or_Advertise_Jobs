@@ -23,10 +23,27 @@ public class Scorer {
         double wordCount = Arrays.stream(title1.split(" ")).count();
         return (int) ((mutual / wordCount) * 100);
     }
+
+    /**
+     * Simillar to hasWords but also checks if words are similar
+     * accounts for typos and compound words as well as trailing changes
+     * booking will be matched to book for example
+     * @param keys1
+     * @param keys2
+     * @return
+     */
     public int hasSimilarWords(Set<String> keys1, Set<String> keys2){
         return (int) ((keys1.stream().filter(a->keys2.stream().anyMatch(b->areSimilar(a, b))).count()/(double)keys1.size())*100);
     }
 
+    /**
+     * algorithm for hasSimilarWords
+     * masks a character in the two strings and checks if the smaller word is in the beginning or end of the longer word
+     * could have done a more exhaustive comparison but decided against it because of effciency concerns
+     * @param word1
+     * @param word2
+     * @return
+     */
     private boolean areSimilar(String word1, String word2){
         word1 = word1.toLowerCase();
         word2 = word2.toLowerCase();
@@ -86,12 +103,14 @@ public class Scorer {
     public int searchInJobs(Search search, Job job){
         ArrayList<Integer> allScores = new ArrayList<>();
         Set<String> jobTerms = job.searchTerms();
+        // if user is logged in, include user skills too
         JobSeeker jobSeeker = (JobSeeker) Runtime.accountManager().getCurrentUser();
         if (jobSeeker != null && !jobSeeker.getSkills().isEmpty()){
             allScores.add(hasSimilarWords(jobSeeker.getSkills(),jobTerms));
         }
         if (search.getCats().isEmpty())
         {
+            // adding the keywords of the categories of the job
             Set<String> searchCats = Runtime.accountManager().getCategories().stream().filter(Objects::nonNull)
                 .filter(a ->search.getCats().contains(a.getName())).flatMap(Set::stream).collect(Collectors.toSet());
             allScores.add(hasSimilarWords(searchCats, jobTerms));
@@ -103,6 +122,7 @@ public class Scorer {
             allScores.add(hasSimilarWords(searchText, Set.of(job.getJobTitle().split(" "))));
             allScores.add(hasSimilarWords(searchText, jobTerms));
         }
+        // adding the score for the rest of criteria
         if (!search.getStates().isEmpty()){allScores.add(scoreComboBox(search.getStates(), job.getStates()));}
         if (!search.getJobTypes().isEmpty()){allScores.add(scoreComboBox(search.getJobTypes(), job.getJobType()));}
         if (search.getSalary() > 0){allScores.add(scoreSalary(search.getSalary(), job.getSalary()));}
@@ -115,11 +135,25 @@ public class Scorer {
 
         return 0;
     }
+
+    /**
+     * score the jobseekers agianst the search criteria
+     * @param search
+     * @param jobs
+     * @return
+     */
     public TreeMultimap<Integer, Job> scoreJobs(Search search, Collection<Job> jobs){
         TreeMultimap<Integer, Job> scoredJobs = TreeMultimap.create(Ordering.natural().reverse(), Comparator.comparing(Job::getID));
         jobs.forEach(job -> scoredJobs.put(searchInJobs(search, job), job));
         return scoredJobs;
     }
+
+    /**
+     * score the jobseekers' skills against a jobs requirements
+     * @param job
+     * @param jobSeekers
+     * @return
+     */
     public TreeMultimap<Integer, JobSeeker> scoreJobSeekers(Job job, Collection<JobSeeker> jobSeekers){
         TreeMultimap<Integer, JobSeeker> scoredJobSeekers = TreeMultimap.create(Ordering.natural().reverse(), Comparator.comparing(JobSeeker::getEmail));
         jobSeekers.forEach(jobSeeker -> scoredJobSeekers.put(jobMatchesJobSeeker(job, jobSeeker), jobSeeker));

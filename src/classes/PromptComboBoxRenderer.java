@@ -4,6 +4,9 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.plaf.basic.*;
 
+/**
+ * Extended because we wanted to show the prompt on the drop down menu before it's selected
+ */
 class PromptComboBoxRenderer extends BasicComboBoxRenderer
 {
     private final String prompt;

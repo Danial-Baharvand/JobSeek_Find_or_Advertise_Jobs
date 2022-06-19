@@ -23,6 +23,7 @@ public class EditCategoryPage implements Page {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    // add a keyword to a category
                     category.add(catTB.forceGetText());
                     IO.writeCategories();
                     GuiHelper.createOptionBox(catsPanel, category);
@@ -37,6 +38,7 @@ public class EditCategoryPage implements Page {
         removeBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // remove a keyword from a category
                 category.removeAll(GuiHelper.getSelectedOptions(catsPanel));
                 IO.writeCategories();
                 GuiHelper.createOptionBox(catsPanel, category);

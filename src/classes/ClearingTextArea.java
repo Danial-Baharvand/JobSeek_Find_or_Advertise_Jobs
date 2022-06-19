@@ -15,7 +15,7 @@ public class ClearingTextArea extends JTextArea implements FocusListener {
         addFocusListener(this);
     }
     public String forceGetText() throws Exception {
-        if (!clicked || getText().equals("")){
+        if (!clicked || getText().equals("")){ // don't allow empty strings
             throw new Exception("Please fill in all fields correctly");
         }else {
             return getText();
