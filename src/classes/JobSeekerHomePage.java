@@ -12,6 +12,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.StandardCopyOption;
 import java.util.*;
 
 public class JobSeekerHomePage implements Page {
@@ -37,6 +38,10 @@ public class JobSeekerHomePage implements Page {
         JobSeeker currentUser = (JobSeeker) Runtime.accountManager().getCurrentUser();
         GuiHelper.createOptionBox(skillsList, new ArrayList<>(currentUser.getSkills()));
         nameLabel.setText(GuiHelper.capitalise(currentUser.getFullName()));
+        if (currentUser.getResumeFile() != null && !currentUser.getResumeFile().equals("null") && !currentUser.getResumeFile().isEmpty()) {
+            resumeFileAddress.setText(currentUser.getResumeFile());
+        }
+
 
         if (currentUser.getResumeFile() == null)
             resumeFileAddress.setText("No Resume Uploaded");
@@ -82,17 +87,24 @@ public class JobSeekerHomePage implements Page {
 
                 if (res == JFileChooser.APPROVE_OPTION) {
                     File file_absolute_path = new File(file_upload.getSelectedFile().getAbsolutePath());
-                    File file_name = new File(file_upload.getSelectedFile().getName());
-                    File dest = new File("src\\resumes");
+                    String file_name = file_upload.getSelectedFile().getName();
+                    if (file_name.endsWith(".pdf")) {
+                        File dest = new File("src/resumes/" + currentUser + ".pdf");
 
-                    //Code to duplicate uploaded file to project resume folder
-                    try {
-                        Files.copy(file_absolute_path.toPath(), dest.toPath());
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
+                        //Code to duplicate uploaded file to project resume folder
+                        try {
+                            Files.copy(file_absolute_path.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                            currentUser.setResumeFile(file_name);
+                            resumeFileAddress.setText(file_name);
+                            IO.writeJobseekers();
+                        } catch (IOException ioException) {
+                            JOptionPane.showMessageDialog(null, "Resume could not be uploaded");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Please upload a PDF file");
                     }
-                    ((JobSeeker) Runtime.accountManager().getCurrentUser()).setResumeFile(file_absolute_path.toString());
-                    resumeFileAddress.setText(file_name.toString());
+
+
                 }
 
 
@@ -102,9 +114,9 @@ public class JobSeekerHomePage implements Page {
         deleteButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                resumeFileAddress.setText("No Resume Uploaded");
                 ((JobSeeker) Runtime.accountManager().getCurrentUser()).setResumeFile(null);
-                if (currentUser.getResumeFile() == null)
-                    resumeFileAddress.setText("No Resume Uploaded");
+                IO.writeJobseekers();
             }
         });
 
@@ -112,11 +124,13 @@ public class JobSeekerHomePage implements Page {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //JOptionPane.showMessageDialog(null, "Location of resume:" + ((JobSeeker) Runtime.accountManager().getCurrentUser()).getResumeFile());
-                try {
-                    Scanner input = new Scanner(new File(((JobSeeker) Runtime.accountManager().getCurrentUser()).getResumeFile()));
-                    JOptionPane.showMessageDialog(null, input.toString());
-                } catch (FileNotFoundException fileNotFoundException) {
-                    fileNotFoundException.printStackTrace();
+                if (currentUser.getResumeFile() != null && !currentUser.getResumeFile().equals("null") && !currentUser.getResumeFile().isEmpty()) {
+                    try {
+                        Desktop desktop = Desktop.getDesktop();
+                        desktop.open(new File("src/resumes/" + currentUser + ".pdf"));
+                    } catch (IOException fileNotFoundException) {
+                        fileNotFoundException.printStackTrace();
+                    }
                 }
             }
         });
