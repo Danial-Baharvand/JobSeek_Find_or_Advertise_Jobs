@@ -2,7 +2,6 @@ package classes;
 
 import com.google.common.collect.Ordering;
 import com.google.common.collect.TreeMultimap;
-
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -39,7 +38,7 @@ public class Scorer {
     /**
      * algorithm for hasSimilarWords
      * masks a character in the two strings and checks if the smaller word is in the beginning or end of the longer word
-     * could have done a more exhaustive comparison but decided against it because of effciency concerns
+     * could have done a more exhaustive comparison but decided against it because of efficiency concerns
      * @param word1
      * @param word2
      * @return
