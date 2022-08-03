@@ -109,6 +109,7 @@ public class CreateJobPage implements Page {
         newJob.setRecruiter((Recruiter) Runtime.accountManager().getCurrentUser());
         newJob.setJobDescription(jobDescTA.forceGetText());
         newJob.setStates(Sets.newHashSet(GuiHelper.getSelectedOptions(statesPanel)));
+        if (newJob.getStates().isEmpty()) throw new Exception("Please choose at least 1 location");
         newJob.setSalary(Integer.parseInt(salaryTB.forceGetText()));
         newJob.setJobType(jobTypeCB.getSelectedItem().toString());
         newJob.setKeywords(keywordsTB.forceGetText());
