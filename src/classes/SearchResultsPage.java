@@ -22,6 +22,10 @@ public class SearchResultsPage<V> implements Page {
     private JScrollPane jobsScroller;
     TreeMultimap<Integer, Job> jobList;
 
+    /**
+     * Creates the search results page
+     * @param jobList
+     */
     public SearchResultsPage(TreeMultimap<Integer, Job> jobList) {
         this.jobList = jobList;
         if (jobList.isEmpty()) {

@@ -21,6 +21,10 @@ public class Recruiter extends User {
         this.org = org;
 
     }
+
+    /**
+     * @return recruiter in the correct format to be written to a file
+     */
     public String toWriteFormat() {
         return   getEmail() + SEPARATOR_1 +
                 getFullName() + SEPARATOR_1 +
@@ -33,6 +37,10 @@ public class Recruiter extends User {
     public String getOrg() {
         return org;
     }
+
+    /**
+     * @return jobs created by the recruiter in the current format to be written to a file
+     */
     private String printJobs(){
         StringBuilder s = new StringBuilder();
         String separator = "";

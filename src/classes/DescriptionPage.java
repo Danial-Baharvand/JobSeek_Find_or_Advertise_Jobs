@@ -61,7 +61,11 @@ public class DescriptionPage implements Page {
     }
 
     private void addRecruiterJobListenrs(Job job) {
-        removeBtn.addActionListener(new ActionListener() {// remove job
+        removeBtn.addActionListener(new ActionListener() {
+            /**
+             * Remove the job. This also removes the job from the database
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 int option = JOptionPane.showConfirmDialog(null, "Are you sure you wanna delete this job");
@@ -71,7 +75,7 @@ public class DescriptionPage implements Page {
                     job.setPublished(false);
                     IO.writeRecruiters();
                     IO.writeJobs();
-                    Runtime.getPagesVisited().clear();
+                    Runtime.getPagesVisited().clear(); // Avoid going back to the deleted job
                     Runtime.showRecruiterHome();
                     JOptionPane.showMessageDialog(null, "Job was deleted!");
                 }
@@ -91,6 +95,10 @@ public class DescriptionPage implements Page {
             }
         });
         viewApplicantsBtn.addActionListener(new ActionListener() {
+            /**
+             * Shows the applicants who have applied for the job
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 // getting applicants for this job and scoring them based on their skills
@@ -101,6 +109,10 @@ public class DescriptionPage implements Page {
             }
         });
         suitablesBtn.addActionListener(new ActionListener() {
+            /**
+             * Shows suitable candidates for the job
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 Scorer scorer = new Scorer();
@@ -112,7 +124,11 @@ public class DescriptionPage implements Page {
         });
     }
 
-
+    /**
+     * This method allows enforcement of the rule to restrict deleting or editing jobs that have ongoing applications
+     * or invitations
+     * @param job
+     */
     private void checkRecruiterJobStatus(Job job) {
         jobseekerButtons.setVisible(false);
         recruiterButtons.setVisible(true);
@@ -125,11 +141,15 @@ public class DescriptionPage implements Page {
         }
     }
 
+    /**
+     * Shows correct buttons based on if the jobseeker has interacted with the job before
+     * @param job to be evaluated
+     */
     public void checkJobSeekerJobStatus(Job job) {
         JobSeeker jobSeeker = (JobSeeker) Runtime.accountManager().getCurrentUser();
         jobseekerButtons.setVisible(true);
         recruiterButtons.setVisible(false);
-        if (jobSeeker.invitations().getJobs().contains(job)) {// if has invitations
+        if (jobSeeker.invitations().getJobs().contains(job)) {// if it has invitations
             removeButton.setVisible(false);
             applyButton.setVisible(false);
             messagePanel.setVisible(true);

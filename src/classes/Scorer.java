@@ -27,9 +27,9 @@ public class Scorer {
      * Simillar to hasWords but also checks if words are similar
      * accounts for typos and compound words as well as trailing changes
      * booking will be matched to book for example
-     * @param keys1
-     * @param keys2
-     * @return
+     * @param keys1 is the first set of keywords
+     * @param keys2 is the second set of keywords
+     * @return similarity
      */
     public int hasSimilarWords(Set<String> keys1, Set<String> keys2){
         return (int) ((keys1.stream().filter(a->keys2.stream().anyMatch(b->areSimilar(a, b))).count()/(double)keys1.size())*100);
@@ -39,9 +39,9 @@ public class Scorer {
      * algorithm for hasSimilarWords
      * masks a character in the two strings and checks if the smaller word is in the beginning or end of the longer word
      * could have done a more exhaustive comparison but decided against it because of efficiency concerns
-     * @param word1
-     * @param word2
-     * @return
+     * @param word1 is the first word
+     * @param word2 is the second word
+     * @return similarity
      */
     private boolean areSimilar(String word1, String word2){
         word1 = word1.toLowerCase();
@@ -136,9 +136,9 @@ public class Scorer {
     }
 
     /**
-     * score the jobseekers agianst the search criteria
-     * @param search
-     * @param jobs
+     * score the jobseekers against the search criteria
+     * @param search object
+     * @param jobs to be compared against
      * @return
      */
     public TreeMultimap<Integer, Job> scoreJobs(Search search, Collection<Job> jobs){
@@ -149,9 +149,9 @@ public class Scorer {
 
     /**
      * score the jobseekers' skills against a jobs requirements
-     * @param job
-     * @param jobSeekers
-     * @return
+     * @param job to be compared
+     * @param jobSeekers to be compared
+     * @return the score for similarity
      */
     public TreeMultimap<Integer, JobSeeker> scoreJobSeekers(Job job, Collection<JobSeeker> jobSeekers){
         TreeMultimap<Integer, JobSeeker> scoredJobSeekers = TreeMultimap.create(Ordering.natural().reverse(), Comparator.comparing(JobSeeker::getEmail));

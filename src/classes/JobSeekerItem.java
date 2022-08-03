@@ -11,13 +11,15 @@ import java.awt.event.MouseEvent;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
+/**
+ * This is a single jobseeker item which is shown on the results menu
+ */
 public class JobSeekerItem implements Page {
     private JPanel jobSeekerItemPanel;
     private JPanel jobSeekerPanel;
     private JLabel fullName;
     private JLabel skills;
     private JLabel jobSeekerScore;
-    private JLabel jobSalary;
     private JLabel skillsLabel;
     private JLabel scoreLabel;
     private JLabel nameLabel;
@@ -36,12 +38,12 @@ public class JobSeekerItem implements Page {
         this.job = job;
         this.score = score;
         if (jobSeeker.getResumeFile().equals("null") || jobSeeker.getResumeFile() == null) {
-            resumeButton.setVisible(false);
+            resumeButton.setVisible(false); // User doesn't have a resume
         }
         createJobSeekerItem();
         addPanelListeners();
         if (job.invitations().getJobSeekers().contains(jobSeeker)) {
-            deActivateInvitations();
+            deActivateInvitations(); // Already invited
         }
 
     }
@@ -52,9 +54,9 @@ public class JobSeekerItem implements Page {
     }
 
     public void createJobSeekerItem() {
-
         fullName.setText(jobSeeker.getFullName());
         if (jobSeeker.getSkills() != null) {
+            // Getting jobseeker skills and capitalising the beginning of words
             skills.setText(jobSeeker.getSkills().stream().map(s -> Character.toUpperCase(s.charAt(0))
                     + s.substring(1)).collect(Collectors.joining(", ")));
         }
@@ -85,6 +87,7 @@ public class JobSeekerItem implements Page {
         sendButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Changing the message to a database friendly format
                 String message = messageTA.getText().replace("\n", "$$newline$$")
                         .replace("\r", "$$newline$$");
                 Invitation invitation = new Invitation(jobSeeker, job, message);

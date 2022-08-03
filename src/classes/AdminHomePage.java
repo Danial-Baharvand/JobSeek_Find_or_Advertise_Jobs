@@ -70,6 +70,10 @@ public class AdminHomePage implements Page {
 
 
         jobSeekerDeactivateButton.addActionListener(new ActionListener() {
+            /**
+             * Deactivate a jobseeker
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (String s : GuiHelper.getSelectedOptions(activeJobSeekerList)) {
@@ -86,6 +90,10 @@ public class AdminHomePage implements Page {
         });
 
         jobSeekerReActivateButton.addActionListener(new ActionListener() {
+            /**
+             * Reactivate jobseeker
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (String s : GuiHelper.getSelectedOptions(inactiveJobSeekersList)) {
@@ -102,6 +110,10 @@ public class AdminHomePage implements Page {
         });
 
         recruiterDeactivateButton.addActionListener(new ActionListener() {
+            /**
+             * Deactivate recruiter
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (String s : GuiHelper.getSelectedOptions(activeRecruiterList)) {
@@ -118,6 +130,10 @@ public class AdminHomePage implements Page {
         });
 
         recruiterReActivateButton.addActionListener(new ActionListener() {
+            /**
+             * Reactivate recruiter
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (String s : GuiHelper.getSelectedOptions(inactiveRecruitersList)) {
@@ -134,6 +150,10 @@ public class AdminHomePage implements Page {
         });
 
         catAddButton.addActionListener(new ActionListener() {
+            /**
+             * Add a category to the main categories
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -150,6 +170,10 @@ public class AdminHomePage implements Page {
         });
 
         catRemoveButton.addActionListener(new ActionListener() {
+            /**
+             * Remove a category from the main categories
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -164,6 +188,10 @@ public class AdminHomePage implements Page {
             }
         });
         catEditButton.addActionListener(new ActionListener() {
+            /**
+             * Open the edit category page for the selected category
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
 

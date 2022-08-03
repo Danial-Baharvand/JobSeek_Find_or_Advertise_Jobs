@@ -73,6 +73,9 @@ public class Header {
         return headerPanel;
     }
 
+    /**
+     * Update the header buttons based on the type of user as well as whether they're logged in or not
+     */
     public void updateButtons() {
         User currentUser = Runtime.accountManager().getCurrentUser();
         backBtn.setVisible(Runtime.getPagesVisited().size() > 1);

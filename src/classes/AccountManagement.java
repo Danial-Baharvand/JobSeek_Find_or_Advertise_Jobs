@@ -32,7 +32,7 @@ public class AccountManagement {
 
     /**
      * Adds a user to the appropriate variable depending on its type
-     * @param user
+     * @param user to be added
      */
     public void addUser(User user){
         if (user instanceof JobSeeker){
@@ -44,10 +44,18 @@ public class AccountManagement {
         }
     }
 
+    /**
+     * sets the current user
+     * @param user to be set as current user
+     */
     public void setCurrentUser(User user) {
         currentUser = user;
     }
 
+    /**
+     * gets the current user
+     * @return current user
+     */
     public User getCurrentUser() {
         return currentUser;
     }

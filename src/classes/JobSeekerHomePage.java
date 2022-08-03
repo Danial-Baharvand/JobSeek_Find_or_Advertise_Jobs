@@ -44,8 +44,6 @@ public class JobSeekerHomePage implements Page {
         if (currentUser.getResumeFile() != null && !currentUser.getResumeFile().equals("null") && !currentUser.getResumeFile().isEmpty()) {
             resumeFileAddress.setText(currentUser.getResumeFile());
         }
-
-
         if (currentUser.getResumeFile() == null)
             resumeFileAddress.setText("No Resume Uploaded");
 

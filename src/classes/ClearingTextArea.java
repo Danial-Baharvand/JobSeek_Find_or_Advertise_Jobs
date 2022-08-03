@@ -6,6 +6,13 @@ import java.awt.event.FocusListener;
 
 import javax.swing.*;
 // TODO: don't allow special characters
+/**
+ * this class extends JTextArea and is used throughout the program to achieve unique options with text fields:
+ *
+ *  * Placeholder text which disappears and reappears at appropriate times with user interaction
+ *  * Consistent formatting, font and color
+ *  * Providing methods to ensure valid input
+ */
 public class ClearingTextArea extends JTextArea implements FocusListener {
     private boolean clicked = false;
     private String defaultText;

@@ -35,7 +35,9 @@ public class Job implements Inbox{
         this.published = published;
     }
 
-
+    /**
+     * @return the job in the correct format to be written to file
+     */
     public String toWriteFormat() {
         return   jobTitle + SEPARATOR_1 +
                  String.join(SEPARATOR_2, states) + SEPARATOR_1 +
@@ -53,7 +55,7 @@ public class Job implements Inbox{
 
     /**
      * returns the relevant terms for the job
-     * @return
+     * @return relevant search terms
      */
     public Set<String> searchTerms(){
         Set<String> terms = categories.stream().flatMap(Set::stream).collect(Collectors.toSet());
@@ -104,7 +106,8 @@ public class Job implements Inbox{
     }
 
     public void setJobTitle(String jobTitle) {
-        // generate ID
+        // generate ID from job title and recruiter email
+        // note: recruiter toString returns its email
         this.jobTitle = jobTitle;
         this.jobID = this.jobTitle + this.recruiter;
     }

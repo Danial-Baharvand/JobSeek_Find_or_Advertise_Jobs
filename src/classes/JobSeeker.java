@@ -47,6 +47,7 @@ public class JobSeeker extends User implements Inbox {
         this.resumeFile = resumeFile;
     }
 
+    // Implement Inbox:
     @Override
     public Applications applications() {
         return applications;

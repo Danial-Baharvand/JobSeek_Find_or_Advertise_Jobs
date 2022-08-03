@@ -32,14 +32,18 @@ public class SearchPage implements Page {
     private JScrollPane jobTypeScroller;
     private JPanel jobTypePanel;
 
+    /**
+     * Create the search page
+     */
     public SearchPage() {
-        /**test code to check categories' functionality
-         should be removed when adding categories by recruiters is implemented
-         */
         GuiHelper.createOptionBox(statePanel, Config.STATES);
         GuiHelper.createOptionBox(catPanel, Runtime.accountManager().getCategories().names());
         GuiHelper.createOptionBox(jobTypePanel, Config.JOB_TYPES);
         searchButton.addActionListener(new ActionListener() {
+            /**
+             * Performs a search with the selected parameters
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
 

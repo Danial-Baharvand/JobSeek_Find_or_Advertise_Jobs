@@ -23,6 +23,9 @@ public class RecruiterHomePage implements Page {
     private JLabel emailText;
     private JLabel orgText;
 
+    /**
+     * Create the recruiter home page based on the collected information in the database
+     */
     public RecruiterHomePage() {
         Recruiter recruiter = (Recruiter) Runtime.accountManager().getCurrentUser();
         nameText.setText(recruiter.getFullName());

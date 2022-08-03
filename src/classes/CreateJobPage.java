@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
-// TODO: publish functionality
 public class CreateJobPage implements Page {
     private ClearingTextField jobTitleTB;
     private JPanel createJobPanel;
@@ -31,10 +30,13 @@ public class CreateJobPage implements Page {
         addListeners(false);
     }
 
+    /**
+     * This is used for editing the page!
+     * getting filed values from the job to be edited
+     * also setting the default value for fields so if the used deletes the text, it shows proper text
+     * @param job to be edited
+     */
     public CreateJobPage(Job job) {
-        // This is used for editing the page!
-        // getting filed values from the job to be edited
-        // also setting the default value for fields so if the used deletes the text, it shows proper text
         setUpPage();
         this.job = job;
         jobTitleTB.setText(job.getJobTitle());
@@ -55,6 +57,10 @@ public class CreateJobPage implements Page {
     private void addListeners(boolean edit) {
         Recruiter recruiter = (Recruiter) Runtime.accountManager().getCurrentUser();
         saveBtn.addActionListener(new ActionListener() {
+            /**
+             * Save the job without publishing
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -75,6 +81,10 @@ public class CreateJobPage implements Page {
             }
         });
         publishBtn.addActionListener(new ActionListener() {
+            /**
+             * Publish the job
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -102,6 +112,11 @@ public class CreateJobPage implements Page {
         jobTypeCB.setRenderer(new PromptComboBoxRenderer("Job Type"));
     }
 
+    /**
+     * Creates a job
+     * @param publish dictates whether the job should be published or just saved
+     * @throws Exception
+     */
     private void createJob(boolean publish) throws Exception {
         // creating a job
         Job newJob = new Job();

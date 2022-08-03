@@ -15,6 +15,11 @@ public class IO {
     public IO() {
 
     }
+
+    /**
+     * Remove contents of a file
+     * @param path of the file
+     */
     public static void clearFileContent(String path) {
         try {
             PrintWriter pw = new PrintWriter(path);
@@ -25,8 +30,8 @@ public class IO {
 
     /**
      * Writes the data to path and goes to the next line
-     * @param path
-     * @param data
+     * @param path of the file
+     * @param data data to be written
      */
     public static void newLine(String path, String data) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path, true))) {
@@ -37,21 +42,33 @@ public class IO {
         }
     }
 
+    /**
+     * Write all jobseekers in memory to file
+     */
     public static void writeJobseekers() {
         clearFileContent(DT_JOBSEEKERS);
         Runtime.accountManager().getJobSeekers().forEach((k, j) -> IO.newLine(DT_JOBSEEKERS, j.toWriteFormat()));
     }
 
+    /**
+     * Write all jobs in memory to file
+     */
     public static void writeJobs() {
         clearFileContent(DT_JOBS);
         Runtime.accountManager().getJobs().forEach((k, j) -> IO.newLine(DT_JOBS, j.toWriteFormat()));
     }
 
+    /**
+     * Write all categories in memory to file
+     */
     public static void writeCategories() {
         clearFileContent(DT_CATEGORIES);
         newLine(DT_CATEGORIES, Runtime.accountManager().getCategories().toWriteFormat());
     }
 
+    /**
+     * Write all recruiters in memory to file
+     */
     public static void writeRecruiters() {
         clearFileContent(DT_RECRUITERS);
         Runtime.accountManager().getRecruiters().forEach((k, r) -> IO.newLine(DT_RECRUITERS, r.toWriteFormat()));
@@ -60,8 +77,10 @@ public class IO {
 
 
     /**
-     * adds the object to file depending on the object type
-     * @param data
+     * Adds the object to file depending on the object type
+     * Makes writing to file easier and cleaner
+     * originally was meant to be more heavily used
+     * @param data to be written to file
      */
     public static void addToDB(Object data) {
         if (data instanceof JobSeeker) {
@@ -79,11 +98,15 @@ public class IO {
         }
     }
 
+    /**
+     * Read jobseekers from file
+     * @return jobseekers
+     */
     public HashMap<String, JobSeeker> readJobSeekers() {
         String line;
         HashMap<String, JobSeeker> jobSeekers = new HashMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(Config.DT_JOBSEEKERS))) {
-            while ((line = reader.readLine()) != null && !line.equals("")) {
+            while ((line = reader.readLine()) != null && !line.equals("")) { // there are more lines
                 String[] userData = line.split(SEPARATOR_1, -1);
                 JobSeeker jobSeeker = new JobSeeker(userData[EMAIL], userData[NAME], userData[PASSWORD]);
                 jobSeeker.setActive(Boolean.parseBoolean(userData[IS_ACTIVE]));
@@ -97,6 +120,10 @@ public class IO {
         return jobSeekers;
     }
 
+    /**
+     * Read recruiters from file
+     * @return recruiters
+     */
     public HashMap<String, Recruiter> readRecruiters() {
         String line;
         HashMap<String, Recruiter> recruiters = new HashMap<>();
@@ -114,6 +141,10 @@ public class IO {
         return recruiters;
     }
 
+    /**
+     * Read admins from file
+     * @return admins
+     */
     public HashMap<String, Admin> readAdmins() {
         String line;
         HashMap<String, Admin> admins = new HashMap<>();
@@ -129,6 +160,13 @@ public class IO {
         return admins;
     }
 
+    /**
+     * read jobs from file
+     * @param recruiters all recruiters
+     * @param jobSeekers all jobseekers
+     * @param mainCategories universal categories set by admin
+     * @return jobs
+     */
     public HashMap<String, Job> readJobs(HashMap<String, Recruiter> recruiters, HashMap<String, JobSeeker> jobSeekers, CategoryManager mainCategories) {
         String line;
         HashMap<String, Job> jobs = new HashMap<>();
@@ -156,6 +194,13 @@ public class IO {
         }
         return jobs;
     }
+
+    /**
+     * Read job categories from file. These categories are specific to each job.
+     * @param mainCategories universal categories
+     * @param data job categories in file format
+     * @return job categories
+     */
     private CategoryManager readJobCategories(CategoryManager mainCategories, String data){
         CategoryManager jobCats = new CategoryManager();
         String[] catNames = data.split(SEPARATOR_2);
@@ -164,6 +209,13 @@ public class IO {
         }
         return jobCats;
     }
+
+    /**
+     * Read applications from file
+     * @param job for the application
+     * @param data is the application information in the file format
+     * @param jobSeekers all jobseekers
+     */
     private void readApplications(Job job, String data, HashMap<String, JobSeeker> jobSeekers){
         String[] appsData = data.split(SEPARATOR_2);
         for (String appData:appsData) {
@@ -176,6 +228,13 @@ public class IO {
             }
         }
     }
+
+    /**
+     * Read invitations from file
+     * @param job for the invitation
+     * @param data of the invitation in the file format
+     * @param jobSeekers all jobseekers
+     */
     private void readInvitations(Job job, String data, HashMap<String, JobSeeker> jobSeekers){
         String[] invsData = data.split(SEPARATOR_2);
         for (String invData:invsData) {
@@ -189,6 +248,11 @@ public class IO {
             }
         }
     }
+
+    /**
+     * Read the main categories from file
+     * @return main categories
+     */
     public CategoryManager readCategories() {
         String line;
         CategoryManager categories = new CategoryManager();

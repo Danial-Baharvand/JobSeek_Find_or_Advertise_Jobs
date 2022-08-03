@@ -64,6 +64,11 @@ public class LoginPage implements Page {
         });
     }
 
+    /**
+     * Logs the user in according to credentials
+     * @param accMan is the account management object
+     * @return success status
+     */
     public boolean userLogin(AccountManagement accMan) {
         if (validateUser(accMan.getJobSeekers())) {
             JobSeeker jobSeeker = accMan.getJobSeekers().get(emailClearingTextField.getText().toLowerCase());
@@ -95,6 +100,11 @@ public class LoginPage implements Page {
         } else return false;
     }
 
+    /**
+     * Validates user password
+     * @param users is the set of users the new user should be compared to
+     * @return login success or failure
+     */
     private boolean validateUser(HashMap<String, ? extends User> users) {
         if (users.containsKey(emailClearingTextField.getText())) {
             return users.get(emailClearingTextField.getText()).getPassword().equals(String.valueOf(passwordClearingPasswordField.getPassword()));

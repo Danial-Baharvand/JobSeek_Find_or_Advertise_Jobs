@@ -44,9 +44,9 @@ public class GuiHelper {
 
     /**
      * gets the selected options from a jpanel with radio buttons
-     * @param optionsPanel
-     * @return
-     * @throws Exception
+     * @param optionsPanel jpanel with radio options
+     * @return the selected option
+     * @throws Exception if no option is selected
      */
     public static String  getSelectedRadio(JPanel optionsPanel) throws Exception {
         Component[] allOptions = optionsPanel.getComponents();
@@ -59,9 +59,9 @@ public class GuiHelper {
     }
 
     /**
-     * creates puts the checkboxes in a set as checkboxes into a jpanel
-     * @param optionsPanel
-     * @param options
+     * creates checkboxes in a set as checkboxes into a jpanel
+     * @param optionsPanel is the container for the checkboxes
+     * @param options is the checkboxes to be put in the container
      */
     public static void createOptionBox(JPanel optionsPanel, Collection<String> options) {
         optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));
@@ -74,9 +74,9 @@ public class GuiHelper {
     }
 
     /**
-     * creates puts the radio buttons in a set as checkboxes into a jpanel
-     * @param optionsPanel
-     * @param options
+     * creates radio buttons in a set as checkboxes into a jpanel
+     * @param optionsPanel is the container for the radio buttons
+     * @param options the radio buttons
      */
     public static void createRadioBox(JPanel optionsPanel, Collection<String> options) {
         optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));
@@ -94,8 +94,8 @@ public class GuiHelper {
     /**
      * creates a list of job items and puts them into a jpabel
      * @param jobList list of jobs and their scores
-     * @param jobsPanel
-     * @return
+     * @param jobsPanel is the container
+     * @return true if successful or false otherwise
      */
     public static boolean createJobList(TreeMultimap<Integer, Job> jobList, JPanel jobsPanel) {
         if (jobList.isEmpty()){
@@ -112,8 +112,8 @@ public class GuiHelper {
     /**
      * creates a list of job items and puts them into a jpabel
      * @param jobList list of jobs
-     * @param jobsPanel
-     * @return
+     * @param jobsPanel is the container
+     * @return true if successful or false otherwise
      */
     public static boolean createJobList(Collection< Job> jobList, JPanel jobsPanel) {
         if (jobList.isEmpty()){
@@ -130,12 +130,13 @@ public class GuiHelper {
 
     /**
      * creates jobseeker items and puts them into the jpanel
-     * @param jobSeekerList
-     * @param job
-     * @param jobSeekerPanel
-     * @return
+     * @param jobSeekerList list of jobs and their scores
+     * @param job is the job related to the jobseekers
+     * @param jobSeekerPanel is the container
+     * @return true if successful, false otherwise
      */
-    public static boolean createJobSeekerList(TreeMultimap<Integer, JobSeeker> jobSeekerList, Job job, JPanel jobSeekerPanel) {
+    public static boolean createJobSeekerList(TreeMultimap<Integer, JobSeeker> jobSeekerList,
+                                              Job job, JPanel jobSeekerPanel) {
         if (jobSeekerList.isEmpty()){
             return false;
         }
@@ -150,7 +151,7 @@ public class GuiHelper {
     /**
      * capitalizes the first character for each letter in a string
      * @param words the string
-     * @return
+     * @return the capitalized string
      */
     public static String capitalise(String words) {
         return Stream.of(words.trim().split("\\s"))

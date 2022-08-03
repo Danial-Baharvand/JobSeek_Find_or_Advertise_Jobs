@@ -10,15 +10,15 @@ import java.util.stream.Collectors;
 public class Applications extends MailManager<Application> {
     /**
      * Remove an application given its job
-     * @param job for which the appliction is deleted
+     * @param job for which the application is deleted
      */
     public void removeByJob(Job job){
         this.remove(this.stream().filter(a -> a.getJob().equals(job)).findFirst());
     }
 
     /**
-     * Remove the aplication given its jobseeker
-     * @param jobSeeker
+     * Remove the application given its jobseeker
+     * @param jobSeeker to be removed
      */
     public void removeByJobSeeker(JobSeeker jobSeeker){
         this.remove(this.stream().filter(a -> a.getJobSeeker().equals(jobSeeker)).findFirst());

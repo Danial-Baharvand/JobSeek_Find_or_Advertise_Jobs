@@ -75,7 +75,7 @@ public class Runtime {
 
     /**
      * shows a page in correct format
-     * @param page
+     * @param page to be shown
      */
     public static void showPage(Page page){
         frame.setTitle(page.pageName());

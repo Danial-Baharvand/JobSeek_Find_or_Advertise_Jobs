@@ -29,7 +29,7 @@ public class JobListing implements Page {
     /**
      * Job listing
      *
-     * @param job
+     * @param job for the listing
      */
     public JobListing(Job job) {
         this.job = job;
@@ -42,7 +42,7 @@ public class JobListing implements Page {
      * Job listing that has a score
      *
      * @param score the score of the job based on how much it matches the current user
-     * @param job
+     * @param job for the listing
      */
     public JobListing(int score, Job job) {
         this.job = job;
@@ -54,6 +54,9 @@ public class JobListing implements Page {
         addPanelListeners();
     }
 
+    /**
+     * Create a job listing object
+     */
     public void createJobListing() {
         // only recruiters see job published text
         if (Runtime.accountManager().getCurrentUser() instanceof Recruiter) {
@@ -72,13 +75,14 @@ public class JobListing implements Page {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                // If user is not logged in, prompt log in before showing description
                 if (Runtime.accountManager().getCurrentUser() == null) {
                     Runtime.showLoginPage();
                 } else {
                     Runtime.showDescriptionPage(job);
                 }
             }
-
+            // Making job listing GUI feel interactive with changing colors
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);

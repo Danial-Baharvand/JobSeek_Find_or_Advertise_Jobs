@@ -3,6 +3,9 @@ package classes;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Config file and options for the program
+ */
 public class Config {
     final static String DT_JOBSEEKERS = "src/dataTables/jobSeekers.csv";
     final static String DT_RESUMES = "src/resumes";
@@ -34,7 +37,7 @@ public class Config {
     final static int JOB_PUBLISHED = 9;
     final static int JOB_CATEGORIES = 10;
     final static int MAIL_JOBSEEKER = 0;
-    final static int MAIL_JOB = 1;
+    final static int MAIL_JOB = 1; // unused intentionally
     final static int MAIL_MESSAGE = 2;
     final static int CATEGORY_NAME = 0;
     final static int CATEGORY_KEYWORDS = 1;

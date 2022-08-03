@@ -24,6 +24,10 @@ public class CreateAccountPage implements Page {
     public CreateAccountPage() {
 
         createAccountButton.addActionListener(new ActionListener() {
+            /**
+             * Tries to create a user. If successful, shows login page
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -36,8 +40,13 @@ public class CreateAccountPage implements Page {
             }
         });
         userTypeComboBox.addItemListener(new ItemListener() {
+            /**
+             * Allows user to create a jobseeker or recruiter account
+             * @param e the event to be processed
+             */
             @Override
             public void itemStateChanged(ItemEvent e) {
+                // Show correct fields based on account type
                 if (userTypeComboBox.getSelectedItem().equals("JobSeeker")) {
                     orgLabel.setVisible(false);
                     orgTextField.setVisible(false);
@@ -61,7 +70,6 @@ public class CreateAccountPage implements Page {
         final String name = fullNameTextField.forceGetText();
         final String pass = String.valueOf(passwordPasswordField.getPassword());
         final String passConfirm = String.valueOf(confirmPasswordPasswordField.getPassword());
-        //note: refactored this from line 76 (if (userTypeComboBox.getSelectedItem().toString().equals(JobSeeker.class.getSimpleName()))
         // to make the user type accessible for the purposes of navigation
         final String userType = userTypeComboBox.getSelectedItem().toString();
         //check if email is registered to an existing account - if so, notify that email is not new
