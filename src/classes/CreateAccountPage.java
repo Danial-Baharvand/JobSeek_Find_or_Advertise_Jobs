@@ -54,7 +54,7 @@ public class CreateAccountPage implements Page {
      * creates a new JobSeeker after validating that the email is new and that the passwords match
      */
     public boolean createUser() throws Exception {
-        final String email = emailTextField.forceGetText();
+        final String email = emailTextField.forceGetText().toLowerCase();
         if (!email.contains("@") || !email.contains(".")) {
             throw new Exception("Please enter a valid email");
         }

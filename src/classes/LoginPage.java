@@ -66,7 +66,7 @@ public class LoginPage implements Page {
 
     public boolean userLogin(AccountManagement accMan) {
         if (validateUser(accMan.getJobSeekers())) {
-            JobSeeker jobSeeker = accMan.getJobSeekers().get(emailClearingTextField.getText());
+            JobSeeker jobSeeker = accMan.getJobSeekers().get(emailClearingTextField.getText().toLowerCase());
             if (jobSeeker.isActive()) {
                 accMan.setCurrentUser(jobSeeker);
                 Runtime.showJobSeekerHome();
@@ -78,7 +78,7 @@ public class LoginPage implements Page {
             }
 
         } else if (validateUser(accMan.getRecruiters())) {
-            Recruiter recruiter = accMan.getRecruiters().get(emailClearingTextField.getText());
+            Recruiter recruiter = accMan.getRecruiters().get(emailClearingTextField.getText().toLowerCase());
             if (recruiter.isActive()) {
                 accMan.setCurrentUser(recruiter);
                 Runtime.showRecruiterHome();
@@ -89,7 +89,7 @@ public class LoginPage implements Page {
                 return false;
             }
         } else if (validateUser(accMan.getAdmins())) {
-            accMan.setCurrentUser(accMan.getAdmins().get(emailClearingTextField.getText()));
+            accMan.setCurrentUser(accMan.getAdmins().get(emailClearingTextField.getText().toLowerCase()));
             Runtime.showAdminHomePage();
             return true;
         } else return false;
