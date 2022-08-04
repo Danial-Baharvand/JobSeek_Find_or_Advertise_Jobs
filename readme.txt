@@ -1,5 +1,5 @@
-Jobseek is a simple Java application which allows:
+Jobseek is a simple Java application which enables:
 
-Jobseekers to view and apply for jobs suitable to their skills or smart search terms.
-Employers to advertise jobs or to find suitable jobseeker suggestions.
-Admins to produce reports and control moderate user accounts.
+Jobseekers search for suitable jobs based on their skills and send applications for consideration.
+Employers to advertise jobs or to find suitable jobseeker based on thier skills.
+Admins to produce reports and moderate user accounts.
